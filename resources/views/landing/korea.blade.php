@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ACC - Program Korea</title>
+    <title>LPK ACC Program Korea</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -80,10 +80,10 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 0px 30px 0 20px;">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>
-                        Adiwerna, Tegal,
+                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 20px;"></i>
+                        Adiwerna, Kabupaten Tegal,
                         Central Java</p>
-                    <h2>ACC Korean Centre</span></h2>
+                    <h2>LPK ACC Korean Centre</span></h2>
                     <p style="text-align: justify;" class="justify-content-center">ACC Korean Centre merupakan program
                         Lowongan Kerja Fishing Korea Lokal Selatan dengan program P To P Visa E.10. LPK Amanah Citra
                         Cemerlang juga ikut serta
@@ -94,6 +94,12 @@
                         mengacu pada standar Nasional dan
                         Internasional.
                     </p>
+                    <div class="alert alert-danger" role="alert">
+                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                            <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
+                            diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
+                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                    </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
                         <a href="#lokasi" class="btn-get-started" style="width: 80%;"><i class="fa fa-map-pin"
                                 style="padding-right: 10px;"></i>
@@ -101,7 +107,7 @@
                         <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang"
                             class="btn-watch-video d-flex align-items-center" style="margin-left: 15px;">
                             <i class="bi bi-play-circle"></i><span> YouTube</span></a>
-                    </div>
+                    </div><br />
                 </div>
             </div>
         </div>
@@ -125,8 +131,12 @@
                     <div class="col-lg-6">
                         <p style="text-align: justify;"><b>About Us</b><br /> ACC Korean Centre merupakan program
                             Lowongan Kerja Fishing Korea Lokal Selatan dengan
-                            program P To P Visa E.10
+                            program P To P.
                         </p>
+                        <div class="alert alert-primary" role="alert">
+                            <marquee>LPK ACC Korean Centre menyediakan dana talangan hingga 80%. Let's Join.. Pendidikan
+                                kurang lebih 1 bulan..</marquee>
+                        </div>
                         <div class="position-relative mt-4">
                             <img src="{{ asset('templates/assets/img/korea/visi_acckorea.png') }}"
                                 class="img-fluid rounded-4" alt="">
@@ -205,7 +215,7 @@
                                     </div>
 
                                     <div class="position-relative mt-4">
-                                        <img src="{{ asset('templates/assets/img/acc/3.jpg') }}"
+                                        <img src="{{ asset('templates/assets/img/acc/5.jpg') }}"
                                             class="img-fluid rounded-4" alt="">
                                     </div>
 
@@ -243,10 +253,10 @@
                                             class="img-fluid rounded-4" alt="">
                                     </div>
 
-                                    <div class="position-relative mt-4">
-                                        <img src="{{ asset('templates/assets/img/acc/1.jpg') }}"
-                                            class="img-fluid rounded-4" alt="">
-                                    </div>
+                                    <!--<div class="position-relative mt-4">-->
+                                    <!--    <img src="{{ asset('templates/assets/img/acc/1.jpg') }}"-->
+                                    <!--        class="img-fluid rounded-4" alt="">-->
+                                    <!--</div>-->
 
                                     <div class="position-relative mt-4">
                                         <img src="{{ asset('templates/assets/img/acc/6.jpg') }}"
@@ -289,7 +299,6 @@
 
     <section class="testimonials" id="galeri">
         <div class="container" data-aos="fade-up">
-
             <div class="section-header">
                 <h2>Galeri ACC Korea</h2>
             </div>

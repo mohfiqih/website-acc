@@ -75,7 +75,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 0px 30px 0 20px;">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i> Tegal,
+                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>
+                        Adiwerna, Kabupaten Tegal,
                         Central Java</p>
                     <h2>LPK Amanah Citra Cemerlang Asia Jaya</span></h2>
                     <p style="text-align: justify;" class="justify-content-center">LPK ACC (Amanah Citra Cemerlang) Asia
@@ -90,6 +91,12 @@
                         ingin tahu Info
                         selengkapnya.
                     </p>
+                    <div class="alert alert-danger" role="alert">
+                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                            <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
+                            diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
+                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                    </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
                         <a href="#services" class="btn-get-started" style="width: 100%;"><i class="bi bi-book"></i>
                             Let's
@@ -109,7 +116,7 @@
                             <p class="title" style="margin-top: 10px;">
                                 <a href="{{ url('program-jepang') }}" class="stretched-link"><i class="bi bi-book"
                                         style="padding-right: 10px;"></i>
-                                    Klik Program
+                                    Program
                                     ACC
                                     Jepang</a>
                             </p>
@@ -121,7 +128,7 @@
                             <p class="title" style="margin-top: 10px;">
                                 <a href="{{ url('program-korea') }}" class="stretched-link"><i class="bi bi-book"
                                         style="padding-right: 10px;"></i>
-                                    Klik Program ACC Korea</a>
+                                    Program ACC Korea</a>
                             </p>
                         </div>
                     </div>
@@ -135,6 +142,9 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4">
                     <div class="col-lg-6">
+                        <div class="alert alert-primary" role="alert">
+                            <marquee>Bahasa Adalah Jendela Untuk Melihat Dunia Lebih Luas</marquee>
+                        </div>
                         <p style="text-align: justify;padding-right: 10px;"><b>Visi</b><br />Terwujudnya lembaga
                             pelatihan yang
                             kompetitif
@@ -165,7 +175,7 @@
                         <!--<div class="card">-->
                         <!--    <div class='sk-ww-google-business-profile' data-embed-id='25372658'></div>-->
                         <!--</div><br />-->
-                        <div class="position-relative mt-4">
+                        <div class="position-relative mt-2">
                             <img src="https://amanahcitracemerlang.id/templates/assets/img/korea/lokasi-korea.png"
                                 class="img-fluid rounded-4 mb-4" alt="">
                         </div>
@@ -200,17 +210,19 @@
                                 </div>
 
                                 <div class="col-md-6">
-                                    <div class="position-relative mt-4">
+                                    <div class="position-relative mt-2">
                                         <img src="https://lh3.googleusercontent.com/p/AF1QipOoTJRgdqUf_rS7xKKVteWxiG2ERjb2i8V-_KXy=s1360-w1360-h1020-rw"
                                             class="img-fluid rounded-4" alt="">
                                     </div>
-                                    <div class="position-relative mt-4">
-                                        <img src="https://lh3.googleusercontent.com/p/AF1QipO60798i7pwGXKJNhy_bz45pRHE-zXb8xleLr7u=s1360-w1360-h1020"
+
+
+                                    <div class="position-relative mt-2">
+                                        <img src="https://lh3.googleusercontent.com/p/AF1QipOvxPq5kXO1rP1Ozl0qJ5_xKB3gSCbfIqyPLEeu=s1360-w1360-h1020"
                                             class="img-fluid rounded-4 mb-4" alt="">
                                     </div>
 
-                                    <div class="position-relative mt-3">
-                                        <img src="https://lh3.googleusercontent.com/p/AF1QipOvxPq5kXO1rP1Ozl0qJ5_xKB3gSCbfIqyPLEeu=s1360-w1360-h1020"
+                                    <div class="position-relative mt-2">
+                                        <img src="{{ asset('templates/assets/img/poster.jpg') }}"
                                             class="img-fluid rounded-4 mb-4" alt="">
                                     </div>
                                 </div>
@@ -227,11 +239,15 @@
 
                 <div class="row gy-4 align-items-center">
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <img src="{{ asset('templates/assets/img/logo.jpg') }}" alt="" class="img-fluid">
                     </div>
+                    <div class="col-lg-4">
+                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
+                            class="img-fluid">
+                    </div>
 
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <div class="stats-item d-flex align-items-center">
                             <span data-purecounter-start="0" data-purecounter-end="1000"
                                 data-purecounter-duration="1" class="purecounter"></span>
@@ -245,13 +261,13 @@
                         </div>
 
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="400" data-purecounter-duration="1"
                                 class="purecounter"></span>
                             <p><strong>Student</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
 
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="70" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="50" data-purecounter-duration="1"
                                 class="purecounter"></span>
                             <p><strong>Karyawan</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
@@ -324,7 +340,7 @@
         {{-- Maps Utama Center --}}
         <section class="contact sections-bg">
             <div class="container" data-aos="fade-up">
-                <h5><b>1. Kantor Utama Amanah Citra Cemerlang</b></h5>
+                <h5><b>1. Kantor Utama Yayasan Amanah Citra Cemerlang</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
                         <iframe class="mb-4 mb-lg-0"
@@ -338,7 +354,7 @@
         {{-- Maps Japan Center --}}
         <section class="contact">
             <div class="container" data-aos="fade-up">
-                <h5><b>2. Lokasi ACC Japan Center</b></h5>
+                <h5><b>2. Lokasi Kantor & Pendidikan ACC Japan Center</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
                         <iframe class="mb-4 mb-lg-0"
@@ -352,7 +368,7 @@
         {{-- Maps Korean Center --}}
         <section class="contact sections-bg">
             <div class="container" data-aos="fade-up">
-                <h5><b>3. Lokasi ACC Korean Center</b></h5>
+                <h5><b>3. Lokasi Pendidikan ACC Korean Center</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
                         <iframe class="mb-4 mb-lg-0"
@@ -381,7 +397,7 @@
                 </div>
 
                 <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
 
                         <div class="info-container d-flex flex-column align-items-center justify-content-center">
                             <div class="info-item d-flex">
@@ -413,7 +429,7 @@
 
                     </div>
 
-                    <div class="col-lg-8">
+                    <div class="col-lg-6">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">

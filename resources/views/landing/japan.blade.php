@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>ACC Japan Centre</title>
+    <title>LPK ACC Japan Centre</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -80,9 +80,9 @@
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 30px 30px 0 20px;">
                     <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>
-                        Adiwerna, Tegal,
+                        Adiwerna, Kabupaten Tegal,
                         Central Java</p>
-                    <h2>ACC Japan Centre</span></h2>
+                    <h2>LPK ACC Japan Centre</span></h2>
                     <p style="text-align: justify;" class="justify-content-center">LPK ACC Japan Centre merupakan bagian
                         dari
                         perusahaan ACC untuk Program Jepang dibuka pada Tahun 2022 memulai untuk kelas pelatihan Bahasa
@@ -90,6 +90,12 @@
                         Khususnya di
                         Kabupaten/Kota Tegal
                     </p>
+                    <div class="alert alert-danger" role="alert">
+                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                            <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
+                            diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
+                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                    </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
                         <a href="#lokasi" class="btn-get-started" style="width: 80%;"><i class="fa fa-map-pin"
                                 style="padding-right: 10px;"></i>
@@ -97,7 +103,7 @@
                         <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang"
                             class="btn-watch-video d-flex align-items-center" style="margin-left: 15px;">
                             <i class="bi bi-play-circle"></i><span> YouTube</span></a>
-                    </div>
+                    </div><br />
                 </div>
             </div>
         </div>
@@ -125,6 +131,10 @@
                             kelas pelatihan
                             Bahasa Jepang untuk Program Magang dan TG.
                         </p>
+                        <div class="alert alert-primary" role="alert">
+                            <marquee>LPK ACC Japan Centre Terbagi menjadi dua kelas program, Kelas Pagi dan Kelas Malam
+                            </marquee>
+                        </div>
 
                         <div class="card">
                             <div class='sk-ww-google-business-profile' data-embed-id='25372661'></div>
@@ -171,6 +181,11 @@
                             <img src="{{ asset('templates/assets/img/home3.jpg') }}" class="img-fluid rounded-4"
                                 alt="">
                             <a href="https://www.youtube.com/watch?v=QAfLrOR26CY" class="glightbox play-btn"></a>
+                        </div>
+
+                        <div class="position-relative mt-4">
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipPBj7J-RI4unahwIDe4sRie09PYD2lKpjSRvM8C=s1360-w1360-h1020"
+                                class="img-fluid rounded-4" alt="">
                         </div>
 
                         <br /><br />
@@ -284,6 +299,10 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <div class="position-relative mt-2">
+                                        <img src="{{ asset('templates/assets/img/poster.jpg') }}"
+                                            class="img-fluid rounded-4 mb-4" alt="">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -322,9 +341,9 @@
                         </div>
 
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="1"
+                            <span data-purecounter-start="0" data-purecounter-end="30" data-purecounter-duration="1"
                                 class="purecounter"></span>
-                            <p><strong>Karyawan</strong> LPK Amanah Citra Cemerlang</p>
+                            <p><strong>Karyawan</strong> LPK ACC Japan Centre</p>
                         </div>
 
                     </div>
@@ -504,7 +523,7 @@
                     "target": "_blank"
                 },
                 {
-                    "url": "https://www.youtube.com/@AmanahCitraCemerlang",
+                    "url": "https://m.youtube.com/@ACCJapanCentre/videos",
                     "title": "YouTube",
                     "bgcolor": "red",
                     "color": "white",

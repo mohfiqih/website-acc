@@ -15,9 +15,11 @@
 <header id="header" class="header d-flex align-items-center" style="padding: 10px;">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="#" class="logo d-flex align-items-center">
-            <h1><img src="{{ asset('templates/assets/img/logo.jpg') }}" alt="" class="img-fluid" width="40px">
+            <h1>
+                <img src="{{ asset('templates/assets/img/logo.jpg') }}" alt="" class="img-fluid" width="40px">
                 ACC Asia
-                Jaya<span>.</span></h1>
+                Jaya<span>.</span>
+            </h1>
         </a>
         <nav id="navbar" class="navbar">
             <ul>

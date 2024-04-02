@@ -76,19 +76,31 @@
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 0px 30px 0 20px;">
                     <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>
-                        Tegal,
+                        Kabupaten Tegal,
                         Central Java</p>
                     <h1 style="color: white">Galeri ACC Asia Jaya</h1>
-                    <p>Foto kegiatan LPK ACC (Amanah Citra Cemerlang), Pembelajaran dan Tempat ACC Japan & ACC
-                        Korean. </p>
+                    <p style="text-align: justify;">Foto kegiatan LPK Yayasan Amanah Citra Cemerlang, Pembelajaran dan
+                        Tempat ACC Japan & ACC
+                        Korean. <br /> Kami membantu anda menentukan sebuah pilihan,
+                        Banyak Dari kita yang Ingin ke Luar negri tetapi tidak tau mau kemana / Tujuan nya tidak jelas,
+                        sehingga beberapa di antara Kita Asal pilih Lpk / PT / meaning Agentcy dan ujung2 nya pekerjaan
+                        atau
+                        Tujuan Tidak sesuai dengan Apa yang kita Harapkan. </p>
+                    <div class="alert alert-danger" role="alert">
+                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                            <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
+                            diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
+                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                    </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
-                        <a href="#lokasi" class="btn-get-started" style="width: 80%;"><i class="fa fa-home"
+                        <a href="{{ url('/') }}" class="btn-get-started" style="width: 80%;"><i class="fa fa-home"
                                 style="padding-right: 10px;"></i>
                             Home</a>
                         <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang"
                             class="btn-watch-video d-flex align-items-center" style="margin-left: 15px;">
                             <i class="bi bi-play-circle"></i><span> YouTube</span></a>
                     </div>
+                    <br />
                 </div>
             </div>
         </div>
@@ -107,6 +119,10 @@
 
     <section id="testimonials" class="testimonials">
         <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Program ACC Japan Centre</h2>
+            </div>
+
             <div class="row">
                 @foreach ($images as $index => $image)
                     <div class="col-md-3 mb-4">
@@ -116,6 +132,11 @@
                     </div>
                 @endforeach
             </div>
+
+            <div class="section-header">
+                <h2>Program ACC Korean Centre</h2>
+            </div>
+
             <div class="row">
                 @foreach ($images as $index => $image)
                     <div class="col-md-3 mb-4">
@@ -155,12 +176,12 @@
         </div>
     </section> --}}
 
-    {{-- <div class="container">
+    <div class="container">
         <section id="blog" class="blog">
             <div class='sk-ww-google-business-photo' data-embed-id='25372651'></div>
             <script src='https://widgets.sociablekit.com/google-business-photos/widget.js' async defer></script>
         </section>
-    </div> --}}
+    </div>
 
     <div class="kc_fab_wrapper"></div>
 
