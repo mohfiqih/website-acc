@@ -90,11 +90,14 @@
                         Khususnya di
                         Kabupaten/Kota Tegal
                     </p>
-                    <div class="alert alert-danger" role="alert">
-                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <marquee scrollamount="4"><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka
+                            cabang diwilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
-                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                            oknum yang mengaku cabang kami! Terimakasih
+                        </marquee>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
                         <a href="#lokasi" class="btn-get-started" style="width: 80%;"><i class="fa fa-map-pin"
@@ -132,8 +135,8 @@
                             Bahasa Jepang untuk Program Magang dan TG.
                         </p>
                         <div class="alert alert-primary" role="alert">
-                            <marquee>LPK ACC Japan Centre Terbagi menjadi dua kelas program, Kelas Pagi dan Kelas Malam
-                            </marquee>
+                            <marquee scrollamount="4">LPK ACC Japan Centre Terbagi menjadi dua kelas program, Kelas
+                                Pagi dan Kelas Malam</marquee>
                         </div>
 
                         <div class="card">

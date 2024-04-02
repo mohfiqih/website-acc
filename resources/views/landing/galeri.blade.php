@@ -86,11 +86,14 @@
                         sehingga beberapa di antara Kita Asal pilih Lpk / PT / meaning Agentcy dan ujung2 nya pekerjaan
                         atau
                         Tujuan Tidak sesuai dengan Apa yang kita Harapkan. </p>
-                    <div class="alert alert-danger" role="alert">
-                        <marquee><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka cabang diwilayah
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <marquee scrollamount="4"><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka
+                            cabang diwilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
-                            oknum yang mengaku cabang kami! Terimakasih</marquee>
+                            oknum yang mengaku cabang kami! Terimakasih
+                        </marquee>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 80%;"><i class="fa fa-home"
