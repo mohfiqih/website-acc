@@ -7,20 +7,24 @@ use App\Http\Controllers\PendaftaranController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\LandingPageController;
+
+Route::get('/upload', [ImageUploadController::class, 'index'])->name('images.index');
+Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.store');
 
 // Landing Page
-Route::get('/', function () {
-    return view('landing/index');
-});
+Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
+Route::get('/program-jepang', [LandingPageController::class, 'program_jepang'])->name('landing.program_jepang');
 
-Route::get('/program-jepang', function () {
-    $images = [
-        '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg',
-        '9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg'
-    ];
+// Route::get('/program-jepang', function () {
+//     $images = [
+//         '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg',
+//         '9.jpg','10.jpg','11.jpg','12.jpg','13.jpg','14.jpg','15.jpg','16.jpg','17.jpg','18.jpg'
+//     ];
 
-    return view('landing/japan', ['images' => $images]);
-});
+//     return view('landing/japan', ['images' => $images]);
+// });
 
 Route::get('/program-korea', function () {
     $images = [

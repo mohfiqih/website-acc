@@ -55,7 +55,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; <strong><span>LPK ACC Asia Jaya</span></strong>| Website ACC v.1.0
+            Copyright &copy; <strong><span>LPK ACC Asia Jaya</span></strong>| Website ACC v.1.1.4
         </div>
         <div class="credits">
             Kabupaten Tegal, Central Java</a>

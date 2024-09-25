@@ -100,10 +100,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
-                        <a href="#lokasi" class="btn-get-started" style="width: 80%;"><i class="fa fa-map-pin"
-                                style="padding-right: 10px;"></i>
+                        <a href="#lokasi" class="btn-get-started" style="width: 40%;">
                             Location</a>
-                        <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang"
+                        <a target="_blank" href="https://forms.gle/KjY7kqerGt7stQpK9" class="btn-get-started"
+                            style="width: 40%;margin-left: 10px;">
+                            Daftar</a>
+                        <a target="_blank" href="https://www.youtube.com/c/accjapancentre"
                             class="btn-watch-video d-flex align-items-center" style="margin-left: 15px;">
                             <i class="bi bi-play-circle"></i><span> YouTube</span></a>
                     </div><br />
@@ -122,6 +124,52 @@
             </div>
         </nav>
     </div>
+
+    {{-- <section class="testimonials" id="galeri">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Galeri ACC Japan</h2>
+            </div>
+            <div class="row">
+                @foreach ($images_db as $image)
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="height: 250px;">
+                            <img src="{{ $image->filepath }}" class="card-img-top" alt="Image"
+                                style="height: 100%; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Date: {{ $image->created_at->format('d M Y H:i') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section> --}}
+
+    <section class="testimonials" id="galeri">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Galeri ACC Japan</h2>
+            </div>
+            <div class="row">
+                @foreach ($images_db as $image)
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="height: 250px;">
+                            <img src="{{ asset($image->filepath) }}" class="card-img-top" alt="Image"
+                                style="height: 100%; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Date: {{ $image->created_at->format('d M Y H:i') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
 
     <main id="main" style="padding-left: 10px;padding-right: 10px;">
         <section id="about" class="about">
@@ -392,7 +440,6 @@
 
     <section class="testimonials" id="galeri">
         <div class="container" data-aos="fade-up">
-
             <div class="section-header">
                 <h2>Galeri ACC Japan</h2>
             </div>

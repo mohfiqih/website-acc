@@ -9,7 +9,7 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="{{ asset('templates/assets/img/logo.jpg') }}" rel="icon">
+    <link href="https://amanahcitracemerlang.id/upload_image/1724591989_logojepang.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -138,6 +138,52 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- <section class="testimonials" id="galeri">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Galeri ACC Japan</h2>
+            </div>
+            <div class="row">
+                @foreach ($images as $image)
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="height: 250px;">
+                            <img src="{{ $image->filepath }}" class="card-img-top" alt="Image"
+                                style="height: 100%; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Date: {{ $image->created_at->format('d M Y H:i') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section> --}}
+
+    <section class="testimonials" id="galeri">
+        <div class="container" data-aos="fade-up">
+            <div class="section-header">
+                <h2>Galeri ACC Japan</h2>
+            </div>
+            <div class="row">
+                @foreach ($images_db as $image)
+                    <div class="col-md-3 mb-4">
+                        <div class="card" style="height: 250px;">
+                            <img src="{{ asset($image->filepath) }}" class="card-img-top" alt="Image"
+                                style="height: 100%; object-fit: cover;">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    Date: {{ $image->created_at->format('d M Y H:i') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
