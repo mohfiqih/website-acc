@@ -3,9 +3,9 @@
         <div class="row gy-4">
             <div class="col-lg-6 col-md-12 footer-info">
                 <a href="index.html" class="logo d-flex align-items-center">
-                    <span>LPK ACC Asia Jaya</span><br />
+                    <span>LPK ACC Japan Centre</span><br />
                 </a>
-                <p style="text-align: justify;padding-right: 10px;"><b>About</b><br />LPK ACC (Amanah Citra Cemerlang)
+                {{-- <p style="text-align: justify;padding-right: 10px;"><b>About</b><br />LPK ACC (Amanah Citra Cemerlang)
                     Asia
                     Jaya telah
                     membimbing dan
@@ -17,6 +17,9 @@
                     Jika
                     ingin tahu Info
                     selengkapnya.
+                </p> --}}
+                <p>
+                    LPK ACC telah membimbing dan membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya Program Magang, Program Tokutei Ginou (TG) dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.
                 </p>
 
             </div>
@@ -55,7 +58,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; <strong><span>LPK ACC Asia Jaya</span></strong>| Website ACC v.1.1.4
+            Copyright &copy; <strong><span>LPK ACC Japan centre</span></strong>| Website ACC v.1.2
         </div>
         <div class="credits">
             Kabupaten Tegal, Central Java</a>
