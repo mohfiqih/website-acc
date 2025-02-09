@@ -282,7 +282,7 @@
                     @foreach ($images_db as $image)
                         <div class="col-md-3 mb-4">
                             <div class="card" style="height: 250px;">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top" alt="Image" style="height: 100%; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;">
                                 <div class="card-body">
                                     <p class="card-text">
                                         Date: {{ $image->created_at->format('d M Y H:i') }}
@@ -634,6 +634,7 @@
     <script src="{{ asset('templates/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('templates/assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
 </body>
 
 </html>
