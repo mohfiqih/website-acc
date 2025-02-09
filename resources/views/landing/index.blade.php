@@ -282,8 +282,7 @@
                     @foreach ($images_db as $image)
                         <div class="col-md-3 mb-4">
                             <div class="card" style="height: 250px;">
-                                <img src="{{ asset($image->filepath) }}" class="card-img-top" alt="Image"
-                                    style="height: 100%; object-fit: cover;">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top" alt="Image" style="height: 100%; object-fit: cover;">
                                 <div class="card-body">
                                     <p class="card-text">
                                         Date: {{ $image->created_at->format('d M Y H:i') }}
