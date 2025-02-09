@@ -1,27 +1,53 @@
-<IfModule mod_rewrite.c>
-    <IfModule mod_negotiation.c>
-        Options -MultiViews -Indexes
-    </IfModule>
+# <IfModule mod_rewrite.c>
+#     <IfModule mod_negotiation.c>
+#         Options -MultiViews -Indexes
+#     </IfModule>
 
-    RewriteEngine On
+#     RewriteEngine On
     
-    RewriteEngine On
-    RewriteCond %{REQUEST_URI} !^/website-acc/
-    RewriteRule ^(.*)$ /website-acc/$1 [L]
+#     RewriteCond %{DOCUMENT_ROOT}/website-acc/public/%{REQUEST_URI} -f
+#     RewriteRule ^(.*)$ website-acc/public/$1 [L]
 
-    # Handle Authorization Header
-    RewriteCond %{HTTP:Authorization} .
-    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+#     # Handle Authorization Header
+#     RewriteCond %{HTTP:Authorization} .
+#     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+#     # Redirect Trailing Slashes If Not A Folder...
+#     RewriteCond %{REQUEST_FILENAME} !-d
+#     RewriteCond %{REQUEST_URI} (.+)/$
+#     RewriteRule ^ %1 [L,R=301]
+
+#     # Allow access to the storage folder
+#     RewriteCond %{REQUEST_URI} ^/storage/(.*)$
+#     RewriteCond %{DOCUMENT_ROOT}/storage/app/public/%1 -f
+#     RewriteRule ^storage/(.*)$ /storage/app/public/$1 [L]
+
+#     # Send Requests To Front Controller...
+#     RewriteCond %{REQUEST_FILENAME} !-d
+#     RewriteCond %{REQUEST_FILENAME} !-f
+#     RewriteRule ^ index.php [L]
+# </IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Arahkan semua request ke Laravel di website-acc/public
+    RewriteCond %{REQUEST_URI} !^/website-acc/public/
+    RewriteRule ^(.*)$ website-acc/public/$1 [L]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Allow access to the storage folder
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Allow access to storage folder
     RewriteCond %{REQUEST_URI} ^/storage/(.*)$
-    RewriteCond %{DOCUMENT_ROOT}/storage/app/public/%1 -f
-    RewriteRule ^storage/(.*)$ /storage/app/public/$1 [L]
+    RewriteCond %{DOCUMENT_ROOT}/website-acc/storage/app/public/%1 -f
+    RewriteRule ^storage/(.*)$ /website-acc/storage/app/public/$1 [L]
 
     # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
