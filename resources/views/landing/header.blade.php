@@ -16,7 +16,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="#" class="logo d-flex align-items-center">
             <h1>
-                <img src="https://amanahcitracemerlang.id/upload_image/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" class="img-fluid">
+                <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" class="img-fluid">
                 ACC Japan Centre<span>.</span>
             </h1>
         </a>

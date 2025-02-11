@@ -15,7 +15,7 @@
             </li>
             <hr class="sidebar-divider">
             <div class="sidebar-heading">
-                Main Menu
+                Data
             </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
@@ -30,7 +30,7 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable"
                     aria-expanded="true" aria-controls="collapseTable">
                     <i class="fas fa-fw fa-table"></i>
@@ -91,10 +91,10 @@
                             Korea</a>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <hr class="sidebar-divider">
-            <div class="version">Web ACC Version 1.0</div>
+            <div class="version">LPK ACC v.1.2</div>
         </ul>
         {{-- @elseif (Auth::user()->user_level == 'Admin Jepang')
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">

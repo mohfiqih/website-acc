@@ -83,24 +83,13 @@
                         Adiwerna, Kabupaten Tegal,
                         Central Java</p>
                     <h2>LPK Amanah Citra Cemerlang (ACC Japan Centre)</span></h2>
-                    {{-- <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
-                        membimbing dan
-                        membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Ada
-                        Dua <a href="{{ url('program-jepang') }}" style="color: white;" target="_blank"><b>Program
-                                Jepang</b></a> dan
-                        <a href="{{ url('program-korea') }}" style="color: white;" target="_blank"><b>Program
-                                Korea</b></a>. Klik Page
-                        Jika
-                        ingin tahu Info
-                        selengkapnya.
-                    </p> --}}
                     <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
                         membimbing dan
                         membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya
                         Program Magang, Program Tokutei Ginou (TG) dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.
                     </p>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <marquee scrollamount="4"><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka
+                        <marquee scrollamount="10"><b>Announcement!</b> LPK Amanah Citra Cemerlang tidak membuka
                             cabang diwilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada

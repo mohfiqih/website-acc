@@ -12,7 +12,7 @@
 
     <meta name="description" content="" />
 
-    <link rel="icon" type="image/png" href="{{ asset('templates/assets/img/logo.jpg') }}" />
+    <link rel="icon" type="image/png" href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -46,9 +46,8 @@
                 <div class="card">
                     <div class="card-body">
                         <center>
-                            <img src="{{ asset('templates/assets/img/logo.jpg') }}" width="60px" hiight="100px" />
-                            <br /> <br />
-                            <h4 class="mb-2">LPK Amanah Citra Cemerlang👋</h4>
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" width="100px" hiight="100px" />
+                            <h4 class="mb-2">LPK Amanah Citra Cemerlang (ACC Japan Centre) 👋</h4>
                             <p class="mb-4">Welcome to Login Page!</p>
                         </center>
                         <form class="mb-3" action="{{ route('actionlogin') }}" method="POST">
@@ -78,14 +77,11 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <button class="btn d-grid w-100" type="submit"
-                                    style="background-color: #1E6C93;color: white;">Sign
-                                    in</button>
+                                <button class="btn d-grid w-100" type="submit" style="background-color: #0d638e;color: white;">Login</button>
                             </div>
                             <center>
-                                <p>Halaman Utama ACC <a href="{{ url('/') }}">Klik Link</a></p>
+                                <p>Landing Page ACC <a href="{{ url('/') }}">Klik Link</a></p>
                             </center>
-
                         </form>
                     </div>
                 </div>
