@@ -64,3 +64,5 @@ Route::get('/upload', [ImageUploadController::class, 'index'])->name('images.ind
 Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.store');
 
 # pendaftaran
+Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
+Route::post('/pendaftaran', [PendaftaranController::class, 'store']);
