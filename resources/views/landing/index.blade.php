@@ -9,7 +9,7 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="https://amanahcitracemerlang.id/upload_image/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -42,25 +42,25 @@
                         </div>
                         <div class="carousel-inner" style="border-radius: 20px;">
                             <div class="carousel-item active">
-                                <img src="https://amanahcitracemerlang.id/upload_image/1738420209_IMG-20250131-WA0008.jpg" class="d-block w-100"
-                                    alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                            <div class="carousel-item ">
-                                <img src="https://amanahcitracemerlang.id/upload_image/1727241978_Screenshot_2024-09-10-09-07-58-609_com.whatsapp-edit.jpg" class="d-block w-100"
-                                    alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                            <div class="carousel-item ">
-                                <img src="https://amanahcitracemerlang.id/upload_image/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.02.jpeg" class="d-block w-100"
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://amanahcitracemerlang.id/upload_image/1738774200_Screenshot_2025_0204_193622.jpg" class="d-block w-100"
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1739244487_Screenshot_2025_0211_102749.jpg" class="d-block w-100"
+                                    alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.02.jpeg" class="d-block w-100"
+                                    alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://lh3.googleusercontent.com/p/AF1QipPBj7J-RI4unahwIDe4sRie09PYD2lKpjSRvM8C=s1360-w1360-h1020" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
@@ -219,7 +219,7 @@
                             {{-- <img src="https://amanahcitracemerlang.id/templates/assets/img/korea/lokasi-korea.png"
                                 class="img-fluid rounded-4 mb-4" alt=""> --}}
 
-                            <img src="https://amanahcitracemerlang.id/upload_image/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.16.jpeg"
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.16.jpeg"
                                 class="img-fluid rounded-4 mb-4" alt="">
                         </div>
                         <div class="content ps-0">
@@ -249,15 +249,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="position-relative mt-2">
-                                        <img src="https://amanahcitracemerlang.id/upload_image/1738420242_IMG-20250131-WA0006.jpg"
+                                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
                                             class="img-fluid rounded-4" alt="">
                                     </div>
                                     <div class="position-relative mt-2">
-                                        <img src="https://amanahcitracemerlang.id/upload_image/1727241978_Screenshot_2024-09-10-09-08-08-217_com.whatsapp-edit.jpg"
+                                        <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-08-08-217_com.whatsapp-edit.jpg"
                                             class="img-fluid rounded-4 mb-4" alt="">
                                     </div>
                                     <div class="position-relative mt-2">
-                                        <img src="https://amanahcitracemerlang.id/upload_image/1726219639_Screenshot_2024-09-11-16-41-34-961_com.whatsapp-edit.jpg"
+                                        <img src="https://www.amanahcitracemerlang.id/storage/images/1726219639_Screenshot_2024-09-11-16-41-34-961_com.whatsapp-edit.jpg"
                                             class="img-fluid rounded-4 mb-4" alt="">
                                     </div>
                                     <div class="position-relative mt-2">
@@ -294,7 +294,7 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4 align-items-center">
                     <div class="col-lg-4">
-                        <img src="https://amanahcitracemerlang.id/upload_image/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg" alt="" class="img-fluid">
+                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg" alt="" class="img-fluid">
                     </div>
                     <div class="col-lg-4">
                         <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
@@ -355,7 +355,7 @@
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item  position-relative">
-                            <img src="https://amanahcitracemerlang.id/upload_image/1738774200_Screenshot_2025_0204_193622.jpg" class="img-fluid rounded-4 mb-4"
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg" class="img-fluid rounded-4 mb-4"
                                 alt="">
                             <h3>Program Magang</h3>
                             <p>
@@ -372,7 +372,7 @@
 
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item position-relative">
-                            <img src="https://amanahcitracemerlang.id/upload_image/1727241978_Screenshot_2024-09-10-09-07-58-609_com.whatsapp-edit.jpg"
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-07-58-609_com.whatsapp-edit.jpg"
                                 class="img-fluid rounded-4 mb-4" alt="">
                             <h3>Program Tokutei Ginou (TG)</h3>
                             <p>
