@@ -1,43 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataTables dari Google Sheets</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-</head>
-<body>
-
-    <table id="spreadsheetTable" class="display">
-        <thead>
-            <tr>
-                @foreach(array_keys($data[0]) as $header)
-                    <th>{{ $header }}</th>
-                @endforeach
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($data as $row)
-                <tr>
-                    @foreach($row as $cell)
-                        <td>{{ $cell }}</td>
-                    @endforeach
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-
-    <script>
-        $(document).ready( function () {
-            $('#spreadsheetTable').DataTable();
-        });
-    </script>
-
-</body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -202,13 +162,17 @@
             max-width: 100%;
             overflow-x: auto;
         }
+
+        .dataTables_paginate {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
 <body>
-    @include('landing.header')
-
-    <section id="hero" class="hero" style="padding: 10px;">
+    <section id="hero" class="hero" style="padding: 10px;padding-top: 50px;">
         <div class="container position-relative">
             <div class="row gy-5" data-aos="fade-in" style="">
                 <div class="col-lg-6 order-1  d-flex flex-column justify-content-center text-center text-lg-start">
@@ -276,29 +240,56 @@
 
     <div class="container mt-4">
         <div class="card">
-            <div class="card-body" style="padding: 30px;border-radius: 10px;">
-                <table id="spreadsheetTable" class="table table-striped table-bordered" style="width:100%;overflow-x: auto;">
-                    <thead>
-                        <tr>
-                            @foreach(array_keys($data[0]) as $header)
-                                <th>{{ $header }}</th>
-                            @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($data as $row)
+            <div class="card-body" style="padding: 30px; border-radius: 10px;">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <label>
+                            Show 
+                            <select id="entriesSelect" class="form-control d-inline-block w-auto">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="20" selected>20</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+    
+                <div class="table-responsive">
+                    <table id="spreadsheetTable" class="table table-striped table-bordered">
+                        <thead>
                             <tr>
-                                @foreach($row as $cell)
-                                    <td>{{ $cell }}</td>
+                                @foreach(array_keys($data[0]) as $header)
+                                    <th>{{ $header }}</th>
                                 @endforeach
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach($data as $row)
+                                <tr>
+                                    @foreach($row as $cell)
+                                        <td>{{ $cell }}</td>
+                                    @endforeach
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Pagination di luar DataTables -->
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <span id="tableInfo"></span>
+                    <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                </div>
             </div>
         </div>
     </div>
-    <br/>
+    
+    <br/>    
 
     <div id="preloader"></div>
 
@@ -311,10 +302,40 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     <script>
-        $(document).ready( function () {
-            $('#spreadsheetTable').DataTable();
+        $(document).ready(function() {
+            let table = $('#spreadsheetTable').DataTable({
+                "paging": true,
+                "pageLength": 20,
+                "searching": true,
+                "info": false,
+                "lengthChange": false,
+                "scrollY": false,
+                "scrollCollapse": false,
+                "dom": 'rtp' 
+            });
+
+            // **Sembunyikan pagination bawaan DataTables**
+            $('.dataTables_paginate').hide();
+
+            // Custom Search
+            $('#tableSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
+            // Custom Entries Dropdown
+            $('#entriesSelect').on('change', function() {
+                table.page.len(this.value).draw();
+            });
+
+            $(document).on('click', '#paginationControls .page-link', function(e) {
+                e.preventDefault();
+                let page = parseInt($(this).data('page'));
+                if (!isNaN(page)) {
+                    table.page(page).draw('page');
+                }
+            });
         });
-    </script>
+    </script>     
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>

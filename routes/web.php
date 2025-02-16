@@ -70,7 +70,7 @@ Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
 
 // # get data
 Route::get('/data-pendaftaran-online', function () {
-    $url = 'https://script.google.com/macros/s/AKfycbz7zGLJKD4_HsglH9UsxG1D6zMK2nlM16hJaHlZSrAmjOC5U0AzMYCR_mlTft0zopO-/exec';
+    $url = 'https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec';
     $response = Http::get($url);
     $data = array_reverse($response->json());
     return view('landing/data-pendaftaran', ['data' => $data]);

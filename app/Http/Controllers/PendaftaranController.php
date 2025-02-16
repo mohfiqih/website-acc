@@ -55,7 +55,7 @@ class PendaftaranController extends Controller
             $data                 = $request->all();
             $bahasa_asing         = implode(', ', $data['bahasa_asing']);
             $data['bahasa_asing'] = $bahasa_asing;
-            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbz7zGLJKD4_HsglH9UsxG1D6zMK2nlM16hJaHlZSrAmjOC5U0AzMYCR_mlTft0zopO-/exec";
+            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec";
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
