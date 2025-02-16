@@ -2,7 +2,8 @@
     <div class="container">
         <div class="row gy-4">
             <div class="col-lg-6 col-md-12 footer-info">
-                <a href="index.html" class="logo d-flex align-items-center">
+                <br />
+                <a href="/" class="logo d-flex align-items-center">
                     <span>LPK ACC Japan Centre</span><br />
                 </a>
                 <p style="text-align: justify;">
@@ -43,7 +44,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang</span></strong>| Website ACC v.1.3.0
+            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang</span></strong><br/>| Website ACC v.1.3.0
         </div>
         <div class="credits">
             Kecamatan Adiwerna, Kabupaten Tegal, Jawa tengah, Indonesia</a>

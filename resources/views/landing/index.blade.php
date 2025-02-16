@@ -122,13 +122,7 @@
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.02.jpeg" class="d-block w-100"
-                                    alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="https://lh3.googleusercontent.com/p/AF1QipPBj7J-RI4unahwIDe4sRie09PYD2lKpjSRvM8C=s1360-w1360-h1020" class="d-block w-100"
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
                                     alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
@@ -172,7 +166,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
-                        <a href="{{ url('/pendaftaran') }}" class="btn-get-started" style="width: 100%;">
+                        <a href="{{ url('/pendaftaran-online') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Daftar
                         </a>

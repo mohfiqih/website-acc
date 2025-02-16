@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\LandingPageController;
+use Illuminate\Support\Facades\Http;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
@@ -64,5 +65,13 @@ Route::get('/upload', [ImageUploadController::class, 'index'])->name('images.ind
 Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.store');
 
 # pendaftaran
-Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
-Route::post('/pendaftaran', [PendaftaranController::class, 'store']);
+Route::get('/pendaftaran-online', [PendaftaranController::class, 'index']);
+Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
+
+// # get data
+Route::get('/data-pendaftaran-online', function () {
+    $url = 'https://script.google.com/macros/s/AKfycbz7zGLJKD4_HsglH9UsxG1D6zMK2nlM16hJaHlZSrAmjOC5U0AzMYCR_mlTft0zopO-/exec';
+    $response = Http::get($url);
+    $data = array_reverse($response->json());
+    return view('landing/data-pendaftaran', ['data' => $data]);
+});

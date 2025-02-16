@@ -44,7 +44,6 @@ class PendaftaranController extends Controller
                 'pendidikan_terakhir'   => 'required|string',
                 'status_pernikahan'     => 'required|string',
                 'pengalaman_kerja'      => 'required|string',
-                // 'bahasa_asing'          => 'required|string',
                 'bahasa_asing'          => 'required|array',
                 'bahasa_asing.*'        => 'required|string',
                 'program_diambil'       => 'required|string',
@@ -56,7 +55,7 @@ class PendaftaranController extends Controller
             $data                 = $request->all();
             $bahasa_asing         = implode(', ', $data['bahasa_asing']);
             $data['bahasa_asing'] = $bahasa_asing;
-            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbxl-yNlMKG32dNhA8-Gnwu6XKINkykux0Dpi0grIYPWX5VRdtJGoraoe4ZcGyA_Su0B/exec";
+            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbz7zGLJKD4_HsglH9UsxG1D6zMK2nlM16hJaHlZSrAmjOC5U0AzMYCR_mlTft0zopO-/exec";
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
