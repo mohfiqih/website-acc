@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use App\Models\Image;
+use App\Models\ProvinsiModel;
 
 class PendaftaranController extends Controller
 {
-    // // Data Karyawan
+    // Data Karyawan
     // public function pendaftaran()
     // {
     //     $user = Auth::user();
@@ -18,7 +20,9 @@ class PendaftaranController extends Controller
 
     public function index()
     {
-        return view('landing.pendaftaran');
+        $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
+        $provinsi  = ProvinsiModel::all();
+        return view('landing.pendaftaran2', ['images_db' => $images_db, 'provinsi' => $provinsi]);
     }
 
     public function store(Request $request)
