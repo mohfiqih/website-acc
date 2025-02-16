@@ -219,10 +219,10 @@
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
                     <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
-                    <h2 class="text-justify"></span>DATA SISWA PENDAFTARAN ONLINE LPK ACC JAPAN CENTRE</h2>
-                    <p style="text-align: justify;" class="justify-content-center">
+                    <h2></span>DATA SISWA PENDAFTARAN ONLINE LPK ACC JAPAN CENTRE</h2>
+                    {{-- <p style="text-align: justify;" class="justify-content-center">
                         LPK ACC Japan Centre menerima Program Magang, Tokutei Ginou (TG) dan Matching Job. Silahkan Daftarkan diri anda di LPK ACC Japan Centre.
-                    </p>
+                    </p> --}}
                     <ul>
                         <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
                         <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
