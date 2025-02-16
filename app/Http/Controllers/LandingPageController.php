@@ -9,7 +9,7 @@ class LandingPageController extends Controller
 {
     public function index()
     {
-        $images_db = Image::orderBy('created_at', 'desc')->get();
+        $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
         return view('landing.index', ['images_db' => $images_db]);
     }
 
