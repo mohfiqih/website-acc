@@ -149,8 +149,31 @@
                                 <video class="d-block w-100" id="video-background" autoplay muted loop>
                                     <source src="{{ asset('bg-video.mp4') }}" type="video/mp4">
                                 </video>
+                                <div class="carousel-caption d-none d-md-block"></div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
+                                    alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
+                                    alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
                             </div>
                         </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
@@ -160,8 +183,8 @@
                         LPK ACC Japan Centre menerima Program Magang, Tokutei Ginou (TG) dan Matching Job. Silahkan Daftarkan diri anda di LPK ACC Japan Centre.
                     </p>
                     <ul>
-                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dk. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
-                        <li class="text-white">LPK ACC Japan Centre lembaga Resmi dan Legal.</li>
+                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
+                        <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
                         <li class="text-white">Gratis Biaya Pendaftaran!!!</li>
                     </ul>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
@@ -184,7 +207,7 @@
                 </ol>
             </nav>
             <div class="signup-content">
-                <form action="{{ url('/pendaftaran') }}" method="POST" class="signup-form">
+                <form action="{{ url('/pendaftaran-online') }}" method="POST" class="signup-form">
                     @csrf            
                     @if(session('success'))
                         <p style="color: green;">{{ session('success') }}</p>
@@ -194,7 +217,7 @@
                         <p style="color: red;">{{ session('error') }}</p>
                     @endif
                     <div class="form-group">
-                        <label class="text-label" for="email" style="font-weight: bold">Email:</label>
+                        <label class="text-label" for="email" style="font-weight: bold">Email Aktif:</label>
                         <input type="email" class="form-control" name="email" placeholder="Masukan email aktif anda.." required>
                     </div>
                     <div class="form-group">
@@ -202,7 +225,7 @@
                         <input type="text" class="form-control" name="nama_lengkap" placeholder="Masukan lama lengkap anda.." required>
                     </div>
                     <div class="form-group">
-                        <label class="text-label" for="nomor_hp" style="font-weight: bold">Nomor HP/WhatsApp:</label>
+                        <label class="text-label" for="nomor_hp" style="font-weight: bold">WhatsApp:</label>
                         <input type="text" class="form-control" name="nomor_hp" placeholder="Masukan nomor hp/whatsapp anda.." required>
                     </div>
                     <div class="form-group">
@@ -281,7 +304,7 @@
                         <input type="text" rows="5" class="form-control" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda.." required>
                     </div>
                     <div class="form-group">
-                        <label class="text-label" for="bahasa_asing" style="font-weight: bold">Bahasa Asing:</label>
+                        <label class="text-label" for="bahasa_asing" style="font-weight: bold">Bahasa Asing Yang dikuasai:</label>
                         <select name="bahasa_asing[]" class="form-control" multiple="multiple" id="bahasa_asing" required>
                             <option value="Inggris">Inggris</option>
                             <option value="Jepang">Jepang</option>
@@ -291,7 +314,7 @@
                         </select>
                     </div>                 
                     <div class="form-group">
-                        <label class="text-label" for="program_diambil" style="font-weight: bold">Program yang Diambil:</label>
+                        <label class="text-label" for="program_diambil" style="font-weight: bold">Program Pendidikan:</label>
                         <select name="program_diambil" class="form-control" required>
                             <option value="" disabled selected>Pilih Program Yang diambil</option>
                             <option value="Magang Jepang (Jisshusei) Kelas Pagi">Magang Jepang (Jisshusei) Kelas Pagi</option>
@@ -299,16 +322,16 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="text-label" for="fasilitas" style="font-weight: bold">Biaya yang akan diambil:</label>
+                        <label class="text-label" for="fasilitas" style="font-weight: bold">Biaya Pendidikan:</label>
                         <select name="fasilitas" class="form-control" required>
-                            <option value="" disabled selected>Pilih Biaya yang akan diambil</option>
+                            <option value="" disabled selected>Pilih Biaya (Sesuaikan dengan Program Yang diambil)</option>
                             <option value="Pendidikan Bahasa Jepang Rp.600.000,- / Bulan (Kelas Pagi Jam 08.30 -15.00 WIB)">Pendidikan Bahasa Jepang Rp.600.000,- / Bulan (Kelas Pagi Jam 08.30 -15.00 WIB)</option>
                             <option value="Pendidikan Bahasa Jepang Rp.800.000,- / Bulan (Kelas Malam Jam 18.30 - 22.00 WIB)">Pendidikan Bahasa Jepang Rp.800.000,- / Bulan (Kelas Malam Jam 18.30 - 22.00 WIB)</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="nama_mentor" style="font-weight: bold">Nama Mentor:</label>
-                        <input type="text" class="form-control" name="nama_mentor" placeholder="Masukan nama mentor (jika belum tau konfirmasi melalui chat whatsapp)" required>
+                        <input type="text" class="form-control" name="nama_mentor" placeholder="(Jika belum tau konfirmasikan melalui chat whatsapp)" required>
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="tanggal_pendaftaran" style="font-weight: bold">Tanggal Pendaftaran:</label>
@@ -325,7 +348,7 @@
     <section class="testimonials" id="galeri">
         <div class="container" data-aos="fade-up">
             <div class="section-header">
-                <h2>Galeri Upload LPK ACC Japan Centre</h2>
+                <h2>Galeri LPK ACC Japan Centre</h2>
             </div>
             <div class="row">
                 @foreach ($images_db as $image)
@@ -394,8 +417,8 @@
         $("#bahasa_asing").select2({
             placeholder: {
                 id: "",
-                text: "Pilih Bahasa Asing..",
-                selected: "Pilih Bahasa Asing..",
+                text: "Pilih Bahasa Asing yang dikuasai",
+                selected: "Pilih Bahasa Asing yang dikuasai",
             },
         });
 
@@ -416,6 +439,7 @@
     
                 Swal.fire({
                     title: 'Apakah Anda yakin ingin mendaftarkan diri?',
+                    text: 'Pastikan data yang sudah anda masukan sesuai dan benar!',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'OK',
