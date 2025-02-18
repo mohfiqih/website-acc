@@ -246,7 +246,7 @@
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="alamat" style="font-weight: bold">Alamat Lengkap:</label>
-                        <textarea name="alamat" class="form-control" placeholder="Masukan alamat lengkap anda.." required></textarea>
+                        <textarea rows="5" name="alamat" class="form-control" placeholder="Masukan alamat lengkap anda.." required></textarea>
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="asal_provinsi" style="font-weight: bold">Asal Provinsi:</label>
@@ -301,7 +301,7 @@
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="pengalaman_kerja" style="font-weight: bold">Pengalaman Kerja:</label>
-                        <input type="text" rows="5" class="form-control" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda.." required>
+                        <textarea type="text" rows="5" class="form-control" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda.." required></textarea>
                     </div>
                     <div class="form-group">
                         <label class="text-label" for="bahasa_asing" style="font-weight: bold">Bahasa Asing Yang dikuasai:</label>
@@ -319,8 +319,6 @@
                             <option value="" disabled selected>Pilih Program Yang diambil</option>
                             <option value="Magang Jepang (Jisshusei)">Magang Jepang (Jisshusei)</option>
                             <option value="Tokutei Ginou (TG)">Tokutei Ginou (TG)</option>
-                            {{-- <option value="Magang Jepang (Jisshusei) Kelas Pagi">Magang Jepang (Jisshusei) Kelas Pagi</option>
-                            <option value="Magang Jepang (Jisshusei) Kelas Malam">Magang Jepang (Jisshusei) Kelas Malam</option> --}}
                         </select>
                     </div>
                     <div class="form-group">
