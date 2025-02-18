@@ -317,8 +317,10 @@
                         <label class="text-label" for="program_diambil" style="font-weight: bold">Program Pendidikan:</label>
                         <select name="program_diambil" class="form-control" required>
                             <option value="" disabled selected>Pilih Program Yang diambil</option>
-                            <option value="Magang Jepang (Jisshusei) Kelas Pagi">Magang Jepang (Jisshusei) Kelas Pagi</option>
-                            <option value="Magang Jepang (Jisshusei) Kelas Malam">Magang Jepang (Jisshusei) Kelas Malam</option>
+                            <option value="Magang Jepang (Jisshusei)">Magang Jepang (Jisshusei)</option>
+                            <option value="Tokutei Ginou (TG)">Tokutei Ginou (TG)</option>
+                            {{-- <option value="Magang Jepang (Jisshusei) Kelas Pagi">Magang Jepang (Jisshusei) Kelas Pagi</option>
+                            <option value="Magang Jepang (Jisshusei) Kelas Malam">Magang Jepang (Jisshusei) Kelas Malam</option> --}}
                         </select>
                     </div>
                     <div class="form-group">
