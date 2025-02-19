@@ -22,7 +22,8 @@
     <link href="{{ asset('templates/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('templates/assets/css/main.css?v=1.0') }}" rel="stylesheet">
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
-
+    <!-- Lity CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
         .pagination-container {
             display: flex;
@@ -117,13 +118,13 @@
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="...">
+                                    alt="..." data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="...">
+                                    alt="..." data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -239,20 +240,20 @@
                         </p>
                         <div class="position-relative mt-4">
                             <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4"
-                                alt="">
+                                alt="" data-lity>
                             <a href="{{ url('/galeri') }}" class="play-btn"></a>
                         </div>
 
                         <div class="position-relative mt-4">
                             <img src="https://lh3.googleusercontent.com/p/AF1QipPBj7J-RI4unahwIDe4sRie09PYD2lKpjSRvM8C=s1360-w1360-h1020"
-                                class="img-fluid rounded-4" alt="">
+                                class="img-fluid rounded-4" alt="" data-lity>
                         </div>
 
                     </div>
                     <div class="col-lg-6">
                         <div class="position-relative mt-2">
                             <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.16.jpeg"
-                                class="img-fluid rounded-4 mb-4" alt="">
+                                class="img-fluid rounded-4 mb-4" alt="" data-lity>
                         </div>
                         <div class="content ps-0">
                             <div class="row">
@@ -282,19 +283,19 @@
                                 <div class="col-md-6">
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
-                                            class="img-fluid rounded-4" alt="">
+                                            class="img-fluid rounded-4" alt="" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-08-08-217_com.whatsapp-edit.jpg"
-                                            class="img-fluid rounded-4 mb-4" alt="">
+                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1726219639_Screenshot_2024-09-11-16-41-34-961_com.whatsapp-edit.jpg"
-                                            class="img-fluid rounded-4 mb-4" alt="">
+                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="{{ asset('templates/assets/img/poster.jpg') }}"
-                                            class="img-fluid rounded-4 mb-4" alt="">
+                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
                                     </div>
                                 </div>
                             </div>
@@ -315,7 +316,7 @@
                         <div class="col-sm-3 mb-3 mb-sm-0">
                             <div class="card">
                                 <div class="card-body">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" data-lity alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
                                 </div>
                                 <div class="card-footer text-body-secondary">
                                     <b>Date:</b> {{ $image->created_at }}<br/>
@@ -357,11 +358,11 @@
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4 align-items-center">
                     <div class="col-lg-4">
-                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg" alt="" class="img-fluid">
+                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg" data-lity alt="" class="img-fluid">
                     </div>
                     <div class="col-lg-4">
                         <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
-                            class="img-fluid">
+                            class="img-fluid" data-lity>
                     </div>
                     <div class="col-lg-4">
                         <div class="stats-item d-flex align-items-center">
@@ -418,7 +419,7 @@
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item  position-relative">
-                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg" class="img-fluid rounded-4 mb-4"
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg" data-lity class="img-fluid rounded-4 mb-4"
                                 alt="">
                             <h3>Program Magang</h3>
                             <p>
@@ -436,7 +437,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item position-relative">
                             <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-07-58-609_com.whatsapp-edit.jpg"
-                                class="img-fluid rounded-4 mb-4" alt="">
+                                class="img-fluid rounded-4 mb-4" alt="" data-lity>
                             <h3>Program Tokutei Ginou (TG)</h3>
                             <p>
                                 Tokutei Ginou (TG) adalah program kerja untuk warga negara asing yang memiliki keahlian khusus.
@@ -468,20 +469,6 @@
             </div>
         </section> --}}
 
-        {{-- Maps Japan Center --}}
-        <section class="contact">
-            <div class="container" data-aos="fade-up">
-                <h5><b>Lokasi Kantor & Pendidikan ACC Japan Center</b></h5>
-                <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-12">
-                        <iframe class="mb-4 mb-lg-0"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
-                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         {{-- Maps Korean Center --}}
         {{-- <section class="contact sections-bg">
             <div class="container" data-aos="fade-up">
@@ -495,6 +482,20 @@
                 </div>
             </div>
         </section> --}}
+
+        {{-- Maps Japan Center --}}
+        <section class="contact">
+            <div class="container" data-aos="fade-up">
+                <h5><b>Lokasi Kantor & Pendidikan ACC Japan Center</b></h5>
+                <div class="row gx-lg-0 gy-4">
+                    <div class="col-lg-12">
+                        <iframe class="mb-4 mb-lg-0"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
+                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         {{-- Testimoni Japan Center --}}
         <div id="reviews" style="padding-top: 20px;padding-bottom: 20px;">
@@ -597,7 +598,7 @@
                         <div class="col-md-6" style="padding: 10px;">
                             <div class="card" style="width: 100%;">
                                 <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="card-img-top"
-                                    alt="ACC Japan">
+                                    alt="ACC Japan" data-lity>
                                 <div class="card-body">
                                     <a href="" target="_blank" class="btn btn-success"
                                         style="width: 100%;"><i class="bi bi-whatsapp"
@@ -680,6 +681,8 @@
     <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('templates/assets/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <!-- Lity JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
 </body>
 
 </html>
