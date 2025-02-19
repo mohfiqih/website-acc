@@ -322,7 +322,7 @@
                                     <b>Date:</b> {{ $image->created_at }}<br/>
                                     {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
                                 </div>
-                            </div>
+                            </div><br/>
                         </div>
                     @endforeach
                 </div>
