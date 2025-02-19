@@ -313,7 +313,7 @@
                 </div>
                 <div class="row">
                     @foreach ($images_db as $image)
-                        <div class="col-sm-3">
+                        <div class="col-sm-3 mb-3 mb-sm-0">
                             <div class="card">
                                 <div class="card-body">
                                     <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" data-lity alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
