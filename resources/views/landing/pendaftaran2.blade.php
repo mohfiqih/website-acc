@@ -24,6 +24,8 @@
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Lity CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
         .text-label {
             padding-bottom: 10px;
@@ -153,13 +155,13 @@
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="...">
+                                    alt="..." data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="...">
+                                    alt="..." dtaa-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -355,7 +357,7 @@
                     <div class="col-sm-3 mb-3 mb-sm-0">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
+                                <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" alt="Image" data-lity style="height: 100%; object-fit: cover;height: 300px;">
                             </div>
                             <div class="card-footer text-body-secondary">
                                 <b>Date:</b> {{ $image->created_at }}<br/>
@@ -504,6 +506,8 @@
     <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('templates/assets/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <!-- Lity JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
 </body>
 
 </html>

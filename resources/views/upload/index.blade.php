@@ -8,6 +8,7 @@
     <title>Upload Foto LPK ACC Japan Centre</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,6 +25,8 @@
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Lity CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -362,8 +365,9 @@
                             </span>
                             <span class="upload-area-title">Drag file(s) here to upload.</span>
                             <span class="upload-area-description">
-                                Alternatively, you can select a file by <br />
+                                Please select image for upload.<br />
                             </span>
+                            <p id="fileCount" style="margin-top: 10px;">No file selected</p>
                             <div class="file-upload-wrapper">
                                 <label for="images" class="file-upload-label">Choose Image</label>
                                 <input type="file" name="images[]" id="images" class="d-none" multiple required>
@@ -389,11 +393,14 @@
                     <div class="col-sm-3 mb-3 mb-sm-0">
                         <div class="card">
                             <div class="card-body">
-                                <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
+                                <img src="{{ asset('storage/' . $image->filepath) }}" data-lity class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
                             </div>
                             <div class="card-footer text-body-secondary">
                                 <b>Date:</b> {{ $image->created_at }}<br/>
                                 {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                                <button class="btn btn-danger btn-sm delete-image" data-id="{{ $image->id }}" style="float: right;">
+                                    Delete
+                                </button>
                             </div>
                         </div><br/>
                     </div>
@@ -429,6 +436,114 @@
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).ready(function() {
+            $("#images").on("change", function() {
+                let fileCount = this.files.length;
+                
+                if (fileCount > 10) {
+                    Swal.fire("Warning!", "Maksimal 10 file yang bisa diupload!", "warning");
+                    this.value = "";
+                    fileCount = 0;
+                }
+
+                let fileCountText = fileCount > 0 ? `${fileCount} file(s) selected` : "No file selected";
+                $("#fileCount").text(fileCountText);
+            });
+
+            // Upload
+            $("#uploadForm").on("submit", function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to upload these files?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#046392",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Upload"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('images.store') }}",
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Your files have been uploaded.",
+                                    icon: "success",
+                                    confirmButtonText: "OK"
+                                }).then(() => {
+                                    location.reload();
+                                });
+
+                                $("#uploadForm")[0].reset();
+                                $("#fileCount").text("No file selected");
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Failed to upload files. Please try again.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Delete
+            $(".delete-image").on("click", function () {
+                let imageId = $(this).data("id");
+                let token = $('meta[name="csrf-token"]').attr("content");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Hapus file tersebut! hanya terhapus di database.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    cancelButtonText: "Batal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/images/" + imageId,
+                            type: "DELETE",
+                            data: {
+                                _token: token
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    $(".image-card-" + imageId).fadeOut("slow", function () {
+                                        $(this).remove();
+                                    });
+                                    Swal.fire("Dihapus!", "Gambar berhasil dihapus.", "success").then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire("Gagal!", "Gagal menghapus gambar.", "error");
+                                }
+                            },
+                            error: function () {
+                                Swal.fire("Error!", "Terjadi kesalahan saat menghapus.", "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -447,6 +562,8 @@
     <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('templates/assets/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <!-- Lity JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
 </body>
 
 </html>
