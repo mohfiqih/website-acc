@@ -22,6 +22,7 @@
     <link href="{{ asset('templates/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('templates/assets/css/main.css?v=1.0') }}" rel="stylesheet">
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
+    <link href="{{ asset('template_pendaftaran/css/profile.css?v=1.0') }}" rel="stylesheet">
     <!-- Lity CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
@@ -217,6 +218,159 @@
     </section>
 
     <main id="main" style="padding: 10px;">
+        <section id="about" class="about">
+            <div class="container" data-aos="fade-up">
+                <div class="col-md-12">
+                    <div class="panel">
+                        {{-- <button class="btn btn-warning pull-right" style="border-radius: 0px;">Profil</button> --}}
+                        <footer class="panel-footer">
+                            <ul class="nav nav-pills">
+                                <li>
+                                    <a href="#"></a>
+                                </li>
+                                <li>
+                                    <a href="#"></a>
+                                </li>
+                                <li>
+                                    <a href="#"></a>
+                                </li>
+                                <li>
+                                    <a href="#"></a>
+                                </li>
+                            </ul>
+                        </footer>
+                    </div>
+                    <div class="panel">
+                        <div class="bio-graph-heading">
+                            <p style="font-weight: bold;">Profil LPK Amanah Citra Cemerlang (ACC)</p>
+                        </div>
+                        <div class="card" style="padding: 30px;">
+                            <div class="panel-body bio-graph-info">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Nama Lembaga</th>
+                                                        <td>:</td>
+                                                        <td>LPK ACC JAPAN CENTRE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nama Pimpinan</th>
+                                                        <td>:</td>
+                                                        <td>A. FAUZAN AMRULLOH</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nomor VIN</th>
+                                                        <td>:</td>
+                                                        <td>2502332801</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tipe Lembaga</th>
+                                                        <td>:</td>
+                                                        <td>LPK SWASTA</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Kondisi</th>
+                                                        <td>:</td>
+                                                        <td>Beroprasi</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Tahun Berdiri</th>
+                                                        <td>:</td>
+                                                        <td>2021</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Luas Area</th>
+                                                        <td>:</td>
+                                                        <td>1042</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Telepon</th>
+                                                        <td>:</td>
+                                                        <td>085526223070</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Nomor Fax.</th>
+                                                        <td>:</td>
+                                                        <td>085640110822</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Email</th>
+                                                        <td>:</td>
+                                                        <td>amanahcitracemerlang1@gmail.com</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Website</th>
+                                                        <td>:</td>
+                                                        <td>www.amanahcitracemerlang.id</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Kode Pos</th>
+                                                        <td>:</td>
+                                                        <td>52194</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Alamat</th>
+                                                        <td>:</td>
+                                                        <td>LPK ACC Japan Center, Unnamed Road, Gitung, Harjosari Lor, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Latitude</th>
+                                                        <td>:</td>
+                                                        <td>-6.9472685</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Longitude</th>
+                                                        <td>:</td>
+                                                        <td>109.1131374</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>NIB</th>
+                                                        <td>:</td>
+                                                        <td>1280001492217</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>                                    
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-borderless">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Deskripsi</th>
+                                                        <td>:</td>
+                                                        <td style="text-align: justify;">LPK ACC JAPAN CENTRE merupakan suatu lembaga pendidikan dan pelatihan bahasa wilayah Jawa Tengah, khususnya Kabupaten/Kota Tegal yang independen berdasarkan Akte Notaris No.19 Tanggal 19 April 2021. Program LPK ACC Japan Centre yaitu Pelatihan Bahasa Jepang, Pelatihan Mental dan Fisik, Program Magang dan TG (Tokutei Ginou) ke Jepang, dan Pelatihan kerja sesuai Job.
+                                                            Kami membantu anda menentukan sebuah pilihan, banyak dari kita yang ingin bekerja ke Luar Negeri tetapi tidak tau mau kemana/tujuannya tidak jelas, sehingga beberapa di antara kita asal pilih LPKPT/Meaning Agency dan ujung-ujungnya pekerjaan atau tujuan tidak sesuai dengan apa yang kita harapkan, di LPK kami dalam meningkatkan kualitas dan kuantitas CPMI dengan melalui edukasi masyarakat yang ingin bekerja di Luar Negeri dan banyak diantaranya yang telah kami tolong serta kami bantu karena sebelumnya salah atau kurang tepat memilih tujuan Negara dimana dia mau bekerja
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Maps</th>
+                                                        <td>:</td>
+                                                        <td style="text-align: justify;">
+                                                            <div class="row gx-lg-0 gy-4">
+                                                                <div class="col-lg-12">
+                                                                    <iframe class="mb-4 mb-lg-0"
+                                                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
+                                                                        frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4">
