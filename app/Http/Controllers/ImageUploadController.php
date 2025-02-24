@@ -33,4 +33,17 @@ class ImageUploadController extends Controller
 
         return back()->with('success', 'Images uploaded successfully');
     }
+
+    public function delete($id)
+    {
+        $image = Image::find($id);
+
+        if (!$image) {
+            return response()->json(['success' => false, 'message' => 'Gambar tidak ditemukan.']);
+        }
+
+        $image->delete();
+
+        return response()->json(['success' => true, 'message' => 'Gambar berhasil dihapus.']);
+    }
 }

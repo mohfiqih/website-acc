@@ -75,3 +75,5 @@ Route::get('/data-pendaftaran-online', function () {
     $data = array_reverse($response->json());
     return view('landing/data-pendaftaran', ['data' => $data]);
 });
+
+Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
