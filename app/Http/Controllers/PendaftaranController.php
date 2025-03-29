@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use App\Models\Image;
 use App\Models\ProvinsiModel;
+// use Barryvdh\DomPDF\DomPDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PendaftaranController extends Controller
 {
@@ -67,5 +69,61 @@ class PendaftaranController extends Controller
         } catch (\Exception $e) {
             return response()->json(['success' => false, 'message' => $e->getMessage()]);
         }
+    }
+
+    public function data_pendaftaran_old() {
+        $url = 'https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec';
+        $response = Http::get($url);
+        $data = array_reverse($response->json());
+        
+        return view('landing/data-pendaftaran', ['data' => $data]);
+    }
+
+    public function data_pendaftaran_new()
+    {
+        $url = 'https://script.google.com/macros/s/AKfycbyDa-VNO4T0qKMuFj3qpirCb5oUnO2p6d3cJ1Tlk9ANYzCLlomw8yWCgfUWrSsNCbK6/exec';
+        $response = Http::get($url);
+        $data = array_reverse($response->json());
+
+        $cleanedData = [];
+        foreach ($data as $key => $value) {
+            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
+                $cleanedData[$key] = $value;
+            } else {
+                $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+                $cleanedData[$newKey] = $value;
+            }
+        }
+
+        return view('landing.data-pendaftaran-new', compact('cleanedData'));
+    }
+
+    public function export_cv_pdf($id)
+    {
+        $url      = 'https://script.google.com/macros/s/AKfycbyDa-VNO4T0qKMuFj3qpirCb5oUnO2p6d3cJ1Tlk9ANYzCLlomw8yWCgfUWrSsNCbK6/exec';
+        $response = Http::get($url);
+        $data     = array_reverse($response->json());
+
+        $rowData  = collect($data)->firstWhere('ID', $id);
+
+        if (!$rowData) {
+            abort(404, 'Data tidak ditemukan');
+        }
+
+        $cleanedData = [];
+        foreach ($rowData as $key => $value) {
+            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
+                $cleanedData[$key] = $value;
+            } else {
+                $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+                $cleanedData[$newKey] = $value;
+            }
+        }
+
+        $nama_katakana = mb_convert_encoding($rowData['NAMA (KATAKANA)'], 'UTF-8', 'auto');
+        $nama = $cleanedData['NAMA'] ?? 'Unknown';
+
+        $pdf = Pdf::loadView('landing.export-cv-pdf', compact('rowData', 'nama_katakana'));
+        return $pdf->stream('CV_' . str_replace(' ', '_', $nama) . '.pdf');
     }
 }

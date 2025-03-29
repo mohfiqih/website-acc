@@ -68,12 +68,11 @@ Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.st
 Route::get('/pendaftaran-online', [PendaftaranController::class, 'index']);
 Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
 
-// # get data
-Route::get('/data-pendaftaran-online', function () {
-    $url = 'https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec';
-    $response = Http::get($url);
-    $data = array_reverse($response->json());
-    return view('landing/data-pendaftaran', ['data' => $data]);
-});
+# get data pendaftaran old
+Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pendaftaran_old']);
+
+# get data pendaftaran baru
+Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
+Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
 
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
