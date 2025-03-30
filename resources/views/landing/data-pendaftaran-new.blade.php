@@ -263,6 +263,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Download CV</th>
                                         <th>Timestamp</th>
                                         <th>Email</th>
                                         <th>Nama (Katakana)</th>
@@ -277,8 +278,8 @@
                                         <th>Berat (kg)</th>
                                         <th>Gol Darah</th>
                                         <th>Buta Warna</th>
-                                        <th>Min. Mata Kiri</th>
-                                        <th>Min. Mata Kanan</th>
+                                        <th>Mata Kiri</th>
+                                        <th>Mata Kanan</th>
                                         <th>Pernah Operasi</th>
                                         <th>Apakah Sedang Minum</th>
                                         <th>Tangan</th>
@@ -296,11 +297,14 @@
                                         <th>Pernah Tinggal/Bekerja di Jepang</th>
                                         <th>Kualifikasi Lamaran</th>
                                         <th>Sekolah Dasar</th>
-                                        <th>Tahun Sekolah SD</th>
+                                        <th>Tahun Masuk SD</th>
+                                        <th>Tahun Keluar SD</th>
                                         <th>SMP</th>
-                                        <th>Tahun Sekolah SMP</th>
+                                        <th>Tahun Masuk SMP</th>
+                                        <th>Tahun Keluar SMP</th>
                                         <th>SMA/SMK</th>
-                                        <th>Tahun Sekolah SMA/SMK</th>
+                                        <th>Tahun Masuk SMA/SMK</th>
+                                        <th>Tahun Keluar SMA/SMK</th>
                                         <th>Jurusan SMA/SMK</th>
                                         <th>Perguruan Tinggi</th>
                                         <th>Pengalaman Kerja</th>
@@ -317,6 +321,7 @@
                                         <th>Usia Ayah</th>
                                         <th>Pekerjaan Ayah</th>
                                         <th>Nama Ibu</th>
+                                        <th>Hubungan</th>
                                         <th>Usia Ibu</th>
                                         <th>Pekerjaan Ibu</th>
                                         <th>Nama Saudara</th>
@@ -325,23 +330,22 @@
                                         <th>Nama Mentor</th>
                                         <th>Ukuran Baju</th>
                                         <th>Nomor Sepatu</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($cleanedData as $row)
                                         <tr>
                                             <td>{{ $row['ID'] }}</td>
+                                            <td>
+                                                <a href="{{ route('export.cv.word', ['id' => $row['ID']]) }}" class="btn btn-sm btn-success">
+                                                    <i class="fa fa-download"></i> Download CV
+                                                </a>                                                
+                                            </td>
                                             @foreach($row as $key => $cell)
                                                 @if ($key !== 'ID')
                                                     <td>{{ $cell }}</td>
                                                 @endif
-                                            @endforeach
-                                            <td>
-                                                <a href="{{ url('/export-cv-pdf/' . $row['ID']) }}" class="btn btn-success btn-sm" target="_blank">
-                                                    Export CV
-                                                </a>
-                                            </td>                                                                                 
+                                            @endforeach                                                                       
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -125,6 +125,15 @@
                 <td class="merged" colspan="1">MATA KANAN</td>
                 <td colspan="2">{{ $rowData['MATA KANAN'] ?? '-' }}</td>
             </tr>
+
+            <tr>
+                <td class="merged" colspan="2">PERNAH OPERASI</td>
+                <td colspan="5">{{ $rowData['PERNAH OPERASI'] ?? '-' }}</td>
+                <td class="merged" colspan="2">APAKAH SEDANG MINUM</td>
+                <td colspan="4">{{ $rowData['APAKAH SEDANG MINUM'] ?? '-' }}</td>
+                <td class="merged" colspan="2">TANGAN</td>
+                <td colspan="2">{{ $rowData['TANGAN'] ?? '-' }}</td>
+            </tr>
         </table>
     </div>
 </body>

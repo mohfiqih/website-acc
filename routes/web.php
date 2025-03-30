@@ -74,5 +74,6 @@ Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pend
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
 Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
+Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
