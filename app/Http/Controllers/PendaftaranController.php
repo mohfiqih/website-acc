@@ -80,6 +80,14 @@ class PendaftaranController extends Controller
         return view('landing/data-pendaftaran', ['data' => $data]);
     }
 
+    # pendaftaran baru
+    public function pendaftaran_baru()
+    {
+        $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
+        $provinsi  = ProvinsiModel::all();
+        return view('landing.pendaftaran_siswa_baru', ['images_db' => $images_db, 'provinsi' => $provinsi]);
+    }
+
     public function data_pendaftaran_new()
     {
         $url = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
