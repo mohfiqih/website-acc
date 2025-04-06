@@ -617,12 +617,12 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KANAN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan isian wajib.</p>
-                            <input type="text" class="form-control" name="mata_kanan" placeholder="Masukan minus mata kanan anda. ex: 0.5" required>
+                            <input type="text" class="form-control" name="mata_kanan" placeholder="Masukan minus mata kanan anda. ex: 0,5" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KIRI:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan isian wajib.</p>
-                            <input type="text" class="form-control" name="mata_kiri" placeholder="Masukan minus mata kiri anda. ex: 1.5" required>
+                            <input type="text" class="form-control" name="mata_kiri" placeholder="Masukan minus mata kiri anda. ex: 1,5" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH OPERASI:</label>
