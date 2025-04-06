@@ -11,6 +11,7 @@ use App\Models\ProvinsiModel;
 use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
@@ -80,9 +81,108 @@ class PendaftaranController extends Controller
         return view('landing/data-pendaftaran', ['data' => $data]);
     }
 
+    # pendaftaran baru
+    public function pendaftaran_baru()
+    {
+        $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
+        $provinsi  = ProvinsiModel::all();
+        return view('landing.pendaftaran_siswa_baru', ['images_db' => $images_db, 'provinsi' => $provinsi]);
+    }
+
+    public function store_pendaftaran_baru(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'email'                      => 'nullable|email',
+                'nama_katakana'              => 'nullable|string',
+                'nama_indonesia'             => 'nullable|string',
+                'alamat'                     => 'nullable|string',
+                'tanggal_lahir'              => 'nullable|date',
+                'usia'                       => 'nullable|integer',
+                'jenis_kelamin'              => 'nullable|string',
+                'no_hp_aktif'                => 'nullable|string',
+                'agama'                      => 'nullable|string',
+                'tinggi_badan'               => 'nullable|integer',
+                'beat_badan'                 => 'nullable|integer',
+                'golongan_darah'             => 'nullable|string',
+                'buta_warna'                 => 'nullable|string',
+                'mata_kanan'                 => 'nullable|string',
+                'mata_kiri'                  => 'nullable|string',
+                'pernah_operasi'             => 'nullable|string',
+                'apakah_sedang_minum'        => 'nullable|string',
+                'tangan'                     => 'nullable|string',
+                'merokok'                    => 'nullable|string',
+                'penyakit_dalam'             => 'nullable|string',
+                'keahlian'                   => 'nullable|string',
+                'sifat_kepribadian'          => 'nullable|string',
+                'kelebihan'                  => 'nullable|string',
+                'kelemahan'                  => 'nullable|string',
+                'status'                     => 'nullable|string',
+                'hobi'                       => 'nullable|string',
+                'motivasi'                   => 'nullable|string',
+                'nabung_berapa'              => 'nullable|string',
+                'apa_yang_akan_dilakukan'    => 'nullable|string',
+                'pernah_tinggal_dijepang'    => 'nullable|string',
+                'kualifikasi'                => 'nullable|string',
+                'pengalaman_kerja'           => 'nullable|string',
+                'pernah_keluar_negeri'       => 'nullable|string',
+                'tanggal_keluar_negeri'      => 'nullable|date',
+                'kerabat_dijepang'           => 'nullable|string',
+                'hubungan_kerabat_dijepang'  => 'nullable|string',
+                'belajar_bahasa'             => 'nullable|string',
+                'bab_yang_dipelajari'        => 'nullable|string',
+                'nama_ayah'                  => 'nullable|string',
+                'hubungan_ayah'              => 'nullable|string',
+                'usia_ayah'                  => 'nullable|integer',
+                'pekerjaan_ayah'             => 'nullable|string',
+                'nama_ibu'                   => 'nullable|string',
+                'hubungan_ibu'               => 'nullable|string',
+                'usia_ibu'                   => 'nullable|integer',
+                'pekerjaan_ibu'              => 'nullable|string',
+                'nama_saudara'               => 'nullable|string',
+                'pendapat_keluarga'          => 'nullable|string',
+                'no_hp_keluarga'             => 'nullable|string',
+                'nama_mentor'                => 'nullable|string',
+                'ukuran_baju'                => 'nullable|string',
+                'nomor_sepatu'               => 'nullable|integer',
+                'bahasa_asing'               => 'nullable|string',
+            ]);
+
+            $data = $request->all();
+
+            $googleScriptUrl = "https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec";
+            $data['id'] = mt_rand(10000000, 99999999);
+
+            $response = Http::withHeaders([
+                'Content-Type' => 'application/json'
+            ])->post($googleScriptUrl, $data);
+
+            if ($response->successful()) {
+                return response()->json(['success' => true]);
+            } else {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal mengirim ke Google Script.',
+                    'debug_response' => $response->body()
+                ]);
+            }
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validasi gagal',
+                'errors' => $e->errors(),
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
+    }
+
     public function data_pendaftaran_new()
     {
-        $url = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
+        $url = 'https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec';
         $response = Http::get($url);
         $data = array_reverse($response->json());
 
@@ -99,38 +199,9 @@ class PendaftaranController extends Controller
         return view('landing.data-pendaftaran-new', compact('cleanedData'));
     }
 
-    // public function export_cv_pdf($id)
-    // {
-    //     $url      = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
-    //     $response = Http::get($url);
-    //     $data     = array_reverse($response->json());
-
-    //     $rowData  = collect($data)->firstWhere('ID', $id);
-
-    //     if (!$rowData) {
-    //         abort(404, 'Data tidak ditemukan');
-    //     }
-
-    //     $cleanedData = [];
-    //     foreach ($rowData as $key => $value) {
-    //         if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
-    //             $cleanedData[$key] = $value;
-    //         } else {
-    //             $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-    //             $cleanedData[$newKey] = $value;
-    //         }
-    //     }
-
-    //     $nama_katakana = mb_convert_encoding($rowData['NAMA (KATAKANA)'], 'UTF-8', 'auto');
-    //     $nama = $cleanedData['NAMA'] ?? 'Unknown';
-
-    //     $pdf = Pdf::loadView('landing.export-cv-pdf', compact('rowData', 'nama_katakana'));
-    //     return $pdf->stream('CV_' . str_replace(' ', '_', $nama) . '.pdf');
-    // }
-
     public function export_cv_word($id)
     {
-        $url      = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
+        $url      = 'https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec';
         $response = Http::get($url);
         $data     = array_reverse($response->json());
 
@@ -148,8 +219,6 @@ class PendaftaranController extends Controller
                 $cleanedData[$newKey] = $value;
             }
         }
-
-        // dd($cleanedData);
 
         if (!$cleanedData) {
             abort(404, 'Data tidak ditemukan');
@@ -234,4 +303,33 @@ class PendaftaranController extends Controller
 
         return response()->download($outputPath)->deleteFileAfterSend(true);
     }
+
+    // public function export_cv_pdf($id)
+    // {
+    //     $url      = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
+    //     $response = Http::get($url);
+    //     $data     = array_reverse($response->json());
+
+    //     $rowData  = collect($data)->firstWhere('ID', $id);
+
+    //     if (!$rowData) {
+    //         abort(404, 'Data tidak ditemukan');
+    //     }
+
+    //     $cleanedData = [];
+    //     foreach ($rowData as $key => $value) {
+    //         if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
+    //             $cleanedData[$key] = $value;
+    //         } else {
+    //             $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+    //             $cleanedData[$newKey] = $value;
+    //         }
+    //     }
+
+    //     $nama_katakana = mb_convert_encoding($rowData['NAMA (KATAKANA)'], 'UTF-8', 'auto');
+    //     $nama = $cleanedData['NAMA'] ?? 'Unknown';
+
+    //     $pdf = Pdf::loadView('landing.export-cv-pdf', compact('rowData', 'nama_katakana'));
+    //     return $pdf->stream('CV_' . str_replace(' ', '_', $nama) . '.pdf');
+    // }
 }

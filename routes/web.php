@@ -71,6 +71,10 @@ Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
 # get data pendaftaran old
 Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pendaftaran_old']);
 
+# pendaftaran
+Route::get('/pendaftaran-siswa-baru', [PendaftaranController::class, 'pendaftaran_baru']);
+Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pendaftaran_baru']);
+
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
 Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
