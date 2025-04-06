@@ -335,7 +335,7 @@
                                 <tbody>
                                     @foreach($cleanedData as $row)
                                         <tr>
-                                            <td>{{ $row['ID'] }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <a href="{{ route('export.cv.word', ['id' => $row['ID']]) }}" class="btn btn-sm btn-success">
                                                     <i class="fa fa-download"></i> Download CV
