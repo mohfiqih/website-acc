@@ -201,7 +201,10 @@ class PendaftaranController extends Controller
 
         $cleanedData = [];
         foreach ($data as $key => $value) {
-            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
+            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
+                    'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+                    'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
                 $cleanedData[$key] = $value;
             } else {
                 $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
@@ -224,7 +227,7 @@ class PendaftaranController extends Controller
             if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
                     'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
                     'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
+                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)', 'MATA KANAN'])) {
                 $cleanedData[$key] = $value;
             } else {
                 $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
@@ -250,42 +253,51 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('NAMA_INDONESIA', $cleanedData['NAMA (INDONESIA)'] ?? '-');
         $templateProcessor->setValue('ALAMAT', $cleanedData['ALAMAT'] ?? '-');
         $tanggal_lahir = date('d-m-Y', strtotime($cleanedData['TANGGAL LAHIR'] ?? '0000-00-00'));
-        $templateProcessor->setValue('TANGGAL_LAHIR', $tanggal_lahir);
+        $templateProcessor->setValue('TGL_LAHIR', $tanggal_lahir);
         $templateProcessor->setValue('USIA', $cleanedData['USIA'] ?? '-');
-        $templateProcessor->setValue('KELAMIN', $cleanedData['KELAMIN'] ?? '-');
+
+        $jenisKelamin = $cleanedData['JENIS KELAMIN'] ?? '';
+        if($jenisKelamin == 'LAKI-LAKI') {
+            $templateProcessor->setValue("JK", "LK" ?? '');
+        } else {
+            $templateProcessor->setValue("JK", "PR" ?? '');
+        }
+
         $templateProcessor->setValue('NO_HP_AKTIF', $cleanedData['NO HP AKTIF'] ?? '-');
         $templateProcessor->setValue('AGAMA', $cleanedData['AGAMA'] ?? '-');
-        $templateProcessor->setValue('TINGGI', $cleanedData['TINGGI (cm)'] ?? '-');
-        $templateProcessor->setValue('BERAT', $cleanedData['BERAT (kg)'] ?? '-');
-        $templateProcessor->setValue('GOL_DARAH', $cleanedData['GOL DARAH'] ?? '-');
-        $templateProcessor->setValue('BUTA_WARNA', $cleanedData['BUTA WARNA'] ?? '-');
-        $templateProcessor->setValue('MATA_KIRI', $cleanedData['MATA KIRI'] ?? '-');
-        $templateProcessor->setValue('MATA_KANAN', $cleanedData['MATA KANAN'] ?? '-');
-        $templateProcessor->setValue('PERNAH_OPERASI', $cleanedData['PERNAH OPERASI'] ?? '-');
-        $templateProcessor->setValue('APAKAH_SEDANG_MINUM', $cleanedData['APAKAH SEDANG MINUM'] ?? '-');
+        $templateProcessor->setValue('TG', $cleanedData['TINGGI'] ?? '-');
+        $templateProcessor->setValue('BRT', $cleanedData['BERAT'] ?? '-');
+        $templateProcessor->setValue('GOL', $cleanedData['GOL DARAH'] ?? '-');
+        $templateProcessor->setValue('BT_WRN', $cleanedData['BUTA WARNA'] ?? '-');
+        $templateProcessor->setValue('MT_KR', $cleanedData['MATA KIRI'] ?? '-');
+        $templateProcessor->setValue('MT_KNN', $cleanedData['MATA KANAN'] ?? '-');
+        $templateProcessor->setValue('OP', $cleanedData['PERNAH OPERASI'] ?? '-');
+        $templateProcessor->setValue('MINUM', $cleanedData['APAKAH SEDANG MINUM'] ?? '-');
         $templateProcessor->setValue('TANGAN', $cleanedData['TANGAN'] ?? '-');
         $templateProcessor->setValue('KEAHLIAN', $cleanedData['KEAHLIAN'] ?? '-');
-        $templateProcessor->setValue('SIFAT_KEPRIBADIAN', $cleanedData['SIFAT/KEPRIBADIAN'] ?? '-');
+        $templateProcessor->setValue('SIFAT', $cleanedData['SIFAT/KEPRIBADIAN'] ?? '-');
         $templateProcessor->setValue('KELEBIHAN', $cleanedData['KELEBIHAN'] ?? '-');
         $templateProcessor->setValue('KELEMAHAN', $cleanedData['KELEMAHAN'] ?? '-');
         $templateProcessor->setValue('STATUS', $cleanedData['STATUS'] ?? '-');
         $templateProcessor->setValue('MEROKOK', $cleanedData['MEROKOK'] ?? '-');
-        $templateProcessor->setValue('PENYAKIT_DALAM', $cleanedData['PENYAKIT DALAM'] ?? '-');
+        $templateProcessor->setValue('P_DALAM', $cleanedData['PENYAKIT DALAM'] ?? '-');
         $templateProcessor->setValue('HOBI', $cleanedData['HOBI'] ?? '-');
         $templateProcessor->setValue('MOTIVASI', $cleanedData['MOTIVASI'] ?? '-');
         $templateProcessor->setValue('NABUNG', $cleanedData['SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'] ?? '-');
-        $templateProcessor->setValue('PLANNING_PULANG', $cleanedData['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] ?? '-');
-        $templateProcessor->setValue('PERNAH_TINGGAL', $cleanedData['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] ?? '-');
-        $templateProcessor->setValue('KUALIFIKASI_LAMAR', $cleanedData['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] ?? '-');
-        $templateProcessor->setValue('SEKOLAH_DASAR', $cleanedData['SEKOLAH DASAR'] ?? '-');
-        $templateProcessor->setValue('TAHUN_MASUK_SD', $cleanedData['TAHUN MASUK SEKOLAH (SD)'] ?? '-');
-        $templateProcessor->setValue('TAHUN_KELUAR_SD', $cleanedData['TAHUN KELUAR SEKOLAH (SD)'] ?? '-');
-        $templateProcessor->setValue('TAHUN_MASUK_SMP', $cleanedData['TAHUN MASUK SEKOLAH (SMP)'] ?? '-');
-        $templateProcessor->setValue('TAHUN_KELUAR_SMP', $cleanedData['TAHUN KELUAR SEKOLAH (SMP)'] ?? '-');
-        $templateProcessor->setValue('TAHUN_MASUK_SMAK', $cleanedData['TAHUN MASUK SEKOLAH (SMA/SMK)'] ?? '-');
-        $templateProcessor->setValue('TAHUN_KELUAR_SMAK', $cleanedData['TAHUN KELUAR SEKOLAH (SMA/SMK)'] ?? '-');
+        $templateProcessor->setValue('PLANNING', $cleanedData['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] ?? '-');
+        $templateProcessor->setValue('PRNH_TGL', $cleanedData['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] ?? '-');
+        $templateProcessor->setValue('KUALIFIKASI', $cleanedData['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] ?? '-');
+        $templateProcessor->setValue('SD', $cleanedData['SEKOLAH DASAR'] ?? '-');
+        $templateProcessor->setValue('MSK_SD', $cleanedData['TAHUN MASUK SEKOLAH (SD)'] ?? '-');
+        $templateProcessor->setValue('KLR_SD', $cleanedData['TAHUN KELUAR SEKOLAH (SD)'] ?? '-');
+        $templateProcessor->setValue('SMP', $cleanedData['SEKOLAH MENENGAH PERTAMA'] ?? '-');
+        $templateProcessor->setValue('MSK_SMP', $cleanedData['TAHUN MASUK SEKOLAH (SMP)'] ?? '-');
+        $templateProcessor->setValue('KLR_SMP', $cleanedData['TAHUN KELUAR SEKOLAH (SMP)'] ?? '-');
+        $templateProcessor->setValue('SMA', $cleanedData['SEKOLAH MENENGAH ATAS/KEJURUAN'] ?? '-');
+        $templateProcessor->setValue('MSK_SMAK', $cleanedData['TAHUN MASUK SEKOLAH (SMA/SMK)'] ?? '-');
+        $templateProcessor->setValue('KLR_SMAK', $cleanedData['TAHUN KELUAR SEKOLAH (SMA/SMK)'] ?? '-');
         $templateProcessor->setValue('JURUSAN', $cleanedData['JURUSAN'] ?? '-');
-        $templateProcessor->setValue('PERGURUAN_TINGGI', $cleanedData['PERGURUAN TINGGI'] ?? '-');
+        $templateProcessor->setValue('PT', $cleanedData['PERGURUAN TINGGI'] ?? '-');
 
         # PENGALAMAN KERJA
         $pengalamanKerja = $cleanedData['PENGALAMAN KERJA'] ?? '';
@@ -295,58 +307,67 @@ class PendaftaranController extends Controller
             $idx = $i + 1;
             if (isset($pengalamanList[$i])) {
                 $parts = array_map('trim', explode(' - ', $pengalamanList[$i]));
-                $templateProcessor->setValue("TAHUN_MASUK_$idx", $parts[0] ?? '');
-                $templateProcessor->setValue("TAHUN_KELUAR_$idx", $parts[1] ?? '');
-                $templateProcessor->setValue("NAMA_PERUSAHAAN_$idx", $parts[2] ?? '');
-                $templateProcessor->setValue("BAGIAN_$idx", $parts[3] ?? '');
+                $templateProcessor->setValue("MASUK_$idx", $parts[0] ?? '');
+                $templateProcessor->setValue("KELUAR_$idx", $parts[1] ?? '');
+                $templateProcessor->setValue("PT_$idx", $parts[2] ?? '');
+                $templateProcessor->setValue("BAG_$idx", $parts[3] ?? '');
             } else {
-                $templateProcessor->setValue("TAHUN_MASUK_$idx", '');
-                $templateProcessor->setValue("TAHUN_KELUAR_$idx", '');
-                $templateProcessor->setValue("NAMA_PERUSAHAAN_$idx", '');
-                $templateProcessor->setValue("BAGIAN_$idx", '');
+                $templateProcessor->setValue("MASUK_$idx", '');
+                $templateProcessor->setValue("KELUAR_$idx", '');
+                $templateProcessor->setValue("PT_$idx", '');
+                $templateProcessor->setValue("BAG_$idx", '');
             }
         }
 
-        $templateProcessor->setValue('BAHASA_ASING', $cleanedData['BAHASA ASING YANG DIKUASAI'] ?? '-');
-        $templateProcessor->setValue('PERNAH_KELUAR_NEGERI', $cleanedData['PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA'] ?? '-');
-        $templateProcessor->setValue('JIKA_YA', $cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? '-');
-        $templateProcessor->setValue('KERABAT_DIJEPANG', $cleanedData['APAKAH ADA KERABAT DI JEPANG'] ?? '-');
-        $templateProcessor->setValue('BELAJAR_BAHASA', $cleanedData['BELAJAR BAHASA'] ?? '-');
-        $templateProcessor->setValue('BUKU_YANG_DIPAKAI', $cleanedData['BUKU YANG DI PAKAI'] ?? '-');
-        $templateProcessor->setValue('BAB_YANG_DIPELAJARI', $cleanedData['BAB YANG DI PELAJARI'] ?? '-');
-        $templateProcessor->setValue('NAMA_AYAH', $cleanedData['NAMA AYAH'] ?? '-');
-        $templateProcessor->setValue('HUBUNGAN_AYAH', $cleanedData['HUBUNGAN AYAH'] ?? '-');
-        $templateProcessor->setValue('USIA_AYAH', $cleanedData['USIA AYAH'] ?? '-');
-        $templateProcessor->setValue('NAMA_IBU', $cleanedData['NAMA IBU'] ?? '-');
-        $templateProcessor->setValue('HUBUNGAN_IBU', $cleanedData['HUBUNGAN IBU'] ?? '-');
-        $templateProcessor->setValue('USIA_IBU', $cleanedData['USIA IBU'] ?? '-');
-        $templateProcessor->setValue('PEKERJAAN_IBU', $cleanedData['PEKERJAAN IBU'] ?? '-');
+        $templateProcessor->setValue('BHS_ASING', $cleanedData['BAHASA ASING YANG DIKUASAI'] ?? '-');
+        $templateProcessor->setValue('LUAR', $cleanedData['PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA'] ?? '-');
+
+        $tgl = date('d-m-Y', strtotime($cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? '0000-00-00'));
+        if(!empty($tgl)) {
+            $templateProcessor->setValue("JIKA_YA", $tgl ?? '');
+        } else {
+            $templateProcessor->setValue("JIKA_YA", "-" ?? '');
+        }
+
+        $templateProcessor->setValue('KERABAT', $cleanedData['APAKAH ADA KERABAT DI JEPANG'] ?? '-');
+        $templateProcessor->setValue('HUB', $cleanedData['APA HUBUNGAN KERABAT YANG DI JEPANG'] ?? '-');
+        $templateProcessor->setValue('BLJR', $cleanedData['BELAJAR BAHASA'] ?? '-');
+        $templateProcessor->setValue('BUKU', $cleanedData['BUKU YANG DI PAKAI'] ?? '-');
+        $templateProcessor->setValue('BAB', $cleanedData['BAB YANG DI PELAJARI'] ?? '-');
+        $templateProcessor->setValue('AYAH', $cleanedData['NAMA AYAH'] ?? '-');
+        $templateProcessor->setValue('HUB_A', $cleanedData['HUBUNGAN AYAH'] ?? '-');
+        $templateProcessor->setValue('USIA_A', $cleanedData['USIA AYAH'] ?? '-');
+        $templateProcessor->setValue('KERJA_A', $cleanedData['PEKERJAAN AYAH'] ?? '-');
+        $templateProcessor->setValue('IBU', $cleanedData['NAMA IBU'] ?? '-');
+        $templateProcessor->setValue('HUB_I', $cleanedData['HUBUNGAN IBU'] ?? '-');
+        $templateProcessor->setValue('USIA_I', $cleanedData['USIA IBU'] ?? '-');
+        $templateProcessor->setValue('KERJA_I', $cleanedData['PEKERJAAN IBU'] ?? '-');
 
         # NAMA SAUDARA
         $saudaraString = $cleanedData['NAMA SAUDARA'] ?? '';
         $saudaraList = array_filter(array_map('trim', explode(',', $saudaraString)));
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $idx = $i + 1;
             if (isset($saudaraList[$i])) {
                 $parts = array_map('trim', explode(' - ', $saudaraList[$i]));
-                $templateProcessor->setValue("HUBUNGAN_SAUDARA_$idx", $parts[0] ?? '');
-                $templateProcessor->setValue("NAMA_SAUDARA_$idx", $parts[1] ?? '');
-                $templateProcessor->setValue("UMUR_SAUDARA_$idx", $parts[2] ?? '');
-                $templateProcessor->setValue("PEKERJAAN_SAUDARA_$idx", $parts[3] ?? '');
+                $templateProcessor->setValue("HUB_$idx", $parts[0] ?? '');
+                $templateProcessor->setValue("NAMA_SDR_$idx", $parts[1] ?? '');
+                $templateProcessor->setValue("USIA_$idx", $parts[2] ?? '');
+                $templateProcessor->setValue("PKRJ_SDR_$idx", $parts[3] ?? '');
             } else {
-                $templateProcessor->setValue("HUBUNGAN_SAUDARA_$idx", '');
-                $templateProcessor->setValue("NAMA_SAUDARA_$idx", '');
-                $templateProcessor->setValue("UMUR_SAUDARA_$idx", '');
-                $templateProcessor->setValue("PEKERJAAN_SAUDARA_$idx", '');
+                $templateProcessor->setValue("HUB_$idx", '');
+                $templateProcessor->setValue("NAMA_SDR_$idx", '');
+                $templateProcessor->setValue("USIA_$idx", '');
+                $templateProcessor->setValue("PKRJ_SDR_$idx", '');
             }
         }
 
-        $templateProcessor->setValue('PENDAPAT_KELUARA', $cleanedData['PENDAPAT KELUARA'] ?? '-');
-        $templateProcessor->setValue('NO_HP_KELUARGA', $cleanedData['NO HP KELUARGA'] ?? '-');
-        $templateProcessor->setValue('NAMA_MENTOR', $cleanedData['NAMA MENTOR'] ?? '-');
-        $templateProcessor->setValue('UKURAN_BAJU', $cleanedData['UKURAN BAJU'] ?? '-');
-        $templateProcessor->setValue('NOMOR_SEPATU', $cleanedData['NOMOR SEPATU'] ?? '-');
+        $templateProcessor->setValue('PENDAPAT', $cleanedData['PENDAPAT KELUARGA'] ?? '-');
+        $templateProcessor->setValue('NO_HP_KEL', $cleanedData['NO HP KELUARGA'] ?? '-');
+        $templateProcessor->setValue('MENTOR', $cleanedData['NAMA MENTOR'] ?? '-');
+        $templateProcessor->setValue('BAJU', $cleanedData['UKURAN BAJU'] ?? '-');
+        $templateProcessor->setValue('SEPATU', $cleanedData['NOMOR SEPATU'] ?? '-');
 
         $fileName   = 'CV_' . str_replace(' ', '_', $cleanedData['NAMA (INDONESIA)'] ?? 'Unknown') . '.docx';
         $outputPath = storage_path("app/public/{$fileName}");
