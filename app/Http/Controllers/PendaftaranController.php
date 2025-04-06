@@ -15,7 +15,7 @@ use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
-    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbzIGunnUPxLA9kmJpck9v70CFPppAnN4NgYA3rUkVRc_fusH9iCXOSN8qeWPABj/exec";
+    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyD5ZXIfgbgye-VPdNKWlsDHAVnPEamLAowRtaOiRAidPsoYWVxwt_SWNdUpqS2ulaB/exec";
 
     public function index()
     {
@@ -134,6 +134,8 @@ class PendaftaranController extends Controller
                 'bahasa_asing'               => 'nullable|string',
                 'pernah_keluar_negeri'       => 'nullable|string',
                 'tanggal_keluar_negeri'      => 'nullable|string',
+                'pernah_keluar_negeri_lain'  => 'nullable|string',
+                'negara'                     => 'nullable|string',
                 'kerabat_dijepang'           => 'nullable|string',
                 'hubungan_kerabat_dijepang'  => 'nullable|string',
                 'belajar_bahasa'             => 'nullable|string',
@@ -320,7 +322,10 @@ class PendaftaranController extends Controller
         }
 
         $templateProcessor->setValue('BHS_ASING', $cleanedData['BAHASA ASING YANG DIKUASAI'] ?? '-');
-        $templateProcessor->setValue('LUAR', $cleanedData['PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA'] ?? '-');
+        $templateProcessor->setValue('JEPANG', $cleanedData['PERNAH KE JEPANG'] ?? '-');
+
+        $templateProcessor->setValue('LUAR_LAIN', $cleanedData['PERNAH LUAR NEGERI LAINNYA'] ?? '-');
+        $templateProcessor->setValue('NEGARA', $cleanedData['JIKA YA, NEGARA APA'] ?? '-');
 
         $tgl = date('d-m-Y', strtotime($cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? '0000-00-00'));
         if(!empty($tgl)) {

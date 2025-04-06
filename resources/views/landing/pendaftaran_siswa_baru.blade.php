@@ -842,7 +842,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA:</label>
+                            <label class="text-label" style="font-weight: bold">PERNAH KE JEPANG:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
                             <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
@@ -855,6 +855,22 @@
                             <label class="text-label" style="font-weight: bold">JIKA YA, SEBUTKAN TGL/BLN/THN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak kosongkan saja.</p>
                             <input type="date" class="form-control" name="tanggal_keluar_negeri" placeholder="Pilih tanggal anda pernah ke luar negeri">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PERNAH KE LUAR NEGERI LAINNYA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
+                            <select name="pernah_keluar_negeri_lain" class="form-control" id="pernah_keluar_negeri_lain" required>
+                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="YA">YA</option>
+                                <option value="TIDAK">TIDAK</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">JIKA YA, NEGARA APA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Jika tidak pernah beri tanda (-)</p>
+                            <input type="text" class="form-control" name="negara" placeholder="Jika tidak pernah beri tanda (-)">
                         </div>
 
                         <div class="form-group">
