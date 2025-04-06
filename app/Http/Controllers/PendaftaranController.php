@@ -299,7 +299,6 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('MSK_SMAK', $cleanedData['TAHUN MASUK SEKOLAH (SMA/SMK)'] ?? '-');
         $templateProcessor->setValue('KLR_SMAK', $cleanedData['TAHUN KELUAR SEKOLAH (SMA/SMK)'] ?? '-');
         $templateProcessor->setValue('JURUSAN', $cleanedData['JURUSAN'] ?? '-');
-        $templateProcessor->setValue('PT', $cleanedData['PERGURUAN TINGGI'] ?? '-');
 
         # PENGALAMAN KERJA
         $pengalamanKerja = $cleanedData['PENGALAMAN KERJA'] ?? '';
@@ -383,6 +382,52 @@ class PendaftaranController extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ])->deleteFileAfterSend(true);
+    }
+
+    # translate kanji
+    function loadKanjiData()
+    {
+        $jsonPath = storage_path('app/templates/kanji_data.json');
+        if (!file_exists($jsonPath)) {
+            return [];
+        }
+
+        $json = file_get_contents($jsonPath);
+        return json_decode($json, true);
+    }
+
+    function getKanjiInfoLocal($char, $kanjiData)
+    {
+        return $kanjiData[$char] ?? null;
+    }
+
+    function translateToKanji($text, $kanjiData)
+    {
+        $translated = '';
+        $details = [];
+
+        $chars = preg_split('//u', $text, null, PREG_SPLIT_NO_EMPTY);
+
+        foreach ($chars as $char) {
+            $info = $this->getKanjiInfoLocal($char, $kanjiData);
+            if ($info) {
+                $translated .= $info['kanji'] ?? $char;
+                $details[] = [
+                    'char'      => $char,
+                    'kanji'     => $info['kanji'] ?? '',
+                    'meanings'  => $info['meanings'] ?? [],
+                    'onyomi'    => $info['onyomi'] ?? [],
+                    'kunyomi'   => $info['kunyomi'] ?? [],
+                ];
+            } else {
+                $translated .= $char;
+            }
+        }
+
+        return [
+            'translated_text' => $translated,
+            'details' => $details,
+        ];
     }
 
     // Data Karyawan
