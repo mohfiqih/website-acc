@@ -15,12 +15,7 @@ use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
-    // Data Karyawan
-    // public function pendaftaran()
-    // {
-    //     $user = Auth::user();
-    //     return view('dasbor.menu.pendaftaran', compact('user'));
-    // }
+    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbzIGunnUPxLA9kmJpck9v70CFPppAnN4NgYA3rUkVRc_fusH9iCXOSN8qeWPABj/exec";
 
     public function index()
     {
@@ -92,18 +87,18 @@ class PendaftaranController extends Controller
     public function store_pendaftaran_baru(Request $request)
     {
         try {
-            $validated = $request->validate([
-                'email'                      => 'nullable|email',
+            $request->validate([
+                'email'                      => 'nullable|string',
                 'nama_katakana'              => 'nullable|string',
                 'nama_indonesia'             => 'nullable|string',
                 'alamat'                     => 'nullable|string',
-                'tanggal_lahir'              => 'nullable|date',
-                'usia'                       => 'nullable|integer',
+                'tanggal_lahir'              => 'nullable|string',
+                'usia'                       => 'nullable|string',
                 'jenis_kelamin'              => 'nullable|string',
                 'no_hp_aktif'                => 'nullable|string',
                 'agama'                      => 'nullable|string',
-                'tinggi_badan'               => 'nullable|integer',
-                'beat_badan'                 => 'nullable|integer',
+                'tinggi_badan'               => 'nullable|string',
+                'berat_badan'                => 'nullable|string',
                 'golongan_darah'             => 'nullable|string',
                 'buta_warna'                 => 'nullable|string',
                 'mata_kanan'                 => 'nullable|string',
@@ -124,38 +119,57 @@ class PendaftaranController extends Controller
                 'apa_yang_akan_dilakukan'    => 'nullable|string',
                 'pernah_tinggal_dijepang'    => 'nullable|string',
                 'kualifikasi'                => 'nullable|string',
+                'sekolah_dasar'              => 'nullable|string',
+                'tahun_masuk_sd'             => 'nullable|string',
+                'tahun_keluar_sd'            => 'nullable|string',
+                'sekolah_menengah_pertama'   => 'nullable|string',
+                'tahun_masuk_smp'            => 'nullable|string',
+                'tahun_keluar_smp'           => 'nullable|string',
+                'sekolah_menengah_atas'      => 'nullable|string',
+                'tahun_masuk_smak'           => 'nullable|string',
+                'tahun_keluar_smak'          => 'nullable|string',
+                'jurusan'                    => 'nullable|string',
+                'perguruan_tinggi'           => 'nullable|string',
                 'pengalaman_kerja'           => 'nullable|string',
+                'bahasa_asing'               => 'nullable|string',
                 'pernah_keluar_negeri'       => 'nullable|string',
-                'tanggal_keluar_negeri'      => 'nullable|date',
+                'tanggal_keluar_negeri'      => 'nullable|string',
                 'kerabat_dijepang'           => 'nullable|string',
                 'hubungan_kerabat_dijepang'  => 'nullable|string',
                 'belajar_bahasa'             => 'nullable|string',
+                'buku_yang_dipakai'          => 'nullable|string',
                 'bab_yang_dipelajari'        => 'nullable|string',
                 'nama_ayah'                  => 'nullable|string',
                 'hubungan_ayah'              => 'nullable|string',
-                'usia_ayah'                  => 'nullable|integer',
+                'usia_ayah'                  => 'nullable|string',
                 'pekerjaan_ayah'             => 'nullable|string',
                 'nama_ibu'                   => 'nullable|string',
                 'hubungan_ibu'               => 'nullable|string',
-                'usia_ibu'                   => 'nullable|integer',
+                'usia_ibu'                   => 'nullable|string',
                 'pekerjaan_ibu'              => 'nullable|string',
                 'nama_saudara'               => 'nullable|string',
                 'pendapat_keluarga'          => 'nullable|string',
                 'no_hp_keluarga'             => 'nullable|string',
                 'nama_mentor'                => 'nullable|string',
                 'ukuran_baju'                => 'nullable|string',
-                'nomor_sepatu'               => 'nullable|integer',
-                'bahasa_asing'               => 'nullable|string',
+                'ukuran_sepatu'              => 'nullable|string',
+                'id'                         => 'nullable|string'
             ]);
 
             $data = $request->all();
 
-            $googleScriptUrl = "https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec";
+            if (!empty($data['hubungan_ayah'])) {
+                $data['hubungan_ayah'] = 'AYAH';
+            }
+            if (!empty($data['hubungan_ibu'])) {
+                $data['hubungan_ibu'] = 'IBU';
+            }
+
             $data['id'] = mt_rand(10000000, 99999999);
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
-            ])->post($googleScriptUrl, $data);
+            ])->post($this->googleScriptUrl, $data);
 
             if ($response->successful()) {
                 return response()->json(['success' => true]);
@@ -182,8 +196,7 @@ class PendaftaranController extends Controller
 
     public function data_pendaftaran_new()
     {
-        $url = 'https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec';
-        $response = Http::get($url);
+        $response = Http::get($this->googleScriptUrl);
         $data = array_reverse($response->json());
 
         $cleanedData = [];
@@ -201,8 +214,7 @@ class PendaftaranController extends Controller
 
     public function export_cv_word($id)
     {
-        $url      = 'https://script.google.com/macros/s/AKfycbxkUTGE0sRRnfNqck_q2qiR6740CVBhXiU-Q7RtoF0axVvxwset1Pm54l07161btfFk/exec';
-        $response = Http::get($url);
+        $response = Http::get($this->googleScriptUrl);
         $data     = array_reverse($response->json());
 
         $rowData  = collect($data)->firstWhere('ID', $id);
@@ -229,7 +241,7 @@ class PendaftaranController extends Controller
             abort(404, 'Template Word tidak ditemukan.');
         }
 
-        $templateProcessor = new TemplateProcessor($templatePath);
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($templatePath);
 
         $tanggal = date('d-m-Y', strtotime($cleanedData['Timestamp'] ?? '0000-00-00'));
         $templateProcessor->setValue('TANGGAL', $tanggal);
@@ -274,7 +286,27 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('TAHUN_KELUAR_SMAK', $cleanedData['TAHUN KELUAR SEKOLAH (SMA/SMK)'] ?? '-');
         $templateProcessor->setValue('JURUSAN', $cleanedData['JURUSAN'] ?? '-');
         $templateProcessor->setValue('PERGURUAN_TINGGI', $cleanedData['PERGURUAN TINGGI'] ?? '-');
-        $templateProcessor->setValue('PENGALAMAN_KERJA', $cleanedData['PENGALAMAN KERJA'] ?? '-');
+
+        # PENGALAMAN KERJA
+        $pengalamanKerja = $cleanedData['PENGALAMAN KERJA'] ?? '';
+        $pengalamanList = array_filter(array_map('trim', explode(',', $pengalamanKerja)));
+
+        for ($i = 0; $i < 3; $i++) {
+            $idx = $i + 1;
+            if (isset($pengalamanList[$i])) {
+                $parts = array_map('trim', explode(' - ', $pengalamanList[$i]));
+                $templateProcessor->setValue("TAHUN_MASUK_$idx", $parts[0] ?? '');
+                $templateProcessor->setValue("TAHUN_KELUAR_$idx", $parts[1] ?? '');
+                $templateProcessor->setValue("NAMA_PERUSAHAAN_$idx", $parts[2] ?? '');
+                $templateProcessor->setValue("BAGIAN_$idx", $parts[3] ?? '');
+            } else {
+                $templateProcessor->setValue("TAHUN_MASUK_$idx", '');
+                $templateProcessor->setValue("TAHUN_KELUAR_$idx", '');
+                $templateProcessor->setValue("NAMA_PERUSAHAAN_$idx", '');
+                $templateProcessor->setValue("BAGIAN_$idx", '');
+            }
+        }
+
         $templateProcessor->setValue('BAHASA_ASING', $cleanedData['BAHASA ASING YANG DIKUASAI'] ?? '-');
         $templateProcessor->setValue('PERNAH_KELUAR_NEGERI', $cleanedData['PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA'] ?? '-');
         $templateProcessor->setValue('JIKA_YA', $cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? '-');
@@ -289,7 +321,27 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('HUBUNGAN_IBU', $cleanedData['HUBUNGAN IBU'] ?? '-');
         $templateProcessor->setValue('USIA_IBU', $cleanedData['USIA IBU'] ?? '-');
         $templateProcessor->setValue('PEKERJAAN_IBU', $cleanedData['PEKERJAAN IBU'] ?? '-');
-        $templateProcessor->setValue('NAMA_SAUDARA', $cleanedData['NAMA SAUDARA'] ?? '-');
+
+        # NAMA SAUDARA
+        $saudaraString = $cleanedData['NAMA SAUDARA'] ?? '';
+        $saudaraList = array_filter(array_map('trim', explode(',', $saudaraString)));
+
+        for ($i = 0; $i < 3; $i++) {
+            $idx = $i + 1;
+            if (isset($saudaraList[$i])) {
+                $parts = array_map('trim', explode(' - ', $saudaraList[$i]));
+                $templateProcessor->setValue("HUBUNGAN_SAUDARA_$idx", $parts[0] ?? '');
+                $templateProcessor->setValue("NAMA_SAUDARA_$idx", $parts[1] ?? '');
+                $templateProcessor->setValue("UMUR_SAUDARA_$idx", $parts[2] ?? '');
+                $templateProcessor->setValue("PEKERJAAN_SAUDARA_$idx", $parts[3] ?? '');
+            } else {
+                $templateProcessor->setValue("HUBUNGAN_SAUDARA_$idx", '');
+                $templateProcessor->setValue("NAMA_SAUDARA_$idx", '');
+                $templateProcessor->setValue("UMUR_SAUDARA_$idx", '');
+                $templateProcessor->setValue("PEKERJAAN_SAUDARA_$idx", '');
+            }
+        }
+
         $templateProcessor->setValue('PENDAPAT_KELUARA', $cleanedData['PENDAPAT KELUARA'] ?? '-');
         $templateProcessor->setValue('NO_HP_KELUARGA', $cleanedData['NO HP KELUARGA'] ?? '-');
         $templateProcessor->setValue('NAMA_MENTOR', $cleanedData['NAMA MENTOR'] ?? '-');
@@ -301,35 +353,16 @@ class PendaftaranController extends Controller
 
         $templateProcessor->saveAs($outputPath);
 
-        return response()->download($outputPath)->deleteFileAfterSend(true);
+        return response()->file($outputPath, [
+            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+        ])->deleteFileAfterSend(true);
     }
 
-    // public function export_cv_pdf($id)
+    // Data Karyawan
+    // public function pendaftaran()
     // {
-    //     $url      = 'https://script.google.com/macros/s/AKfycbyiO50M8wtacyaZVUpmWSyqU_qvORZzLizrIJ01anKJKtDel_EizmrAedeeUpsAQZAf/exec';
-    //     $response = Http::get($url);
-    //     $data     = array_reverse($response->json());
-
-    //     $rowData  = collect($data)->firstWhere('ID', $id);
-
-    //     if (!$rowData) {
-    //         abort(404, 'Data tidak ditemukan');
-    //     }
-
-    //     $cleanedData = [];
-    //     foreach ($rowData as $key => $value) {
-    //         if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)'])) {
-    //             $cleanedData[$key] = $value;
-    //         } else {
-    //             $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-    //             $cleanedData[$newKey] = $value;
-    //         }
-    //     }
-
-    //     $nama_katakana = mb_convert_encoding($rowData['NAMA (KATAKANA)'], 'UTF-8', 'auto');
-    //     $nama = $cleanedData['NAMA'] ?? 'Unknown';
-
-    //     $pdf = Pdf::loadView('landing.export-cv-pdf', compact('rowData', 'nama_katakana'));
-    //     return $pdf->stream('CV_' . str_replace(' ', '_', $nama) . '.pdf');
+    //     $user = Auth::user();
+    //     return view('dasbor.menu.pendaftaran', compact('user'));
     // }
 }
