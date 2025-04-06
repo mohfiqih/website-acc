@@ -311,6 +311,8 @@
                                         <th>Bahasa Asing</th>
                                         <th>Pernah ke Jepang</th>
                                         <th>Tanggal ke Jepang</th>
+                                        <th>Luar Negeri Lainnya</th>
+                                        <th>Negara</th>
                                         <th>Kerabat di Jepang</th>
                                         <th>Hubungan Kerabat</th>
                                         <th>Belajar Bahasa</th>
