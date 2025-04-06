@@ -24,6 +24,7 @@
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet">
+
     <!-- Lity CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
@@ -181,6 +182,60 @@
 
         .is-invalid {
             border-color: red;
+        }
+
+        .nav-link.active-step {
+            background-color: #046392 !important;
+            color: white !important;
+            font-weight: bold;
+        }
+
+        #stepNav {
+            flex-wrap: wrap;
+            justify-content: left;
+        }
+
+        @media (max-width: 768px) {
+            #stepNav .nav-item {
+                flex: 0 0 100%;
+                text-align: left;
+            }
+        }
+        #stepNav .nav-link {
+            color: black;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+        #stepNav .active-step {
+            background-color: #007bff;
+            color: white !important;
+        }
+
+        select[multiple] {
+            width: 100% !important;
+            min-height: 120px;
+        }
+
+        .select2-container--default .select2-selection--single {
+            height: 45px;
+            padding: 8px 12px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 28px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 100%;
+        }
+        .select2-container {
+            width: 100% !important;
+        }
+
+        .nav-link.disabled {
+            pointer-events: none;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -428,7 +483,31 @@
                     </div>         
                 </form> --}}
 
-                <form id="pendaftaranForm" action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form">
+                {{-- nav pill --}}
+                <br/>
+                
+                <ul class="nav nav-pills mb-3 flex-wrap" id="stepNav" style="gap: 10px;">
+                    <li class="nav-item">
+                        <a class="nav-link active-step" id="nav-step-1" href="javascript:void(0)">1. Data Diri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="nav-step-2" href="javascript:void(0)">2. Kesehatan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="nav-step-3" href="javascript:void(0)">3. Motivasi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="nav-step-4" href="javascript:void(0)">4. Pendidikan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="nav-step-5" href="javascript:void(0)">5. Pengalaman & Lain-lain</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" id="nav-step-6" href="javascript:void(0)">6. Data Keluarga & Ukuran</a>
+                    </li>
+                </ul>
+                
+                <form action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form">
                     @csrf
 
                     @if(session('success'))
@@ -440,7 +519,7 @@
                     @endif
                 
                     {{-- Step 1 --}}
-                    <div class="step" id="step-1">
+                    <div class="step" id="step-1"><br/>
                         <h5 class="mb-1" style="font-weight: bold">Page 1: Data Diri Siswa</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">EMAIL:</label>
@@ -459,7 +538,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">ALAMAT LENGKAP:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf kapital.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf kapital. <br/> *) (e.g: JL. BAWAL GITUNG RT 01/RW 02, DESA HARJOSARI LOR, KECAMATAN ADIWERNA, KABUPATEN TEGAL, JAWA TENGAH, INDONESIA)</p>
                             <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat anda" required>
                         </div>
                         <div class="form-group">
@@ -469,7 +548,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan usia anda isian wajib.</p>
                             <input type="number" class="form-control" name="usia" placeholder="Masukan usia anda" required>
                         </div>
                         <div class="form-group">
@@ -499,11 +578,11 @@
                                 <option value="KONGHUCU">KONGHUCU</option>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;width: 10%;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
                 
                     {{-- Step 2 --}}
-                    <div class="step d-none" id="step-2">
+                    <div class="step d-none" id="step-2"><br/>
                         <h5 class="mb-1" style="font-weight: bold">Page 2: Kesehatan dan Fisik</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TINGGI (cm):</label>
@@ -557,7 +636,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">APAKAH SEDANG MINUM:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih sedang minum atau tidak isian wajib.</p>
-                            <select name="sedang_minum" class="form-control" required>
+                            <select name="apakah_sedang_minum" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi sedang minum atau tidak</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
@@ -590,12 +669,12 @@
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;width: 10%;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;width: 10%;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
                 
                     {{-- Step 3 --}}
-                    <div class="step d-none" id="step-3">
+                    <div class="step d-none" id="step-3"><br/>
                         <h5 class="mb-1" style="font-weight: bold">Page 3: Motivasi dan Lainnya</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KEAHLIAN:</label>
@@ -660,12 +739,12 @@
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak beri tanda (-) pada kolom isian</p>
                             <textarea type="text" class="form-control" name="kualifikasi" placeholder="Masukan kualifikasi apa yang dilamar" required></textarea>
                         </div>
-                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;width: 10%;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;width: 10%;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
 
                     {{-- Step 4 --}}
-                    <div class="step d-none" id="step-4">
+                    <div class="step d-none" id="step-4"><br/>
                         <h5 class="mb-1" style="font-weight: bold">Page 4: Pendidikan</h5><hr>
 
                         {{-- SD --}}
@@ -734,13 +813,197 @@
 
                         {{-- PERGURUAN TINGGI --}}
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan perguruan tinggi, jikat tidak ada beri tanda (-).</p>
-                            <input type="text" class="form-control" name="perguruan_tinggi" placeholder="Masukan nama perguruan tinggi, jika tidak ada beri tanda (-)" required>
+                            <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI (JIKA ADA) - PROGRAM STUDI:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan perguruan tinggi, jikat tidak ada beri tanda (-).<br/> *) (e.g: POLITEKNIK - S1 TEKNIK INFORMATIKA)</p>
+                            <input type="text" class="form-control" name="perguruan_tinggi" placeholder="Masukan nama perguruan tinggi - program studi, jika tidak ada beri tanda (-)" required>
                         </div>
                         
-                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;width: 10%;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;width: 10%;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                    </div>
+
+                    {{-- Step 5 --}}
+                    <div class="step d-none" id="step-5"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 5: Pengalaman & Lain-Lain</h5><hr>
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PENGALAMAN KERJA (Tahun Kerja - Nama Perusahaan - Bagian):</label>
+                            <p class="text-danger" style="font-size: 11px;">
+                                *) e.g: 2024 - PT. ADIKARSA JAYA - Staff Administrasi, 
+                                        2024 - PT. ABC - Manager<br/>
+                                *) Jika tidak ada beri tanda (-) pada kolom isian<br/>
+                                *) Jika lebih dari satu tekan enter dan ketik kembali sesuai format pertama.</p>
+                            <textarea type="text" class="form-control" rows="5" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda dengan format (Tahun Kerja - Nama Perusahaan - Bagian)" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">BAHASA ASING YANG DIKUASAI:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Silahkan ketik bahasa asing yang ingin anda cari.</p>
+                            <select name="bahasa_asing[]" class="form-control" multiple="multiple" id="bahasa_asing"></select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PERNAH KE JEPANG ATAU LUAR NEGERI LAINNYA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
+                            <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri" required>
+                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="YA">YA</option>
+                                <option value="TIDAK">TIDAK</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">JIKA YA, SEBUTKAN TGL/BLN/THN:</label>
+                            <input type="date" class="form-control" name="tanggal_keluar_negeri" placeholder="Pilih tanggal anda pernah ke luar negeri">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">APAKAH ADA KERABAT DI JEPANG:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak ada klik Tidak, isian wajib.</p>
+                            <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang" required>
+                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="YA">YA</option>
+                                <option value="TIDAK">TIDAK</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI JEPANG:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi jika ada, jika tidak ada beri tanda (-) isian wajib.</p>
+                            <input type="text" class="form-control" name="hubungan_kerabat_dijepang" placeholder="Masukan apa hubungan kerabat anda di jepang" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">BELAJAR BAHASA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi jika anda pernah belajar bahasa, jika tidak ada beri tanda (-) isian wajib.</p>
+                            <input type="text" class="form-control" name="belajar_bahasa" placeholder="Masukan apa hubungan kerabat anda di jepang" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">BAB YANG DIPELAJARI:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda pelajari, jika tidak ada beri tanda (-) isian wajib.</p>
+                            <input type="text" class="form-control" name="bab_yang_dipelajari" placeholder="Masukan apa hubungan kerabat anda di jepang" required>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
+                    </div>
+
+                    {{-- Step 6 --}}
+                    <div class="step d-none" id="step-6"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 6: Data Keluarga & Ukuran</h5><hr>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NAMA AYAH:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah, gunakan huruf KAPITAL isian wajib.</p>
+                            <input type="text" class="form-control" name="nama_ayah" placeholder="Masukan nama lengkap ayah" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">HUBUNGAN AYAH:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon klik pilihan dibawah isian wajib.</p>
+                            <input class="form-check-input" type="radio" name="hubungan_ayah">
+                            <label class="form-check-label">
+                                AYAH
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">USIA AYAH:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, Jika sudah tidak ada beri tanda (-) pada kolom isian isian wajib.
+                                                                       <br/>*) Jika sudah tidak ada beri tanda (-) pada kolom isian
+                            </p>
+                            <input type="number" class="form-control" name="usia_ayah" placeholder="Masukan usia lengkap ayah" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PEKERJAAN AYAH:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ayah, gunakan huruf KAPITAL isian wajib.
+                                                                       <br/>*) Jika sudah tidak ada beri tanda (-) pada kolom isian
+                            </p>
+                            <input type="text" class="form-control" name="pekerjaan_ayah" placeholder="Masukan pekerjaan lengkap ayah" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NAMA IBU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama IBU, gunakan huruf KAPITAL isian wajib.</p>
+                            <input type="text" class="form-control" name="nama_ibu" placeholder="Masukan nama lengkap ibu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">HUBUNGAN IBU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon klik pilihan dibawah isian wajib.</p>
+                            <input class="form-check-input" type="radio" name="hubungan_ibu">
+                            <label class="form-check-label">
+                                IBU
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">USIA IBU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, Jika sudah tidak ada beri tanda (-) pada kolom isian.</p>
+                            <input type="number" class="form-control" name="usia_ibu" placeholder="Masukan usia lengkap ibu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PEKERJAAN IBU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu, gunakan huruf KAPITAL isian wajib.
+                                                                       <br/>*) Jika sudah tidak ada beri tanda (-) pada kolom isian
+                            </p>
+                            <input type="text" class="form-control" name="pekerjaan_ibu" placeholder="Masukan pekerjaan lengkap ibu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NAMA SAUDARA (HUBUNGAN - NAMA - USIA - PEKERJAAN):</label>
+                            <p class="text-danger" style="font-size: 11px;">
+                                *) e.g: ADIK - MARCELL - 20 - TIDAK BEKERJA, KAKAK - AHMAD - 30 - KARYAWAN SWASTA<br/>
+                                *) Jika tidak ada beri tanda (-) pada kolom isian<br/>
+                                *) Jika lebih dari satu tekan enter dan ketik kembali sesuai format pertama.
+                            </p>
+                            <textarea type="text" class="form-control" rows="5" name="nama_saudara" placeholder="Masukan nama saudara dengan formaty (Hubungan - Nama - Usia - Pekerjaan)" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PENDAPAT KELUARGA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak setuju klik Tidak, isian wajib.</p>
+                            <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang" required>
+                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="SETUJU">SETUJU</option>
+                                <option value="TIDAK SETUJU">TIDAK SETUJU</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NOMOR HP KELUARGA (AKTIF):</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu, gunakan huruf KAPITAL isian wajib.</p>
+                            <input type="text" class="form-control" name="no_hp_keluarga" placeholder="Masukan nomor hp keluarga" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama  mentor, gunakan huruf KAPITAL isian wajib.</p>
+                            <input type="text" class="form-control" name="nama_mentor" placeholder="Masukan nama mentor tidak perlu menggunakan PAK/BU/MAS/MBA" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">UKURAN BAJU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih ukuran baju, isian wajib.</p>
+                            <select name="ukura_baju" class="form-control" id="ukura_baju" required>
+                                <option value="" disabled selected>Pilih opsi ukuran baju</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">NOMOR SEPATU:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi ukuran septu, isian wajib.</p>
+                            <input type="number" class="form-control" name="ukuran_sepatu" placeholder="Masukan ukuran sepatu" required>
+                        </div>
+                        
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="submit" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;">Submit</button>
                     </div>
                 </form>
             </div>
@@ -765,30 +1028,128 @@
         $(window).on('load', function() {
             $('#preloader').fadeOut('slow');
         });
+        
+        $('#bahasa_asing').select2({
+            tags: true,
+            placeholder: 'Silahkan ketik bahasa asing yang ingin anda cari...',
+            width: '100%',
+            language: {
+                noResults: function () {
+                    return "Klik pilih atau tekan enter untuk menambahkan..";
+                }
+            }
+        });
 
-        $("#bahasa_asing").select2({
-            placeholder: {
-                id: "",
-                text: "Pilih Bahasa Asing yang dikuasai",
-                selected: "Pilih Bahasa Asing yang dikuasai",
-            },
+        $.get('https://restcountries.com/v3.1/all', function (data) {
+            const languagesSet = new Set();
+
+            data.forEach(country => {
+                if (country.languages) {
+                    Object.values(country.languages).forEach(lang => {
+                        languagesSet.add(lang);
+                    });
+                }
+            });
+
+            languagesSet.forEach(lang => {
+                const option = new Option(lang, lang, false, false);
+                $('#bahasa_asing').append(option).trigger('change');
+            });
+        });
+
+        $('#pernah_keluar_negeri').select2({
+            tags: true,
+            placeholder: "Pilih atau ketik jawaban...",
+            allowClear: true,
+            width: '100%',
+            language: {
+                noResults: function () {
+                    return "Tidak ditemukan, tekan Enter untuk menambahkan";
+                }
+            }
         });
 
         // insert data
+        // $(document).ready(function() {
+        //     $('.signup-form').on('submit', function(e) {
+        //         e.preventDefault();
+
+        //         let bahasaAsing = $('#bahasa_asing').val();
+        //         if (bahasaAsing) {
+        //             let bahasaAsingString = bahasaAsing.join(',');
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: 'bahasa_asing',
+        //                 value: bahasaAsingString
+        //             }).appendTo('.signup-form');
+        //         }
+    
+        //         Swal.fire({
+        //             title: 'Apakah Anda yakin ingin mendaftarkan diri?',
+        //             text: 'Pastikan data yang sudah anda masukan sesuai dan benar, jika ada keslaahan data hanya bisa di edit melalui administrasi!',
+        //             icon: 'warning',
+        //             showCancelButton: true,
+        //             confirmButtonText: 'OK',
+        //             cancelButtonText: 'Batal',
+        //             confirmButtonColor: '#046392'
+        //         }).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 var form = $(this);
+        //                 var formData = form.serialize();
+    
+        //                 Swal.fire({
+        //                     text: 'Mohon tunggu sedang memproses pendaftaran..',
+        //                     icon: 'warning',
+        //                     showConfirmButton: false,
+        //                     willOpen: () => {
+        //                         Swal.showLoading();
+        //                     }
+        //                 });
+    
+        //                 $.ajax({
+        //                     url: form.attr('action'),
+        //                     type: 'POST',
+        //                     data: formData,
+        //                     success: function(response) {
+        //                         if (response.success) {
+        //                             Swal.fire({
+        //                                 title: 'Berhasil!',
+        //                                 text: 'Berhasil daftar di LPK ACC Japan Centre!',
+        //                                 icon: 'success',
+        //                                 timer: 3000,
+        //                                 showConfirmButton: false,
+        //                             }).then(() => {
+        //                                 location.reload();
+        //                             });
+        //                         } else {
+        //                             Swal.fire({
+        //                                 title: 'Gagal!',
+        //                                 text: 'Terjadi kesalahan saat mengirim data.',
+        //                                 icon: 'error',
+        //                                 confirmButtonText: 'Tutup'
+        //                             });
+        //                         }
+        //                     },
+        //                 });
+        //             }
+        //         });
+        //     });
+        // });
+
         $(document).ready(function() {
             $('.signup-form').on('submit', function(e) {
                 e.preventDefault();
 
                 let bahasaAsing = $('#bahasa_asing').val();
                 if (bahasaAsing) {
-                    let bahasaAsingString = bahasaAsing.join(',');
+                    let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') : bahasaAsing;
                     $('<input>').attr({
                         type: 'hidden',
-                        name: 'bahasa_asing_hidden',
+                        name: 'bahasa_asing',
                         value: bahasaAsingString
                     }).appendTo('.signup-form');
                 }
-    
+
                 Swal.fire({
                     title: 'Apakah Anda yakin ingin mendaftarkan diri?',
                     text: 'Pastikan data yang sudah anda masukan sesuai dan benar!',
@@ -799,23 +1160,26 @@
                     confirmButtonColor: '#046392'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var form = $(this);
+                        var form = $('.signup-form');
                         var formData = form.serialize();
-    
+
                         Swal.fire({
-                            text: 'Mohon tunggu sedang memproses pendaftaran..',
+                            text: 'Mohon tunggu sedang memproses pendaftaran...',
                             icon: 'warning',
                             showConfirmButton: false,
-                            willOpen: () => {
+                            allowOutsideClick: false,
+                            didOpen: () => {
                                 Swal.showLoading();
                             }
                         });
-    
+
                         $.ajax({
                             url: form.attr('action'),
                             type: 'POST',
                             data: formData,
                             success: function(response) {
+                                Swal.close();
+
                                 if (response.success) {
                                     Swal.fire({
                                         title: 'Berhasil!',
@@ -827,14 +1191,32 @@
                                         location.reload();
                                     });
                                 } else {
+                                    let message = response.message || 'Terjadi kesalahan saat mengirim data.';
+                                    let errors = response.errors ? Object.values(response.errors).flat().join('\n') : '';
+
                                     Swal.fire({
                                         title: 'Gagal!',
-                                        text: 'Terjadi kesalahan saat mengirim data.',
+                                        text: `${message}\n${errors}`,
                                         icon: 'error',
                                         confirmButtonText: 'Tutup'
                                     });
                                 }
                             },
+                            error: function(xhr) {
+                                Swal.close();
+                                let errorMessage = 'Terjadi kesalahan sistem.';
+                                if (xhr.responseJSON?.errors) {
+                                    errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                                } else if (xhr.responseJSON?.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                }
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: errorMessage,
+                                    icon: 'error',
+                                    confirmButtonText: 'Tutup'
+                                });
+                            }
                         });
                     }
                 });
@@ -845,19 +1227,26 @@
     {{-- next previouse --}}
     <script>
         let currentStep = 1;
+        let maxStepReached = 1;
         const totalSteps = document.querySelectorAll('.step').length;
-    
+
         function showStep(step) {
-            document.querySelectorAll('.step').forEach((el, i) => {
-                el.classList.toggle('d-none', i !== step - 1);
-            });
+            if (step <= maxStepReached) {
+                document.querySelectorAll('.step').forEach(stepEl => stepEl.classList.add('d-none'));
+                document.getElementById('step-' + step).classList.remove('d-none');
+
+                document.querySelectorAll('#stepNav .nav-link').forEach(nav => nav.classList.remove('active-step'));
+                document.getElementById('nav-step-' + step).classList.add('active-step');
+
+                currentStep = step;
+            }
         }
-    
+
         function nextStep() {
             const currentForm = document.querySelector(`#step-${currentStep}`);
             const inputs = currentForm.querySelectorAll('input, select, textarea');
             let isValid = true;
-    
+
             inputs.forEach(input => {
                 if (!input.checkValidity()) {
                     isValid = false;
@@ -866,24 +1255,53 @@
                     input.classList.remove('is-invalid');
                 }
             });
-    
+
             if (isValid && currentStep < totalSteps) {
                 currentStep++;
+                maxStepReached = Math.max(maxStepReached, currentStep);
+                enableStepNavLinks();
                 showStep(currentStep);
             }
         }
-    
+
         function prevStep() {
             if (currentStep > 1) {
                 currentStep--;
                 showStep(currentStep);
             }
         }
-    
-        document.addEventListener('DOMContentLoaded', () => {
-            showStep(currentStep);
-        });
-    </script>     
+
+        function enableStepNavLinks() {
+            for (let i = 1; i <= totalSteps; i++) {
+                const navLink = document.getElementById(`nav-step-${i}`);
+                if (i <= maxStepReached) {
+                    navLink.classList.remove('disabled');
+                } else {
+                    navLink.classList.add('disabled');
+                }
+            }
+        }
+
+        // Tambahkan event listener dinamis
+        for (let i = 1; i <= totalSteps; i++) {
+            const nav = document.getElementById(`nav-step-${i}`);
+            nav.addEventListener('click', () => {
+                if (i <= maxStepReached) {
+                    showStep(i);
+                }
+            });
+        }
+
+        document.getElementById('nav-step-1').addEventListener('click', () => showStep(1));
+        document.getElementById('nav-step-2').addEventListener('click', () => showStep(2));
+        document.getElementById('nav-step-3').addEventListener('click', () => showStep(3));
+        document.getElementById('nav-step-4').addEventListener('click', () => showStep(4));
+        document.getElementById('nav-step-5').addEventListener('click', () => showStep(5));
+        document.getElementById('nav-step-6').addEventListener('click', () => showStep(6));
+
+        showStep(currentStep);
+        enableStepNavLinks();
+    </script>    
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
