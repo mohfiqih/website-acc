@@ -77,6 +77,10 @@ Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pen
 
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
+
+# refresh
+Route::get('/refresh-table-pendaftaran', [PendaftaranController::class, 'refreshTablePendaftaran'])->name('refresh.pendaftaran');
+
 Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
 Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 
