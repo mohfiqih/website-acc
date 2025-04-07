@@ -168,7 +168,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
-                        <a href="{{ url('/pendaftaran-online') }}" class="btn-get-started" style="width: 100%;">
+                        <a href="{{ url('/pendaftaran-siswa-baru') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Daftar
                         </a>
