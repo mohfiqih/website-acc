@@ -314,26 +314,26 @@
                                         <th>Pernah Operasi</th>
                                         <th>Apakah Sedang Minum</th>
                                         <th>Tangan</th>
+                                        <th>Merokok</th>
+                                        <th>Penyakit Dalam</th>
                                         <th>Keahlian</th>
                                         <th>Sifat/Kepribadian</th>
                                         <th>Kelebihan</th>
                                         <th>Kelemahan</th>
                                         <th>Status</th>
-                                        <th>Merokok</th>
-                                        <th>Penyakit Dalam</th>
                                         <th>Hobi</th>
                                         <th>Motivasi</th>
                                         <th>Rencana Menabung</th>
                                         <th>Rencana Setelah Jepang</th>
                                         <th>Pernah Tinggal/Bekerja di Jepang</th>
                                         <th>Kualifikasi Lamaran</th>
-                                        <th>Sekolah Dasar</th>
+                                        <th>Nama SD</th>
                                         <th>Tahun Masuk SD</th>
                                         <th>Tahun Keluar SD</th>
-                                        <th>SMP</th>
+                                        <th>Nama SMP</th>
                                         <th>Tahun Masuk SMP</th>
                                         <th>Tahun Keluar SMP</th>
-                                        <th>SMA/SMK</th>
+                                        <th>Nama SMA/SMK</th>
                                         <th>Tahun Masuk SMA/SMK</th>
                                         <th>Tahun Keluar SMA/SMK</th>
                                         <th>Jurusan SMA/SMK</th>

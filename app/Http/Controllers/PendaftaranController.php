@@ -200,28 +200,6 @@ class PendaftaranController extends Controller
 
     public function data_pendaftaran_new()
     {
-        // $response = Http::get($this->googleScriptUrl);
-        // $data     = array_reverse($response->json());
-
-        // $cleanedData = [];
-        // foreach ($data as $key => $value) {
-        //     if ($key === 'Timestamp') {
-        //         $dateOnly = substr($value, 0, 10);
-        //         $cleanedRow[$key] = $dateOnly;
-        //         continue;
-        //     }
-
-        //     if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-        //             'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
-        //             'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-        //             'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
-        //         $cleanedData[$key] = $value;
-        //     } else {
-        //         $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-        //         $cleanedData[$newKey] = $value;
-        //     }
-        // }
-
         $response = Http::get($this->googleScriptUrl);
         $data     = array_reverse($response->json());
 
@@ -230,9 +208,14 @@ class PendaftaranController extends Controller
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
-                if ($key === 'Timestamp') {
+                if ($key === 'Timestamp' || $key === 'TANGGAL LAHIR' || $key === 'JIKA YA, SEBUTKAN TGL/BLN/THN') {
                     $dateOnly = substr($value, 0, 10);
                     $cleanedRow[$key] = $dateOnly;
+                    continue;
+                }
+
+                if (in_array($key, ['SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
+                    $cleanedRow[$key] = $this->convertJsonToText($value);
                     continue;
                 }
 
@@ -262,9 +245,14 @@ class PendaftaranController extends Controller
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
-                if ($key === 'Timestamp') {
+                if ($key === 'Timestamp' || $key === 'TANGGAL LAHIR' || $key === 'JIKA YA, SEBUTKAN TGL/BLN/THN') {
                     $dateOnly = substr($value, 0, 10);
                     $cleanedRow[$key] = $dateOnly;
+                    continue;
+                }
+
+                if (in_array($key, ['SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
+                    $cleanedRow[$key] = $this->convertJsonToText($value);
                     continue;
                 }
 
@@ -296,7 +284,8 @@ class PendaftaranController extends Controller
             if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
                     'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
                     'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)', 'MATA KANAN'])) {
+                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)', 
+                    'MATA KANAN', 'SIFAT/KEPRIBADIAN'])) {
                 $cleanedData[$key] = $value;
             } else {
                 $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
@@ -344,9 +333,11 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('MINUM', $cleanedData['APAKAH SEDANG MINUM'] ?? '-');
         $templateProcessor->setValue('TANGAN', $cleanedData['TANGAN'] ?? '-');
         $templateProcessor->setValue('KEAHLIAN', $cleanedData['KEAHLIAN'] ?? '-');
-        $templateProcessor->setValue('SIFAT', $cleanedData['SIFAT/KEPRIBADIAN'] ?? '-');
-        $templateProcessor->setValue('KELEBIHAN', $cleanedData['KELEBIHAN'] ?? '-');
-        $templateProcessor->setValue('KELEMAHAN', $cleanedData['KELEMAHAN'] ?? '-');
+        
+        $templateProcessor->setValue('SIFAT', $this->convertJsonToText($cleanedData['SIFAT/KEPRIBADIAN'] ?? '[]'));
+        $templateProcessor->setValue('KELEBIHAN', $this->convertJsonToText($cleanedData['KELEBIHAN'] ?? '[]'));
+        $templateProcessor->setValue('KELEMAHAN', $this->convertJsonToText($cleanedData['KELEMAHAN'] ?? '[]'));        
+
         $templateProcessor->setValue('STATUS', $cleanedData['STATUS'] ?? '-');
         $templateProcessor->setValue('MEROKOK', $cleanedData['MEROKOK'] ?? '-');
         $templateProcessor->setValue('P_DALAM', $cleanedData['PENYAKIT DALAM'] ?? '-');
@@ -471,6 +462,16 @@ class PendaftaranController extends Controller
             'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
         ])->deleteFileAfterSend(true);
+    }
+
+    # convert sifat, kelebihan, kelemahan
+    function convertJsonToText($json) {
+        $arr = json_decode($json, true);
+        if (is_array($arr) && count($arr) > 0) {
+            $values = array_map(fn($item) => strtoupper($item['value']), $arr);
+            return implode(', ', $values);
+        }
+        return '-';
     }
 
     # translate kanji

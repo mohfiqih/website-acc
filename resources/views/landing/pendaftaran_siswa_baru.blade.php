@@ -24,6 +24,8 @@
     <link href="{{ asset('templates/assets/css/floating.css?v=1.0') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- Tagify CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css">
 
     <!-- Lity CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
@@ -246,10 +248,27 @@
         .select2-container {
             width: 100% !important;
         }
-
         .nav-link.disabled {
             pointer-events: none;
             opacity: 0.6;
+        }
+        .btn-kecil {
+            padding: 4px 8px;
+            font-size: 12px;
+            background-color: #28a745; /* warna hijau */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-kecil:hover {
+            background-color: #218838;
+        }
+
+        .text-white {
+            color: white;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -270,6 +289,12 @@
                     </div>                    
                     <h2 class="text-justify mt-4"></span>FORMULIR PENDAFTARAN SISWA BARU (CV) <br/> LPK ACC JAPAN CENTRE TEGAL</h2>
                     <p class="text-white"><b>Lokasi LPK ACC Japan Centre : </b> Dk. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</p>
+                    <p class="text-white">
+                        Klik disini untuk download CV siswa yang sudah terdaftar: 
+                        <a class="text-white" href="/data-pendaftaran">
+                            <button class="btn-kecil">Lihat CV</button>
+                        </a>
+                    </p>                    
                 </center>
             </div>
         </div>
@@ -378,6 +403,7 @@
                                 <option value="KONGHUCU">KONGHUCU</option>
                             </select>
                         </div>
+                        
                         <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
                 
@@ -481,21 +507,25 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, isian wajib.</p>
                             <textarea type="text" rows="3" class="form-control" name="keahlian" placeholder="Masukan keahlian anda" required></textarea>
                         </div>
+
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SIFAT/KEPRIBADIAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian, isian wajib.</p>
-                            <textarea type="text" rows="3" class="form-control" name="sifat_kepribadian" placeholder="Masukan sifat/kepribadian anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian, maksimal 2 pilihan.</p>
+                            <input name="sifat_kepribadian" id="sifat_kepribadian" class="form-control tagify-sifat" placeholder="Contoh: disiplin, jujur" required>
                         </div>
+                        
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEBIHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="kelebihan" placeholder="Masukan kelebihan anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 2 pilihan.</p>
+                            <input name="kelebihan" id="kelebihan" class="form-control tagify-kelebihan" placeholder="Contoh: kerja tim, cepat belajar" required>
                         </div>
+                        
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEMAHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="kelemahan" placeholder="Masukan kelemahan anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 2 pilihan.</p>
+                            <input name="kelemahan" id="kelemahan" class="form-control tagify-kelemahan" placeholder="Contoh: mudah panik, kurang percaya diri" required>
                         </div>
+
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">STATUS:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih status, isian wajib.</p>
@@ -823,6 +853,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <!-- Tagify JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
 
     {{-- JS Pendaftaran --}}
     <script src="{{ asset('js/scroll_up_next_previous.js') }}"></script>
@@ -874,6 +906,36 @@
                         type: 'hidden',
                         name: 'bahasa_asing',
                         value: bahasaAsingString
+                    }).appendTo('.signup-form');
+                }
+
+                let sifat = $('#sifat_kepribadian').val();
+                if (sifat) {
+                    let sifatString = Array.isArray(sifat) ? sifat.join(', ') : sifat;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'sifat_kepribadian',
+                        value: sifatString
+                    }).appendTo('.signup-form');
+                }
+
+                let kelebihan = $('#kelebihan').val();
+                if (kelebihan) {
+                    let kelebihanString = Array.isArray(kelebihan) ? kelebihan.join(', ') : kelebihan;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'kelebihan',
+                        value: kelebihanString
+                    }).appendTo('.signup-form');
+                }
+
+                let kelemahan = $('#kelemahan').val();
+                if (kelemahan) {
+                    let kelemahanString = Array.isArray(kelemahan) ? kelemahan.join(', ') : kelemahan;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'kelemahan',
+                        value: kelemahanString
                     }).appendTo('.signup-form');
                 }
 
@@ -947,6 +1009,61 @@
                         });
                     }
                 });
+            });
+        });
+
+        // rekomendasi kata
+        document.addEventListener("DOMContentLoaded", function () {
+            const sifatInput = document.querySelector('.tagify-sifat');
+            const kelebihanInput = document.querySelector('.tagify-kelebihan');
+            const kelemahanInput = document.querySelector('.tagify-kelemahan');
+
+            const sifatTagify = new Tagify(sifatInput, {
+                whitelist: [
+                    "JUJUR", "DISIPLIN", "SABAR", "RAJIN", "PERCAYA DIRI", "TEPAT WAKTU", "INISIATIF", "TELITI",
+                    "MANDIRI", "PEKERJA KERAS", "MUDAH BERGAUL", "FLEKSIBEL", "BERPIKIR POSITIF", "BERSAHABAT",
+                    "KREATIF", "MOTIVASI TINGGI", "ADAPTIF", "CERDAS EMOSIONAL"
+                ],
+                maxTags: 2,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 20
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
+
+            const kelebihanTagify = new Tagify(kelebihanInput, {
+                whitelist: [
+                    "KOMUNIKATIF", "CEPAT BELAJAR", "KERJA TIM", "BERPIKIR KRITIS", "KEPEMIMPINAN", "PROBLEM SOLVING",
+                    "MULTITASKING", "MANAJEMEN WAKTU", "KERJA DI BAWAH TEKANAN", "PEMAHAMAN CEPAT", "BERORIENTASI TARGET",
+                    "INOVATIF", "RESPONSIF", "PEKA TERHADAP SEKITAR", "ANALITIS"
+                ],
+                maxTags: 2,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 20
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
+
+            const kelemahanTagify = new Tagify(kelemahanInput, {
+                whitelist: [
+                    "KURANG PERCAYA DIRI", "MUDAH PANIK", "TIDAK SABARAN", "SULIT FOKUS", "KURANG PENGALAMAN",
+                    "TERLALU PERFEKSIONIS", "MUDAH TERPENGARUH", "KURANG KOMUNIKATIF", "MUDAH BOSAN",
+                    "SUKA MENUNDA", "KURANG BERANI", "TERLALU KRITIS", "SULIT MENOLAK", "TERLALU JUJUR"
+                ],
+                maxTags: 2,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 20
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
             });
         });
     </script>
