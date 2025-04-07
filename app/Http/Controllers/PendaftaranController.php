@@ -325,10 +325,10 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('TGL_LAHIR', $tanggal_lahir);
         $templateProcessor->setValue('USIA', $cleanedData['USIA'] ?? '-');
 
-        $jenisKelamin = $cleanedData['JENIS KELAMIN'] ?? '';
+        $jenisKelamin = $cleanedData['KELAMIN'] ?? '';
         if($jenisKelamin == 'LAKI-LAKI') {
             $templateProcessor->setValue("JK", "LK" ?? '');
-        } else {
+        } else if($jenisKelamin == 'PEREMPUAN') {
             $templateProcessor->setValue("JK", "PR" ?? '');
         }
 
