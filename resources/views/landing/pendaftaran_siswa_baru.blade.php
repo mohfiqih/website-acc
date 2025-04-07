@@ -421,7 +421,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KIRI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan, jika belum tau kosongkan saja.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kiri, jika belum tau kosongkan saja.</p>
                             <input type="text" class="form-control" name="mata_kiri" placeholder="Masukan minus mata kiri anda. ex: 1,5">
                         </div>
                         <div class="form-group">
@@ -628,10 +628,12 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PENGALAMAN KERJA (Tahun Kerja - Nama Perusahaan - Bagian):</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) e.g: 2024 - 2025 - PT. ADIKARSA JAYA - Staff Administrasi, 
-                                        2024 - 2025 - PT. ABC - Manager<br/>
-                                *) Jika tidak ada kosongkan saja.<br/>
-                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.</p>
+                                *) e.g: 2024 - 2025 - PT. ADIKARSA JAYA - STAFF ADMINISTRASI, 
+                                        2024 - 2025 - PT. ABC - MANAGER<br/>
+                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.<br/>
+                                *) Mohon gunakan Huruf KAPITAL.<br/>
+                                *) Jika tidak ada kosongkan saja.
+                            </p>
                             <textarea type="text" class="form-control" rows="5" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda dengan format (Tahun Masuk - Tahun Keluar - Nama Perusahaan - Bagian)"></textarea>
                         </div>
 
@@ -759,8 +761,9 @@
                             <label class="text-label" style="font-weight: bold">NAMA SAUDARA (HUBUNGAN - NAMA - USIA - PEKERJAAN):</label>
                             <p class="text-danger" style="font-size: 11px;">
                                 *) e.g: ADIK - MARCELL - 20 - TIDAK BEKERJA, KAKAK - AHMAD - 30 - KARYAWAN SWASTA<br/>
-                                *) Jika tidak ada kosongkan saja.<br/>
-                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.
+                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.<br/>
+                                *) Mohon gunakan Huruf KAPITAL.<br/>
+                                *) Jika tidak ada kosongkan saja.
                             </p>
                             <textarea type="text" class="form-control" rows="5" name="nama_saudara" placeholder="Masukan nama saudara dengan format (Hubungan - Nama - Usia - Pekerjaan)"></textarea>
                         </div>
@@ -821,6 +824,133 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+    {{-- JS Pendaftaran --}}
+    <script src="{{ asset('js/scroll_up_next_previous.js') }}"></script>
+
+    <script>
+        // -------------- POST DATA ---------------- //
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.hash === "#galeri") {
+                document.getElementById("galeri").scrollIntoView({ behavior: "smooth" });
+            }
+        });
+
+        $(window).on('load', function() {
+            $('#preloader').fadeOut('slow');
+        });
+
+        $('#bahasa_asing').select2({
+            tags: true,
+            placeholder: 'Silahkan ketik bahasa asing yang ingin anda cari...',
+            width: '100%',
+            language: {
+                noResults: function () {
+                    return "Klik pilih atau tekan enter untuk menambahkan..";
+                }
+            }
+        });
+
+        $('#pernah_keluar_negeri').select2({
+            tags: true,
+            placeholder: "Pilih atau ketik jawaban...",
+            allowClear: true,
+            width: '100%',
+            language: {
+                noResults: function () {
+                    return "Tidak ditemukan, tekan Enter untuk menambahkan";
+                }
+            }
+        });
+
+        // insert data
+        $(document).ready(function() {
+            $('.signup-form').on('submit', function(e) {
+                e.preventDefault();
+
+                let bahasaAsing = $('#bahasa_asing').val();
+                if (bahasaAsing) {
+                    let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') : bahasaAsing;
+                    $('<input>').attr({
+                        type: 'hidden',
+                        name: 'bahasa_asing',
+                        value: bahasaAsingString
+                    }).appendTo('.signup-form');
+                }
+
+                Swal.fire({
+                    title: 'Apakah Anda yakin ingin mendaftarkan diri?',
+                    text: 'Pastikan data yang anda masukan sesuai dan benar, jika ada kesalahan hubungi bagian administrasi untuk mengubahnya!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Batal',
+                    confirmButtonColor: '#046392'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var form = $('.signup-form');
+                        var formData = form.serialize();
+
+                        Swal.fire({
+                            text: 'Mohon tunggu sedang memproses pendaftaran...',
+                            icon: 'warning',
+                            showConfirmButton: false,
+                            allowOutsideClick: false,
+                            didOpen: () => {
+                                Swal.showLoading();
+                            }
+                        });
+
+                        $.ajax({
+                            url: form.attr('action'),
+                            type: 'POST',
+                            data: formData,
+                            success: function(response) {
+                                Swal.close();
+
+                                if (response.success) {
+                                    Swal.fire({
+                                        title: 'Berhasil!',
+                                        text: 'Berhasil daftar di LPK ACC Japan Centre!',
+                                        icon: 'success',
+                                        timer: 3000,
+                                        showConfirmButton: false,
+                                    }).then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    let message = response.message || 'Terjadi kesalahan saat mengirim data.';
+                                    let errors = response.errors ? Object.values(response.errors).flat().join('\n') : '';
+
+                                    Swal.fire({
+                                        title: 'Gagal!',
+                                        text: `${message}\n${errors}`,
+                                        icon: 'error',
+                                        confirmButtonText: 'Tutup'
+                                    });
+                                }
+                            },
+                            error: function(xhr) {
+                                Swal.close();
+                                let errorMessage = 'Terjadi kesalahan sistem.';
+                                if (xhr.responseJSON?.errors) {
+                                    errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
+                                } else if (xhr.responseJSON?.message) {
+                                    errorMessage = xhr.responseJSON.message;
+                                }
+                                Swal.fire({
+                                    title: 'Error!',
+                                    text: errorMessage,
+                                    icon: 'error',
+                                    confirmButtonText: 'Tutup'
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
@@ -837,9 +967,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <!-- Lity JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
-
-    {{-- JS Pendaftaran --}}
-    <script src="{{ asset('js/pendaftaran_siswa_baru.js') }}"></script>
 </body>
 
 </html>

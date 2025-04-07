@@ -200,23 +200,88 @@ class PendaftaranController extends Controller
 
     public function data_pendaftaran_new()
     {
+        // $response = Http::get($this->googleScriptUrl);
+        // $data     = array_reverse($response->json());
+
+        // $cleanedData = [];
+        // foreach ($data as $key => $value) {
+        //     if ($key === 'Timestamp') {
+        //         $dateOnly = substr($value, 0, 10);
+        //         $cleanedRow[$key] = $dateOnly;
+        //         continue;
+        //     }
+
+        //     if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
+        //             'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+        //             'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+        //             'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
+        //         $cleanedData[$key] = $value;
+        //     } else {
+        //         $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+        //         $cleanedData[$newKey] = $value;
+        //     }
+        // }
+
         $response = Http::get($this->googleScriptUrl);
-        $data = array_reverse($response->json());
+        $data     = array_reverse($response->json());
 
         $cleanedData = [];
-        foreach ($data as $key => $value) {
-            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-                    'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
-                    'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
-                $cleanedData[$key] = $value;
-            } else {
-                $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-                $cleanedData[$newKey] = $value;
+
+        foreach ($data as $row) {
+            $cleanedRow = [];
+            foreach ($row as $key => $value) {
+                if ($key === 'Timestamp') {
+                    $dateOnly = substr($value, 0, 10);
+                    $cleanedRow[$key] = $dateOnly;
+                    continue;
+                }
+
+                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
+                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+                        'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
+                    $cleanedRow[$key] = $value;
+                } else {
+                    $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+                    $cleanedRow[$newKey] = $value;
+                }
             }
+            $cleanedData[] = $cleanedRow;
         }
 
         return view('landing.data-pendaftaran-new', compact('cleanedData'));
+    }
+
+    public function refreshTablePendaftaran()
+    {
+        $response = Http::get($this->googleScriptUrl);
+        $data     = array_reverse($response->json());
+
+        $cleanedData = [];
+
+        foreach ($data as $row) {
+            $cleanedRow = [];
+            foreach ($row as $key => $value) {
+                if ($key === 'Timestamp') {
+                    $dateOnly = substr($value, 0, 10);
+                    $cleanedRow[$key] = $dateOnly;
+                    continue;
+                }
+
+                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
+                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+                        'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
+                    $cleanedRow[$key] = $value;
+                } else {
+                    $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+                    $cleanedRow[$newKey] = $value;
+                }
+            }
+            $cleanedData[] = $cleanedRow;
+        }
+
+        return view('partials.table_body', compact('cleanedData'));
     }
 
     public function export_cv_word($id)

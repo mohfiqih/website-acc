@@ -168,6 +168,33 @@
             display: flex;
             justify-content: center;
         }
+
+        @media (max-width: 576px) {
+            #refreshIndicator {
+                margin-bottom: 10px;
+            }
+        }
+
+        .fixed-header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fixed-header-table thead th {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .table-scroll-wrapper {
+            overflow-x: auto;
+        }
+
+        .fixed-header-table th, 
+        .fixed-header-table td {
+            white-space: nowrap;
+        }
     </style>
 </head>
 
@@ -257,14 +284,18 @@
                 </div>
     
                 <div class="table-responsive">
+                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                        🔄 Refreshing data...
+                    </div>
+                    <br/>
                     <div class="table-responsive">
-                        <table id="spreadsheetTable" class="table table-striped table-bordered">
+                        <table id="spreadsheetTable" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>No</th>
                                         <th>Download CV</th>
-                                        <th>Timestamp</th>
+                                        <th>Tanggal</th>
                                         <th>Email</th>
                                         <th>Nama (Katakana)</th>
                                         <th>Nama (Indonesia)</th>
@@ -334,8 +365,9 @@
                                         <th>Nomor Sepatu</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach($cleanedData as $row)
+                                <tbody id="tableBody">
+                                    @include('partials.table_body')
+                                    {{-- @foreach($cleanedData as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
@@ -349,7 +381,7 @@
                                                 @endif
                                             @endforeach                                                                       
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             @else
                                 <tr>
@@ -361,9 +393,12 @@
                 </div>
     
                 <!-- Pagination di luar DataTables -->
-                <div class="d-flex justify-content-between align-items-center mt-3">
+                <div class="d-flex justify-content-between align-items-center">
                     <span id="tableInfo"></span>
-                    <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    
+                    <div class="d-flex align-items-center ms-auto">
+                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -382,6 +417,29 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     <script>
+        // Refresh tabel
+        function refreshTable() {
+            const indicator = document.getElementById('refreshIndicator');
+            indicator.style.display = 'inline';
+
+            fetch('{{ route('refresh.pendaftaran') }}')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('tableBody').innerHTML = html;
+                    indicator.style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Gagal refresh tabel', error);
+                    indicator.innerText = '❌ Gagal memuat data';
+                    setTimeout(() => {
+                        indicator.style.display = 'none';
+                        indicator.innerText = '🔄 Refreshing data...';
+                    }, 3000);
+                });
+        }
+
+        setInterval(refreshTable, 30000);
+
         $(document).ready(function() {
             let table = $('#spreadsheetTable').DataTable({
                 "paging": true,
