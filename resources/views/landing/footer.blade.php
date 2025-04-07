@@ -3,10 +3,10 @@
         <div class="row gy-4">
             <div class="col-lg-6 col-md-12 footer-info">
                 <br />
-                <a href="/" class="logo d-flex align-items-center">
-                    <span>LPK ACC Japan Centre</span><br />
+                <a href="/" class="logo align-items-center">
+                    <span>LPK ACC Japan Centre</span>
                 </a>
-                <p style="text-align: justify;">
+                <p class="mt-2" style="text-align: justify;">
                     LPK ACC telah membimbing dan membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya Program Magang, Program Tokutei Ginou (TG) dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.
                 </p>
             </div>
