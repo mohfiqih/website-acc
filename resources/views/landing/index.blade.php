@@ -736,7 +736,7 @@
 
     </main>
 
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
 
     <!-- Modal WhatsApp -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"

@@ -403,7 +403,7 @@
                                 <option value="KONGHUCU">KONGHUCU</option>
                             </select>
                         </div>
-                        
+
                         <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
                 
@@ -817,7 +817,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama  mentor gunakan huruf KAPITAL, isian wajib.</p>
-                            <input type="text" class="form-control" name="nama_mentor" placeholder="Masukan nama mentor tidak perlu menggunakan PAK/BU/MAS/MBA" required>
+                            <input type="text" class="form-control" name="nama_mentor" value="{{ $mentor }}" required>
                         </div>
 
                         <div class="form-group">
@@ -846,7 +846,7 @@
         </div>
     </div>
 
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
