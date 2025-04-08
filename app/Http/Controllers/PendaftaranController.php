@@ -77,11 +77,17 @@ class PendaftaranController extends Controller
     }
 
     # pendaftaran baru
-    public function pendaftaran_baru()
+    public function pendaftaran_baru($mentor = null)
     {
         $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
         $provinsi  = ProvinsiModel::all();
-        return view('landing.pendaftaran_siswa_baru', ['images_db' => $images_db, 'provinsi' => $provinsi]);
+        $mentor    = $mentor ? strtoupper(str_replace('-', ' ', $mentor)) : null;
+
+        return view('landing.pendaftaran_siswa_baru', [
+            'images_db' => $images_db,
+            'provinsi'  => $provinsi,
+            'mentor'    => $mentor
+        ]);
     }
 
     public function store_pendaftaran_baru(Request $request)

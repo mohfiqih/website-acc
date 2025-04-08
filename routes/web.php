@@ -71,8 +71,10 @@ Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
 # get data pendaftaran old
 Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pendaftaran_old']);
 
-# pendaftaran
+# pendaftaran umum
 Route::get('/pendaftaran-siswa-baru', [PendaftaranController::class, 'pendaftaran_baru']);
+# for mentor
+Route::get('/pendaftaran-siswa-baru/{mentor}', [PendaftaranController::class, 'pendaftaran_baru']);
 Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pendaftaran_baru']);
 
 # get data pendaftaran baru

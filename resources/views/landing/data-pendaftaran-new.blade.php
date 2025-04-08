@@ -408,7 +408,7 @@
     
     <br/>    
 
-    <div id="preloader"></div>
+    {{-- <div id="preloader"></div> --}}
 
     @include('landing.footer')
 
