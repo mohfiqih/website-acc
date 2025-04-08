@@ -384,8 +384,9 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('LUAR_LAIN', $cleanedData['PERNAH LUAR NEGERI LAINNYA'] ?? '');
         $templateProcessor->setValue('NEGARA', $cleanedData['JIKA YA, NEGARA APA'] ?? '');
 
-        $tgl = date('d-m-Y', strtotime($cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? ''));
-        if(!empty($tgl)) {
+        $tgl = date('d-m-Y', strtotime($cleanedData['JIKA YA, SEBUTKAN TGL/BLN/THN'] ?? '0000-00-00'));
+        $pernah_kejepang = $cleanedData['PERNAH KE JEPANG'];
+        if($pernah_kejepang == 'YA') {
             $templateProcessor->setValue("JIKA_YA", $tgl ?? '');
         } else {
             $templateProcessor->setValue("JIKA_YA", "" ?? '');

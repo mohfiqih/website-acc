@@ -2,10 +2,10 @@
     <tr>
         <td>{{ $loop->iteration }}</td>
         <td>
-            <a href="{{ route('export.cv.word', ['id' => $row['ID']]) }}" class="btn btn-sm btn-success">
+            <button class="btn btn-sm btn-success btn-download-cv" data-id="{{ $row['ID'] }}" data-nama="{{ $row['NAMA (INDONESIA)'] }}">
                 <i class="fa fa-download"></i> Download CV
-            </a>                                                
-        </td>
+            </button>
+        </td>        
         @foreach($row as $key => $cell)
             @if ($key !== 'ID')
                 <td>{{ $cell }}</td>

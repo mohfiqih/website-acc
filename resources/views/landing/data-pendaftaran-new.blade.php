@@ -9,6 +9,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -246,7 +248,7 @@
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
                     <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
-                    <h2></span>DATA SISWA PENDAFTARAN ONLINE LPK ACC JAPAN CENTRE</h2>
+                    <h2></span>DATA PENDAFTARAN SISWA BARU (CV) LPK ACC JAPAN CENTRE TEGAL</h2>
                     <ul>
                         <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
                         <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
@@ -473,8 +475,68 @@
                 }
             });
         });
-    </script>     
+    </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $(document).on('click', '.btn-download-cv', function(e) {
+            e.preventDefault();
+
+            const id = $(this).data('id');
+            const nama = $(this).data('nama');
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to download this CV?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#046392'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/export-cv-word/${id}`, {
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Download failed');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
+
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'File has been downloaded.',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to download file.',
+                            icon: 'error'
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+    
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
