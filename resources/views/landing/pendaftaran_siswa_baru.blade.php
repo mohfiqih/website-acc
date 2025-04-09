@@ -289,12 +289,12 @@
                     </div>                    
                     <h2 class="text-justify mt-4"></span>FORMULIR PENDAFTARAN SISWA BARU (CV) <br/> LPK ACC JAPAN CENTRE TEGAL</h2>
                     <p class="text-white"><b>Lokasi LPK ACC Japan Centre : </b> Dk. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</p>
-                    <p class="text-white">
+                    {{-- <p class="text-white">
                         Klik disini untuk download CV siswa yang sudah terdaftar: 
                         <a class="text-white" href="/data-pendaftaran">
                             <button class="btn-kecil">Lihat CV</button>
                         </a>
-                    </p>                    
+                    </p> --}}
                 </center>
             </div>
         </div>
@@ -817,7 +817,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama  mentor gunakan huruf KAPITAL, isian wajib.</p>
-                            <input type="text" class="form-control" name="nama_mentor" value="{{ $mentor }}" required>
+                            <input type="text" class="form-control" name="nama_mentor" value="{{ $mentor }}" placeholder="Masukan nama mentor" required>
                         </div>
 
                         <div class="form-group">
