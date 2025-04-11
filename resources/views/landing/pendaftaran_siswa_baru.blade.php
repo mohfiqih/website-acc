@@ -29,6 +29,10 @@
 
     <!-- Lity CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
+
+    {{-- Year Picker --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    
     <style>
         .text-label {
             padding-bottom: 10px;
@@ -504,25 +508,25 @@
                         <h5 class="mb-1" style="font-weight: bold">Page 3: Motivasi dan Lainnya</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KEAHLIAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, isian wajib.</p>
-                            <textarea type="text" rows="3" class="form-control" name="keahlian" placeholder="Masukan keahlian anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-keahlian" name="keahlian" placeholder="Contoh: peternakan, pertanian" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SIFAT/KEPRIBADIAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian, maksimal 2 pilihan.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian, maksimal 1 pilihan.</p>
                             <input name="sifat_kepribadian" id="sifat_kepribadian" class="form-control tagify-sifat" placeholder="Contoh: disiplin, jujur" required>
                         </div>
                         
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEBIHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 2 pilihan.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 1 pilihan.</p>
                             <input name="kelebihan" id="kelebihan" class="form-control tagify-kelebihan" placeholder="Contoh: kerja tim, cepat belajar" required>
                         </div>
                         
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEMAHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 2 pilihan.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 1 pilihan.</p>
                             <input name="kelemahan" id="kelemahan" class="form-control tagify-kelemahan" placeholder="Contoh: mudah panik, kurang percaya diri" required>
                         </div>
 
@@ -537,23 +541,30 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">HOBI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="hobi" placeholder="Masukan hobi anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-hobi" id="hobi" name="hobi" placeholder="Contoh: sepak bola, pemrograman" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MOTIVASI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="motivasi" placeholder="Masukan motivasi anda" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-motivasi" id="motivasi" name="motivasi" placeholder="Contoh: Ingin mendapat uang banyak" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SELAMA 3 TAHUN DI JEPANG, MAU NABUNG BERAPA:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="nabung_berapa" placeholder="Masukan planning anda nabung berapa" required></textarea>
-                        </div>
+                            <select class="form-control" name="nabung_berapa" required>
+                                <option value="" disabled selected>Pilih planning nabung</option>
+                                <option value="150 JT / 3 TAHUN">150 JT / 3 TAHUN</option>
+                                <option value="200 JT / 3 TAHUN">200 JT / 3 TAHUN</option>
+                                <option value="250 JT / 3 TAHUN">250 JT / 3 TAHUN</option>
+                                <option value="300 JT / 3 TAHUN">300 JT / 3 TAHUN</option>
+                                <option value="BELUM ADA PLANNING MENABUNG">BELUM ADA PLANNING MENABUNG</option>
+                            </select>
+                        </div>                        
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, isian wajib.</p>
-                            <textarea type="text" class="form-control" name="apa_yang_akan_dilakukan" placeholder="Masukan planning anda setelah pulang" required></textarea>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, maksimal pilihan 2.</p>
+                            <input type="text" class="form-control tagify-planning" id="planning" name="apa_yang_akan_dilakukan" placeholder="Masukan planning anda setelah pulang" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG:</label>
@@ -587,13 +598,13 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SD):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_masuk_sd" placeholder="Masukan tahun masuk SD" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_sd" placeholder="Masukan tahun masuk SD" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SD):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_keluar_sd" placeholder="Masukan tahun keluar SD" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_sd" placeholder="Masukan tahun keluar SD" required>
                         </div>
 
                         {{-- SMP --}}
@@ -606,13 +617,13 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMP):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_masuk_smp" placeholder="Masukan tahun masuk SMP" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smp" placeholder="Masukan tahun masuk SMP" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMP):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_keluar_smp" placeholder="Masukan tahun keluar SMP" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smp" placeholder="Masukan tahun keluar SMP" required>
                         </div>
 
                         {{-- SMA / SMK --}}
@@ -625,13 +636,13 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMA/SMK):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk KAPITAL isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_masuk_smak" placeholder="Masukan tahun masuk SMA/SMK" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smak" placeholder="Masukan tahun masuk SMA/SMK" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMA/SMK):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar isian wajib.</p>
-                            <input type="number" class="form-control" name="tahun_keluar_smak" placeholder="Masukan tahun keluar SMA/SMK" required>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smak" placeholder="Masukan tahun keluar SMA/SMK" required>
                         </div>
 
                         {{-- JURUSAN --}}
@@ -641,11 +652,17 @@
                             <input type="text" class="form-control" name="jurusan" placeholder="Masukan jurusan (SMA/SMK), gunakan huruf KAPITAL">
                         </div>
 
-                        {{-- PERGURUAN TINGGI --}}
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI (JIKA ADA) - PROGRAM STUDI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan perguruan tinggi, jika tidak ada kosongkan saja.<br/> *) (e.g: POLITEKNIK - S1 TEKNIK INFORMATIKA)</p>
-                            <input type="text" class="form-control" name="perguruan_tinggi" placeholder="Jika tidak ada kosongkan saja">
+                            <p class="text-danger" style="font-size: 11px;">
+                              *) Maksimal 2 Perguruan Tinggi<br/>
+                              *) Gunakan huruf kapital
+                            </p>
+                            <div id="perguruan-wrapper"></div>
+                          
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="addPerguruanBtn">
+                              + Tambah Perguruan Tinggi
+                            </button>
                         </div>
                         
                         <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
@@ -655,17 +672,19 @@
                     {{-- Step 5 --}}
                     <div class="step d-none" id="step-5"><br/>
                         <h5 class="mb-1" style="font-weight: bold">Page 5: Pengalaman & Lain-Lain</h5><hr>
+
+                        {{-- Pengalaman Kerja --}}
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">PENGALAMAN KERJA (Tahun Kerja - Nama Perusahaan - Bagian):</label>
+                            <label class="text-label font-weight-bold">PENGALAMAN KERJA:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) e.g: 2024 - 2025 - PT. ADIKARSA JAYA - STAFF ADMINISTRASI, 
-                                        2024 - 2025 - PT. ABC - MANAGER<br/>
-                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.<br/>
-                                *) Mohon gunakan Huruf KAPITAL.<br/>
-                                *) Jika tidak ada kosongkan saja.
+                                *) Maksimal 3 pengalaman kerja<br/>
+                                *) Gunakan huruf kapital
                             </p>
-                            <textarea type="text" class="form-control" rows="5" name="pengalaman_kerja" placeholder="Masukan pengalaman kerja anda dengan format (Tahun Masuk - Tahun Keluar - Nama Perusahaan - Bagian)"></textarea>
-                        </div>
+                            <div id="pengalaman-wrapper"></div>
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="addPengalamanBtn">
+                                + Tambah Pengalaman
+                            </button>
+                        </div>                        
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAHASA ASING YANG DIKUASAI (KAPITAL):</label>
@@ -717,13 +736,18 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI JEPANG:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi jika ada, jika tidak ada kosongkan saja.</p>
-                            <input type="text" class="form-control" name="hubungan_kerabat_dijepang" placeholder="Masukan apa hubungan kerabat anda di jepang">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jika ada, jika tidak ada kosongkan saja.</p>
+                            <select name="hubungan_kerabat_dijepang" class="form-control" required>
+                                <option value="" disabled selected>Pilih Hubungan Kerabat</option>
+                                <option value="TEMAN">TEMAN</option>
+                                <option value="KELUARGA">KELUARGA</option>
+                                <option value="TETANGGA">TETANGGA</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BELAJAR BAHASA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi, jika tidak tau kosongkan saja.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah belajar bahasa atau tidak, jika belum kosongkan saja.</p>
                             <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang">
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="YA">YA</option>
@@ -733,14 +757,17 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BUKU YANG DIPAKAI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi buku apa yang dipakai, jika tidak tau kosongkan saja.</p>
-                            <input type="text" class="form-control" name="buku_yang_dipakai" placeholder="Masukan buku apa yang dipakai, jika tidak tau kosongkan">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buku yang digunakan, jika belum kosongkan.</p>
+                            <select name="buku_yang_dipakai" class="form-control" required>
+                                <option value="" disabled selected>Pilih Buku yang digunakan</option>
+                                <option value="NIHONGO">NIHONGO</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAB YANG DIPELAJARI:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda pelajari, jika tidak tau kosongkan saja.</p>
-                            <input type="text" class="form-control" name="bab_yang_dipelajari" placeholder="Masukan bab berapa yang di pelajari">
+                            <input type="number" class="form-control" name="bab_yang_dipelajari" placeholder="Masukan bab berapa yang di pelajari">
                         </div>
                         
                         <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
@@ -788,15 +815,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">NAMA SAUDARA (HUBUNGAN - NAMA - USIA - PEKERJAAN):</label>
+                            <label class="text-label" style="font-weight: bold">
+                                NAMA SAUDARA (maks. 6 data)
+                            </label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) e.g: ADIK - MARCELL - 20 - TIDAK BEKERJA, KAKAK - AHMAD - 30 - KARYAWAN SWASTA<br/>
-                                *) Jika lebih dari satu pisah dengan tanda (,) ketik kembali sesuai format pertama.<br/>
-                                *) Mohon gunakan Huruf KAPITAL.<br/>
-                                *) Jika tidak ada kosongkan saja.
-                            </p>
-                            <textarea type="text" class="form-control" rows="5" name="nama_saudara" placeholder="Masukan nama saudara dengan format (Hubungan - Nama - Usia - Pekerjaan)"></textarea>
+                                *) Maksimal 6 nama saudara<br/>
+                                *) Gunakan huruf kapital
+                              </p>
+                            <div id="saudara-wrapper">
+                            </div>
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="add-saudara-btn">+ Tambah Saudara</button>
                         </div>
+                        
+                        <input type="hidden" name="nama_saudara" id="nama_saudara_hidden">                        
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PENDAPAT KELUARGA:</label>
@@ -1014,9 +1045,36 @@
 
         // rekomendasi kata
         document.addEventListener("DOMContentLoaded", function () {
-            const sifatInput = document.querySelector('.tagify-sifat');
+            const keahlianInput  = document.querySelector('.tagify-keahlian');
+            const sifatInput     = document.querySelector('.tagify-sifat');
             const kelebihanInput = document.querySelector('.tagify-kelebihan');
             const kelemahanInput = document.querySelector('.tagify-kelemahan');
+            const hobiInput      = document.querySelector('.tagify-hobi');
+            const motivasiInput  = document.querySelector('.tagify-motivasi');
+            const planningInput  = document.querySelector('.tagify-planning');
+
+            const keahlianTagify = new Tagify(keahlianInput, {
+                whitelist: [
+                    "PERTANIAN", "PETERNAKAN", "PERIKANAN", "PERKEBUNAN", "PERDAGANGAN",
+                    "KONSTRUKSI", "TEKNIK LISTRIK", "TEKNIK MESIN", "TEKNIK SIPIL", "TEKNIK KOMPUTER",
+                    "IT SUPPORT", "PEMROGRAMAN", "DESAIN GRAFIS", "MULTIMEDIA", "FOTOGRAFI",
+                    "VIDEOGRAFI", "ADMINISTRASI", "KEUANGAN", "AKUNTANSI", "PERPAJAKAN",
+                    "PENDIDIKAN", "KESEHATAN", "PERAWATAN", "BIDAN", "FARMASI", 
+                    "PARIWISATA", "PERHOTELAN", "TATA BOGA", "TATA BUSANA", "TATA RIAS",
+                    "JURNALISTIK", "HUMAS", "PELAYANAN PUBLIK", "MARKETING", "SALES",
+                    "LOGISTIK", "TRANSPORTASI", "KEAMANAN", "KETRAMPILAN TANGAN", 
+                    "PENGELASAN", "PENGOLAHAN MAKANAN", "SERVICE ELEKTRONIK", "MONTIR",
+                    "BARISTA", "KASIR", "PRAMUNIAGA", "CALL CENTER", "DATA ENTRY"
+                ],
+                maxTags: 1,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 20
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
 
             const sifatTagify = new Tagify(sifatInput, {
                 whitelist: [
@@ -1024,7 +1082,7 @@
                     "MANDIRI", "PEKERJA KERAS", "MUDAH BERGAUL", "FLEKSIBEL", "BERPIKIR POSITIF", "BERSAHABAT",
                     "KREATIF", "MOTIVASI TINGGI", "ADAPTIF", "CERDAS EMOSIONAL"
                 ],
-                maxTags: 2,
+                maxTags: 1,
                 dropdown: {
                     enabled: 0,
                     maxItems: 20
@@ -1040,7 +1098,7 @@
                     "MULTITASKING", "MANAJEMEN WAKTU", "KERJA DI BAWAH TEKANAN", "PEMAHAMAN CEPAT", "BERORIENTASI TARGET",
                     "INOVATIF", "RESPONSIF", "PEKA TERHADAP SEKITAR", "ANALITIS"
                 ],
-                maxTags: 2,
+                maxTags: 1,
                 dropdown: {
                     enabled: 0,
                     maxItems: 20
@@ -1056,7 +1114,70 @@
                     "TERLALU PERFEKSIONIS", "MUDAH TERPENGARUH", "KURANG KOMUNIKATIF", "MUDAH BOSAN",
                     "SUKA MENUNDA", "KURANG BERANI", "TERLALU KRITIS", "SULIT MENOLAK", "TERLALU JUJUR"
                 ],
-                maxTags: 2,
+                maxTags: 1,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 20
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
+
+            // HOBI
+            const hobiTagify = new Tagify(hobiInput, {
+                whitelist: [
+                    "MEMBACA", "MENULIS", "OLAHRAGA", "SEPAK BOLA", "BULU TANGKIS",
+                    "BERSEPEDA", "MEMASAK", "BERKEBUN", "FOTOGRAFI", "VIDEOGRAFI",
+                    "GAMING", "MEMANCING", "MUSIK", "MENYANYI", "MENGGAMBAR",
+                    "MELUKIS", "TRAVELING", "NONTON FILM", "DESAIN", "KERJINAN TANGAN"
+                ],
+                maxTags: 1,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 15
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
+
+            // MOTIVASI
+            const motivasiTagify = new Tagify(motivasiInput, {
+                whitelist: [
+                    "INGIN MANDIRI", "MEMBANTU ORANG TUA", "MENGEMBANGKAN DIRI", "BELAJAR HAL BARU",
+                    "MENINGKATKAN KETERAMPILAN", "MENDAPAT PEKERJAAN", "MEMPERBAIKI EKONOMI KELUARGA",
+                    "MENCAPAI CITA-CITA", "INGIN SUKSES", "MEMILIKI PENGHASILAN", "MENGISI WAKTU LUANG",
+                    "MENGABDI PADA MASYARAKAT", "INGIN PUNYA KARIR", "BELAJAR DISIPLIN", "MENGIKUTI PROGRAM PEMERINTAH"
+                ],
+                maxTags: 1,
+                dropdown: {
+                    enabled: 0,
+                    maxItems: 15
+                },
+                transformTag: tagData => {
+                    tagData.value = tagData.value.toUpperCase();
+                }
+            });
+
+            // PLANNING SETELAH PULANG
+            const planningTagify = new Tagify(planningInput, {
+                whitelist: [
+                    "BERWIRAUSAHA",
+                    "MELANJUTKAN KULIAH",
+                    "MENCARI PEKERJAAN",
+                    "MEMBUKA USAHA KELUARGA",
+                    "KURSUS / PELATIHAN",
+                    "MENABUNG UNTUK INVESTASI",
+                    "MENIKAH",
+                    "MEMBANTU ORANG TUA",
+                    "BANGUN RUMAH",
+                    "MELANJUTKAN BISNIS",
+                    "FREELANCE",
+                    "KERJA KE JEPANG LAGI",
+                    "BELUM ADA RENCANA"
+                ],
+                maxTags: 1,
                 dropdown: {
                     enabled: 0,
                     maxItems: 20
@@ -1066,7 +1187,7 @@
                 }
             });
         });
-    </script>
+    </script>     
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -1084,6 +1205,166 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <!-- Lity JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
+
+    {{-- Year Picker --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.yearpicker').datepicker({
+                format: "yyyy",
+                viewMode: "years",
+                minViewMode: "years",
+                autoclose: true
+            });
+        });
+    </script>
+
+    {{-- Pengalaman --}}
+    <script>
+        let pengalamanCount = 0;
+        const maxPengalaman = 3;
+    
+        document.getElementById('addPengalamanBtn').addEventListener('click', function () {
+            if (pengalamanCount >= maxPengalaman) return alert('Maksimal 3 pengalaman kerja.');
+    
+            const wrapper = document.getElementById('pengalaman-wrapper');
+            const div = document.createElement('div');
+            div.classList.add('row', 'mb-2', 'pengalaman-row');
+            div.innerHTML = `
+                <div class="col-md-2">
+                    <input type="text" name="tahun_awal[]" class="form-control yearpciker" placeholder="TAHUN AWAL" required>
+                </div>
+                <div class="col-md-2">
+                    <input type="text" name="tahun_akhir[]" class="form-control yearpciker" placeholder="TAHUN AKHIR" required>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" name="nama_perusahaan[]" class="form-control" placeholder="NAMA PERUSAHAAN" required>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="bagian[]" class="form-control" placeholder="BAGIAN" required>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <button type="button" class="btn btn-danger btn-sm remove-row">&times;</button>
+                </div>
+            `;
+            wrapper.appendChild(div);
+            pengalamanCount++;
+    
+            div.querySelector('.remove-row').addEventListener('click', function () {
+                div.remove();
+                pengalamanCount--;
+            });
+        });
+    </script>
+    
+    {{-- Nama Sudara --}}
+    <script>
+        let saudaraCount = 0;
+        const maxSaudara = 6;
+        
+        function renderSaudaraRow(index) {
+            return `
+            <div class="row align-items-center mb-2 saudara-row" data-index="${index}">
+                <div class="col-md-2">
+                    <select class="form-control hubungan">
+                        <option value="">HUBUNGAN</option>
+                        <option value="KAKAK">KAKAK</option>
+                        <option value="ADIK">ADIK</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" class="form-control nama" placeholder="NAMA LENGKAP (KAPITAL)">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control usia" placeholder="USIA">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control pekerjaan" placeholder="PEKERJAAN (KAPITAL)">
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-danger btn-sm remove-saudara">&times;</button>
+                </div>
+            </div>`;
+        }
+        
+        document.getElementById('add-saudara-btn').addEventListener('click', function() {
+            if (saudaraCount >= maxSaudara) {
+                alert('Maksimal 6 saudara.');
+                return;
+            }
+            const wrapper = document.getElementById('saudara-wrapper');
+            wrapper.insertAdjacentHTML('beforeend', renderSaudaraRow(saudaraCount));
+            saudaraCount++;
+        });
+        
+        document.getElementById('saudara-wrapper').addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-saudara')) {
+                e.target.closest('.saudara-row').remove();
+                saudaraCount--;
+            }
+        });
+        
+        function generateNamaSaudaraString() {
+            const rows = document.querySelectorAll('.saudara-row');
+            const data = [];
+        
+            rows.forEach(row => {
+                const hubungan  = row.querySelector('.hubungan').value.trim().toUpperCase();
+                const nama      = row.querySelector('.nama').value.trim().toUpperCase();
+                const usia      = row.querySelector('.usia').value.trim();
+                const pekerjaan = row.querySelector('.pekerjaan').value.trim().toUpperCase();
+        
+                if (hubungan && nama && usia && pekerjaan) {
+                    data.push(`${hubungan} - ${nama} - ${usia} - ${pekerjaan}`);
+                }
+            });
+        
+            document.getElementById('nama_saudara_hidden').value = data.join(', ');
+        }
+        
+        document.querySelector('form').addEventListener('submit', function(e) {
+            generateNamaSaudaraString();
+        });
+    </script>    
+    
+    {{-- Perguruan Tinggi --}}
+    <script>
+        let perguruanCount = 0;
+        const maxPerguruan = 2;
+      
+        document.getElementById('addPerguruanBtn').addEventListener('click', function() {
+          if (perguruanCount >= maxPerguruan) {
+            alert('Maksimal 2 perguruan tinggi.');
+            return;
+          }
+      
+          const wrapper = document.getElementById('perguruan-wrapper');
+      
+          const div = document.createElement('div');
+          div.classList.add('row', 'mb-2', 'perguruan-row');
+          div.innerHTML = `
+            <div class="col-md-6">
+                <input type="text" name="nama_perguruan[]" class="form-control" placeholder="NAMA PERGURUAN TINGGI" required>
+            </div>
+            <div class="col-md-5">
+                <input type="text" name="program_studi[]" class="form-control" placeholder="PROGRAM STUDI" required>
+            </div>
+            <div class="col-md-1 d-flex align-items-center">
+                <button type="button" class="btn btn-danger btn-sm remove-perguruan">&times;</button>
+            </div>
+          `;
+          
+          wrapper.appendChild(div);
+          perguruanCount++;
+      
+          div.querySelector('.remove-perguruan').addEventListener('click', function() {
+            div.remove();
+            perguruanCount--;
+          });
+        });
+    </script>  
 </body>
 
 </html>
