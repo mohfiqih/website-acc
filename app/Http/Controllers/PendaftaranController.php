@@ -93,6 +93,43 @@ class PendaftaranController extends Controller
     public function store_pendaftaran_baru(Request $request)
     {
         try {
+            $input = $request->all();
+
+            $pengalamanList = [];
+            $perguruanList  = [];
+
+            # pengalaman
+            if ($request->has('tahun_awal')) {
+                foreach ($request->tahun_awal as $i => $tahunAwal) {
+                    $tahunAkhir     = $request->tahun_akhir[$i] ?? '-';
+                    $perusahaan     = $request->nama_perusahaan[$i] ?? '-';
+                    $bagian         = $request->bagian[$i] ?? '-';
+
+                    $pengalamanList[] = "{$tahunAwal} - {$tahunAkhir} - {$perusahaan} - {$bagian}";
+                }
+            }
+
+            $input['pengalaman_kerja'] = implode(', ', $pengalamanList);
+
+            # perguruan tinggi
+            if ($request->has('nama_perguruan')) {
+                foreach ($request->nama_perguruan as $i => $nama_perguruan) {
+                    $prodi = $request->program_studi[$i] ?? '-';
+                    $perguruanList[] = "{$nama_perguruan} - {$prodi}";
+                }
+            }
+            $input['perguruan_tinggi'] = implode(', ', $perguruanList);
+
+
+            $fieldJsonFields = ['nama_keluarga', 'bahasa_asing'];
+            foreach ($fieldJsonFields as $field) {
+                if (isset($input[$field])) {
+                    $input[$field] = $this->convertJsonToText($input[$field]);
+                }
+            }
+
+            $request->merge($input);
+
             $request->validate([
                 'email'                      => 'nullable|string',
                 'nama_katakana'              => 'nullable|string',
@@ -166,6 +203,13 @@ class PendaftaranController extends Controller
 
             $data = $request->all();
 
+            foreach ($data as $key => $value) {
+                if ($key === 'email') continue;
+                if (is_string($value)) {
+                    $data[$key] = strtoupper($value);
+                }
+            }
+
             if (!empty($data['hubungan_ayah'])) {
                 $data['hubungan_ayah'] = 'AYAH';
             }
@@ -175,7 +219,30 @@ class PendaftaranController extends Controller
 
             $data['id']             = mt_rand(10000000, 99999999);
             $data['no_hp_aktif']    = "'" . $data['no_hp_aktif'];
-            $data['no_hp_keluarga'] = "'" . $data['no_hp_keluarga'];
+            $data['no_hp_keluarga'] = "'" . $data['no_hp_keluarga'];    
+
+            # nama saudara
+            if (!empty($data['nama_saudara'])) {
+                $saudaraList   = explode(';', $data['nama_saudara']);
+                $formattedList = [];
+
+                foreach ($saudaraList as $saudara) {
+                    $parts = array_map('trim', explode(',', $saudara));
+
+                    $hubungan  = isset($parts[0]) && $parts[0] !== '' ? strtoupper($parts[0]) : '';
+                    $nama      = isset($parts[1]) && $parts[1] !== '' ? strtoupper($parts[1]) : '';
+                    $usia      = isset($parts[2]) && $parts[2] !== '' ? $parts[2] : '';
+                    $pekerjaan = isset($parts[3]) && $parts[3] !== '' ? strtoupper($parts[3]) : '';
+
+                    $filteredParts = array_filter([$hubungan, $nama, $usia, $pekerjaan], function ($value) {
+                        return $value !== '';
+                    });
+
+                    $formattedList[] = implode(' - ', $filteredParts);
+                }
+
+                $data['nama_saudara'] = implode(', ', $formattedList);
+            }
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
@@ -220,7 +287,7 @@ class PendaftaranController extends Controller
                     continue;
                 }
 
-                if (in_array($key, ['SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
+                if (in_array($key, ['KEAHLIAN', 'MOTIVASI', 'HOBI', 'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN', 'SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
                     $cleanedRow[$key] = $this->convertJsonToText($value);
                     continue;
                 }
@@ -228,11 +295,22 @@ class PendaftaranController extends Controller
                 if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
                         'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
                         'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
-                    $cleanedRow[$key] = $value;
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
+                {
+                    // $cleanedRow[$key] = $value;
+                    if (stripos($key, 'EMAIL') !== false) {
+                        $cleanedRow[$key] = $value;
+                    } else {
+                        $cleanedRow[$key] = strtoupper($value);
+                    }
                 } else {
                     $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-                    $cleanedRow[$newKey] = $value;
+                    // $cleanedRow[$newKey] = $value;
+                    if (stripos($newKey, 'EMAIL') !== false) {
+                        $cleanedRow[$newKey] = $value;
+                    } else {
+                        $cleanedRow[$newKey] = strtoupper($value);
+                    }
                 }
             }
             $cleanedData[] = $cleanedRow;
@@ -257,7 +335,7 @@ class PendaftaranController extends Controller
                     continue;
                 }
 
-                if (in_array($key, ['SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
+                if (in_array($key, ['KEAHLIAN', 'MOTIVASI', 'HOBI', 'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN', 'SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
                     $cleanedRow[$key] = $this->convertJsonToText($value);
                     continue;
                 }
@@ -265,11 +343,22 @@ class PendaftaranController extends Controller
                 if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
                         'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
                         'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) {
-                    $cleanedRow[$key] = $value;
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
+                {
+                    // $cleanedRow[$key] = $value;
+                    if (stripos($key, 'EMAIL') !== false) {
+                        $cleanedRow[$key] = $value;
+                    } else {
+                        $cleanedRow[$key] = strtoupper($value);
+                    }
                 } else {
                     $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-                    $cleanedRow[$newKey] = $value;
+                    // $cleanedRow[$newKey] = $value;
+                    if (stripos($newKey, 'EMAIL') !== false) {
+                        $cleanedRow[$newKey] = $value;
+                    } else {
+                        $cleanedRow[$newKey] = strtoupper($value);
+                    }
                 }
             }
             $cleanedData[] = $cleanedRow;
@@ -291,11 +380,12 @@ class PendaftaranController extends Controller
                     'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
                     'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
                     'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)', 
-                    'MATA KANAN', 'SIFAT/KEPRIBADIAN'])) {
-                $cleanedData[$key] = $value;
+                    'MATA KANAN', 'SIFAT/KEPRIBADIAN'])) 
+            {
+                $cleanedData[$key] = $value;          
             } else {
                 $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-                $cleanedData[$newKey] = $value;
+                $cleanedData[$newKey] = $value;       
             }
         }
 
@@ -338,19 +428,17 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('OP', $cleanedData['PERNAH OPERASI'] ?? '-');
         $templateProcessor->setValue('MINUM', $cleanedData['APAKAH SEDANG MINUM'] ?? '-');
         $templateProcessor->setValue('TANGAN', $cleanedData['TANGAN'] ?? '-');
-        $templateProcessor->setValue('KEAHLIAN', $cleanedData['KEAHLIAN'] ?? '-');
-        
+        $templateProcessor->setValue('KEAHLIAN', $this->convertJsonToText($cleanedData['KEAHLIAN']) ?? '[]');
         $templateProcessor->setValue('SIFAT', $this->convertJsonToText($cleanedData['SIFAT/KEPRIBADIAN'] ?? '[]'));
         $templateProcessor->setValue('KELEBIHAN', $this->convertJsonToText($cleanedData['KELEBIHAN'] ?? '[]'));
         $templateProcessor->setValue('KELEMAHAN', $this->convertJsonToText($cleanedData['KELEMAHAN'] ?? '[]'));        
-
         $templateProcessor->setValue('STATUS', $cleanedData['STATUS'] ?? '-');
         $templateProcessor->setValue('MEROKOK', $cleanedData['MEROKOK'] ?? '-');
         $templateProcessor->setValue('P_DALAM', $cleanedData['PENYAKIT DALAM'] ?? '-');
-        $templateProcessor->setValue('HOBI', $cleanedData['HOBI'] ?? '-');
-        $templateProcessor->setValue('MOTIVASI', $cleanedData['MOTIVASI'] ?? '-');
+        $templateProcessor->setValue('HOBI', $this->convertJsonToText($cleanedData['HOBI']) ?? '[]');
+        $templateProcessor->setValue('MOTIVASI', $this->convertJsonToText($cleanedData['MOTIVASI']) ?? '[]');
         $templateProcessor->setValue('NABUNG', $cleanedData['SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'] ?? '-');
-        $templateProcessor->setValue('PLANNING', $cleanedData['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] ?? '-');
+        $templateProcessor->setValue('PLANNING', $this->convertJsonToText($cleanedData['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN']) ?? '[]');
         $templateProcessor->setValue('PRNH_TGL', $cleanedData['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] ?? '-');
         $templateProcessor->setValue('KUALIFIKASI', $cleanedData['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] ?? '-');
         $templateProcessor->setValue('SD', $cleanedData['SEKOLAH DASAR'] ?? '-');
@@ -416,9 +504,9 @@ class PendaftaranController extends Controller
         $ayah = $cleanedData['NAMA AYAH'] ?? '';
         if (!empty($ayah)) {
             $keluargaList[] = [
-                'hubungan' => 'AYAH',
-                'nama' => $ayah,
-                'usia' => $cleanedData['USIA AYAH'] ?? '-',
+                'hubungan'  => 'AYAH',
+                'nama'      => $ayah,
+                'usia'      => $cleanedData['USIA AYAH'] ?? '-',
                 'pekerjaan' => $cleanedData['PEKERJAAN AYAH'] ?? '-',
             ];
         }
@@ -426,9 +514,9 @@ class PendaftaranController extends Controller
         $ibu = $cleanedData['NAMA IBU'] ?? '';
         if (!empty($ibu)) {
             $keluargaList[] = [
-                'hubungan' => 'IBU',
-                'nama' => $ibu,
-                'usia' => $cleanedData['USIA IBU'] ?? '-',
+                'hubungan'  => 'IBU',
+                'nama'      => $ibu,
+                'usia'      => $cleanedData['USIA IBU'] ?? '-',
                 'pekerjaan' => $cleanedData['PEKERJAAN IBU'] ?? '-',
             ];
         }
@@ -439,9 +527,9 @@ class PendaftaranController extends Controller
         foreach ($saudaraList as $sdr) {
             $parts = array_map('trim', explode(' - ', $sdr));
             $keluargaList[] = [
-                'hubungan' => $parts[0] ?? '',
-                'nama' => $parts[1] ?? '',
-                'usia' => $parts[2] ?? '',
+                'hubungan'  => $parts[0] ?? '',
+                'nama'      => $parts[1] ?? '',
+                'usia'      => $parts[2] ?? '',
                 'pekerjaan' => $parts[3] ?? '',
             ];
         }
@@ -466,20 +554,27 @@ class PendaftaranController extends Controller
         $templateProcessor->saveAs($outputPath);
 
         return response()->file($outputPath, [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-            'Content-Disposition' => 'attachment; filename="' . $fileName . '"',
+            'Content-Type'          => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'Content-Disposition'   => 'attachment; filename="' . $fileName . '"',
         ])->deleteFileAfterSend(true);
     }
 
     # convert sifat, kelebihan, kelemahan
-    function convertJsonToText($json) {
-        $arr = json_decode($json, true);
-        if (is_array($arr) && count($arr) > 0) {
-            $values = array_map(fn($item) => strtoupper($item['value']), $arr);
-            return implode(', ', $values);
+    function convertJsonToText($arr) {
+        if (is_string($arr)) {
+            $arr = json_decode($arr, true);
         }
-        return '-';
-    }
+    
+        if (!is_array($arr) || count($arr) === 0) return '';
+    
+        $values = array_map(function ($item) {
+            $val = $item['value'] ?? $item['VALUE'] ?? null;
+            return $val ? strtoupper($val) : null;
+        }, $arr);
+    
+        $values = array_filter($values);
+        return implode(', ', $values);
+    }     
 
     # translate kanji
     // function loadKanjiData()
