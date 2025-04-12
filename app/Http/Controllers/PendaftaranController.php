@@ -58,8 +58,8 @@ class PendaftaranController extends Controller
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
-            ])->post($googleScriptUrl, $data);       
-            
+            ])->post($googleScriptUrl, $data);
+
             if ($response->successful()) {
                 return response()->json(['success' => true]);
             }
@@ -72,7 +72,7 @@ class PendaftaranController extends Controller
         $url = 'https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec';
         $response = Http::get($url);
         $data = array_reverse($response->json());
-        
+
         return view('landing/data-pendaftaran', ['data' => $data]);
     }
 
@@ -219,7 +219,7 @@ class PendaftaranController extends Controller
 
             $data['id']             = mt_rand(10000000, 99999999);
             $data['no_hp_aktif']    = "'" . $data['no_hp_aktif'];
-            $data['no_hp_keluarga'] = "'" . $data['no_hp_keluarga'];    
+            $data['no_hp_keluarga'] = "'" . $data['no_hp_keluarga'];
 
             # nama saudara
             if (!empty($data['nama_saudara'])) {
@@ -292,10 +292,10 @@ class PendaftaranController extends Controller
                     continue;
                 }
 
-                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)',
+                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)',
                         'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)']))
                 {
                     // $cleanedRow[$key] = $value;
                     if (stripos($key, 'EMAIL') !== false) {
@@ -340,10 +340,10 @@ class PendaftaranController extends Controller
                     continue;
                 }
 
-                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+                if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)',
+                        'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)',
                         'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
+                        'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)']))
                 {
                     // $cleanedRow[$key] = $value;
                     if (stripos($key, 'EMAIL') !== false) {
@@ -376,16 +376,16 @@ class PendaftaranController extends Controller
 
         $cleanedData = [];
         foreach ($rowData as $key => $value) {
-            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-                    'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+            if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)',
+                    'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)',
                     'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)', 
-                    'MATA KANAN', 'SIFAT/KEPRIBADIAN'])) 
+                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)',
+                    'MATA KANAN', 'SIFAT/KEPRIBADIAN']))
             {
-                $cleanedData[$key] = $value;          
+                $cleanedData[$key] = $value;
             } else {
                 $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-                $cleanedData[$newKey] = $value;       
+                $cleanedData[$newKey] = $value;
             }
         }
 
@@ -431,7 +431,7 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('KEAHLIAN', $this->convertJsonToText($cleanedData['KEAHLIAN']) ?? '[]');
         $templateProcessor->setValue('SIFAT', $this->convertJsonToText($cleanedData['SIFAT/KEPRIBADIAN'] ?? '[]'));
         $templateProcessor->setValue('KELEBIHAN', $this->convertJsonToText($cleanedData['KELEBIHAN'] ?? '[]'));
-        $templateProcessor->setValue('KELEMAHAN', $this->convertJsonToText($cleanedData['KELEMAHAN'] ?? '[]'));        
+        $templateProcessor->setValue('KELEMAHAN', $this->convertJsonToText($cleanedData['KELEMAHAN'] ?? '[]'));
         $templateProcessor->setValue('STATUS', $cleanedData['STATUS'] ?? '-');
         $templateProcessor->setValue('MEROKOK', $cleanedData['MEROKOK'] ?? '-');
         $templateProcessor->setValue('P_DALAM', $cleanedData['PENYAKIT DALAM'] ?? '-');
@@ -564,17 +564,22 @@ class PendaftaranController extends Controller
         if (is_string($arr)) {
             $arr = json_decode($arr, true);
         }
-    
+
         if (!is_array($arr) || count($arr) === 0) return '';
-    
+
         $values = array_map(function ($item) {
             $val = $item['value'] ?? $item['VALUE'] ?? null;
             return $val ? strtoupper($val) : null;
         }, $arr);
-    
+
         $values = array_filter($values);
         return implode(', ', $values);
-    }     
+    }
+
+    public function buku_tamu()
+    {
+        return view('buku_tamu.index');
+    }
 
     # translate kanji
     // function loadKanjiData()

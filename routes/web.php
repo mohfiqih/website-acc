@@ -87,3 +87,7 @@ Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'
 Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
+
+# buku tamu
+Route::get('/buku-tamu', [PendaftaranController::class, 'buku_tamu']);
+Route::post('buku-tamu', [PendaftaranController::class, 'store_buku_tamu']);
