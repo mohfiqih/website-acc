@@ -841,7 +841,7 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NOMOR HP KELUARGA (AKTIF):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu gunakan huruf KAPITAL, isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon nomor HP Keluarga, isian wajib.</p>
                             <input type="text" class="form-control" name="no_hp_keluarga" placeholder="Masukan nomor hp keluarga" required>
                         </div>
 
