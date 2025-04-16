@@ -11,9 +11,7 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link
-        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
-        rel="icon">
+    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -107,7 +105,7 @@
 
         body::before {
             content: "";
-            position: fixed;
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
@@ -149,8 +147,7 @@
             white-space: nowrap;
         }
 
-        th,
-        td {
+        th, td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -196,7 +193,7 @@
             overflow-x: auto;
         }
 
-        .fixed-header-table th,
+        .fixed-header-table th, 
         .fixed-header-table td {
             white-space: nowrap;
         }
@@ -225,14 +222,14 @@
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
-                                    class="d-block w-100" alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
+                                    alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
-                                    class="d-block w-100" alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
+                                    alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -250,16 +247,13 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin"
-                            style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
+                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
                     <h2></span>DATA PENDAFTARAN SISWA BARU (CV) LPK ACC JAPAN CENTRE TEGAL</h2>
                     <ul>
-                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor,
-                            Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
+                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
                         <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
                     </ul>
-                    <div class="d-flex justify-content-center justify-content-lg-start text-center"
-                        style="padding-bottom: 30px;">
+                    <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Website LPK ACC Japan Centre
@@ -276,7 +270,7 @@
                 <div class="d-flex justify-content-between mb-3">
                     <div>
                         <label>
-                            Show
+                            Show 
                             <select id="entriesSelect" class="form-control d-inline-block w-auto">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
@@ -290,13 +284,12 @@
                         <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
                     </div>
                 </div>
-
+    
                 <div class="table-responsive">
-                    <div id="refreshIndicator"
-                        style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
                     </div>
-                    <br />
+                    <br/>
                     <div class="table-responsive">
                         <table id="spreadsheetTable" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
@@ -306,9 +299,9 @@
                                         <th>Download CV</th>
                                         <th>Tanggal</th>
                                         <th>Email</th>
-                                        <th>Nama Jepang (Katakana)</th>
-                                        <th>Nama Lengkap (Indonesia)</th>
-                                        <th>Alamat Lengkap</th>
+                                        <th>Nama (Katakana)</th>
+                                        <th>Nama (Indonesia)</th>
+                                        <th>Alamat</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Usia</th>
                                         <th>Kelamin</th>
@@ -376,19 +369,19 @@
                                 </thead>
                                 <tbody id="tableBody">
                                     @include('partials.table_body')
-                                    {{-- @foreach ($cleanedData as $row)
+                                    {{-- @foreach($cleanedData as $row)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
                                                 <a href="{{ route('export.cv.word', ['id' => $row['ID']]) }}" class="btn btn-sm btn-success">
                                                     <i class="fa fa-download"></i> Download CV
-                                                </a>
+                                                </a>                                                
                                             </td>
-                                            @foreach ($row as $key => $cell)
+                                            @foreach($row as $key => $cell)
                                                 @if ($key !== 'ID')
                                                     <td>{{ $cell }}</td>
                                                 @endif
-                                            @endforeach
+                                            @endforeach                                                                       
                                         </tr>
                                     @endforeach --}}
                                 </tbody>
@@ -400,11 +393,11 @@
                         </table>
                     </div>
                 </div>
-
+    
                 <!-- Pagination di luar DataTables -->
                 <div class="d-flex justify-content-between align-items-center">
                     <span id="tableInfo"></span>
-
+                    
                     <div class="d-flex align-items-center ms-auto">
                         <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
                     </div>
@@ -412,8 +405,8 @@
             </div>
         </div>
     </div>
-
-    <br />
+    
+    <br/>    
 
     {{-- <div id="preloader"></div> --}}
 
@@ -458,7 +451,7 @@
                 "lengthChange": false,
                 "scrollY": false,
                 "scrollCollapse": false,
-                "dom": 'rtp'
+                "dom": 'rtp' 
             });
 
             // **Sembunyikan pagination bawaan DataTables**
@@ -502,48 +495,48 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`/export-cv-word/${id}`, {
-                            method: 'GET',
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest',
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error('Download failed');
-                            }
-                            return response.blob();
-                        })
-                        .then(blob => {
-                            const url = window.URL.createObjectURL(blob);
-                            const a = document.createElement('a');
-                            a.href = url;
-                            a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
-                            document.body.appendChild(a);
-                            a.click();
-                            a.remove();
-                            window.URL.revokeObjectURL(url);
+                        method: 'GET',
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Download failed');
+                        }
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
 
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'File has been downloaded.',
-                                icon: 'success',
-                                timer: 2000,
-                                showConfirmButton: false
-                            });
-                        })
-                        .catch(error => {
-                            Swal.fire({
-                                title: 'Error!',
-                                text: 'Failed to download file.',
-                                icon: 'error'
-                            });
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'File has been downloaded.',
+                            icon: 'success',
+                            timer: 2000,
+                            showConfirmButton: false
                         });
+                    })
+                    .catch(error => {
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Failed to download file.',
+                            icon: 'error'
+                        });
+                    });
                 }
             });
         });
     </script>
-
+    
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>

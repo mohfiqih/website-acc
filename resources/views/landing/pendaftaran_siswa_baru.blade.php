@@ -9,9 +9,7 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link
-        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
-        rel="icon">
+    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -33,9 +31,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
 
     {{-- Year Picker --}}
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    
     <style>
         .text-label {
             padding-bottom: 10px;
@@ -113,7 +110,7 @@
 
         body::before {
             content: "";
-            position: fixed;
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
@@ -186,17 +183,14 @@
             font-size: 13px;
             color: #999;
         }
-
         input::-moz-placeholder {
             font-size: 13px;
             color: #999;
         }
-
         input:-ms-input-placeholder {
             font-size: 13px;
             color: #999;
         }
-
         input::-ms-input-placeholder {
             font-size: 13px;
             color: #999;
@@ -227,13 +221,11 @@
                 text-align: left;
             }
         }
-
         #stepNav .nav-link {
             color: black;
             border: 1px solid #dee2e6;
             border-radius: 5px;
         }
-
         #stepNav .active-step {
             background-color: #007bff;
             color: white !important;
@@ -251,29 +243,23 @@
             border-radius: 6px;
             border: 1px solid #ced4da;
         }
-
         .select2-container--default .select2-selection--single .select2-selection__rendered {
             line-height: 28px;
         }
-
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: 100%;
         }
-
         .select2-container {
             width: 100% !important;
         }
-
         .nav-link.disabled {
             pointer-events: none;
             opacity: 0.6;
         }
-
         .btn-kecil {
             padding: 4px 8px;
             font-size: 12px;
-            background-color: #28a745;
-            /* warna hijau */
+            background-color: #28a745; /* warna hijau */
             color: white;
             border: none;
             border-radius: 4px;
@@ -304,13 +290,11 @@
                             <source src="https://amanahcitracemerlang.id/bg-video.mp4" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
-                    </div>
-                    <h2 class="text-justify mt-4"></span>FORMULIR PENDAFTARAN SISWA BARU (CV) <br /> LPK ACC JAPAN
-                        CENTRE TEGAL</h2>
-                    <p class="text-white"><b>Lokasi LPK ACC Japan Centre : </b> Dk. Gitung, Desa Harjosari Lor,
-                        Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</p>
+                    </div>                    
+                    <h2 class="text-justify mt-4"></span>FORMULIR PENDAFTARAN SISWA BARU (CV) <br/> LPK ACC JAPAN CENTRE TEGAL</h2>
+                    <p class="text-white"><b>Lokasi LPK ACC Japan Centre : </b> Dk. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</p>
                     {{-- <p class="text-white">
-                        Klik disini untuk download CV siswa yang sudah terdaftar:
+                        Klik disini untuk download CV siswa yang sudah terdaftar: 
                         <a class="text-white" href="/data-pendaftaran">
                             <button class="btn-kecil">Lihat CV</button>
                         </a>
@@ -330,7 +314,7 @@
             </nav>
             <div class="signup-content">
                 {{-- nav pill --}}
-                <br />
+                <br/>
                 <ul class="nav nav-pills mb-3 flex-wrap" id="stepNav" style="gap: 10px;">
                     <li class="nav-item">
                         <a class="nav-link active-step" id="nav-step-1" href="javascript:void(0)">1. Data Diri</a>
@@ -345,75 +329,60 @@
                         <a class="nav-link disabled" id="nav-step-4" href="javascript:void(0)">4. Pendidikan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="nav-step-5" href="javascript:void(0)">5. Pengalaman &
-                            Lain-lain</a>
+                        <a class="nav-link disabled" id="nav-step-5" href="javascript:void(0)">5. Pengalaman & Lain-lain</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" id="nav-step-6" href="javascript:void(0)">6. Data Keluarga &
-                            Ukuran</a>
+                        <a class="nav-link disabled" id="nav-step-6" href="javascript:void(0)">6. Data Keluarga & Ukuran</a>
                     </li>
                 </ul>
-
+                
                 <form action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form">
                     @csrf
 
-                    @if (session('success'))
+                    @if(session('success'))
                         <p style="color: green;">{{ session('success') }}</p>
                     @endif
 
-                    @if (session('error'))
+                    @if(session('error'))
                         <p style="color: red;">{{ session('error') }}</p>
                     @endif
-
+                
                     {{-- Step 1 --}}
-                    <div class="step" id="step-1"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 1: Data Diri Siswa</h5>
-                        <hr>
+                    <div class="step" id="step-1"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 1: Data Diri Siswa</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">EMAIL:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan email isian wajib.</p>
-                            <input type="email" class="form-control" name="email"
-                                placeholder="Masukan email aktif anda" required>
+                            <input type="email" class="form-control" name="email" placeholder="Masukan email aktif anda" required>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">NAMA JEPANG (KATAKANA):</label>
+                            <label class="text-label" style="font-weight: bold">NAMA (KATAKANA):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak tau kosongkan saja.</p>
-                            <input type="text" class="form-control" name="nama_katakana"
-                                placeholder="Masukan nama (katakana) anda">
+                            <input type="text" class="form-control" name="nama_katakana" placeholder="Masukan nama (katakana) anda">
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">NAMA LENGKAP (INDONESIA):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf KAPITAL, isian
-                                wajib.</p>
-                            <input type="text" class="form-control" name="nama_indonesia"
-                                placeholder="Masukan nama (indonesia) anda" required>
+                            <label class="text-label" style="font-weight: bold">NAMA (INDONESIA):</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf KAPITAL, isian wajib.</p>
+                            <input type="text" class="form-control" name="nama_indonesia" placeholder="Masukan nama (indonesia) anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">ALAMAT LENGKAP:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf KAPITAL, isian
-                                wajib. <br /> *) (e.g: JL. BAWAL GITUNG RT 01/RW 02, DESA HARJOSARI LOR, KECAMATAN
-                                ADIWERNA, KABUPATEN TEGAL, JAWA TENGAH, INDONESIA)</p>
-                            <input type="text" class="form-control" name="alamat"
-                                placeholder="Masukan alamat anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon gunakan huruf KAPITAL, isian wajib. <br/> *) (e.g: JL. BAWAL GITUNG RT 01/RW 02, DESA HARJOSARI LOR, KECAMATAN ADIWERNA, KABUPATEN TEGAL, JAWA TENGAH, INDONESIA)</p>
+                            <input type="text" class="form-control" name="alamat" placeholder="Masukan alamat anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TANGGAL LAHIR:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih tanggal lahir isian wajib.
-                            </p>
-                            <input type="date" class="form-control" name="tanggal_lahir"
-                                placeholder="Pilih tanggal lahir anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih tanggal lahir isian wajib.</p>
+                            <input type="date" class="form-control" name="tanggal_lahir" placeholder="Pilih tanggal lahir anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan usia anda, isian wajib.
-                            </p>
-                            <input type="number" class="form-control" name="usia"
-                                placeholder="Masukan usia anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan usia anda, isian wajib.</p>
+                            <input type="number" class="form-control" name="usia" placeholder="Masukan usia anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JENIS KELAMIN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jenis kelamin, isian wajib.
-                            </p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jenis kelamin, isian wajib.</p>
                             <select name="jenis_kelamin" class="form-control" required>
                                 <option value="" disabled selected>Pilih jenis kelamin</option>
                                 <option value="LAKI-LAKI">LAKI-LAKI</option>
@@ -422,10 +391,8 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NO HP AKTIF:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan nomor hp aktif, isian
-                                wajib.</p>
-                            <input type="number" class="form-control" name="no_hp_aktif"
-                                placeholder="Masukan nomor HP aktif anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan nomor hp aktif, isian wajib.</p>
+                            <input type="number" class="form-control" name="no_hp_aktif" placeholder="Masukan nomor HP aktif anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" for="agama" style="font-weight: bold">AGAMA:</label>
@@ -441,28 +408,21 @@
                             </select>
                         </div>
 
-                        <button type="button" class="btn btn-primary mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                            onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
-
+                
                     {{-- Step 2 --}}
-                    <div class="step d-none" id="step-2"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 2: Kesehatan dan Fisik</h5>
-                        <hr>
+                    <div class="step d-none" id="step-2"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 2: Kesehatan dan Fisik</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TINGGI (cm):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tinggi badan, isian
-                                wajib.</p>
-                            <input type="number" class="form-control" name="tinggi_badan"
-                                placeholder="Masukan tinggi badan anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tinggi badan, isian wajib.</p>
+                            <input type="number" class="form-control" name="tinggi_badan" placeholder="Masukan tinggi badan anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BERAT (kg):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan berat badan, isian wajib.
-                            </p>
-                            <input type="number" class="form-control" name="berat_badan"
-                                placeholder="Masukan berat badan anda" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan berat badan, isian wajib.</p>
+                            <input type="number" class="form-control" name="berat_badan" placeholder="Masukan berat badan anda" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">GOL. DARAH:</label>
@@ -477,8 +437,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BUTA WARNA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buta warna atau tidak,
-                                isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buta warna atau tidak, isian wajib.</p>
                             <select name="buta_warna" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi buta warna atau tidak</option>
                                 <option value="YA">YA</option>
@@ -487,22 +446,17 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KANAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan, jika
-                                belum tau kosongkan saja.</p>
-                            <input type="text" class="form-control" name="mata_kanan"
-                                placeholder="Masukan minus mata kanan anda. ex: 0,5">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan, jika belum tau kosongkan saja.</p>
+                            <input type="text" class="form-control" name="mata_kanan" placeholder="Masukan minus mata kanan anda. ex: 0,5">
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KIRI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kiri, jika
-                                belum tau kosongkan saja.</p>
-                            <input type="text" class="form-control" name="mata_kiri"
-                                placeholder="Masukan minus mata kiri anda. ex: 1,5">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kiri, jika belum tau kosongkan saja.</p>
+                            <input type="text" class="form-control" name="mata_kiri" placeholder="Masukan minus mata kiri anda. ex: 1,5">
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH OPERASI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah operasi atau tidak,
-                                isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah operasi atau tidak, isian wajib.</p>
                             <select name="pernah_operasi" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi pernah operasi atau tidak</option>
                                 <option value="YA">YA</option>
@@ -511,8 +465,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">APAKAH SEDANG MINUM:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih sedang minum atau tidak,
-                                isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih sedang minum atau tidak, isian wajib.</p>
                             <select name="apakah_sedang_minum" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi sedang minum atau tidak</option>
                                 <option value="YA">YA</option>
@@ -521,8 +474,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TANGAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih penggunaan tangan, isian
-                                wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih penggunaan tangan, isian wajib.</p>
                             <select name="tangan" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi tangan</option>
                                 <option value="KANAN">KANAN</option>
@@ -540,55 +492,42 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PENYAKIT DALAM:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih penyakit dalam, isian
-                                wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih penyakit dalam, isian wajib.</p>
                             <select name="penyakit_dalam" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi penyakit dalam</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-                        <button type="button" class="btn btn-secondary mt-3"
-                            style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-primary mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                            onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-primary mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
-
+                
                     {{-- Step 3 --}}
-                    <div class="step d-none" id="step-3"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 3: Motivasi dan Lainnya</h5>
-                        <hr>
+                    <div class="step d-none" id="step-3"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 3: Motivasi dan Lainnya</h5><hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KEAHLIAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, maksimal 1
-                                pilihan.</p>
-                            <input type="text" class="form-control tagify-keahlian" name="keahlian"
-                                placeholder="Contoh: peternakan, pertanian" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-keahlian" name="keahlian" placeholder="Contoh: peternakan, pertanian" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SIFAT/KEPRIBADIAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian,
-                                maksimal 1 pilihan.</p>
-                            <input name="sifat_kepribadian" id="sifat_kepribadian" class="form-control tagify-sifat"
-                                placeholder="Contoh: disiplin, jujur" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian, maksimal 1 pilihan.</p>
+                            <input name="sifat_kepribadian" id="sifat_kepribadian" class="form-control tagify-sifat" placeholder="Contoh: disiplin, jujur" required>
                         </div>
-
+                        
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEBIHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 1
-                                pilihan.</p>
-                            <input name="kelebihan" id="kelebihan" class="form-control tagify-kelebihan"
-                                placeholder="Contoh: kerja tim, cepat belajar" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 1 pilihan.</p>
+                            <input name="kelebihan" id="kelebihan" class="form-control tagify-kelebihan" placeholder="Contoh: kerja tim, cepat belajar" required>
                         </div>
-
+                        
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEMAHAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 1
-                                pilihan.</p>
-                            <input name="kelemahan" id="kelemahan" class="form-control tagify-kelemahan"
-                                placeholder="Contoh: mudah panik, kurang percaya diri" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 1 pilihan.</p>
+                            <input name="kelemahan" id="kelemahan" class="form-control tagify-kelemahan" placeholder="Contoh: mudah panik, kurang percaya diri" required>
                         </div>
 
                         <div class="form-group">
@@ -602,23 +541,17 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">HOBI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi, maksimal 1 pilihan.
-                            </p>
-                            <input type="text" class="form-control tagify-hobi" id="hobi" name="hobi"
-                                placeholder="Contoh: sepak bola, pemrograman" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-hobi" id="hobi" name="hobi" placeholder="Contoh: sepak bola, pemrograman" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MOTIVASI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, maksimal 1
-                                pilihan.</p>
-                            <input type="text" class="form-control tagify-motivasi" id="motivasi"
-                                name="motivasi" placeholder="Contoh: Ingin mendapat uang banyak" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, maksimal 1 pilihan.</p>
+                            <input type="text" class="form-control tagify-motivasi" id="motivasi" name="motivasi" placeholder="Contoh: Ingin mendapat uang banyak" required>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">SELAMA 3 TAHUN DI JEPANG, MAU NABUNG
-                                BERAPA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, isian wajib.
-                            </p>
+                            <label class="text-label" style="font-weight: bold">SELAMA 3 TAHUN DI JEPANG, MAU NABUNG BERAPA:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, isian wajib.</p>
                             <select class="form-control" name="nabung_berapa" required>
                                 <option value="" disabled selected>Pilih planning nabung</option>
                                 <option value="150 JT / 3 TAHUN">150 JT / 3 TAHUN</option>
@@ -627,19 +560,14 @@
                                 <option value="300 JT / 3 TAHUN">300 JT / 3 TAHUN</option>
                                 <option value="BELUM ADA PLANNING MENABUNG">BELUM ADA PLANNING MENABUNG</option>
                             </select>
+                        </div>                        
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, maksimal pilihan 2.</p>
+                            <input type="text" class="form-control tagify-planning" id="planning" name="apa_yang_akan_dilakukan" placeholder="Masukan planning anda setelah pulang" required>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">SETELAH PULANG JEPANG, APA YANG AKAN
-                                DILAKUKAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, maksimal
-                                pilihan 2.</p>
-                            <input type="text" class="form-control tagify-planning" id="planning"
-                                name="apa_yang_akan_dilakukan" placeholder="Masukan planning anda setelah pulang"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">APAKAH ANDA PERNAH TINGGAL/BEKERJA DI
-                                JEPANG:</label>
+                            <label class="text-label" style="font-weight: bold">APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi isian wajib.</p>
                             <select name="pernah_tinggal_dijepang" class="form-control" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
@@ -648,188 +576,142 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">JIKA YA, KUALIFIKASI APA YANG ANDA
-                                LAMAR:</label>
+                            <label class="text-label" style="font-weight: bold">JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak ada kosongkan saja</p>
                             <textarea type="text" class="form-control" name="kualifikasi" placeholder="Masukan kualifikasi apa yang dilamar"></textarea>
                         </div>
-                        <button type="button" class="btn btn-secondary mt-3"
-                            style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-success mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                            onclick="nextStep()">Next</button>
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
 
                     {{-- Step 4 --}}
-                    <div class="step d-none" id="step-4"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 4: Pendidikan</h5>
-                        <hr>
+                    <div class="step d-none" id="step-4"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 4: Pendidikan</h5><hr>
 
                         {{-- SD --}}
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SEKOLAH DASAR (SD):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sekolah dasar dengan
-                                huruf KAPITAL, isian wajib.</p>
-                            <input type="text" class="form-control" name="sekolah_dasar"
-                                placeholder="Masukan nama SD, gunakan huruf KAPITAL" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sekolah dasar dengan huruf KAPITAL, isian wajib.</p>
+                            <input type="text" class="form-control" name="sekolah_dasar" placeholder="Masukan nama SD, gunakan huruf KAPITAL" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SD):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.
-                            </p>
-                            <input type="number" class="form-control yearpicker" name="tahun_masuk_sd"
-                                placeholder="Masukan tahun masuk SD" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_sd" placeholder="Masukan tahun masuk SD" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SD):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian
-                                wajib.</p>
-                            <input type="number" class="form-control yearpicker" name="tahun_keluar_sd"
-                                placeholder="Masukan tahun keluar SD" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_sd" placeholder="Masukan tahun keluar SD" required>
                         </div>
 
                         {{-- SMP --}}
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH PERTAMA
-                                (SMP):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan SMP dengan huruf KAPITAL
-                                isian wajib.</p>
-                            <input type="text" class="form-control" name="sekolah_menengah_pertama"
-                                placeholder="Masukan nama SMP, gunakan huruf KAPITAL" required>
+                            <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH PERTAMA (SMP):</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan SMP dengan huruf KAPITAL isian wajib.</p>
+                            <input type="text" class="form-control" name="sekolah_menengah_pertama" placeholder="Masukan nama SMP, gunakan huruf KAPITAL" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMP):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.
-                            </p>
-                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smp"
-                                placeholder="Masukan tahun masuk SMP" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smp" placeholder="Masukan tahun masuk SMP" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMP):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian
-                                wajib.</p>
-                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smp"
-                                placeholder="Masukan tahun keluar SMP" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smp" placeholder="Masukan tahun keluar SMP" required>
                         </div>
 
                         {{-- SMA / SMK --}}
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH ATAS/KEJURUAN
-                                (SMA/SMK):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan SMA/SMK dengan huruf
-                                KAPITAL, isian wajib.</p>
-                            <input type="text" class="form-control" name="sekolah_menengah_atas"
-                                placeholder="Masukan nama SMA/SMK, gunakan huruf KAPITAL" required>
+                            <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK):</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan SMA/SMK dengan huruf KAPITAL, isian wajib.</p>
+                            <input type="text" class="form-control" name="sekolah_menengah_atas" placeholder="Masukan nama SMA/SMK, gunakan huruf KAPITAL" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMA/SMK):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk KAPITAL isian
-                                wajib.</p>
-                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smak"
-                                placeholder="Masukan tahun masuk SMA/SMK" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk KAPITAL isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_masuk_smak" placeholder="Masukan tahun masuk SMA/SMK" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMA/SMK):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar isian wajib.
-                            </p>
-                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smak"
-                                placeholder="Masukan tahun keluar SMA/SMK" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar isian wajib.</p>
+                            <input type="number" class="form-control yearpicker" name="tahun_keluar_smak" placeholder="Masukan tahun keluar SMA/SMK" required>
                         </div>
 
                         {{-- JURUSAN --}}
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JURUSAN (SMA/SMK):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan jurusan SMA/SMK dengan
-                                huruf KAPITAL, jika tidak ada kosongkan saja.</p>
-                            <input type="text" class="form-control" name="jurusan"
-                                placeholder="Masukan jurusan (SMA/SMK), gunakan huruf KAPITAL">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan jurusan SMA/SMK dengan huruf KAPITAL, jika tidak ada kosongkan saja.</p>
+                            <input type="text" class="form-control" name="jurusan" placeholder="Masukan jurusan (SMA/SMK), gunakan huruf KAPITAL">
                         </div>
 
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI (JIKA ADA) - PROGRAM
-                                STUDI:</label>
+                            <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI (JIKA ADA) - PROGRAM STUDI:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Maksimal 2 Perguruan Tinggi<br />
-                                *) Gunakan huruf kapital
+                              *) Maksimal 2 Perguruan Tinggi<br/>
+                              *) Gunakan huruf kapital
                             </p>
                             <div id="perguruan-wrapper"></div>
-
-                            <button type="button" class="btn btn-primary mt-2"
-                                style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                                id="addPerguruanBtn">
-                                + Tambah Perguruan Tinggi
+                          
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="addPerguruanBtn">
+                              + Tambah Perguruan Tinggi
                             </button>
                         </div>
-
-                        <button type="button" class="btn btn-secondary mt-3"
-                            style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-success mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                            onclick="nextStep()">Next</button>
+                        
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
 
                     {{-- Step 5 --}}
-                    <div class="step d-none" id="step-5"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 5: Pengalaman & Lain-Lain</h5>
-                        <hr>
+                    <div class="step d-none" id="step-5"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 5: Pengalaman & Lain-Lain</h5><hr>
 
                         {{-- Pengalaman Kerja --}}
                         <div class="form-group">
                             <label class="text-label font-weight-bold">PENGALAMAN KERJA:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Maksimal 3 pengalaman kerja<br />
+                                *) Maksimal 3 pengalaman kerja<br/>
                                 *) Gunakan huruf kapital
                             </p>
                             <div id="pengalaman-wrapper"></div>
-                            <button type="button" class="btn btn-primary mt-2"
-                                style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                                id="addPengalamanBtn">
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="addPengalamanBtn">
                                 + Tambah Pengalaman
                             </button>
-                        </div>
+                        </div>                        
 
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">BAHASA ASING YANG DIKUASAI
-                                (KAPITAL):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Silahkan ketik bahasa asing yang ingin
-                                anda cari, jika tidak ada kosongkan saja.</p>
-                            <select name="bahasa_asing[]" class="form-control" multiple="multiple"
-                                id="bahasa_asing"></select>
+                            <label class="text-label" style="font-weight: bold">BAHASA ASING YANG DIKUASAI (KAPITAL):</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Silahkan ketik bahasa asing yang ingin anda cari, jika tidak ada kosongkan saja.</p>
+                            <select name="bahasa_asing[]" class="form-control" multiple="multiple" id="bahasa_asing"></select>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH KE JEPANG:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
-                                Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
-                            <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri"
-                                required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
+                            <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-
+                        
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">JIKA YA, SEBUTKAN
-                                TANGGAL/BULAN/TAHUN:</label>
+                            <label class="text-label" style="font-weight: bold">JIKA YA, SEBUTKAN TANGGAL/BULAN/TAHUN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak ada kosongkan saja.</p>
-                            <input type="date" class="form-control" name="tanggal_keluar_negeri"
-                                placeholder="Pilih tanggal anda pernah ke luar negeri">
+                            <input type="date" class="form-control" name="tanggal_keluar_negeri" placeholder="Pilih tanggal anda pernah ke luar negeri">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH KE LUAR NEGERI LAINNYA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
-                                <b>Tidak</b>, isian wajib.
-                            </p>
-                            <select name="pernah_keluar_negeri_lain" class="form-control"
-                                id="pernah_keluar_negeri_lain" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik <b>Tidak</b>, isian wajib.</p>
+                            <select name="pernah_keluar_negeri_lain" class="form-control" id="pernah_keluar_negeri_lain" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
@@ -839,15 +721,12 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA YA, NEGARA APA:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak pernah kosongkan saja.</p>
-                            <input type="text" class="form-control" name="negara"
-                                placeholder="Jika tidak pernah kosongkan saja">
+                            <input type="text" class="form-control" name="negara" placeholder="Jika tidak pernah kosongkan saja">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">APAKAH ADA KERABAT DI JEPANG:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
-                                <b>Tidak</b>, isian wajib.
-                            </p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik <b>Tidak</b>, isian wajib.</p>
                             <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="YA">YA</option>
@@ -856,10 +735,8 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI
-                                JEPANG:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jika ada, jika tidak ada
-                                kosongkan saja.</p>
+                            <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI JEPANG:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jika ada, jika tidak ada kosongkan saja.</p>
                             <select name="hubungan_kerabat_dijepang" class="form-control" required>
                                 <option value="" disabled selected>Pilih Hubungan Kerabat</option>
                                 <option value="TEMAN">TEMAN</option>
@@ -870,8 +747,7 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BELAJAR BAHASA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah belajar bahasa atau
-                                tidak, jika belum kosongkan saja.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah belajar bahasa atau tidak, jika belum kosongkan saja.</p>
                             <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang">
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="YA">YA</option>
@@ -881,8 +757,7 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BUKU YANG DIPAKAI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buku yang digunakan, jika
-                                belum kosongkan.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buku yang digunakan, jika belum kosongkan.</p>
                             <select name="buku_yang_dipakai" class="form-control" required>
                                 <option value="" disabled selected>Pilih Buku yang digunakan</option>
                                 <option value="NIHONGO">NIHONGO</option>
@@ -891,70 +766,52 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAB YANG DIPELAJARI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda
-                                pelajari, jika tidak tau kosongkan saja.</p>
-                            <input type="number" class="form-control" name="bab_yang_dipelajari"
-                                placeholder="Masukan bab berapa yang di pelajari">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda pelajari, jika tidak tau kosongkan saja.</p>
+                            <input type="number" class="form-control" name="bab_yang_dipelajari" placeholder="Masukan bab berapa yang di pelajari">
                         </div>
-
-                        <button type="button" class="btn btn-secondary mt-3"
-                            style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="button" class="btn btn-success mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                            onclick="nextStep()">Next</button>
+                        
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="button" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;" onclick="nextStep()">Next</button>
                     </div>
 
                     {{-- Step 6 --}}
-                    <div class="step d-none" id="step-6"><br />
-                        <h5 class="mb-1" style="font-weight: bold">Page 6: Data Keluarga & Ukuran</h5>
-                        <hr>
+                    <div class="step d-none" id="step-6"><br/>
+                        <h5 class="mb-1" style="font-weight: bold">Page 6: Data Keluarga & Ukuran</h5><hr>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA AYAH:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah gunakan huruf
-                                KAPITAL, jika tidak ada kosongkan saja.</p>
-                            <input type="text" class="form-control" name="nama_ayah"
-                                placeholder="Masukan nama lengkap ayah" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah gunakan huruf KAPITAL, jika tidak ada kosongkan saja.</p>
+                            <input type="text" class="form-control" name="nama_ayah" placeholder="Masukan nama lengkap ayah" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA AYAH:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, jika tidak ada
-                                kosongkan saja</p>
-                            <input type="number" class="form-control" name="usia_ayah"
-                                placeholder="Masukan usia ayah">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, jika tidak ada kosongkan saja</p>
+                            <input type="number" class="form-control" name="usia_ayah" placeholder="Masukan usia ayah">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN AYAH:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ayah gunakan huruf
-                                KAPITAL, jika tidak ada kosongkan saja</p>
-                            <input type="text" class="form-control" name="pekerjaan_ayah"
-                                placeholder="Masukan pekerjaan ayah">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ayah gunakan huruf KAPITAL, jika tidak ada kosongkan saja</p>
+                            <input type="text" class="form-control" name="pekerjaan_ayah" placeholder="Masukan pekerjaan ayah">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA IBU:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ibu gunakan huruf
-                                KAPITAL, jika tidak kosongkan saja.</p>
-                            <input type="text" class="form-control" name="nama_ibu"
-                                placeholder="Masukan nama lengkap ibu">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ibu gunakan huruf KAPITAL, jika tidak kosongkan saja.</p>
+                            <input type="text" class="form-control" name="nama_ibu" placeholder="Masukan nama lengkap ibu">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA IBU:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, jika tidak
-                                kosongkan saja.</p>
-                            <input type="number" class="form-control" name="usia_ibu"
-                                placeholder="Masukan usia ibu">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ibu, jika tidak kosongkan saja.</p>
+                            <input type="number" class="form-control" name="usia_ibu" placeholder="Masukan usia ibu">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN IBU:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu gunakan huruf
-                                KAPITAL, jika tidak kosongkan saja</p>
-                            <input type="text" class="form-control" name="pekerjaan_ibu"
-                                placeholder="Masukan pekerjaan ibu">
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu gunakan huruf KAPITAL, jika tidak kosongkan saja</p>
+                            <input type="text" class="form-control" name="pekerjaan_ibu" placeholder="Masukan pekerjaan ibu">
                         </div>
 
                         <div class="form-group">
@@ -962,22 +819,19 @@
                                 NAMA SAUDARA (maks. 6 data)
                             </label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Maksimal 6 nama saudara<br />
+                                *) Maksimal 6 nama saudara<br/>
                                 *) Gunakan huruf kapital
-                            </p>
+                              </p>
                             <div id="saudara-wrapper">
                             </div>
-                            <button type="button" class="btn btn-primary mt-2"
-                                style="cursor: pointer;background-color: #046392;font-weight: bold;"
-                                id="add-saudara-btn">+ Tambah Saudara</button>
+                            <button type="button" class="btn btn-primary mt-2" style="cursor: pointer;background-color: #046392;font-weight: bold;" id="add-saudara-btn">+ Tambah Saudara</button>
                         </div>
-
-                        <input type="hidden" name="nama_saudara" id="nama_saudara_hidden">
+                        
+                        <input type="hidden" name="nama_saudara" id="nama_saudara_hidden">                        
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PENDAPAT KELUARGA:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak setuju klik
-                                Tidak, isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak setuju klik Tidak, isian wajib.</p>
                             <select name="pendapat_keluarga" class="form-control" id="pendapat_keluarga" required>
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
                                 <option value="SETUJU">SETUJU</option>
@@ -987,28 +841,19 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NOMOR HP KELUARGA (AKTIF):</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi pekerjaan ibu gunakan huruf
-                                KAPITAL, isian wajib.</p>
-                            <input type="text" class="form-control" name="no_hp_keluarga"
-                                placeholder="Masukan nomor hp keluarga" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon nomor HP Keluarga, isian wajib.</p>
+                            <input type="text" class="form-control" name="no_hp_keluarga" placeholder="Masukan nomor hp keluarga" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
-                            <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi nama mentor gunakan huruf
-                                KAPITAL, isian wajib. <br />
-                                *) Jika belum tau silahkan konfirmasikan dengan Nomor WA yang sudah chat/konsultasi di
-                                WA.
-                            </p>
-                            <input type="text" class="form-control" name="nama_mentor"
-                                value="{{ $mentor }}" placeholder="Masukan nama mentor" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama  mentor gunakan huruf KAPITAL, isian wajib.</p>
+                            <input type="text" class="form-control" name="nama_mentor" value="{{ $mentor }}" placeholder="Masukan nama mentor" required>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">UKURAN BAJU:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih ukuran baju, isian wajib.
-                            </p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih ukuran baju, isian wajib.</p>
                             <select name="ukuran_baju" class="form-control" id="ukuran_baju" required>
                                 <option value="" disabled selected>Pilih opsi ukuran baju</option>
                                 <option value="M">M</option>
@@ -1020,16 +865,12 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NOMOR SEPATU:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi ukuran sepatu, isian wajib.
-                            </p>
-                            <input type="number" class="form-control" name="ukuran_sepatu"
-                                placeholder="Masukan ukuran sepatu" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi ukuran sepatu, isian wajib.</p>
+                            <input type="number" class="form-control" name="ukuran_sepatu" placeholder="Masukan ukuran sepatu" required>
                         </div>
-
-                        <button type="button" class="btn btn-secondary mt-3"
-                            style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
-                        <button type="submit" class="btn btn-success mt-3"
-                            style="cursor: pointer;background-color: #046392;font-weight: bold;">Submit</button>
+                        
+                        <button type="button" class="btn btn-secondary mt-3" style="cursor: pointer;font-weight: bold;" onclick="prevStep()">Previous</button>
+                        <button type="submit" class="btn btn-success mt-3" style="cursor: pointer;background-color: #046392;font-weight: bold;">Submit</button>
                     </div>
                 </form>
             </div>
@@ -1053,9 +894,7 @@
         // -------------- POST DATA ---------------- //
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.hash === "#galeri") {
-                document.getElementById("galeri").scrollIntoView({
-                    behavior: "smooth"
-                });
+                document.getElementById("galeri").scrollIntoView({ behavior: "smooth" });
             }
         });
 
@@ -1068,7 +907,7 @@
             placeholder: 'Silahkan ketik bahasa asing yang ingin anda cari...',
             width: '100%',
             language: {
-                noResults: function() {
+                noResults: function () {
                     return "Klik pilih atau tekan enter untuk menambahkan..";
                 }
             }
@@ -1080,7 +919,7 @@
             allowClear: true,
             width: '100%',
             language: {
-                noResults: function() {
+                noResults: function () {
                     return "Tidak ditemukan, tekan Enter untuk menambahkan";
                 }
             }
@@ -1093,8 +932,7 @@
 
                 let bahasaAsing = $('#bahasa_asing').val();
                 if (bahasaAsing) {
-                    let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') :
-                        bahasaAsing;
+                    let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') : bahasaAsing;
                     $('<input>').attr({
                         type: 'hidden',
                         name: 'bahasa_asing',
@@ -1173,10 +1011,8 @@
                                         location.reload();
                                     });
                                 } else {
-                                    let message = response.message ||
-                                        'Terjadi kesalahan saat mengirim data.';
-                                    let errors = response.errors ? Object.values(
-                                        response.errors).flat().join('\n') : '';
+                                    let message = response.message || 'Terjadi kesalahan saat mengirim data.';
+                                    let errors = response.errors ? Object.values(response.errors).flat().join('\n') : '';
 
                                     Swal.fire({
                                         title: 'Gagal!',
@@ -1190,8 +1026,7 @@
                                 Swal.close();
                                 let errorMessage = 'Terjadi kesalahan sistem.';
                                 if (xhr.responseJSON?.errors) {
-                                    errorMessage = Object.values(xhr.responseJSON
-                                        .errors).flat().join('\n');
+                                    errorMessage = Object.values(xhr.responseJSON.errors).flat().join('\n');
                                 } else if (xhr.responseJSON?.message) {
                                     errorMessage = xhr.responseJSON.message;
                                 }
@@ -1209,14 +1044,14 @@
         });
 
         // rekomendasi kata
-        document.addEventListener("DOMContentLoaded", function() {
-            const keahlianInput = document.querySelector('.tagify-keahlian');
-            const sifatInput = document.querySelector('.tagify-sifat');
+        document.addEventListener("DOMContentLoaded", function () {
+            const keahlianInput  = document.querySelector('.tagify-keahlian');
+            const sifatInput     = document.querySelector('.tagify-sifat');
             const kelebihanInput = document.querySelector('.tagify-kelebihan');
             const kelemahanInput = document.querySelector('.tagify-kelemahan');
-            const hobiInput = document.querySelector('.tagify-hobi');
-            const motivasiInput = document.querySelector('.tagify-motivasi');
-            const planningInput = document.querySelector('.tagify-planning');
+            const hobiInput      = document.querySelector('.tagify-hobi');
+            const motivasiInput  = document.querySelector('.tagify-motivasi');
+            const planningInput  = document.querySelector('.tagify-planning');
 
             const keahlianTagify = new Tagify(keahlianInput, {
                 whitelist: [
@@ -1224,10 +1059,10 @@
                     "KONSTRUKSI", "TEKNIK LISTRIK", "TEKNIK MESIN", "TEKNIK SIPIL", "TEKNIK KOMPUTER",
                     "IT SUPPORT", "PEMROGRAMAN", "DESAIN GRAFIS", "MULTIMEDIA", "FOTOGRAFI",
                     "VIDEOGRAFI", "ADMINISTRASI", "KEUANGAN", "AKUNTANSI", "PERPAJAKAN",
-                    "PENDIDIKAN", "KESEHATAN", "PERAWATAN", "BIDAN", "FARMASI",
+                    "PENDIDIKAN", "KESEHATAN", "PERAWATAN", "BIDAN", "FARMASI", 
                     "PARIWISATA", "PERHOTELAN", "TATA BOGA", "TATA BUSANA", "TATA RIAS",
                     "JURNALISTIK", "HUMAS", "PELAYANAN PUBLIK", "MARKETING", "SALES",
-                    "LOGISTIK", "TRANSPORTASI", "KEAMANAN", "KETRAMPILAN TANGAN",
+                    "LOGISTIK", "TRANSPORTASI", "KEAMANAN", "KETRAMPILAN TANGAN", 
                     "PENGELASAN", "PENGOLAHAN MAKANAN", "SERVICE ELEKTRONIK", "MONTIR",
                     "BARISTA", "KASIR", "PRAMUNIAGA", "CALL CENTER", "DATA ENTRY"
                 ],
@@ -1243,10 +1078,8 @@
 
             const sifatTagify = new Tagify(sifatInput, {
                 whitelist: [
-                    "JUJUR", "DISIPLIN", "SABAR", "RAJIN", "PERCAYA DIRI", "TEPAT WAKTU", "INISIATIF",
-                    "TELITI",
-                    "MANDIRI", "PEKERJA KERAS", "MUDAH BERGAUL", "FLEKSIBEL", "BERPIKIR POSITIF",
-                    "BERSAHABAT",
+                    "JUJUR", "DISIPLIN", "SABAR", "RAJIN", "PERCAYA DIRI", "TEPAT WAKTU", "INISIATIF", "TELITI",
+                    "MANDIRI", "PEKERJA KERAS", "MUDAH BERGAUL", "FLEKSIBEL", "BERPIKIR POSITIF", "BERSAHABAT",
                     "KREATIF", "MOTIVASI TINGGI", "ADAPTIF", "CERDAS EMOSIONAL"
                 ],
                 maxTags: 1,
@@ -1261,10 +1094,8 @@
 
             const kelebihanTagify = new Tagify(kelebihanInput, {
                 whitelist: [
-                    "KOMUNIKATIF", "CEPAT BELAJAR", "KERJA TIM", "BERPIKIR KRITIS", "KEPEMIMPINAN",
-                    "PROBLEM SOLVING",
-                    "MULTITASKING", "MANAJEMEN WAKTU", "KERJA DI BAWAH TEKANAN", "PEMAHAMAN CEPAT",
-                    "BERORIENTASI TARGET",
+                    "KOMUNIKATIF", "CEPAT BELAJAR", "KERJA TIM", "BERPIKIR KRITIS", "KEPEMIMPINAN", "PROBLEM SOLVING",
+                    "MULTITASKING", "MANAJEMEN WAKTU", "KERJA DI BAWAH TEKANAN", "PEMAHAMAN CEPAT", "BERORIENTASI TARGET",
                     "INOVATIF", "RESPONSIF", "PEKA TERHADAP SEKITAR", "ANALITIS"
                 ],
                 maxTags: 1,
@@ -1279,8 +1110,7 @@
 
             const kelemahanTagify = new Tagify(kelemahanInput, {
                 whitelist: [
-                    "KURANG PERCAYA DIRI", "MUDAH PANIK", "TIDAK SABARAN", "SULIT FOKUS",
-                    "KURANG PENGALAMAN",
+                    "KURANG PERCAYA DIRI", "MUDAH PANIK", "TIDAK SABARAN", "SULIT FOKUS", "KURANG PENGALAMAN",
                     "TERLALU PERFEKSIONIS", "MUDAH TERPENGARUH", "KURANG KOMUNIKATIF", "MUDAH BOSAN",
                     "SUKA MENUNDA", "KURANG BERANI", "TERLALU KRITIS", "SULIT MENOLAK", "TERLALU JUJUR"
                 ],
@@ -1318,8 +1148,7 @@
                     "INGIN MANDIRI", "MEMBANTU ORANG TUA", "MENGEMBANGKAN DIRI", "BELAJAR HAL BARU",
                     "MENINGKATKAN KETERAMPILAN", "MENDAPAT PEKERJAAN", "MEMPERBAIKI EKONOMI KELUARGA",
                     "MENCAPAI CITA-CITA", "INGIN SUKSES", "MEMILIKI PENGHASILAN", "MENGISI WAKTU LUANG",
-                    "MENGABDI PADA MASYARAKAT", "INGIN PUNYA KARIR", "BELAJAR DISIPLIN",
-                    "MENGIKUTI PROGRAM PEMERINTAH"
+                    "MENGABDI PADA MASYARAKAT", "INGIN PUNYA KARIR", "BELAJAR DISIPLIN", "MENGIKUTI PROGRAM PEMERINTAH"
                 ],
                 maxTags: 1,
                 dropdown: {
@@ -1358,7 +1187,7 @@
                 }
             });
         });
-    </script>
+    </script>     
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -1396,10 +1225,10 @@
     <script>
         let pengalamanCount = 0;
         const maxPengalaman = 3;
-
-        document.getElementById('addPengalamanBtn').addEventListener('click', function() {
+    
+        document.getElementById('addPengalamanBtn').addEventListener('click', function () {
             if (pengalamanCount >= maxPengalaman) return alert('Maksimal 3 pengalaman kerja.');
-
+    
             const wrapper = document.getElementById('pengalaman-wrapper');
             const div = document.createElement('div');
             div.classList.add('row', 'mb-2', 'pengalaman-row');
@@ -1422,19 +1251,19 @@
             `;
             wrapper.appendChild(div);
             pengalamanCount++;
-
-            div.querySelector('.remove-row').addEventListener('click', function() {
+    
+            div.querySelector('.remove-row').addEventListener('click', function () {
                 div.remove();
                 pengalamanCount--;
             });
         });
     </script>
-
+    
     {{-- Nama Sudara --}}
     <script>
         let saudaraCount = 0;
         const maxSaudara = 6;
-
+        
         function renderSaudaraRow(index) {
             return `
             <div class="row align-items-center mb-2 saudara-row" data-index="${index}">
@@ -1459,7 +1288,7 @@
                 </div>
             </div>`;
         }
-
+        
         document.getElementById('add-saudara-btn').addEventListener('click', function() {
             if (saudaraCount >= maxSaudara) {
                 alert('Maksimal 6 saudara.');
@@ -1469,53 +1298,53 @@
             wrapper.insertAdjacentHTML('beforeend', renderSaudaraRow(saudaraCount));
             saudaraCount++;
         });
-
+        
         document.getElementById('saudara-wrapper').addEventListener('click', function(e) {
             if (e.target.classList.contains('remove-saudara')) {
                 e.target.closest('.saudara-row').remove();
                 saudaraCount--;
             }
         });
-
+        
         function generateNamaSaudaraString() {
             const rows = document.querySelectorAll('.saudara-row');
             const data = [];
-
+        
             rows.forEach(row => {
-                const hubungan = row.querySelector('.hubungan').value.trim().toUpperCase();
-                const nama = row.querySelector('.nama').value.trim().toUpperCase();
-                const usia = row.querySelector('.usia').value.trim();
+                const hubungan  = row.querySelector('.hubungan').value.trim().toUpperCase();
+                const nama      = row.querySelector('.nama').value.trim().toUpperCase();
+                const usia      = row.querySelector('.usia').value.trim();
                 const pekerjaan = row.querySelector('.pekerjaan').value.trim().toUpperCase();
-
+        
                 if (hubungan && nama && usia && pekerjaan) {
                     data.push(`${hubungan} - ${nama} - ${usia} - ${pekerjaan}`);
                 }
             });
-
+        
             document.getElementById('nama_saudara_hidden').value = data.join(', ');
         }
-
+        
         document.querySelector('form').addEventListener('submit', function(e) {
             generateNamaSaudaraString();
         });
-    </script>
-
+    </script>    
+    
     {{-- Perguruan Tinggi --}}
     <script>
         let perguruanCount = 0;
         const maxPerguruan = 2;
-
+      
         document.getElementById('addPerguruanBtn').addEventListener('click', function() {
-            if (perguruanCount >= maxPerguruan) {
-                alert('Maksimal 2 perguruan tinggi.');
-                return;
-            }
-
-            const wrapper = document.getElementById('perguruan-wrapper');
-
-            const div = document.createElement('div');
-            div.classList.add('row', 'mb-2', 'perguruan-row');
-            div.innerHTML = `
+          if (perguruanCount >= maxPerguruan) {
+            alert('Maksimal 2 perguruan tinggi.');
+            return;
+          }
+      
+          const wrapper = document.getElementById('perguruan-wrapper');
+      
+          const div = document.createElement('div');
+          div.classList.add('row', 'mb-2', 'perguruan-row');
+          div.innerHTML = `
             <div class="col-md-6">
                 <input type="text" name="nama_perguruan[]" class="form-control" placeholder="NAMA PERGURUAN TINGGI" required>
             </div>
@@ -1526,16 +1355,16 @@
                 <button type="button" class="btn btn-danger btn-sm remove-perguruan">&times;</button>
             </div>
           `;
-
-            wrapper.appendChild(div);
-            perguruanCount++;
-
-            div.querySelector('.remove-perguruan').addEventListener('click', function() {
-                div.remove();
-                perguruanCount--;
-            });
+          
+          wrapper.appendChild(div);
+          perguruanCount++;
+      
+          div.querySelector('.remove-perguruan').addEventListener('click', function() {
+            div.remove();
+            perguruanCount--;
+          });
         });
-    </script>
+    </script>  
 </body>
 
 </html>
