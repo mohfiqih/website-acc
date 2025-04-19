@@ -2,7 +2,7 @@
 let currentStep = 1;
 let maxStepReached = 1;
 const totalSteps = document.querySelectorAll('.step').length;
-    
+
 function scrollToStepNav() {
     const navElement = document.getElementById('stepFirst');
     if (navElement) {
@@ -11,25 +11,25 @@ function scrollToStepNav() {
         window.scrollTo({ top: y, behavior: 'smooth' });
     }
 }
-    
+
 function showStep(step) {
     if (step <= maxStepReached) {
         document.querySelectorAll('.step').forEach(stepEl => stepEl.classList.add('d-none'));
         document.getElementById('step-' + step).classList.remove('d-none');
-    
+
         document.querySelectorAll('#stepFirst .card').forEach(nav => nav.classList.remove('active-step'));
         document.getElementById('nav-step-' + step).classList.add('active-step');
-    
+
         currentStep = step;
         scrollToStepNav();
     }
 }
-    
+
 function nextStep() {
     const currentForm = document.querySelector(`#step-${currentStep}`);
     const inputs = currentForm.querySelectorAll('input, select, textarea');
     let isValid = true;
-    
+
     inputs.forEach(input => {
         if (!input.checkValidity()) {
             isValid = false;
@@ -38,7 +38,7 @@ function nextStep() {
             input.classList.remove('is-invalid');
         }
     });
-    
+
     if (isValid && currentStep < totalSteps) {
         currentStep++;
         maxStepReached = Math.max(maxStepReached, currentStep);
@@ -46,25 +46,40 @@ function nextStep() {
         showStep(currentStep);
     }
 }
-    
+
 function prevStep() {
     if (currentStep > 1) {
         currentStep--;
         showStep(currentStep);
     }
 }
-    
+
+// function enableStepNavLinks() {
+//     for (let i = 1; i <= totalSteps; i++) {
+//         const navLink = document.getElementById(`nav-step-${i}`);
+//         if (i <= maxStepReached) {
+//             navLink.classList.remove('disabled');
+//         } else {
+//             navLink.classList.add('disabled');
+//         }
+//     }
+// }
+
 function enableStepNavLinks() {
     for (let i = 1; i <= totalSteps; i++) {
         const navLink = document.getElementById(`nav-step-${i}`);
+        const warningText = navLink.parentElement.querySelector('.warning-text'); // <-- di sini ubahannya
+
         if (i <= maxStepReached) {
             navLink.classList.remove('disabled');
+            if (warningText) warningText.classList.add('d-none');
         } else {
             navLink.classList.add('disabled');
+            if (warningText) warningText.classList.remove('d-none');
         }
     }
 }
-    
+
 // Event listener dinamis untuk nav step
 for (let i = 1; i <= totalSteps; i++) {
     const nav = document.getElementById(`nav-step-${i}`);
@@ -76,7 +91,7 @@ for (let i = 1; i <= totalSteps; i++) {
         });
     }
 }
-    
+
 document.addEventListener('DOMContentLoaded', function() {
     showStep(currentStep);
     enableStepNavLinks();
