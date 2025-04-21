@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Http;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
+
+# manual book
+Route::get('/manual-book', [LandingPageController::class, 'manual_book'])->name('landing.manual_book');
+
 Route::get('/program-jepang', [LandingPageController::class, 'program_jepang'])->name('landing.program_jepang');
 
 Route::get('/program-korea', function () {
