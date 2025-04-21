@@ -27,4 +27,10 @@ class LandingPageController extends Controller
             'images_db' => $images_db
         ]);
     }
+
+    public function manual_book()
+    {
+        $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
+        return view('landing.manual-book', ['images_db' => $images_db]);
+    }
 }
