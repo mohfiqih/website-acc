@@ -948,7 +948,7 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah gunakan huruf
                                 Kapital, jika sudah tidak ada kosongkan saja.</p>
                             <input type="text" class="form-control" name="nama_ayah"
-                                placeholder="Masukan nama lengkap ayah" required>
+                                placeholder="Masukan nama lengkap ayah">
                         </div>
 
                         <div class="form-group">
