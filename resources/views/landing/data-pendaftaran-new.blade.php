@@ -436,11 +436,11 @@
                     setTimeout(() => {
                         indicator.style.display = 'none';
                         indicator.innerText = '🔄 Refreshing data...';
-                    }, 3000);
+                    }, 6000000);
                 });
         }
 
-        setInterval(refreshTable, 30000);
+        setInterval(refreshTable, 6000000);
 
         $(document).ready(function() {
             let table = $('#spreadsheetTable').DataTable({
