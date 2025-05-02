@@ -440,7 +440,7 @@
                 });
         }
 
-        setInterval(refreshTable, 30000);
+        setInterval(refreshTable, 6000000);
 
         $(document).ready(function() {
             let table = $('#spreadsheetTable').DataTable({
