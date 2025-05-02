@@ -436,7 +436,7 @@
                     setTimeout(() => {
                         indicator.style.display = 'none';
                         indicator.innerText = '🔄 Refreshing data...';
-                    }, 3000);
+                    }, 6000000);
                 });
         }
 
