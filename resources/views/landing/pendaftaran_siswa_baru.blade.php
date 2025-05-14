@@ -1196,7 +1196,6 @@
                             data: formData,
                             success: function(response) {
                                 Swal.close();
-
                                 if (response.success) {
                                     Swal.fire({
                                         title: 'Berhasil!',
@@ -1207,17 +1206,19 @@
                                     }).then(() => {
                                         location.reload();
                                     });
-                                } else {
-                                    let message = response.message ||
-                                        'Terjadi kesalahan saat mengirim data.';
-                                    let errors = response.errors ? Object.values(
-                                        response.errors).flat().join('\n') : '';
-
+                                } else if (response.duplicate) {
                                     Swal.fire({
-                                        title: 'Gagal!',
-                                        text: `${message}\n${errors}`,
+                                        title: 'Warning!',
+                                        text: response.message,
+                                        icon: 'warning',
+                                        timer: 3000,
+                                        showConfirmButton: false,
+                                    });
+                                } else {
+                                    Swal.fire({
                                         icon: 'error',
-                                        confirmButtonText: 'Tutup'
+                                        title: 'Gagal!',
+                                        text: 'Terjadi kesalahan saat menyimpan data.'
                                     });
                                 }
                             },
