@@ -365,6 +365,8 @@
                                         <th>Nama Mentor</th>
                                         <th>Ukuran Baju</th>
                                         <th>Nomor Sepatu</th>
+                                        <th>Pilihan Kelas</th>
+                                        <th>Pilihan Program</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
