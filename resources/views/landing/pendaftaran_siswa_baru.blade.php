@@ -329,8 +329,10 @@
                 </ol>
             </nav>
             <div class="signup-content">
+                <div class="alert alert-warning" role="alert">
+                    Jika saat mengisi form tidak bisa klik <b>Next</b> maka terdapat kolom yang belum terisi, silahkan bisa di cek kembali formulir yang telah anda isi!
+                </div>
                 {{-- nav pill --}}
-                <br />
                 <ul class="nav nav-pills mb-3 flex-wrap" id="stepNav" style="gap: 10px;">
                     <li class="nav-item">
                         <a class="nav-link active-step" id="nav-step-1" href="javascript:void(0)">1. Data
@@ -890,8 +892,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI
                                 JEPANG:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jika ada, jika tidak ada
-                                kosongkan saja.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jika ada, jika tidak ada kosongkan saja.</p>
                             <select name="hubungan_kerabat_dijepang" class="form-control">
                                 <option value="" disabled selected>Pilih Hubungan Kerabat</option>
                                 <option value="TEMAN">TEMAN</option>
@@ -903,8 +904,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BELAJAR BAHASA:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon pilih pernah belajar bahasa atau
-                                tidak, jika belum kosongkan saja.
+                                *) Mohon pilih belajar bahasa, pilih YA jika ingin belajar bahasa di LPK ACC Japan Centre (untuk matching job opsional).
                             </p>
                             <select name="kerabat_dijepang" class="form-control" id="kerabat_dijepang">
                                 <option value="" disabled selected>Pilih opsi pertanyaan</option>
@@ -915,18 +915,18 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BUKU YANG DIPAKAI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buku yang digunakan, jika
-                                belum kosongkan.</p>
-                            <select name="buku_yang_dipakai" class="form-control" required>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buku yang pernah digunakan, jika belum kosongkan.</p>
+                            <select name="buku_yang_dipakai" class="form-control">
                                 <option value="" disabled selected>Pilih Buku yang digunakan</option>
                                 <option value="NIHONGO">NIHONGO</option>
+                                <option value="LAINNYA">LAINNYA</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAB YANG DIPELAJARI:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda
-                                pelajari, jika tidak tau kosongkan saja.</p>
+                                pelajari, jika belum kosongkan saja.</p>
                             <input type="number" class="form-control" name="bab_yang_dipelajari"
                                 placeholder="Masukan bab berapa yang di pelajari">
                         </div>
@@ -946,15 +946,14 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA AYAH:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah gunakan huruf
-                                Kapital, jika sudah tidak ada kosongkan saja.</p>
+                                kapital, jika tidak ada kosongkan saja.</p>
                             <input type="text" class="form-control" name="nama_ayah"
                                 placeholder="Masukan nama lengkap ayah">
                         </div>
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA AYAH:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ayah, jika tidak ada
-                                kosongkan saja</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi usia ayah, jika tidak ada kosongkan saja.</p>
                             <input type="number" class="form-control" name="usia_ayah"
                                 placeholder="Masukan usia ayah">
                         </div>
@@ -962,7 +961,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN AYAH:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi pekerjaan ayah, jika tidak ada kosongkan saja
+                                *) Mohon isi pekerjaan ayah, jika tidak ada kosongkan saja.
                             </p>
                             <input type="text" class="form-control" name="pekerjaan_ayah"
                                 placeholder="Masukan pekerjaan ayah">
@@ -971,7 +970,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi nama ibu, jika tidak kosongkan saja.
+                                *) Mohon isi nama ibu gunakan huruf kapital, jika tidak ada kosongkan saja.
                             </p>
                             <input type="text" class="form-control" name="nama_ibu"
                                 placeholder="Masukan nama lengkap ibu">
@@ -980,8 +979,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi usia ibu, jika tidak
-                                kosongkan saja.
+                                *) Mohon isi usia ibu, jika tidak ada kosongkan saja.
                             </p>
                             <input type="number" class="form-control" name="usia_ibu"
                                 placeholder="Masukan usia ibu">
@@ -990,7 +988,7 @@
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi pekerjaan ibu, jika tidak kosongkan saja
+                                *) Mohon isi pekerjaan ibu, jika tidak ada kosongkan saja
                             </p>
                             <input type="text" class="form-control" name="pekerjaan_ibu"
                                 placeholder="Masukan pekerjaan ibu">
@@ -1034,10 +1032,9 @@
 
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama mentor gunakan huruf
-                                KAPITAL, isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Jika sudah terisi gunakan yang sudah ada, jika belum beri tanda (-)</p>
                             <input type="text" class="form-control" name="nama_mentor"
-                                value="{{ $mentor }}" placeholder="Masukan nama mentor" required>
+                                value="{{ $mentor }}" placeholder="Masukan nama mentor">
                         </div>
 
                         <div class="form-group">
@@ -1059,6 +1056,29 @@
                             </p>
                             <input type="number" class="form-control" name="ukuran_sepatu"
                                 placeholder="Masukan ukuran sepatu" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PILIH KELAS:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih kelas, isian wajib.
+                            </p>
+                            <select name="pilih_kelas" class="form-control" id="pilih_kelas" required>
+                                <option value="" disabled selected>Pilih opsi kelas</option>
+                                <option value="Kelas Pagi">Kelas Pagi</option>
+                                <option value="Kelas Malam">Kelas Malam</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="text-label" style="font-weight: bold">PILIH PROGRAM:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih program, isian wajib.
+                            </p>
+                            <select name="pilih_program" class="form-control" id="pilih_program" required>
+                                <option value="" disabled selected>Pilih opsi program</option>
+                                <option value="Magang">Magang</option>
+                                <option value="Tokutei Ginou (TG)">Tokutei Ginou (TG)</option>
+                                <option value="Matching Job">Matching Job</option>
+                            </select>
                         </div>
 
                         <button type="button" class="btn btn-secondary mt-3"

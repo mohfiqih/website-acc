@@ -15,7 +15,8 @@ use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
-    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyD5ZXIfgbgye-VPdNKWlsDHAVnPEamLAowRtaOiRAidPsoYWVxwt_SWNdUpqS2ulaB/exec";
+    // protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyD5ZXIfgbgye-VPdNKWlsDHAVnPEamLAowRtaOiRAidPsoYWVxwt_SWNdUpqS2ulaB/exec";
+    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
 
     public function index()
     {
@@ -217,6 +218,8 @@ class PendaftaranController extends Controller
                 'nama_mentor'                => 'nullable|string',
                 'ukuran_baju'                => 'nullable|string',
                 'ukuran_sepatu'              => 'nullable|string',
+                'pilih_kelas'                => 'nullable|string',
+                'pilih_program'              => 'nullable|string',
                 'id'                         => 'nullable|string'
             ]);
 
