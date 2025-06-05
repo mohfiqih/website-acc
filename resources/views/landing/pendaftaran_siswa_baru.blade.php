@@ -1075,9 +1075,9 @@
                             </p>
                             <select name="pilih_program" class="form-control" id="pilih_program" required>
                                 <option value="" disabled selected>Pilih opsi program</option>
-                                <option value="Magang">Magang</option>
-                                <option value="Tokutei Ginou (TG)">Tokutei Ginou (TG)</option>
-                                <option value="Matching Job">Matching Job</option>
+                                <option value="Program Magang">Program Magang</option>
+                                <option value="Program TG">Program TG</option>
+                                <option value="Program Matching Job">Program Matching Job</option>
                             </select>
                         </div>
 
