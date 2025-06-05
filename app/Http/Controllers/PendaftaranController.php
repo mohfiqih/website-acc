@@ -584,6 +584,8 @@ class PendaftaranController extends Controller
         $templateProcessor->setValue('MENTOR', $cleanedData['NAMA MENTOR'] ?? '-');
         $templateProcessor->setValue('BAJU', $cleanedData['UKURAN BAJU'] ?? '-');
         $templateProcessor->setValue('SEPATU', $cleanedData['NOMOR SEPATU'] ?? '-');
+        $templateProcessor->setValue('KELAS', $cleanedData['PILIH KELAS'] ?? '');
+        $templateProcessor->setValue('PROGRAM', $cleanedData['PILIH PROGRAM'] ?? '');
 
         $fileName   = 'CV_' . str_replace(' ', '_', $cleanedData['NAMA (INDONESIA)'] ?? 'Unknown') . '.docx';
         $outputPath = storage_path("app/public/{$fileName}");
