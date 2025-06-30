@@ -491,7 +491,8 @@ class PendaftaranController extends Controller
 
         # PENGALAMAN KERJA
         $pengalamanKerja = $cleanedData['PENGALAMAN KERJA'] ?? '';
-        $pengalamanList = array_filter(array_map('trim', explode(',', $pengalamanKerja)));
+        $pengalamanKerja = $this->escapeXml($pengalamanKerja);
+        $pengalamanList  = array_filter(array_map('trim', explode(',', $pengalamanKerja)));
 
         for ($i = 0; $i < 3; $i++) {
             $idx = $i + 1;
@@ -613,7 +614,12 @@ class PendaftaranController extends Controller
     
         $values = array_filter($values);
         return implode(', ', $values);
-    }     
+    }
+
+    function escapeXml($value)
+    {
+        return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_XML1, 'UTF-8');
+    }
 
     # translate kanji
     // function loadKanjiData()
