@@ -42,7 +42,7 @@
             justify-content: center;
             align-items: center;
             margin-top: 20px;
-            padding: 10px 15px;
+            padding: 0px 0px;
         }
 
         .pagination {
@@ -247,12 +247,9 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
-                    <h2></span>DATA PENDAFTARAN SISWA BARU (CV) LPK ACC JAPAN CENTRE TEGAL</h2>
-                    <ul>
-                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
-                        <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
-                    </ul>
+                    <h2 style="text-align: center"></span>DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h2>
+                    <h2 style="text-align: center">LPK ACC JAPAN CENTRE</h2>
+                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
@@ -266,7 +263,7 @@
 
     <div class="container mt-4">
         <div class="card">
-            <div class="card-body" style="padding: 30px; border-radius: 10px;">
+            <div class="card-body" style="padding: 20px; border-radius: 10px;">
                 <div class="d-flex justify-content-between mb-3">
                     <div>
                         <label>
@@ -297,6 +294,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Download CV</th>
+                                        <th>WhatsApp</th>
                                         <th>Tanggal</th>
                                         <th>Email</th>
                                         <th>Nama (Katakana)</th>
