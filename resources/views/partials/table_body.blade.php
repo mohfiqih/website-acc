@@ -15,11 +15,11 @@
                         $phone = '62' . substr($phone, 1);
                     }
                 @endphp
-                <a href="https://wa.me/{{ $phone }}" 
-                   target="_blank" 
-                   class="btn btn-sm btn-success" 
-                   style="background-color:#25D366;border-color:#25D366;">
-                    <i class="fa fa-whatsapp"></i> WhatsApp
+                <a href="https://api.whatsapp.com/send?phone={{ $phone }}&text=Halo kak%20{{ urlencode($row['NAMA (INDONESIA)']) }},%20Data Pendaftaran Online%20sudah%20masuk%20ya."
+                    target="_blank"
+                    class="btn btn-sm btn-success"
+                    style="background-color:#25D366;border-color:#25D366;">
+                        <i class="fa fa-whatsapp"></i> WhatsApp
                 </a>
             @endif
         </td> 
