@@ -497,6 +497,7 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih golongan darah.</p>
                             <select name="golongan_darah" class="form-control">
                                 <option value="" disabled selected>Pilih golongan darah</option>
+                                <option value="Belum Mengetahui">Belum Mengetahui</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
                                 <option value="O">O</option>
@@ -1076,8 +1077,9 @@
                             <select name="pilih_program" class="form-control" id="pilih_program" required>
                                 <option value="" disabled selected>Pilih opsi program</option>
                                 <option value="Program Magang">Program Magang</option>
-                                <option value="Program TG">Program TG</option>
-                                <option value="Program Matching Job">Program Matching Job</option>
+                                <option value="Program TG Nol">Program TG Nol</option>
+                                <option value="Program Matching Job Magang">Program Matching Job Magang</option>
+                                <option value="Program Matching Job TG">Program Matching Job TG</option>
                             </select>
                         </div>
 
