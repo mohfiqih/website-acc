@@ -25,7 +25,7 @@
                 <h4>Our Services</h4>
                 <ul>
                     <li><a href="#">ACC Japan Center</a></li>
-                    <li><a href="#">ACC Korean Center</a></li>
+                    {{-- <li><a href="#">ACC Korean Center</a></li> --}}
                 </ul>
             </div>
 
