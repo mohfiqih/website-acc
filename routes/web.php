@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\DataKonsultasi;
 use Illuminate\Support\Facades\Http;
 
 // Landing Page
@@ -91,3 +92,7 @@ Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'
 Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
+
+# data konsultasi
+Route::get('/data-konsultasi', [DataKonsultasi::class, 'data_konsultasi']);
+Route::get('/data-konsultasi/export-pdf', [DataKonsultasi::class, 'exportPdf'])->name('data-konsultasi.export-pdf');
