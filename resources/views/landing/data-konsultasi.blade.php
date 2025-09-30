@@ -372,7 +372,9 @@
                     <form action="{{ route('data-konsultasi.export-pdf') }}" method="GET" class="d-flex align-items-center mb-3">
                         <div class="row">
                             <div class="col-md-12">
+                                <label><b>Dari Tanggal</b></label>
                                 <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                <label><b>Sampai Tanggal</b></label>
                                 <input type="date" name="end_date" class="form-control me-2 mb-2" required>
                             </div>
                             <div class="col md-12">
