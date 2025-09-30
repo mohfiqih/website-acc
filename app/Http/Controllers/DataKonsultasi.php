@@ -16,7 +16,7 @@ use Illuminate\Validation\ValidationException;
 class DataKonsultasi extends Controller
 {
     protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyCSsWEpYv0I9mWJvFbpNdr0hTF1LS-mGk8us4MZrmJdW2xjDAIU_qnkKCMFLPKHbEY5Q/exec";
-    
+
     public function data_konsultasi()
     {
         $response = Http::get($this->googleScriptUrl);
@@ -36,10 +36,12 @@ class DataKonsultasi extends Controller
         $cleanedData = [];
 
         // untuk statistik
-        $perBulan = [];
-        $perTahun = [];
+        $perHari     = [];
+        $perBulan    = [];
+        $perTahun    = [];
         $perProvinsi = [];
         $perKabupaten = [];
+        $perUmur      = [];
 
         // daftar nama bulan
         $namaBulan = [
@@ -48,27 +50,29 @@ class DataKonsultasi extends Controller
             9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
         ];
 
+        $tz = new \DateTimeZone('Asia/Jakarta');
+
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
                 if ($key === 'Timestamp') {
-                    continue;
-                }
+                    try {
+                        $dt = new \DateTime($value, $tz); // parsing langsung
+                    } catch (\Exception $e) {
+                        continue;
+                    }
 
-                if ($key === 'Tanggal Konsultasi') {
-                    $dateOnly = substr($value, 0, 10);
+                    $dateOnly = $dt->format('Y-m-d'); // hasil YYYY-MM-DD
                     $cleanedRow[$key] = $dateOnly;
 
-                    // parsing bulan & tahun
-                    $time = strtotime($dateOnly);
-                    $bulan = (int) date('m', $time); // angka bulan
-                    $tahun = date('Y', $time);
+                    // hitung per hari
+                    $perHari[$dateOnly] = ($perHari[$dateOnly] ?? 0) + 1;
 
-                    $nama = $namaBulan[$bulan] . ' ' . $tahun; // contoh: Januari 2025
+                    $bulan = (int) $dt->format('m');
+                    $tahun = $dt->format('Y');
 
-                    // Hitung per bulan (pakai nama bulan + tahun)
+                    $nama = $namaBulan[$bulan] . ' ' . $tahun;
                     $perBulan[$nama] = ($perBulan[$nama] ?? 0) + 1;
-                    // Hitung per tahun
                     $perTahun[$tahun] = ($perTahun[$tahun] ?? 0) + 1;
                 } else {
                     $cleanedRow[$key] = $value;
@@ -79,17 +83,25 @@ class DataKonsultasi extends Controller
                     if ($key === 'Kabupaten') {
                         $perKabupaten[$value] = ($perKabupaten[$value] ?? 0) + 1;
                     }
+                    if ($key === 'Usia') {
+                        $perUmur[$value] = ($perUmur[$value] ?? 0) + 1;
+                    }
                 }
             }
             $cleanedData[] = $cleanedRow;
         }
 
+        // urutkan perHari biar rapi
+        ksort($perHari);
+
         return view('landing.data-konsultasi', [
-            'cleanedData' => $cleanedData,
-            'perBulan' => $perBulan,
-            'perTahun' => $perTahun,
-            'perProvinsi' => $perProvinsi,
-            'perKabupaten' => $perKabupaten,
+            'cleanedData'   => $cleanedData,
+            'perHari'       => $perHari,
+            'perBulan'      => $perBulan,
+            'perTahun'      => $perTahun,
+            'perProvinsi'   => $perProvinsi,
+            'perKabupaten'  => $perKabupaten,
+            'perUmur'       => $perUmur,
         ]);
     }
 
@@ -99,17 +111,23 @@ class DataKonsultasi extends Controller
         $data     = array_reverse($response->json());
 
         $cleanedData = [];
+        $tz = new \DateTimeZone('Asia/Jakarta');
 
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
-                if ($key === 'Timestamp') {
-                    continue;
-                }
+                // if ($key === 'Timestamp') {
+                //     continue;
+                // }
 
-                if ($key === 'Tanggal Konsultasi') {
-                    $dateOnly = substr($value, 0, 10);
-                    $cleanedRow[$key] = $dateOnly;
+                if ($key === 'Timestamp') {
+                    try {
+                        $dt = new \DateTime($value, $tz);
+                        $dateOnly = $dt->format('Y-m-d');
+                        $cleanedRow[$key] = $dateOnly;
+                    } catch (\Exception $e) {
+                        $cleanedRow[$key] = $value; // fallback kalau parsing gagal
+                    }
                 } else {
                     $cleanedRow[$key] = $value;
                 }
@@ -120,7 +138,7 @@ class DataKonsultasi extends Controller
         return view('partials.table_konsultasi', compact('cleanedData'));
     }
 
-    public function exportPdf()
+    public function exportPdf(Request $request)
     {
         $response = Http::get($this->googleScriptUrl);
 
@@ -135,16 +153,22 @@ class DataKonsultasi extends Controller
             $json = [];
         }
 
+        $startDate = $request->input('start_date');
+        $endDate   = $request->input('end_date');
+
         $data = [];
         foreach ($json as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
                 if ($key === 'Timestamp') {
-                    continue;
-                }
-                if ($key === 'Tanggal Konsultasi') {
                     $dateOnly = substr($value, 0, 10);
                     $cleanedRow[$key] = $dateOnly;
+
+                    if ($startDate && $endDate) {
+                        if ($dateOnly < $startDate || $dateOnly > $endDate) {
+                            continue 2;
+                        }
+                    }
                 } else {
                     $cleanedRow[$key] = $value;
                 }

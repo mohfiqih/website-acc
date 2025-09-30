@@ -247,8 +247,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <h2 style="text-align: center"></span>DATA TAMU KONSULTASI</h2>
-                    <h2 style="text-align: center">LPK ACC JAPAN CENTRE</h2>
+                    <h2 style="text-align: center"></span>DATA TAMU KONSULTASI LPK ACC JAPAN CENTRE</h2>
                     <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
@@ -267,7 +266,35 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Bulan 
+                        Statistik Per Hari <br/>
+                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartHari','statistik_per_hari')">Export PNG</button>
+                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartHari','Statistik Per Hari')">Export PDF</button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartHari"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header text-dark">
+                        Statistik Berdasarkan Umur <br/>
+                        <button class="btn btn-sm btn-success" onclick="downloadPNG('umurChart','grafik_berdasarkan_umur')">Export PNG</button>
+                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('umurChart','Grafik Berdasarkan Umur')">Export PDF</button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="umurChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header text-dark">
+                        Statistik Per Bulan <br/>
                         <button class="btn btn-sm btn-success" onclick="downloadPNG('chartBulan','statistik_per_bulan')">Export PNG</button>
                         <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartBulan','Statistik Per Bulan')">Export PDF</button>
                     </div>
@@ -280,7 +307,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Tahun 
+                        Statistik Per Tahun <br/>
                         <button class="btn btn-sm btn-success" onclick="downloadPNG('chartTahun','statistik_per_tahun')">Export PNG</button>
                         <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartTahun','Statistik Per Tahun')">Export PDF</button>
                     </div>
@@ -295,7 +322,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Provinsi 
+                        Statistik Per Provinsi <br/>
                         <button class="btn btn-sm btn-success" onclick="downloadPNG('chartProvinsi','statistik_per_provinsi')">Export PNG</button>
                         <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartProvinsi','Statistik Per Provinsi')">Export PDF</button>
                     </div>
@@ -308,7 +335,7 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Kabupaten 
+                        Statistik Per Kabupaten <br/>
                         <button class="btn btn-sm btn-success" onclick="downloadPNG('chartKabupaten','statistik_per_kabupaten')">Export PNG</button>
                         <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartKabupaten','Statistik Per Kabupaten')">Export PDF</button>
                     </div>
@@ -342,9 +369,19 @@
                 </div>
     
                 <div class="table-responsive">
-                    <a href="{{ route('data-konsultasi.export-pdf') }}" class="btn btn-success mb-3">
-                        <i class="fa fa-download"></i> Export PDF
-                    </a>
+                    <form action="{{ route('data-konsultasi.export-pdf') }}" method="GET" class="d-flex align-items-center mb-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                            </div>
+                            <div class="col md-12">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-download"></i> Export PDF
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                     <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
                     </div>
@@ -356,8 +393,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>WhatsApp</th>
-                                        <th>Email</th>
                                         <th>Tanggal Konsultasi</th>
+                                        <th>Email</th>
                                         <th>Nama Lengkap</th>
                                         <th>Usia</th>
                                         <th>Pendidikan Terakhir</th>
@@ -528,6 +565,68 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
+        const ctx = document.getElementById('umurChart').getContext('2d');
+        const umurData = @json($perUmur);
+
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(umurData),
+                datasets: [{
+                    data: Object.values(umurData),
+                    backgroundColor: [
+                        '#36A2EB', // biru
+                        '#FFCE56', // kuning
+                        '#4BC0C0', // hijau tosca
+                        '#9966FF', // ungu
+                        '#FF9F40', // oranye
+                        '#8D99AE'  // abu-abu
+                    ],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    }
+                }
+            }
+        });
+
+        const chartHari = new Chart(document.getElementById('chartHari'), {
+            type: 'line',
+            data: {
+                labels: {!! json_encode(array_keys($perHari)) !!},
+                datasets: [{
+                    label: 'Jumlah Konsultasi per Hari',
+                    data: {!! json_encode(array_values($perHari)) !!},
+                    borderColor: '#e74c3c',
+                    backgroundColor: 'rgba(231,76,60,0.2)',
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Tanggal'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Jumlah Konsultasi'
+                        }
+                    }
+                }
+            }
+        });
+
         const chartBulan = new Chart(document.getElementById('chartBulan'), {
             type: 'bar',
             data: {
