@@ -34,13 +34,13 @@
             @foreach($data as $i => $row)
                 <tr>
                     <td>{{ $i+1 }}</td>
-                    <td>{{ $row['Tanggal Konsultasi'] ?? '' }}</td>
+                    <td>{{ $row['Timestamp'] ?? '' }}</td>
                     <td>{{ $row['Nama Lengkap'] ?? '' }}</td>
                     <td>{{ $row['Email Address'] ?? '' }}</td>
                     <td>{{ $row['WhatsApp'] ?? '' }}</td>
                     <td>{{ $row['Usia'] ?? '' }}</td>
                     <td>{{ $row['Pendidikan Terakhir'] ?? '' }}</td>
-                    <td>{{ $row['Alamat Lengkap'] ?? '' }}</td>
+                    <td>{{ $row['Alamat (Dukuh/Desa/RT RW)'] ?? '' }}</td>
                     <td>{{ $row['Kecamatan'] ?? '' }}</td>
                     <td>{{ $row['Kabupaten'] ?? '' }}</td>
                     <td>{{ $row['Provinsi'] ?? '' }}</td>

@@ -221,16 +221,19 @@
                             LPK ACC JAPAN CENTRE merupakan suatu lembaga pendidikan dan pelatihan bahasa wilayah Jawa Tengah, khususnya Kabupaten/Kota Tegal yang independen berdasarkan Akte Notaris No.19 Tanggal 19 April 2021. Program LPK ACC Japan Centre yaitu Pelatihan Bahasa Jepang, Pelatihan Mental dan Fisik, Program Magang dan TG (Tokutei Ginou) ke Jepang, dan Pelatihan kerja sesuai Job.
                         </p>
                         <ul>
-                            <li><span>Laki-Laki & Perempuan</span></li>
-                            <li><span>Usia 18 - 28 Tahun</span></li>
-                            <li><span>KTP, KK, Akte Kelahiran</span></li>
-                            <li><span>Ijazah minimal SMA/SMK</span></li>
+                            <li><span>Laki-Laki atau Perempuan</span></li>
+                            <li><span>Laki-Laki Usia 18 - 35 Tahun</span></li>
+                            <li><span>Perempuan Usia 18 - 28 Tahun</span></li>
+                            <li><span>Ijazah Asli Minimal SMA/SMK/MA/Paket C</span></li>
+                            <li><span>Akte Kelahiran Asli</span></li>
+                            <li><span>Fotocopy KTP, Kartu Keluarga</span></li>
                             <li><span>Sehat Jasmani & Rohani</span></li>
                             <li><span>Tidak Bertato & Bertindik</span></li>
                             <li><span>Bersedia mengikuti pelatihan</span></li>
                             <li><span>
                                     Bersedia mengikuti pelatihan Bahasa Jepang selama 4 Bulan
-                                </span></li>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
@@ -254,14 +257,14 @@
                                 <li><i class="bi bi-check-circle-fill"></i> <span>Manufaktur</span></li>
                             </ul>
 
-                            <h5><b>CONTACT ACC</b></h5>
+                            {{-- <h5><b>CONTACT ACC</b></h5>
                             <button class="btn btn-success">
                                 <a target="_blank"
                                     href="https://api.whatsapp.com/send/?phone=6285640110822&text&type=phone_number&app_absent=0"
                                     class="text-white">
                                     <b>WhatsApp:</b> 0856-4011-0822 (Admin)
                                 </a>
-                            </button>
+                            </button> --}}
 
                             <div class="position-relative mt-4">
                                 <img src="https://amanahcitracemerlang.id/storage/images/1727338199_Screenshot_2024-09-26-13-59-37-542_com.whatsapp-edit.jpg"
@@ -411,12 +414,13 @@
                             <div class="icon">
                                 <i class="bi bi-send"></i>
                             </div>
-                            <h4>35 - 70 Jt<span> / Job</span></h4>
+                            <h4>38 - 70 Jt<span> / Job</span></h4>
                             <ul>
                                 <li><i class="bi bi-check"></i> <span>
-                                        Biaya Proses Rp. 35.000.000 - Rp. 70.000.000 (Administrasi)
+                                        Biaya Proses Rp. 38.000.000 - Rp. 70.000.000 (Administrasi)
                                     </span>
                                 </li>
+                                <li><i class="bi bi-check"></i> <span>Penambahan DP estimasi 1-18 Jt</span></li>
                                 <li><i class="bi bi-check"></i> <span>Dana Talangan dari Bank 80% (Jaminan)</span></li>
                                 <li><i class="bi bi-check"></i> <span>Biaya variatif untuk setiap job.</span></li>
                             </ul>
@@ -455,15 +459,16 @@
                                 </h3>
                                 <div class="faq-content">
                                     <p>
-                                        Contoh Biaya Job Total Rp. 45.000.000,- (Empat Puluh Lima Juta Rupiah)<br />
+                                        Contoh Pengambilan Job dengan biaya Rp. 50.000.000,- (Lima Puluh Juta Rupiah)<br />
                                     <ul>
                                         <li>
-                                            DP Rp. 10.000.000,- ketika akan Interview (Untuk proses dan pemantapan
-                                            Bahasa)
+                                            DP Job Rp. 10.000.000,- ketika akan Interview (Untuk proses dan pemantapan Bahasa)
                                         </li>
                                         <li>
-                                            Sisa Rp. 35.000.000,- pelunasan COE dan Visa turun. Surat kontrak kerja,
-                                            tanda terima pembayaran administrasi akan disimpan oleh notaris.
+                                            Penambahan DP Rp. 10.000.000,- ketika sudah dinyatakan lolos Interview, dilakukan setelah lolos dan pengambilan berkas sebelum berangkat pemantapan.
+                                        </li>
+                                        <li>
+                                            Sisa Rp. 30.000.000,- pelunasan ketika COE dan Visa turun, jika ingin menggunakan dana talang bisa dengan jaminan sertifikat tanah/rumah.
                                         </li>
                                     </ul>
                                     </p>

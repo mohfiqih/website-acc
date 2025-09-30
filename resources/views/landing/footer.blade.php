@@ -4,7 +4,7 @@
             <div class="col-lg-6 col-md-12 footer-info">
                 <br />
                 <a href="/" class="logo align-items-center">
-                    <span>LPK ACC Japan Centre</span>
+                    <span style="line-height: 1">LPK ACC Japan Centre</span>
                 </a>
                 <p class="mt-2" style="text-align: justify;">
                     LPK ACC telah membimbing dan membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya Program Magang, Program Tokutei Ginou (TG) dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.
@@ -44,7 +44,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang (ACC)</span></strong> Website v.1.3.5
+            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang (ACC)</span></strong> Website v.1.3.6
         </div>
         <div class="credits">
             Kecamatan Adiwerna, Kabupaten Tegal, Jawa tengah, Indonesia</a>
