@@ -378,13 +378,13 @@
                         <option value="perTahun">Per Tahun</option>
                         <option value="perProvinsi">Per Provinsi</option>
                         <option value="perKabupaten">Per Kabupaten</option>
-                        <option value="perUmur">Per Umur</option>
+                        <option value="perUmur">Per Usia</option>
                     </select>
 
-                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="downloadPNG('mainChart','statistik_dinamis')">
+                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="downloadPNG('mainChart')">
                         Export PNG
                     </button>
-                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="downloadPDF('mainChart','Statistik Dinamis')">
+                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="downloadPDF('mainChart')">
                         Export PDF
                     </button>
                 </div>
@@ -393,6 +393,7 @@
                 <div>
                     <canvas id="mainChart" style="min-height: 300px; width: 100%;"></canvas>
                 </div>
+                <div id="chartSummary"></div>
             </div>
         </div>
     </div>
@@ -787,6 +788,7 @@
     {{-- Grafik All --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
 
     <script>
         const datasets = {
@@ -828,6 +830,7 @@
             }
         };
 
+        // Urutkan per umur
         datasets.perUmur.labels = datasets.perUmur.labels
             .map((v, i) => ({ label: parseInt(v), value: datasets.perUmur.data[i] }))
             .sort((a, b) => a.label - b.label)
@@ -866,13 +869,8 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        x: {
-                            ticks: { color: '#333', maxRotation: 45, minRotation: 0 }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            ticks: { precision: 0, stepSize: 1, color: '#333' }
-                        }
+                        x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 } },
+                        y: { beginAtZero: true, ticks: { precision: 0, stepSize: 1, color: '#333' } }
                     },
                     plugins: {
                         legend: { display: false },
@@ -884,14 +882,38 @@
                             padding: { top: 10, bottom: 20 }
                         }
                     },
-                    layout: {
-                        padding: 15
-                    }
+                    layout: { padding: 15 }
                 }
             });
 
             document.getElementById('chartTitle').innerText = selected.title;
             currentFilter = filterKey;
+
+            // --- Update Tabel Keterangan di bawah chart ---
+            const summaryContainer = document.getElementById('chartSummary');
+            const entries = selected.labels.map((label, i) => [label, selected.data[i]]);
+            let tableHTML = `
+                <div class="mt-4">
+                    <b>Keterangan ${selected.title}:</b>
+                    <table class="table table-bordered table-sm mt-2" style="width:auto; margin:auto;">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${entries.map(([label, value]) => `
+                                <tr>
+                                    <td>${label}</td>
+                                    <td>${value}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            summaryContainer.innerHTML = tableHTML;
         }
 
         renderChart('perHari');
@@ -900,36 +922,48 @@
             renderChart(this.value);
         });
 
+        // --- Download PNG ---
         function downloadPNG(chartId) {
             const canvas = document.getElementById(chartId);
             const url = canvas.toDataURL("image/png");
             const link = document.createElement("a");
-
-            const fileName = datasets[currentFilter].title
-                .replace(/\s+/g, '_')
-                .toLowerCase();
-
+            const fileName = datasets[currentFilter].title.replace(/\s+/g, '_').toLowerCase();
             link.href = url;
             link.download = fileName + ".png";
             link.click();
         }
 
+        // --- Download PDF (Chart + Tabel) ---
         function downloadPDF(chartId) {
             const canvas = document.getElementById(chartId);
             const imgData = canvas.toDataURL("image/png");
-
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF({ orientation: 'landscape' });
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'px', format: 'a4' });
 
             const title = datasets[currentFilter].title;
-
             doc.setFontSize(16);
-            doc.text(title, 15, 20);
+            doc.text(title, doc.internal.pageSize.getWidth()/2, 20, { align: 'center' });
 
-            doc.addImage(imgData, "PNG", 15, 30, 250, 110);
+            // Chart
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const imgWidth = pageWidth * 0.8;
+            const imgHeight = (canvas.height / canvas.width) * imgWidth;
+            const x = (pageWidth - imgWidth)/2;
+            doc.addImage(imgData, "PNG", x, 40, imgWidth, imgHeight);
 
-            const fileName = title.replace(/\s+/g, '_').toLowerCase() + ".pdf";
-            doc.save(fileName);
+            // Tabel keterangan
+            const entries = datasets[currentFilter].labels.map((label, i) => [label, datasets[currentFilter].data[i]]);
+            doc.autoTable({
+                startY: 50 + imgHeight,
+                head: [['Kategori', 'Jumlah']],
+                body: entries,
+                styles: { fontSize: 10, cellPadding: 4 },
+                headStyles: { fillColor: [4, 98, 145], textColor: 255, halign: 'center' },
+                columnStyles: { 0: { cellWidth: 180 }, 1: { halign: 'center' } },
+                margin: { left: 20, right: 20 }
+            });
+
+            doc.save(title.replace(/\s+/g, '_').toLowerCase() + ".pdf");
         }
 
         ctx.style.height = '360px';
