@@ -313,7 +313,17 @@ class PendaftaranController extends Controller
         $response = Http::get($this->googleScriptUrl);
         $data     = array_reverse($response->json());
 
-        $cleanedData = [];
+        $cleanedData    = [];
+        $perMentorAll = [];
+        $perMentorPerMonth = [];
+        $months = [];
+        $allowedMentors = [
+            'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
+            'SELLY', 'ADITYA', 'FAHRUL', 'FADIL', 'FUJIAYU', 'FIRMAN', 'GAZI',
+            'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
+            'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',
+            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', '-'
+        ];
 
         foreach ($data as $row) {
             $cleanedRow = [];
@@ -350,10 +360,36 @@ class PendaftaranController extends Controller
                     }
                 }
             }
+
+            // grafik per mentor
+            if (!empty($cleanedRow['NAMA MENTOR']) && !empty($cleanedRow['Timestamp'])) {
+                $mentor = strtoupper(trim(preg_replace('/[^A-Z ]/', '', $cleanedRow['NAMA MENTOR'])));
+                $mentor = preg_replace('/\s+/', ' ', $mentor);
+                $timestamp = $cleanedRow['Timestamp'];
+
+                $monthKey = date('Y-m', strtotime($timestamp));
+                $months[$monthKey] = date('F Y', strtotime($timestamp));
+
+                if (in_array($mentor, $allowedMentors)) {
+                    if (!isset($perMentorAll[$mentor])) $perMentorAll[$mentor] = 0;
+                    $perMentorAll[$mentor]++;
+
+                    if (!isset($perMentorPerMonth[$monthKey][$mentor])) $perMentorPerMonth[$monthKey][$mentor] = 0;
+                    $perMentorPerMonth[$monthKey][$mentor]++;
+                }
+            }
+
             $cleanedData[] = $cleanedRow;
         }
 
-        return view('landing.data-pendaftaran-new', compact('cleanedData'));
+        arsort($perMentorAll);
+
+        return view('landing.data-pendaftaran-new', [
+            'cleanedData'       => $cleanedData,
+            'perMentor'         => $perMentorAll,
+            'perMentorPerMonth' => $perMentorPerMonth,
+            'months'            => $months
+        ]);
     }
 
     public function refreshTablePendaftaran()
@@ -597,6 +633,160 @@ class PendaftaranController extends Controller
             'Content-Type'          => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
             'Content-Disposition'   => 'attachment; filename="' . $fileName . '"',
         ])->deleteFileAfterSend(true);
+    }
+
+    public function exportPdf(Request $request)
+    {
+        $response = Http::get($this->googleScriptUrl);
+
+        if (!$response->successful()) {
+            return back()->with('error', 'Gagal ambil data dari Google Script');
+        }
+
+        $json = $response->json();
+
+        if (!is_array($json)) {
+            \Log::error('Google Script response bukan array', ['body' => $response->body()]);
+            $json = [];
+        }
+
+        $startDate = $request->input('start_date');
+        $endDate   = $request->input('end_date');
+
+        $data = [];
+        // foreach ($json as $row) {
+        //     $cleanedRow = [];
+        //     foreach ($row as $key => $value) {
+        //         if ($key === 'Timestamp') {
+        //             $dateOnly = substr($value, 0, 10);
+        //             $cleanedRow[$key] = $dateOnly;
+
+        //             if ($startDate && $endDate) {
+        //                 if ($dateOnly < $startDate || $dateOnly > $endDate) {
+        //                     continue 2;
+        //                 }
+        //             }
+        //         }
+
+        //         if (in_array($key, ['KEAHLIAN', 'MOTIVASI', 'HOBI', 'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN', 'SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
+        //             $cleanedRow[$key] = $this->convertJsonToText($value);
+        //             continue;
+        //         }
+
+        //         if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
+        //                 'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
+        //                 'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+        //                 'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
+        //         {
+        //             // $cleanedRow[$key] = $value;
+        //             if (stripos($key, 'EMAIL') !== false) {
+        //                 $cleanedRow[$key] = $value;
+        //             } else {
+        //                 $cleanedRow[$key] = strtoupper($value);
+        //             }
+        //         } else {
+        //             $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+        //             // $cleanedRow[$newKey] = $value;
+        //             if (stripos($newKey, 'EMAIL') !== false) {
+        //                 $cleanedRow[$newKey] = $value;
+        //             } else {
+        //                 $cleanedRow[$newKey] = strtoupper($value);
+        //             }
+        //         }
+        //     }
+        //     $data[] = $cleanedRow;
+        // }
+
+        foreach ($json as $row) {
+            $cleanedRow = [];
+            foreach ($row as $key => $value) {
+
+                if ($key === 'Timestamp') {
+                    $dateOnly = substr($value, 0, 10);
+                    $formattedDate = date('d-m-y', strtotime($dateOnly));
+                    $cleanedRow[$key] = $formattedDate;
+
+                    if ($startDate && $endDate) {
+                        if ($dateOnly < $startDate || $dateOnly > $endDate) {
+                            continue 2;
+                        }
+                    }
+                    continue;
+                }
+
+                if (stripos($key, 'TANGGAL LAHIR') !== false) {
+                    $formattedBirth = '';
+                    if (!empty($value) && strtotime($value)) {
+                        $formattedBirth = date('d-m-y', strtotime($value));
+                    }
+                    $cleanedRow[$key] = $formattedBirth;
+                    continue;
+                }
+
+                if (in_array($key, [
+                    'NAMA (KATAKANA)', 'NAMA (INDONESIA)',
+                    'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)',
+                    'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
+                    'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'
+                ])) {
+                    $cleanedRow[$key] = strtoupper($value);
+                } else {
+                    $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
+                    if (stripos($newKey, 'EMAIL') !== false) {
+                        $cleanedRow[$newKey] = $value;
+                    } else {
+                        $cleanedRow[$newKey] = strtoupper($value);
+                    }
+                }
+
+                if (in_array($key, [
+                    'KEAHLIAN', 'MOTIVASI', 'HOBI',
+                    'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN',
+                    'SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'
+                ])) {
+                    $cleanedRow[$key] = $this->convertJsonToText($value);
+                }
+            }
+
+            $data[] = $cleanedRow;
+        }
+
+        $pdf = Pdf::loadView('landing.export_pendaftaran', ['data' => $data])
+            ->setPaper('a4', 'landscape');
+
+        $hariIndo = [
+            'Sunday'    => 'Minggu',
+            'Monday'    => 'Senin',
+            'Tuesday'   => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday'  => 'Kamis',
+            'Friday'    => 'Jumat',
+            'Saturday'  => 'Sabtu'
+        ];
+        $bulanIndo = [
+            'January'   => 'Januari',
+            'February'  => 'Februari',
+            'March'     => 'Maret',
+            'April'     => 'April',
+            'May'       => 'Mei',
+            'June'      => 'Juni',
+            'July'      => 'Juli',
+            'August'    => 'Agustus',
+            'September' => 'September',
+            'October'   => 'Oktober',
+            'November'  => 'November',
+            'December'  => 'Desember'
+        ];
+
+        $day   = $hariIndo[date('l')];
+        $date  = date('d');
+        $month = $bulanIndo[date('F')];
+        $year  = date('Y');
+        $time  = date('H.i.s');
+
+        $filename = "Data-Konsultasi-{$day}-{$date}-{$month}-{$year}-{$time}.pdf";
+
+        return $pdf->download($filename);
     }
 
     # convert sifat, kelebihan, kelemahan

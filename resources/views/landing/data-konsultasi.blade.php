@@ -266,7 +266,7 @@
     </section>
 
     {{-- Chart --}}
-    <div class="container mt-4">
+    {{-- <div class="container mt-4">
         <div class="row">
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
@@ -282,21 +282,6 @@
                     </div>
                 </div>
             </div>
-
-            {{-- <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Berdasarkan Umur <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('umurChart','grafik_berdasarkan_umur')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('umurChart','Grafik Berdasarkan Umur')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="umurChart" width="400" height="400"></canvas>
-                    </div>
-                </div>
-            </div> --}}
 
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
@@ -377,8 +362,43 @@
                 </div>
             </div>
         </div>
+    </div> --}}
+
+    {{-- Chart All --}}
+    <div class="container mt-4">
+        <div class="card shadow-sm">
+            <div class="card-header text-dark d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <strong id="chartTitle">Statistik Per Hari</strong>
+                </div>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <select id="chartFilter" class="form-select form-select-sm">
+                        <option value="perHari">Per Hari</option>
+                        <option value="perBulan">Per Bulan</option>
+                        <option value="perTahun">Per Tahun</option>
+                        <option value="perProvinsi">Per Provinsi</option>
+                        <option value="perKabupaten">Per Kabupaten</option>
+                        <option value="perUmur">Per Usia</option>
+                    </select>
+
+                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="downloadPNG('mainChart')">
+                        Export PNG
+                    </button>
+                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="downloadPDF('mainChart')">
+                        Export PDF
+                    </button>
+                </div>
+            </div>
+            <div class="card-body text-center">
+                <div>
+                    <canvas id="mainChart" style="min-height: 300px; width: 100%;"></canvas>
+                </div>
+                <div id="chartSummary"></div>
+            </div>
+        </div>
     </div>
 
+    {{-- Data --}}
     <div class="container mt-2">
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
@@ -465,7 +485,6 @@
             </div>
         </div>
     </div>
-
     <br />
 
     {{-- <div id="preloader"></div> --}}
@@ -597,8 +616,8 @@
         });
     </script>
 
-    {{-- Grafik --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- Grafik Old --}}
+    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
         let labels = {!! json_encode(array_keys($perUmur)) !!};
@@ -764,6 +783,191 @@
 
             doc.save(title.replace(/\s+/g, '_').toLowerCase() + ".pdf");
         }
+    </script> --}}
+
+    {{-- Grafik All --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <script>
+        const datasets = {
+            perHari: {
+                labels: {!! json_encode(array_keys($perHari)) !!},
+                data: {!! json_encode(array_values($perHari)) !!},
+                type: 'line',
+                title: 'Statistik Per Hari'
+            },
+            perBulan: {
+                labels: {!! json_encode(array_keys($perBulan)) !!},
+                data: {!! json_encode(array_values($perBulan)) !!},
+                type: 'bar',
+                title: 'Statistik Per Bulan'
+            },
+            perTahun: {
+                labels: {!! json_encode(array_keys($perTahun)) !!},
+                data: {!! json_encode(array_values($perTahun)) !!},
+                type: 'bar',
+                title: 'Statistik Per Tahun'
+            },
+            perProvinsi: {
+                labels: {!! json_encode(array_keys($perProvinsi)) !!},
+                data: {!! json_encode(array_values($perProvinsi)) !!},
+                type: 'bar',
+                title: 'Statistik Per Provinsi'
+            },
+            perKabupaten: {
+                labels: {!! json_encode(array_keys($perKabupaten)) !!},
+                data: {!! json_encode(array_values($perKabupaten)) !!},
+                type: 'bar',
+                title: 'Statistik Per Kabupaten'
+            },
+            perUmur: {
+                labels: {!! json_encode(array_keys($perUmur)) !!},
+                data: {!! json_encode(array_values($perUmur)) !!},
+                type: 'bar',
+                title: 'Statistik Per Umur'
+            }
+        };
+
+        // Urutkan per umur
+        datasets.perUmur.labels = datasets.perUmur.labels
+            .map((v, i) => ({ label: parseInt(v), value: datasets.perUmur.data[i] }))
+            .sort((a, b) => a.label - b.label)
+            .map(item => item.label);
+
+        datasets.perUmur.data = datasets.perUmur.labels.map(label => {
+            const idx = datasets.perUmur.labels.indexOf(label);
+            return Object.values({!! json_encode($perUmur) !!})[idx];
+        });
+
+        const ctx = document.getElementById('mainChart');
+        let chartInstance = null;
+        let currentFilter = 'perHari';
+
+        function renderChart(filterKey) {
+            const selected = datasets[filterKey];
+            if (!selected) return;
+
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: selected.type,
+                data: {
+                    labels: selected.labels,
+                    datasets: [{
+                        label: selected.title,
+                        data: selected.data,
+                        backgroundColor: 'rgba(4, 98, 145, 0.8)',
+                        borderColor: '#046291',
+                        borderWidth: 1.2,
+                        fill: selected.type === 'line',
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: { ticks: { color: '#333', maxRotation: 45, minRotation: 0 } },
+                        y: { beginAtZero: true, ticks: { precision: 0, stepSize: 1, color: '#333' } }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: {
+                            display: true,
+                            text: selected.title,
+                            color: '#046291',
+                            font: { size: 15, weight: 'bold' },
+                            padding: { top: 10, bottom: 20 }
+                        }
+                    },
+                    layout: { padding: 15 }
+                }
+            });
+
+            document.getElementById('chartTitle').innerText = selected.title;
+            currentFilter = filterKey;
+
+            // --- Update Tabel Keterangan di bawah chart ---
+            const summaryContainer = document.getElementById('chartSummary');
+            const entries = selected.labels.map((label, i) => [label, selected.data[i]]);
+            let tableHTML = `
+                <div class="mt-4">
+                    <b>Keterangan ${selected.title}:</b>
+                    <table class="table table-bordered table-sm mt-2" style="width:auto; margin:auto;">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Jumlah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${entries.map(([label, value]) => `
+                                <tr>
+                                    <td>${label}</td>
+                                    <td>${value}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            summaryContainer.innerHTML = tableHTML;
+        }
+
+        renderChart('perHari');
+
+        document.getElementById('chartFilter').addEventListener('change', function() {
+            renderChart(this.value);
+        });
+
+        // --- Download PNG ---
+        function downloadPNG(chartId) {
+            const canvas = document.getElementById(chartId);
+            const url = canvas.toDataURL("image/png");
+            const link = document.createElement("a");
+            const fileName = datasets[currentFilter].title.replace(/\s+/g, '_').toLowerCase();
+            link.href = url;
+            link.download = fileName + ".png";
+            link.click();
+        }
+
+        // --- Download PDF (Chart + Tabel) ---
+        function downloadPDF(chartId) {
+            const canvas = document.getElementById(chartId);
+            const imgData = canvas.toDataURL("image/png");
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ orientation: 'landscape', unit: 'px', format: 'a4' });
+
+            const title = datasets[currentFilter].title;
+            doc.setFontSize(16);
+            doc.text(title, doc.internal.pageSize.getWidth()/2, 20, { align: 'center' });
+
+            // Chart
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const imgWidth = pageWidth * 0.8;
+            const imgHeight = (canvas.height / canvas.width) * imgWidth;
+            const x = (pageWidth - imgWidth)/2;
+            doc.addImage(imgData, "PNG", x, 40, imgWidth, imgHeight);
+
+            // Tabel keterangan
+            const entries = datasets[currentFilter].labels.map((label, i) => [label, datasets[currentFilter].data[i]]);
+            doc.autoTable({
+                startY: 50 + imgHeight,
+                head: [['Kategori', 'Jumlah']],
+                body: entries,
+                styles: { fontSize: 10, cellPadding: 4 },
+                headStyles: { fillColor: [4, 98, 145], textColor: 255, halign: 'center' },
+                columnStyles: { 0: { cellWidth: 180 }, 1: { halign: 'center' } },
+                margin: { left: 20, right: 20 }
+            });
+
+            doc.save(title.replace(/\s+/g, '_').toLowerCase() + ".pdf");
+        }
+
+        ctx.style.height = '360px';
+        ctx.style.width = '100%';
     </script>
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>

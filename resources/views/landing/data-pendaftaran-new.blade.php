@@ -262,6 +262,30 @@
     </section>
 
     <div class="container mt-4">
+        {{-- Chart --}}
+        <div class="card mt-5 mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
+                <p class="mb-0"><b>Daftar Online Berdasarkan Nama Mentor</b></p>
+                <div class="d-flex align-items-center gap-2 flex-wrap">
+                    <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
+                        <option value="">All Month</option>
+                        @foreach ($months as $key => $label)
+                            <option value="{{ $key }}">{{ $label }}</option> {{-- $key = "YYYY-MM" --}}
+                        @endforeach
+                    </select>
+                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">Export JPG</button>
+                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="exportPDFLandscape()">Export PDF</button>
+                </div>
+            </div>
+
+            <div class="card-body text-center">
+                <div>
+                    <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
+                </div>
+                <div id="mentorSummary"></div>
+            </div>
+        </div>
+        
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
                 <div class="d-flex justify-content-between mb-3">
@@ -282,6 +306,22 @@
                     </div>
                 </div>
     
+                <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
+                        class="d-flex align-items-center mb-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label><b>Dari Tanggal</b></label>
+                                <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                <label><b>Sampai Tanggal</b></label>
+                                <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                            </div>
+                            <div class="col md-12">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-download"></i> Export PDF
+                                </button>
+                            </div>
+                        </div>
+                </form>
                 <div class="table-responsive">
                     <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
@@ -369,21 +409,6 @@
                                 </thead>
                                 <tbody id="tableBody">
                                     @include('partials.table_body')
-                                    {{-- @foreach($cleanedData as $row)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <a href="{{ route('export.cv.word', ['id' => $row['ID']]) }}" class="btn btn-sm btn-success">
-                                                    <i class="fa fa-download"></i> Download CV
-                                                </a>                                                
-                                            </td>
-                                            @foreach($row as $key => $cell)
-                                                @if ($key !== 'ID')
-                                                    <td>{{ $cell }}</td>
-                                                @endif
-                                            @endforeach                                                                       
-                                        </tr>
-                                    @endforeach --}}
                                 </tbody>
                             @else
                                 <tr>
@@ -393,8 +418,6 @@
                         </table>
                     </div>
                 </div>
-    
-                <!-- Pagination di luar DataTables -->
                 <div class="d-flex justify-content-between align-items-center">
                     <span id="tableInfo"></span>
                     
@@ -536,7 +559,145 @@
             });
         });
     </script>
-    
+
+    {{-- Chart --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+    <script>
+        const allData = @json($perMentor);
+        const monthlyData = @json($perMentorPerMonth);
+
+        const ctx = document.getElementById('mentorChart').getContext('2d');
+        let chart;
+        let currentData = allData;
+
+        function renderChart(dataObj) {
+            const labels = Object.keys(dataObj);
+            const data = Object.values(dataObj);
+
+            if (chart) chart.destroy();
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels,
+                    datasets: [{
+                        label: 'Jumlah Pendaftar',
+                        data,
+                        borderWidth: 1,
+                        backgroundColor: 'rgba(4, 98, 145, 0.8)',
+                        borderColor: '#046291'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { stepSize: 5, precision: 0 }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: true }
+                    }
+                }
+            });
+
+            currentData = dataObj;
+            updateSummaryTable(dataObj);
+        }
+
+        function updateSummaryTable(dataObj) {
+            const summaryContainer = document.getElementById('mentorSummary');
+            const entries = Object.entries(dataObj);
+
+            let tableHTML = `
+                <div class="mt-4">
+                    <b>Keterangan Jumlah Pendaftar per Mentor:</b>
+                    <table class="table table-bordered table-sm mt-2" style="width:auto; margin:auto;">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Nama Mentor</th>
+                                <th>Jumlah Pendaftar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${entries.map(([mentor, jumlah]) => `
+                                <tr>
+                                    <td>${mentor}</td>
+                                    <td>${jumlah}</td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            summaryContainer.innerHTML = tableHTML;
+        }
+
+        // Render chart default semua data
+        renderChart(allData);
+
+        // Event listener filter bulan
+        document.getElementById('monthFilter').addEventListener('change', function() {
+            const val = this.value; // ex: "2025-10"
+            if (val && monthlyData[val]) {
+                renderChart(monthlyData[val]);
+            } else {
+                renderChart(allData);
+            }
+        });
+
+        // EXPORT JPG
+        function exportJPG() {
+            const link = document.createElement('a');
+            link.download = 'daftar_online_per_mentor.jpg';
+            link.href = document.getElementById('mentorChart').toDataURL('image/jpeg', 1.0);
+            link.click();
+        }
+
+        // EXPORT PDF Landscape dengan tabel
+        async function exportPDFLandscape() {
+            const { jsPDF } = window.jspdf;
+            const canvas = document.getElementById('mentorChart');
+
+            await new Promise(r => setTimeout(r, 300)); // pastikan chart siap
+
+            const imgData = canvas.toDataURL('image/png', 1.0);
+            const pdf = new jsPDF({ orientation: 'landscape', unit: 'px', format: 'a4' });
+
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const imgWidth = pageWidth * 0.85;
+            const imgHeight = (canvas.height / canvas.width) * imgWidth;
+            const x = (pageWidth - imgWidth) / 2;
+            const y = 40;
+
+            // Judul
+            pdf.setFontSize(16);
+            pdf.text("Daftar Online Berdasarkan Nama Mentor", pageWidth / 2, 25, { align: 'center' });
+
+            // Chart
+            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+
+            // Tabel keterangan per mentor
+            const tableData = Object.entries(currentData).map(([mentor, jumlah]) => [mentor, jumlah]);
+            pdf.autoTable({
+                startY: y + imgHeight + 30,
+                head: [['Nama Mentor', 'Jumlah Pendaftar']],
+                body: tableData,
+                styles: { fontSize: 10, cellPadding: 4 },
+                headStyles: { fillColor: [4, 98, 145], textColor: 255, halign: 'center' },
+                columnStyles: { 0: { cellWidth: 180 }, 1: { halign: 'center' } },
+                margin: { left: 40, right: 40 }
+            });
+
+            pdf.save('daftar_online_per_mentor.pdf');
+        }
+    </script>
+
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
