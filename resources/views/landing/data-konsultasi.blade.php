@@ -11,7 +11,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+        rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -63,19 +65,19 @@
             padding: 8px 12px;
             border-radius: 5px;
             text-decoration: none;
-            border: 1px solid #046392;
+            border: 1px solid #046291;
             background-color: white;
-            color: #046392;
+            color: #046291;
             font-weight: bold;
         }
 
         .pagination li a:hover {
-            background-color: #046392;
+            background-color: #046291;
             color: white;
         }
 
         .pagination li.active span {
-            background-color: #046392;
+            background-color: #046291;
             color: white;
         }
 
@@ -105,7 +107,7 @@
 
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -147,7 +149,8 @@
             white-space: nowrap;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -193,7 +196,7 @@
             overflow-x: auto;
         }
 
-        .fixed-header-table th, 
+        .fixed-header-table th,
         .fixed-header-table td {
             white-space: nowrap;
         }
@@ -222,14 +225,14 @@
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -248,8 +251,10 @@
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
                     <h2 style="text-align: center"></span>DATA TAMU KONSULTASI LPK ACC JAPAN CENTRE</h2>
-                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
-                    <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
+                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor,
+                        Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start text-center"
+                        style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Website LPK ACC Japan Centre
@@ -266,9 +271,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Hari <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartHari','statistik_per_hari')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartHari','Statistik Per Hari')">Export PDF</button>
+                        Statistik Per Hari <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartHari','statistik_per_hari')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartHari','Statistik Per Hari')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="chartHari"></canvas>
@@ -276,15 +283,32 @@
                 </div>
             </div>
 
-            <div class="col-md-6 mb-4">
+            {{-- <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Berdasarkan Umur <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('umurChart','grafik_berdasarkan_umur')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('umurChart','Grafik Berdasarkan Umur')">Export PDF</button>
+                        Statistik Berdasarkan Umur <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('umurChart','grafik_berdasarkan_umur')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('umurChart','Grafik Berdasarkan Umur')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="umurChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div> --}}
+
+            <div class="col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-header text-dark">
+                        Statistik Per Kabupaten <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartUsia','statistik_per_usia')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartUsia','Statistik Per Usia')">Export PDF</button>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="chartUsia"></canvas>
                     </div>
                 </div>
             </div>
@@ -294,9 +318,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Bulan <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartBulan','statistik_per_bulan')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartBulan','Statistik Per Bulan')">Export PDF</button>
+                        Statistik Per Bulan <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartBulan','statistik_per_bulan')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartBulan','Statistik Per Bulan')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="chartBulan"></canvas>
@@ -307,9 +333,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Tahun <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartTahun','statistik_per_tahun')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartTahun','Statistik Per Tahun')">Export PDF</button>
+                        Statistik Per Tahun <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartTahun','statistik_per_tahun')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartTahun','Statistik Per Tahun')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="chartTahun"></canvas>
@@ -322,9 +350,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Provinsi <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartProvinsi','statistik_per_provinsi')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartProvinsi','Statistik Per Provinsi')">Export PDF</button>
+                        Statistik Per Provinsi <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartProvinsi','statistik_per_provinsi')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartProvinsi','Statistik Per Provinsi')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="chartProvinsi"></canvas>
@@ -335,9 +365,11 @@
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
                     <div class="card-header text-dark">
-                        Statistik Per Kabupaten <br/>
-                        <button class="btn btn-sm btn-success" onclick="downloadPNG('chartKabupaten','statistik_per_kabupaten')">Export PNG</button>
-                        <button class="btn btn-sm btn-primary" onclick="downloadPDF('chartKabupaten','Statistik Per Kabupaten')">Export PDF</button>
+                        Statistik Per Kabupaten <br />
+                        <button class="btn btn-sm btn-success"
+                            onclick="downloadPNG('chartKabupaten','statistik_per_kabupaten')">Export PNG</button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="downloadPDF('chartKabupaten','Statistik Per Kabupaten')">Export PDF</button>
                     </div>
                     <div class="card-body">
                         <canvas id="chartKabupaten"></canvas>
@@ -353,7 +385,7 @@
                 <div class="d-flex justify-content-between mb-3">
                     <div>
                         <label>
-                            Show 
+                            Show
                             <select id="entriesSelect" class="form-control d-inline-block w-auto">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
@@ -367,9 +399,10 @@
                         <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
                     </div>
                 </div>
-    
+
                 <div class="table-responsive">
-                    <form action="{{ route('data-konsultasi.export-pdf') }}" method="GET" class="d-flex align-items-center mb-3">
+                    <form action="{{ route('data-konsultasi.export-pdf') }}" method="GET"
+                        class="d-flex align-items-center mb-3">
                         <div class="row">
                             <div class="col-md-12">
                                 <label><b>Dari Tanggal</b></label>
@@ -384,10 +417,11 @@
                             </div>
                         </div>
                     </form>
-                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                    <div id="refreshIndicator"
+                        style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
                     </div>
-                    <br/>
+                    <br />
                     <div class="table-responsive">
                         <table id="spreadsheetTable" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
@@ -419,11 +453,11 @@
                         </table>
                     </div>
                 </div>
-    
+
                 <!-- Pagination di luar DataTables -->
                 <div class="d-flex justify-content-between align-items-center">
                     <span id="tableInfo"></span>
-                    
+
                     <div class="d-flex align-items-center ms-auto">
                         <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
                     </div>
@@ -431,8 +465,8 @@
             </div>
         </div>
     </div>
-    
-    <br/>    
+
+    <br />
 
     {{-- <div id="preloader"></div> --}}
 
@@ -477,7 +511,7 @@
                 "lengthChange": false,
                 "scrollY": false,
                 "scrollCollapse": false,
-                "dom": 'rtp' 
+                "dom": 'rtp'
             });
 
             // **Sembunyikan pagination bawaan DataTables**
@@ -517,47 +551,47 @@
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'OK',
-                confirmButtonColor: '#046392'
+                confirmButtonColor: '#046291'
             }).then((result) => {
                 if (result.isConfirmed) {
                     fetch(`/export-cv-word/${id}`, {
-                        method: 'GET',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Download failed');
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(url);
+                            method: 'GET',
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            }
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Download failed');
+                            }
+                            return response.blob();
+                        })
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
+                            document.body.appendChild(a);
+                            a.click();
+                            a.remove();
+                            window.URL.revokeObjectURL(url);
 
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'File has been downloaded.',
-                            icon: 'success',
-                            timer: 2000,
-                            showConfirmButton: false
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'File has been downloaded.',
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'Failed to download file.',
+                                icon: 'error'
+                            });
                         });
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            title: 'Error!',
-                            text: 'Failed to download file.',
-                            icon: 'error'
-                        });
-                    });
                 }
             });
         });
@@ -567,30 +601,41 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script>
-        const ctx = document.getElementById('umurChart').getContext('2d');
-        const umurData = @json($perUmur);
+        let labels = {!! json_encode(array_keys($perUmur)) !!};
+        let data = {!! json_encode(array_values($perUmur)) !!};
 
-        new Chart(ctx, {
-            type: 'pie',
+        let combined = labels.map((label, i) => ({
+            label: parseInt(label),
+            value: data[i]
+        }));
+
+        combined.sort((a, b) => a.label - b.label);
+        labels = combined.map(item => item.label);
+        data = combined.map(item => item.value);
+
+        const chartUsia = new Chart(document.getElementById('chartUsia'), {
+            type: 'bar',
             data: {
-                labels: Object.keys(umurData),
+                labels: labels,
                 datasets: [{
-                    data: Object.values(umurData),
-                    backgroundColor: [
-                        '#36A2EB', // biru
-                        '#FFCE56', // kuning
-                        '#4BC0C0', // hijau tosca
-                        '#9966FF', // ungu
-                        '#FF9F40', // oranye
-                        '#8D99AE'  // abu-abu
-                    ],
+                    label: 'Jumlah Konsultasi per Usia',
+                    data: data,
+                    backgroundColor: '#046291',
+                    borderColor: 'rgba(4, 98, 145, 0.5)',
+                    borderWidth: 1
                 }]
             },
             options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            stepSize: 1,
+                            callback: function(value) {
+                                return value;
+                            }
+                        }
                     }
                 }
             }
@@ -603,8 +648,8 @@
                 datasets: [{
                     label: 'Jumlah Konsultasi per Hari',
                     data: {!! json_encode(array_values($perHari)) !!},
-                    borderColor: '#e74c3c',
-                    backgroundColor: 'rgba(231,76,60,0.2)',
+                    borderColor: '#046291',
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
                     fill: true,
                     tension: 0.3
                 }]
@@ -626,6 +671,20 @@
                         }
                     }
                 }
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            precision: 0,
+                            stepSize: 1,
+                            callback: function(value) {
+                                return value;
+                            }
+                        }
+                    }
+                }
             }
         });
 
@@ -636,7 +695,7 @@
                 datasets: [{
                     label: 'Jumlah Konsultasi per Bulan',
                     data: {!! json_encode(array_values($perBulan)) !!},
-                    backgroundColor: '#3498db' // biru solid
+                    backgroundColor: '#046291'
                 }]
             }
         });
@@ -648,7 +707,7 @@
                 datasets: [{
                     label: 'Jumlah Konsultasi per Tahun',
                     data: {!! json_encode(array_values($perTahun)) !!},
-                    backgroundColor: '#2ecc71' // hijau solid
+                    backgroundColor: '#046291'
                 }]
             }
         });
@@ -660,7 +719,7 @@
                 datasets: [{
                     label: 'Jumlah Konsultasi per Provinsi',
                     data: {!! json_encode(array_values($perProvinsi)) !!},
-                    backgroundColor: '#f39c12' // oranye solid
+                    backgroundColor: '#046291'
                 }]
             }
         });
@@ -672,7 +731,7 @@
                 datasets: [{
                     label: 'Jumlah Konsultasi per Kabupaten',
                     data: {!! json_encode(array_values($perKabupaten)) !!},
-                    backgroundColor: '#8e44ad' // ungu solid
+                    backgroundColor: '#046291'
                 }]
             }
         });
@@ -691,7 +750,9 @@
             const canvas = document.getElementById(chartId);
             const imgData = canvas.toDataURL("image/png");
 
-            const { jsPDF } = window.jspdf;
+            const {
+                jsPDF
+            } = window.jspdf;
             const doc = new jsPDF();
 
             // Judul di PDF
@@ -701,10 +762,10 @@
             // Chart masuk PDF
             doc.addImage(imgData, "PNG", 15, 30, 180, 100);
 
-            doc.save(title.replace(/\s+/g,'_').toLowerCase() + ".pdf");
+            doc.save(title.replace(/\s+/g, '_').toLowerCase() + ".pdf");
         }
     </script>
-    
+
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>

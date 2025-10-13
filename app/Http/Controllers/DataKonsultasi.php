@@ -35,7 +35,6 @@ class DataKonsultasi extends Controller
         $data = $json;
         $cleanedData = [];
 
-        // untuk statistik
         $perHari     = [];
         $perBulan    = [];
         $perTahun    = [];
@@ -43,7 +42,6 @@ class DataKonsultasi extends Controller
         $perKabupaten = [];
         $perUmur      = [];
 
-        // daftar nama bulan
         $namaBulan = [
             1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
             5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
@@ -55,6 +53,9 @@ class DataKonsultasi extends Controller
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
+                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap'])) {
+                    $value = ucwords(strtolower(trim($value)));
+                }
                 if ($key === 'Timestamp') {
                     try {
                         $dt = new \DateTime($value, $tz); // parsing langsung
@@ -91,7 +92,6 @@ class DataKonsultasi extends Controller
             $cleanedData[] = $cleanedRow;
         }
 
-        // urutkan perHari biar rapi
         ksort($perHari);
 
         return view('landing.data-konsultasi', [
@@ -120,13 +120,16 @@ class DataKonsultasi extends Controller
                 //     continue;
                 // }
 
+                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap'])) {
+                    $value = ucwords(strtolower(trim($value)));
+                }
                 if ($key === 'Timestamp') {
                     try {
                         $dt = new \DateTime($value, $tz);
                         $dateOnly = $dt->format('Y-m-d');
                         $cleanedRow[$key] = $dateOnly;
                     } catch (\Exception $e) {
-                        $cleanedRow[$key] = $value; // fallback kalau parsing gagal
+                        $cleanedRow[$key] = $value;
                     }
                 } else {
                     $cleanedRow[$key] = $value;
@@ -160,6 +163,9 @@ class DataKonsultasi extends Controller
         foreach ($json as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
+                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap'])) {
+                    $value = ucwords(strtolower(trim($value)));
+                }
                 if ($key === 'Timestamp') {
                     $dateOnly = substr($value, 0, 10);
                     $cleanedRow[$key] = $dateOnly;
