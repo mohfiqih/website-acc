@@ -894,8 +894,8 @@
             const entries = selected.labels.map((label, i) => [label, selected.data[i]]);
             let tableHTML = `
                 <div class="mt-4">
-                    <b>Keterangan ${selected.title}:</b>
-                    <table class="table table-bordered table-sm mt-2" style="width:auto; margin:auto;">
+                    <b style="display: block; text-align: left;">Keterangan ${selected.title}:</b>
+                    <table class="table table-bordered table-sm mt-2 text-nowrap" style="min-width: 300px;">
                         <thead class="table-light">
                             <tr>
                                 <th>Kategori</th>
