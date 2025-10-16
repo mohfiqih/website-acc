@@ -35,12 +35,13 @@ class DataKonsultasi extends Controller
         $data = $json;
         $cleanedData = [];
 
-        $perHari     = [];
-        $perBulan    = [];
-        $perTahun    = [];
-        $perProvinsi = [];
+        $perHari      = [];
+        $perBulan     = [];
+        $perTahun     = [];
+        $perProvinsi  = [];
         $perKabupaten = [];
         $perUmur      = [];
+        $perGender    = [];
 
         $namaBulan = [
             1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
@@ -53,29 +54,47 @@ class DataKonsultasi extends Controller
         foreach ($data as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
-                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap'])) {
+                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap', 'Alamat (Dukuh/Desa/RT RW)', 'Dapat informasi dari mana?'])) {
                     $value = ucwords(strtolower(trim($value)));
                 }
+
                 if ($key === 'Timestamp') {
                     try {
-                        $dt = new \DateTime($value, $tz); // parsing langsung
+                        $dt = new \DateTime($value, $tz);
                     } catch (\Exception $e) {
                         continue;
                     }
 
-                    $dateOnly = $dt->format('Y-m-d'); // hasil YYYY-MM-DD
-                    $cleanedRow[$key] = $dateOnly;
+                    $dateTimeFull = $dt->format('Y-m-d H:i:s');
+                    $cleanedRow[$key] = $dateTimeFull;
 
-                    // hitung per hari
+                    $dateOnly = $dt->format('Y-m-d');
                     $perHari[$dateOnly] = ($perHari[$dateOnly] ?? 0) + 1;
 
                     $bulan = (int) $dt->format('m');
                     $tahun = $dt->format('Y');
-
                     $nama = $namaBulan[$bulan] . ' ' . $tahun;
                     $perBulan[$nama] = ($perBulan[$nama] ?? 0) + 1;
                     $perTahun[$tahun] = ($perTahun[$tahun] ?? 0) + 1;
-                } else {
+                } 
+                elseif ($key === 'Usia') {
+                    $usiaAngka = (int) preg_replace('/\D+/', '', $value);
+                    $cleanedRow[$key] = $usiaAngka;
+                    $perUmur[$usiaAngka] = ($perUmur[$usiaAngka] ?? 0) + 1;
+                } 
+                elseif ($key === 'Jenis Kelamin') {
+                    $gender = strtolower(trim($value));
+                    if ($gender === 'laki-laki' || $gender === 'laki laki' || $gender === 'pria') {
+                        $gender = 'Laki-Laki';
+                    } elseif ($gender === 'perempuan' || $gender === 'wanita') {
+                        $gender = 'Perempuan';
+                    } else {
+                        $gender = 'Tidak Diketahui';
+                    }
+                    $cleanedRow[$key] = $gender;
+                    $perGender[$gender] = ($perGender[$gender] ?? 0) + 1;
+                } 
+                else {
                     $cleanedRow[$key] = $value;
 
                     if ($key === 'Provinsi') {
@@ -83,9 +102,6 @@ class DataKonsultasi extends Controller
                     }
                     if ($key === 'Kabupaten') {
                         $perKabupaten[$value] = ($perKabupaten[$value] ?? 0) + 1;
-                    }
-                    if ($key === 'Usia') {
-                        $perUmur[$value] = ($perUmur[$value] ?? 0) + 1;
                     }
                 }
             }
@@ -102,6 +118,7 @@ class DataKonsultasi extends Controller
             'perProvinsi'   => $perProvinsi,
             'perKabupaten'  => $perKabupaten,
             'perUmur'       => $perUmur,
+            'perGender'     => $perGender,
         ]);
     }
 

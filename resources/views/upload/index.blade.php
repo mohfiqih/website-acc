@@ -41,6 +41,24 @@
             --c-background-primary: #d0d1de;
         }
 
+        html {
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-y: auto; /* scroll vertikal aktif */
+            overflow-x: hidden; /* cegah scroll horizontal */
+            background-attachment: fixed;
+            zoom: 100%;
+            transform: scale(1);
+        }
         body::before {
             content: "";
             position: fixed; 
@@ -56,18 +74,6 @@
             z-index: -1;
             pointer-events: none;
         }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: -2;
-        }
-
         input,
         button,
         select,
@@ -390,19 +396,20 @@
             </div>
             <div class="row">
                 @foreach ($images_db as $image)
-                    <div class="col-sm-3 mb-3 mb-sm-0">
-                        <div class="card">
-                            <div class="card-body">
-                                <img src="{{ asset('storage/' . $image->filepath) }}" data-lity class="card-img-top lazyload" alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body p-0">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}" 
+                                        class="card-img-top lazyload img-fluid" 
+                                        data-lity 
+                                        alt="Image"
+                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="card-footer text-body-secondary">
+                                    <b>Date:</b> {{ $image->created_at }}<br/>
+                                    {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                                </div>
                             </div>
-                            <div class="card-footer text-body-secondary">
-                                <b>Date:</b> {{ $image->created_at }}<br/>
-                                {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
-                                <button class="btn btn-danger btn-sm delete-image" data-id="{{ $image->id }}" style="float: right;">
-                                    Delete
-                                </button>
-                            </div>
-                        </div><br/>
                     </div>
                 @endforeach
             </div>

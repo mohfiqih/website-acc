@@ -261,11 +261,13 @@
         </div>
     </section>
 
+    {{-- Chart --}}
     <div class="container mt-4">
-        {{-- Chart --}}
-        <div class="card mt-5 mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-                <p class="mb-0"><b>Daftar Online Berdasarkan Nama Mentor</b></p>
+        <div class="card shadow-sm">
+            <div class="card-header text-dark d-flex justify-content-between align-items-center flex-wrap">
+                <div>
+                    <strong>Daftar Online Berdasarkan Nama Mentor</strong>
+                </div>
                 <div class="d-flex align-items-center gap-2 flex-wrap">
                     <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
                         <option value="">All Month</option>
@@ -273,11 +275,15 @@
                             <option value="{{ $key }}">{{ $label }}</option>
                         @endforeach
                     </select>
-                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">Export JPG</button>
-                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="exportPDFLandscape()">Export PDF</button>
+
+                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
+                        Export JPG
+                    </button>
+                    <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="exportPDFLandscape()">
+                        Export PDF
+                    </button>
                 </div>
             </div>
-
             <div class="card-body text-center">
                 <div>
                     <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
@@ -285,7 +291,10 @@
                 <div id="mentorSummary"></div>
             </div>
         </div>
-        
+    </div>
+    
+    {{-- Data Pendaftaran --}}
+    <div class="container mt-4">
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
                 <div class="d-flex justify-content-between mb-3">
@@ -294,8 +303,8 @@
                             Show 
                             <select id="entriesSelect" class="form-control d-inline-block w-auto">
                                 <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20" selected>20</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
                             </select>
@@ -328,7 +337,7 @@
                     </div>
                     <br/>
                     <div class="table-responsive">
-                        <table id="spreadsheetTable" class="table table-striped table-bordered fixed-header-table">
+                        <table id="spreadsheetTablePendaftaran" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
                                 <thead>
                                     <tr>
@@ -466,9 +475,43 @@
         setInterval(refreshTable, 6000000);
 
         $(document).ready(function() {
+            let table = $('#spreadsheetTablePendaftaran').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "searching": true,
+                "info": false,
+                "lengthChange": false,
+                "scrollY": false,
+                "scrollCollapse": false,
+                "dom": 'rtp' 
+            });
+
+            // **Sembunyikan pagination bawaan DataTables**
+            $('.dataTables_paginate').hide();
+
+            // Custom Search
+            $('#tableSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
+            // Custom Entries Dropdown
+            $('#entriesSelect').on('change', function() {
+                table.page.len(this.value).draw();
+            });
+
+            $(document).on('click', '#paginationControls .page-link', function(e) {
+                e.preventDefault();
+                let page = parseInt($(this).data('page'));
+                if (!isNaN(page)) {
+                    table.page(page).draw('page');
+                }
+            });
+        });
+
+        $(document).ready(function() {
             let table = $('#spreadsheetTable').DataTable({
                 "paging": true,
-                "pageLength": 20,
+                "pageLength": 10,
                 "searching": true,
                 "info": false,
                 "lengthChange": false,
@@ -651,19 +694,21 @@
 
             let tableHTML = `
                 <div class="mt-4">
-                    <b>Keterangan Jumlah Pendaftar per Mentor:</b>
+                    <b>Keterangan Jumlah Pendaftaran Berdasarkan Mentor (Hanya data pendaftaran online):</b>
                     <div class="table-responsive mt-2">
-                        <table class="table table-bordered table-sm mb-0 text-nowrap" style="min-width: 300px;">
+                        <table id="spreadsheetTable" class="table table-bordered table-sm mb-0 text-nowrap" style="min-width: 300px;">
                             <thead class="table-light">
                                 <tr>
-                                    <th>Nama Mentor</th>
-                                    <th>Jumlah Pendaftar</th>
+                                    <th width="10" class="text-center">No</th>
+                                    <th class="text-center">Nama Mentor</th>
+                                    <th class="text-center">Jumlah Pendaftaran</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                ${entries.map(([mentor, jumlah]) => `
+                                ${entries.map(([mentor, jumlah], i) => `
                                     <tr>
-                                        <td>${mentor}</td>
+                                        <td class="text-center">${i + 1}</td>
+                                        <td class="text-center">${mentor}</td>
                                         <td class="text-center">${jumlah}</td>
                                     </tr>
                                 `).join('')}
@@ -673,6 +718,38 @@
                 </div>
             `;
             summaryContainer.innerHTML = tableHTML;
+
+            setTimeout(() => {
+                let table = $('#spreadsheetTable').DataTable({
+                    "paging": true,
+                    "pageLength": 10,
+                    "searching": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "scrollY": false,
+                    "scrollCollapse": false,
+                    "dom": 'rtp',
+                    "destroy": true
+                });
+
+                $('.dataTables_paginate').hide();
+
+                $('#tableSearch').off('keyup').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                $('#entriesSelect').off('change').on('change', function() {
+                    table.page.len(this.value).draw();
+                });
+
+                $(document).off('click', '#paginationControls .page-link').on('click', '#paginationControls .page-link', function(e) {
+                    e.preventDefault();
+                    let page = parseInt($(this).data('page'));
+                    if (!isNaN(page)) {
+                        table.page(page).draw('page');
+                    }
+                });
+            }, 100);
         }
 
         // Render default all data
