@@ -467,16 +467,20 @@
                 </div>
                 <div class="row">
                     @foreach ($images_db as $image)
-                        <div class="col-sm-3 mb-3 mb-sm-0">
-                            <div class="card">
-                                <div class="card-body">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}" class="card-img-top lazyload" data-lity alt="Image" style="height: 100%; object-fit: cover;height: 300px;">
+                        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body p-0">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}" 
+                                        class="card-img-top lazyload img-fluid" 
+                                        data-lity 
+                                        alt="Image"
+                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
                                 </div>
                                 <div class="card-footer text-body-secondary">
                                     <b>Date:</b> {{ $image->created_at }}<br/>
                                     {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
                                 </div>
-                            </div><br/>
+                            </div>
                         </div>
                     @endforeach
                 </div>

@@ -265,105 +265,6 @@
         </div>
     </section>
 
-    {{-- Chart --}}
-    {{-- <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Hari <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartHari','statistik_per_hari')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartHari','Statistik Per Hari')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartHari"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Kabupaten <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartUsia','statistik_per_usia')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartUsia','Statistik Per Usia')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartUsia"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Bulan <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartBulan','statistik_per_bulan')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartBulan','Statistik Per Bulan')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartBulan"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Tahun <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartTahun','statistik_per_tahun')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartTahun','Statistik Per Tahun')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartTahun"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Provinsi <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartProvinsi','statistik_per_provinsi')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartProvinsi','Statistik Per Provinsi')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartProvinsi"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-header text-dark">
-                        Statistik Per Kabupaten <br />
-                        <button class="btn btn-sm btn-success"
-                            onclick="downloadPNG('chartKabupaten','statistik_per_kabupaten')">Export PNG</button>
-                        <button class="btn btn-sm btn-danger"
-                            onclick="downloadPDF('chartKabupaten','Statistik Per Kabupaten')">Export PDF</button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="chartKabupaten"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-
     {{-- Chart All --}}
     <div class="container mt-4">
         <div class="card shadow-sm">
@@ -373,12 +274,13 @@
                 </div>
                 <div class="d-flex align-items-center gap-2 flex-wrap">
                     <select id="chartFilter" class="form-select form-select-sm">
-                        <option value="perHari">Per Hari</option>
-                        <option value="perBulan">Per Bulan</option>
-                        <option value="perTahun">Per Tahun</option>
-                        <option value="perProvinsi">Per Provinsi</option>
-                        <option value="perKabupaten">Per Kabupaten</option>
-                        <option value="perUmur">Per Usia</option>
+                        <option value="perHari">Grafik Berdasarkan Hari</option>
+                        <option value="perBulan">Grafik Berdasarkan Bulan</option>
+                        <option value="perTahun">Grafik Berdasarkan Tahun</option>
+                        <option value="perProvinsi">Grafik Berdasarkan Provinsi</option>
+                        <option value="perKabupaten">Grafik Berdasarkan Kabupaten</option>
+                        <option value="perUmur">Grafik Berdasarkan Usia</option>
+                        <option value="perGender">Grafik Berdasarkan Jenis Kelamin</option>
                     </select>
 
                     <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="downloadPNG('mainChart')">
@@ -408,8 +310,8 @@
                             Show
                             <select id="entriesSelect" class="form-control d-inline-block w-auto">
                                 <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="20" selected>20</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
                             </select>
@@ -443,7 +345,7 @@
                     </div>
                     <br />
                     <div class="table-responsive">
-                        <table id="spreadsheetTable" class="table table-striped table-bordered fixed-header-table">
+                        <table id="spreadsheetTableKonsultasi" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
                                 <thead>
                                     <tr>
@@ -460,6 +362,7 @@
                                         <th>Provinsi</th>
                                         <th>Nomor Aktif (WA)</th>
                                         <th>Informasi dari mana?</th>
+                                        <th>Jenis Kelamin</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
@@ -496,7 +399,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-
     <script>
         // Refresh tabel
         function refreshTable() {
@@ -522,15 +424,49 @@
         setInterval(refreshTable, 6000000);
 
         $(document).ready(function() {
-            let table = $('#spreadsheetTable').DataTable({
+            let table = $('#spreadsheetTableKonsultasi').DataTable({
                 "paging": true,
-                "pageLength": 20,
+                "pageLength": 10,
                 "searching": true,
                 "info": false,
                 "lengthChange": false,
                 "scrollY": false,
                 "scrollCollapse": false,
-                "dom": 'rtp'
+                "dom": 'rtp' 
+            });
+
+            // **Sembunyikan pagination bawaan DataTables**
+            $('.dataTables_paginate').hide();
+
+            // Custom Search
+            $('#tableSearch').on('keyup', function() {
+                table.search(this.value).draw();
+            });
+
+            // Custom Entries Dropdown
+            $('#entriesSelect').on('change', function() {
+                table.page.len(this.value).draw();
+            });
+
+            $(document).on('click', '#paginationControls .page-link', function(e) {
+                e.preventDefault();
+                let page = parseInt($(this).data('page'));
+                if (!isNaN(page)) {
+                    table.page(page).draw('page');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            let table = $('#spreadsheetTable').DataTable({
+                "paging": true,
+                "pageLength": 10,
+                "searching": true,
+                "info": false,
+                "lengthChange": false,
+                "scrollY": false,
+                "scrollCollapse": false,
+                "dom": 'rtp' 
             });
 
             // **Sembunyikan pagination bawaan DataTables**
@@ -616,217 +552,53 @@
         });
     </script>
 
-    {{-- Grafik Old --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-        let labels = {!! json_encode(array_keys($perUmur)) !!};
-        let data = {!! json_encode(array_values($perUmur)) !!};
-
-        let combined = labels.map((label, i) => ({
-            label: parseInt(label),
-            value: data[i]
-        }));
-
-        combined.sort((a, b) => a.label - b.label);
-        labels = combined.map(item => item.label);
-        data = combined.map(item => item.value);
-
-        const chartUsia = new Chart(document.getElementById('chartUsia'), {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Usia',
-                    data: data,
-                    backgroundColor: '#046291',
-                    borderColor: 'rgba(4, 98, 145, 0.5)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0,
-                            stepSize: 1,
-                            callback: function(value) {
-                                return value;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        const chartHari = new Chart(document.getElementById('chartHari'), {
-            type: 'line',
-            data: {
-                labels: {!! json_encode(array_keys($perHari)) !!},
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Hari',
-                    data: {!! json_encode(array_values($perHari)) !!},
-                    borderColor: '#046291',
-                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Tanggal'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Jumlah Konsultasi'
-                        }
-                    }
-                }
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            precision: 0,
-                            stepSize: 1,
-                            callback: function(value) {
-                                return value;
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-        const chartBulan = new Chart(document.getElementById('chartBulan'), {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode(array_keys($perBulan)) !!},
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Bulan',
-                    data: {!! json_encode(array_values($perBulan)) !!},
-                    backgroundColor: '#046291'
-                }]
-            }
-        });
-
-        const chartTahun = new Chart(document.getElementById('chartTahun'), {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode(array_keys($perTahun)) !!},
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Tahun',
-                    data: {!! json_encode(array_values($perTahun)) !!},
-                    backgroundColor: '#046291'
-                }]
-            }
-        });
-
-        const chartProvinsi = new Chart(document.getElementById('chartProvinsi'), {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode(array_keys($perProvinsi)) !!},
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Provinsi',
-                    data: {!! json_encode(array_values($perProvinsi)) !!},
-                    backgroundColor: '#046291'
-                }]
-            }
-        });
-
-        const chartKabupaten = new Chart(document.getElementById('chartKabupaten'), {
-            type: 'bar',
-            data: {
-                labels: {!! json_encode(array_keys($perKabupaten)) !!},
-                datasets: [{
-                    label: 'Jumlah Konsultasi per Kabupaten',
-                    data: {!! json_encode(array_values($perKabupaten)) !!},
-                    backgroundColor: '#046291'
-                }]
-            }
-        });
-
-        // export chart
-        function downloadPNG(chartId, filename) {
-            const canvas = document.getElementById(chartId);
-            const url = canvas.toDataURL("image/png");
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = filename + ".png";
-            link.click();
-        }
-
-        function downloadPDF(chartId, title) {
-            const canvas = document.getElementById(chartId);
-            const imgData = canvas.toDataURL("image/png");
-
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
-
-            // Judul di PDF
-            doc.setFontSize(16);
-            doc.text(title, 15, 20);
-
-            // Chart masuk PDF
-            doc.addImage(imgData, "PNG", 15, 30, 180, 100);
-
-            doc.save(title.replace(/\s+/g, '_').toLowerCase() + ".pdf");
-        }
-    </script> --}}
-
     {{-- Grafik All --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
     <script>
         const datasets = {
             perHari: {
                 labels: {!! json_encode(array_keys($perHari)) !!},
                 data: {!! json_encode(array_values($perHari)) !!},
                 type: 'line',
-                title: 'Statistik Per Hari'
+                title: 'Statistik Berdasarkan Hari'
             },
             perBulan: {
                 labels: {!! json_encode(array_keys($perBulan)) !!},
                 data: {!! json_encode(array_values($perBulan)) !!},
                 type: 'bar',
-                title: 'Statistik Per Bulan'
+                title: 'Statistik Berdasarkan Bulan'
             },
             perTahun: {
                 labels: {!! json_encode(array_keys($perTahun)) !!},
                 data: {!! json_encode(array_values($perTahun)) !!},
                 type: 'bar',
-                title: 'Statistik Per Tahun'
+                title: 'Statistik Berdasarkan Tahun'
             },
             perProvinsi: {
                 labels: {!! json_encode(array_keys($perProvinsi)) !!},
                 data: {!! json_encode(array_values($perProvinsi)) !!},
                 type: 'bar',
-                title: 'Statistik Per Provinsi'
+                title: 'Statistik Berdasarkan Provinsi'
             },
             perKabupaten: {
                 labels: {!! json_encode(array_keys($perKabupaten)) !!},
                 data: {!! json_encode(array_values($perKabupaten)) !!},
                 type: 'bar',
-                title: 'Statistik Per Kabupaten'
+                title: 'Statistik Berdasarkan Kabupaten'
             },
             perUmur: {
                 labels: {!! json_encode(array_keys($perUmur)) !!},
                 data: {!! json_encode(array_values($perUmur)) !!},
                 type: 'bar',
-                title: 'Statistik Per Umur'
+                title: 'Statistik Berdasarkan Umur'
+            },
+            perGender: {
+                labels: {!! json_encode(array_keys($perGender)) !!},
+                data: {!! json_encode(array_values($perGender)) !!},
+                type: 'bar',
+                title: 'Statistik Berdasarkan Jenis Kelamin'
             }
         };
 
@@ -895,18 +667,20 @@
             let tableHTML = `
                 <div class="mt-4">
                     <b style="display: block; text-align: left;">Keterangan ${selected.title}:</b>
-                    <table class="table table-bordered table-sm mt-2 text-nowrap" style="min-width: 300px;">
+                    <table id="spreadsheetTable" class="table table-bordered table-sm mt-2 text-nowrap" style="min-width: 300px;">
                         <thead class="table-light">
                             <tr>
-                                <th>Kategori</th>
-                                <th>Jumlah</th>
+                                <th width="10" class="text-center">No</th>
+                                <th class="text-center">Kategori</th>
+                                <th class="text-center">Jumlah</th>
                             </tr>
                         </thead>
                         <tbody>
-                            ${entries.map(([label, value]) => `
+                            ${entries.map(([label, value], i) => `
                                 <tr>
-                                    <td>${label}</td>
-                                    <td>${value}</td>
+                                    <td class="text-center">${i + 1}</td>
+                                    <td class="text-center">${label}</td>
+                                    <td class="text-center">${value}</td>
                                 </tr>
                             `).join('')}
                         </tbody>
@@ -914,6 +688,38 @@
                 </div>
             `;
             summaryContainer.innerHTML = tableHTML;
+
+            setTimeout(() => {
+                let table = $('#spreadsheetTable').DataTable({
+                    "paging": true,
+                    "pageLength": 10,
+                    "searching": true,
+                    "info": false,
+                    "lengthChange": false,
+                    "scrollY": false,
+                    "scrollCollapse": false,
+                    "dom": 'rtp',
+                    "destroy": true
+                });
+
+                $('.dataTables_paginate').hide();
+
+                $('#tableSearch').off('keyup').on('keyup', function() {
+                    table.search(this.value).draw();
+                });
+
+                $('#entriesSelect').off('change').on('change', function() {
+                    table.page.len(this.value).draw();
+                });
+
+                $(document).off('click', '#paginationControls .page-link').on('click', '#paginationControls .page-link', function(e) {
+                    e.preventDefault();
+                    let page = parseInt($(this).data('page'));
+                    if (!isNaN(page)) {
+                        table.page(page).draw('page');
+                    }
+                });
+            }, 100);
         }
 
         renderChart('perHari');
