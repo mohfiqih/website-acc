@@ -508,39 +508,38 @@
             });
         });
 
-        $(document).ready(function() {
-            let table = $('#spreadsheetTable').DataTable({
-                "paging": true,
-                "pageLength": 10,
-                "searching": true,
-                "info": false,
-                "lengthChange": false,
-                "scrollY": false,
-                "scrollCollapse": false,
-                "dom": 'rtp' 
-            });
+        // $(document).ready(function() {
+        //     let table = $('#spreadsheetTable').DataTable({
+        //         "paging": true,
+        //         "pageLength": 10,
+        //         "searching": true,
+        //         "info": false,
+        //         "lengthChange": false,
+        //         "scrollY": false,
+        //         "scrollCollapse": false,
+        //         "dom": 'rtp' 
+        //     });
+            
+        //     $('.dataTables_paginate').hide();
 
-            // **Sembunyikan pagination bawaan DataTables**
-            $('.dataTables_paginate').hide();
+        //     // Custom Search
+        //     $('#tableSearch').on('keyup', function() {
+        //         table.search(this.value).draw();
+        //     });
 
-            // Custom Search
-            $('#tableSearch').on('keyup', function() {
-                table.search(this.value).draw();
-            });
+        //     // Custom Entries Dropdown
+        //     $('#entriesSelect').on('change', function() {
+        //         table.page.len(this.value).draw();
+        //     });
 
-            // Custom Entries Dropdown
-            $('#entriesSelect').on('change', function() {
-                table.page.len(this.value).draw();
-            });
-
-            $(document).on('click', '#paginationControls .page-link', function(e) {
-                e.preventDefault();
-                let page = parseInt($(this).data('page'));
-                if (!isNaN(page)) {
-                    table.page(page).draw('page');
-                }
-            });
-        });
+        //     $(document).on('click', '#paginationControls .page-link', function(e) {
+        //         e.preventDefault();
+        //         let page = parseInt($(this).data('page'));
+        //         if (!isNaN(page)) {
+        //             table.page(page).draw('page');
+        //         }
+        //     });
+        // });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
