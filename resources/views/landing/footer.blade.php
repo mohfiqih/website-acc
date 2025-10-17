@@ -47,7 +47,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang (ACC)</span></strong> Website v.1.4.1
+            Copyright &copy; <strong><span>LPK Amanah Citra Cemerlang (ACC)</span></strong> Website v.1.4.2
         </div>
         <div class="credits">
             Kecamatan Adiwerna, Kabupaten Tegal, Jawa tengah, Indonesia</a>
