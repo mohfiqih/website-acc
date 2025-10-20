@@ -233,8 +233,9 @@ return [
         'Pdf' => Barryvdh\DomPDF\Facade::class,
         'providers' => [
             Yajra\DataTables\DataTablesServiceProvider::class,
-        ]
-
+        ],
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class
     ],
 
 ];

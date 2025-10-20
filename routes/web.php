@@ -42,58 +42,50 @@ Route::get('/daftar-online', function () {
     return view('landing/daftar');
 });
 
-// Login
+# Login
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('actionlogin', [LoginController::class, 'actionlogin'])->name('actionlogin');
-
-// Register
+# Register
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
 Route::post('actionregister', [RegisterController::class, 'register'])->name('register');
-
-// Dashboard
+# Dashboard
 Route::get('/dasbor', [DashboardController::class, 'index'])->name('index')->middleware('auth');
 Route::post('/logout', [DashboardController::class, 'logout'])->name('logout')->middleware('web');
-// Route::get('/data-pendaftaran-siswa-baru', [DashboardController::class, 'data_pendaftaran_online']);
 Route::get('/data-pendaftaran-siswa-baru', [DashboardController::class, 'data_pendaftaran_online'])->name('data-pendaftaran-siswa-baru');
 Route::get('/data-pendaftaran-siswa-baru/json', [DashboardController::class, 'data_pendaftaran_online_json'])->name('data-pendaftaran-siswa-baru.json');
-// Profil Admin
+# Profil Admin
 Route::get('/profil', [DashboardController::class, 'profil'])->name('profil')->middleware('auth');
-
-// Struktur Organisasi
+# Struktur Organisasi
 Route::get('/struktur-jepang', [DashboardController::class, 'struktur_jepang'])->name('struktur_jepang')->middleware('auth');
 Route::get('/struktur-korea', [DashboardController::class, 'struktur_korea'])->name('struktur_korea')->middleware('auth');
-
+# Data Siswa
+Route::get('/data-siswa', [DashboardController::class, 'data_siswa'])->name('data-siswa');
+Route::get('data-siswa/export-pdf', [DashboardController::class, 'export_pdf'])->name('data-siswa.export-pdf');
+Route::get('data-siswa/export-excel', [DashboardController::class, 'export_excel'])->name('data-siswa.export-excel');
 # Data User
 Route::get('/data-user', [UserController::class, 'data_user'])->name('data_user')->middleware('auth');
 Route::delete('/user/{id}', [UserController::class, 'delete_user'])->name('delete_user');
-
 # upload galeri
 Route::get('/upload', [ImageUploadController::class, 'index'])->name('images.index');
 Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.store');
-
 # pendaftaran
 Route::get('/pendaftaran-online', [PendaftaranController::class, 'index']);
 Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
-
 # get data pendaftaran old
 Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pendaftaran_old']);
-
 # pendaftaran umum
 Route::get('/pendaftaran-siswa-baru', [PendaftaranController::class, 'pendaftaran_baru']);
 # for mentor
 Route::get('/pendaftaran-siswa-baru/{mentor}', [PendaftaranController::class, 'pendaftaran_baru']);
 Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pendaftaran_baru']);
-
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
 Route::get('/data-pendaftaran/export-pdf', [PendaftaranController::class, 'exportPdf'])->name('data-pendaftaran.export-pdf');
-
 # refresh
 Route::get('/refresh-table-pendaftaran', [PendaftaranController::class, 'refreshTablePendaftaran'])->name('refresh.pendaftaran');
 Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
 Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
-
 # data konsultasi
 Route::get('/data-konsultasi', [DataKonsultasi::class, 'data_konsultasi']);
 Route::get('/data-konsultasi/export-pdf', [DataKonsultasi::class, 'exportPdf'])->name('data-konsultasi.export-pdf');

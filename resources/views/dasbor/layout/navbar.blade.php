@@ -38,11 +38,19 @@
             <hr class="sidebar-divider">
 
             <!-- Data Siswa -->
-            <div class="sidebar-heading">Data Siswa</div>
+            <div class="sidebar-heading">ALL DATA</div>
             <li class="nav-item {{ Request::is('data-pendaftaran-siswa-baru') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('data-pendaftaran-siswa-baru') }}">
                     <i class="fas fa-fw fa-file-signature text-success"></i>
-                    <span>Data Pendaftaran Online</span>
+                    <span>Pendaftaran Online</span>
+                </a>
+            </li>
+
+            {{-- Data Siswa --}}
+            <li class="nav-item" style="padding-left: 10px;">
+                <a class="nav-link" href="{{ url('data-siswa') }}">
+                    <i class="fas fa-fw fa-users text-primary"></i>
+                    <span>Data All Siswa</span>
                 </a>
             </li>
 
@@ -51,29 +59,17 @@
                 $isKaryawanActive = Request::is('data-karyawan*');
             @endphp
             <li class="nav-item {{ $isKaryawanActive ? 'active' : '' }}" style="padding-left: 10px;">
-                <a class="nav-link {{ $isKaryawanActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseKaryawan"
-                    aria-expanded="{{ $isKaryawanActive ? 'true' : 'false' }}" aria-controls="collapseKaryawan">
+                <a class="nav-link {{ $isKaryawanActive ? '' : 'collapsed' }}" href="{{ url('data-karyawan/jepang') }}">
                     <i class="fas fa-fw fa-users text-warning"></i>
-                    <span>Karyawan</span>
+                    <span>Data Karyawan</span>
                 </a>
-                <div id="collapseKaryawan" class="collapse {{ $isKaryawanActive ? 'show' : '' }}" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Data Karyawan:</h6>
-                        <a class="collapse-item {{ Request::is('data-karyawan/jepang') ? 'active' : '' }}" href="{{ url('data-karyawan/jepang') }}">
-                            <i class="fas fa-user-tie me-1 text-secondary"></i> Karyawan Jepang
-                        </a>
-                        <a class="collapse-item {{ Request::is('data-karyawan/korea') ? 'active' : '' }}" href="{{ url('data-karyawan/korea') }}">
-                            <i class="fas fa-user-tie me-1 text-secondary"></i> Karyawan Korea
-                        </a>
-                    </div>
-                </div>
             </li>
 
             <!-- Struktur -->
             <li class="nav-item {{ Request::is('struktur-jepang') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('struktur-jepang') }}">
                     <i class="fas fa-fw fa-sitemap text-danger"></i>
-                    <span>Struktur Jepang</span>
+                    <span>Struktur Karyawan</span>
                 </a>
             </li>
 
@@ -81,7 +77,7 @@
             <li class="nav-item {{ Request::is('update-kegiatan') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('update-kegiatan') }}">
                     <i class="fas fa-fw fa-camera-retro text-info"></i>
-                    <span>Update Kegiatan</span>
+                    <span>Upload Galeri</span>
                 </a>
             </li>
 
@@ -112,11 +108,20 @@
                         <a class="collapse-item" href="{{ url('/') }}" target="_blank">
                             <i class="fas fa-home me-1"></i> Halaman Utama
                         </a>
-                        <a class="collapse-item" href="{{ url('program-jepang') }}" target="_blank">
-                            <i class="fas fa-flag me-1 text-danger"></i> ACC Japan
+                        <a class="collapse-item" href="{{ url('/pendaftaran-siswa-baru') }}" target="_blank">
+                            <i class="fas fa-home me-1"></i> Pendaftaran Online
                         </a>
-                        <a class="collapse-item" href="{{ url('program-korea') }}" target="_blank">
-                            <i class="fas fa-flag me-1 text-info"></i> ACC Korea
+                        <a class="collapse-item" href="{{ url('/data-pendaftaran') }}" target="_blank">
+                            <i class="fas fa-home me-1"></i> Data Pendaftaran
+                        </a>
+                        <a class="collapse-item" href="{{ url('/data-konsultasi') }}" target="_blank">
+                            <i class="fas fa-home me-1"></i> Data Konsultasi
+                        </a>
+                        <a class="collapse-item" href="{{ url('/manual-book') }}" target="_blank">
+                            <i class="fas fa-home me-1"></i> Manual Book
+                        </a>
+                        <a class="collapse-item" href="{{ url('/upload') }}" target="_blank">
+                            <i class="fas fa-home me-1"></i> Halaman Upload
                         </a>
                     </div>
                 </div>
@@ -125,7 +130,7 @@
             <hr class="sidebar-divider">
 
             <div class="version text-center small mb-3 text-muted">
-                <i class="fas fa-code-branch me-1"></i> Web Version v.1.3.2
+                <i class="fas fa-code-branch me-1"></i> Web Version @include('version.index')
             </div>
         </ul>
     @endif
