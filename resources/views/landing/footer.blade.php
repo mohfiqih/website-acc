@@ -47,7 +47,7 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; by <strong><span>IT LPK ACC Japan Centre</span></strong> v.1.4.3
+            Copyright &copy; by <strong><span>IT LPK ACC Japan Centre</span></strong> @include('version.index')
         </div>
         <div class="credits">
             Kecamatan Adiwerna, Kabupaten Tegal, Jawa tengah, Indonesia</a>

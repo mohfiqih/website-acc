@@ -46,6 +46,14 @@
                 </a>
             </li>
 
+            {{-- Data Siswa --}}
+            <li class="nav-item" style="padding-left: 10px;">
+                <a class="nav-link" href="{{ url('data-siswa') }}">
+                    <i class="fas fa-fw fa-users text-primary"></i>
+                    <span>Data All Siswa</span>
+                </a>
+            </li>
+
             <!-- Karyawan -->
             @php
                 $isKaryawanActive = Request::is('data-karyawan*');
@@ -122,7 +130,7 @@
             <hr class="sidebar-divider">
 
             <div class="version text-center small mb-3 text-muted">
-                <i class="fas fa-code-branch me-1"></i> Web Version v.1.3.2
+                <i class="fas fa-code-branch me-1"></i> Web Version @include('version.index')
             </div>
         </ul>
     @endif

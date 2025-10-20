@@ -12,6 +12,11 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class DashboardController extends Controller
 {
@@ -334,5 +339,155 @@ class DashboardController extends Controller
     function escapeXml($value)
     {
         return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_XML1, 'UTF-8');
+    }
+
+    # DATA SISWA
+    public function data_siswa()
+    {
+        $user = Auth::user();
+        $url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS51328pl_XG6xJYi9nCpDVaGO9tLaM10XWhNGN_7yakAu6EEnr-yUhlaySXgchjjbLbIVf9UDhfWuG/pub?output=csv';
+        
+        $csv = @file_get_contents($url);
+        if (!$csv) {
+            return "Gagal mengambil data. Pastikan spreadsheet sudah dipublish!";
+        }
+
+        $lines = array_filter(explode("\n", $csv));
+        if (count($lines) < 2) return "Spreadsheet kosong atau format tidak valid.";
+
+        $firstLine = $lines[0];
+        $delimiter = substr_count($firstLine, ';') > substr_count($firstLine, ',') ? ';' : ',';
+
+        $header = str_getcsv(array_shift($lines), $delimiter);
+        $header = array_map('trim', $header);
+
+        $data = [];
+        $bulanList = [];
+        $tahunList = [];
+        $gelombangList = [];
+
+        foreach ($lines as $line) {
+            $row      = str_getcsv($line, $delimiter);
+            $row      = array_map('trim', $row);
+            $row      = array_pad($row, count($header), '');
+            $rowAssoc = array_combine($header, $row);
+
+            if (!empty($rowAssoc['Nama Lengkap'])) {
+
+                if (empty($rowAssoc['Mentor'])) {
+                    $rowAssoc['Mentor'] = '-';
+                }
+
+                $rowAssoc['Status'] = !empty($rowAssoc['NIS']) ? 'Siswa' : 'Cabut Berkas';
+
+                $data[] = $rowAssoc;
+
+                // kumpulkan dropdown list
+                if(!empty($rowAssoc['Bulan'])) $bulanList[] = $rowAssoc['Bulan'];
+                if(!empty($rowAssoc['Tahun'])) $tahunList[] = $rowAssoc['Tahun'];
+                if(!empty($rowAssoc['Gelombang'])) $gelombangList[] = $rowAssoc['Gelombang'];
+            }
+        }
+
+        // unique & sort
+        $bulanList = array_unique($bulanList);
+        sort($bulanList);
+
+        $tahunList = array_unique($tahunList);
+        sort($tahunList);
+
+        $gelombangList = array_unique($gelombangList);
+        sort($gelombangList);
+
+        $visibleColumns = ['Nama Lengkap', 'NIS', 'Bulan', 'Tahun', 'Mentor', 'Status'];
+
+        return view('dasbor.menu.data-siswa', compact(
+            'data', 'visibleColumns', 'user', 'bulanList', 'tahunList', 'gelombangList'
+        ));
+    }
+
+    # Export Excel
+    public function export_excel(Request $request)
+    {
+        $bulan     = $request->get('bulan');
+        $tahun     = $request->get('tahun');
+        $gelombang = $request->get('gelombang');
+
+        $data = $this->getDataSiswaFiltered($bulan, $tahun, $gelombang);
+
+        $spreadsheet = new Spreadsheet();
+        $sheet     = $spreadsheet->getActiveSheet();
+
+        $headers = ['No', 'Nama Lengkap', 'NIS', 'Bulan', 'Tahun', 'Mentor', 'Status'];
+        foreach ($headers as $col => $header) {
+            $sheet->setCellValueByColumnAndRow($col + 1, 1, $header);
+            $sheet->getStyleByColumnAndRow($col + 1, 1)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyleByColumnAndRow($col + 1, 1)->getFont()->setBold(true);
+        }
+
+        $rowNumber = 2;
+        $no = 1;
+        foreach ($data as $row) {
+            $sheet->setCellValue('A' . $rowNumber, $no);
+            $sheet->setCellValue('B' . $rowNumber, $row['Nama Lengkap'] ?? '');
+            $sheet->setCellValue('C' . $rowNumber, $row['NIS'] ?? '');
+            $sheet->setCellValue('D' . $rowNumber, $row['Bulan'] ?? '');
+            $sheet->setCellValue('E' . $rowNumber, $row['Tahun'] ?? '');
+            $sheet->setCellValue('F' . $rowNumber, $row['Mentor'] ?? '');
+            $sheet->setCellValue('G' . $rowNumber, $row['Status'] ?? '');
+
+            $rowNumber++;
+            $no++;
+        }
+
+        foreach (range('A', 'G') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
+
+        $filenameParts = ['Data-Siswa'];
+        if ($bulan) $filenameParts[] = $bulan;
+        if ($tahun) $filenameParts[] = $tahun;
+        if ($gelombang) $filenameParts[] = 'Gelombang-' . $gelombang;
+        $filename = implode('-', $filenameParts) . '.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('php://output');
+        exit;
+    }
+
+    // Filter data berdasarkan input
+    private function getDataSiswaFiltered($bulan = null, $tahun = null, $gelombang = null)
+    {
+        $user = Auth::user();
+        $url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS51328pl_XG6xJYi9nCpDVaGO9tLaM10XWhNGN_7yakAu6EEnr-yUhlaySXgchjjbLbIVf9UDhfWuG/pub?output=csv';
+        
+        $csv        = @file_get_contents($url);
+        $lines      = array_filter(explode("\n", $csv));
+        $delimiter  = substr_count($lines[0], ';') > substr_count($lines[0], ',') ? ';' : ',';
+        $header     = str_getcsv(array_shift($lines), $delimiter);
+        $header     = array_map('trim', $header);
+
+        $filtered = [];
+        foreach ($lines as $line) {
+            $row = str_getcsv($line, $delimiter);
+            $row = array_map('trim', $row);
+            $row = array_pad($row, count($header), '');
+            $rowAssoc = array_combine($header, $row);
+
+            if (!empty($rowAssoc['Nama Lengkap'])) {
+                if($bulan && $rowAssoc['Bulan'] != $bulan) continue;
+                if($tahun && $rowAssoc['Tahun'] != $tahun) continue;
+                if($gelombang && $rowAssoc['Gelombang'] != $gelombang) continue;
+
+                $rowAssoc['Status'] = !empty($rowAssoc['NIS']) ? 'Siswa' : 'Cabut Berkas';
+                $rowAssoc['Mentor'] = $rowAssoc['Mentor'] ?? '-';
+                $filtered[] = $rowAssoc;
+            }
+        }
+        return $filtered;
     }
 }
