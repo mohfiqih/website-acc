@@ -784,7 +784,7 @@ class PendaftaranController extends Controller
         $year  = date('Y');
         $time  = date('H.i.s');
 
-        $filename = "Data-Konsultasi-{$day}-{$date}-{$month}-{$year}-{$time}.pdf";
+        $filename = "Data-Pendaftaran-{$day}-{$date}-{$month}-{$year}-{$time}.pdf";
 
         return $pdf->download($filename);
     }

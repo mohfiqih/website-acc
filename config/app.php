@@ -231,6 +231,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Pdf' => Barryvdh\DomPDF\Facade::class,
+        'providers' => [
+            Yajra\DataTables\DataTablesServiceProvider::class,
+        ]
 
     ],
 
