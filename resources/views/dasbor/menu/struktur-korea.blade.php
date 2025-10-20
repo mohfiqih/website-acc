@@ -1,5 +1,5 @@
 @extends('dasbor.layout.app')
-@section('title', 'ACC Asia Jaya - Struktur Office')
+@section('title', 'LPK ACC Japan Centre - Struktur Office')
 @section('content')
     <nav aria-label="breadcrumb" class="main-breadcrumb">
         <ol class="breadcrumb">

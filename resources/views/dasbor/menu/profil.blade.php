@@ -1,5 +1,5 @@
 @extends('dasbor.layout.app')
-@section('title', 'ACC Asia Jaya - Profil')
+@section('title', 'LPK ACC Japan Centre - Profil')
 @section('content')
 
     <!-- Breadcrumb -->

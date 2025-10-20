@@ -7,12 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="{{ asset('templates/assets/img/logo.jpg') }}" rel="icon">
+    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <title>@yield('title')</title>
     <link href="{{ asset('template_home/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template_home/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('template_home/css/ruang-admin.min.css') }}" rel="stylesheet">
     <link href="{{ asset('template_home/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <style>
+        /* === FIXED SIDEBAR === */
+        .sidebar {
+            position: fixed !important;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 1030;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Biar konten nggak ketutupan sidebar */
+        #content-wrapper {
+            margin-left: 230px; /* sesuaikan dengan lebar sidebar */
+        }
+
+        /* Tambahan estetika */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsif: sidebar menutup di layar kecil */
+        @media (max-width: 992px) {
+            .sidebar {
+                position: relative !important;
+                height: auto;
+            }
+
+            #content-wrapper {
+                margin-left: 0 !important;
+            }
+        }
+    </style>
 </head>
 
 <body id="page-top">
