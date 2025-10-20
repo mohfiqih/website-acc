@@ -1,208 +1,88 @@
 @extends('dasbor.layout.app')
 @section('title', 'LPK ACC Japan Centre - Pendaftaran Online')
-
 @section('content')
 <style>
-    .table-responsive {
-        overflow-x: auto;
-        position: relative;
-        white-space: nowrap;
-        -webkit-overflow-scrolling: touch;
+    .pagination-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
     }
 
-    #spreadsheetTablePendaftaran {
-        border-collapse: collapse;
-        width: 100%;
+    .pagination {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        gap: 5px;
+        flex-wrap: wrap;
     }
 
-    #spreadsheetTablePendaftaran th,
-    #spreadsheetTablePendaftaran td {
-        border: 1px solid #dee2e6;
+    .pagination li a,
+    .pagination li span {
+        display: inline-block;
         padding: 8px 12px;
-        text-align: left;
-        vertical-align: middle !important;
-        white-space: nowrap;
-        background-color: #fff !important; /* pastikan tidak transparan */
-    }
-
-    #spreadsheetTablePendaftaran th {
-        background-color: #f8f9fa;
+        border-radius: 5px;
+        text-decoration: none;
+        border: 1px solid #046392;
+        background-color: white;
+        color: #046392;
         font-weight: bold;
-        text-align: center;
     }
 
-    #spreadsheetTablePendaftaran tbody tr:hover {
-        background-color: #f1f1f1;
+    .pagination li a:hover {
+        background-color: #046392;
+        color: white;
     }
 
-    .text-label {
-            padding-bottom: 10px;
-        }
+    .pagination li.active span {
+        background-color: #046392;
+        color: white;
+    }
 
-        .form-group {
-            padding-top: 15px;
-        }
+    body::before {
+        content: "";
+        position: fixed; 
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg") center center/cover no-repeat;
+        background-size: cover;
+        opacity: 0.1;
+        z-index: -1;
+        pointer-events: none;
+    }
 
-        .pagination-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
-            padding: 0px 0px;
-        }
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.5);
+        z-index: -2;
+    }
 
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            gap: 5px;
-            flex-wrap: wrap;
-        }
+    .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
 
-        .pagination li {
-            display: inline-block;
-        }
+    table {
+        width: 100%;
+        min-width: 1200px;
+        border-collapse: collapse;
+        white-space: nowrap;
+    }
 
-        .pagination li a,
-        .pagination li span {
-            display: inline-block;
-            padding: 8px 12px;
-            border-radius: 5px;
-            text-decoration: none;
-            border: 1px solid #046392;
-            background-color: white;
-            color: #046392;
-            font-weight: bold;
-        }
-
-        .pagination li a:hover {
-            background-color: #046392;
-            color: white;
-        }
-
-        .pagination li.active span {
-            background-color: #046392;
-            color: white;
-        }
-
-        .pagination li.disabled span {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        @media (max-width: 768px) {
-            .pagination-container {
-                padding: 10px;
-                width: 100%;
-                justify-content: center;
-            }
-
-            .pagination {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .pagination li a,
-            .pagination li span {
-                padding: 6px 10px;
-                font-size: 14px;
-            }
-        }
-
-        body::before {
-            content: "";
-            position: fixed; 
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url("https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg") center center/cover no-repeat;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            opacity: 0.1;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: -2;
-        }
-
-        .container {
-            overflow-x: auto;
-        }
-
-        .card-body {
-            padding: 30px;
-            border-radius: 10px;
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            min-width: 1200px;
-            border-collapse: collapse;
-            white-space: nowrap;
-        }
-
-        th, td {
-            text-align: left;
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f8f9fa;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .table-responsive {
-            max-width: 100%;
-            overflow-x: auto;
-        }
-
-        .dataTables_paginate {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-        }
-
-        @media (max-width: 576px) {
-            #refreshIndicator {
-                margin-bottom: 10px;
-            }
-        }
-
-        .fixed-header-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .fixed-header-table thead th {
-            position: sticky;
-            top: 0;
-            background: white;
-            z-index: 10;
-        }
-
-        .table-scroll-wrapper {
-            overflow-x: auto;
-        }
-
-        .fixed-header-table th, 
-        .fixed-header-table td {
-            white-space: nowrap;
-        }
+    th {
+        background-color: #f8f9fa;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
 </style>
 
 <!-- Breadcrumb -->
@@ -218,7 +98,7 @@
     <div class="col-lg-12">
         <div class="card mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between mt-2">
-                <h5 class="m-0 font-weight-bold text-primary">Data Pendaftaran Online</h5>
+                <h5 class="m-0 font-weight-bold">Data Pendaftaran Online</h5>
             </div>
             <hr>
             <div class="d-flex justify-content-between mb-3" style="padding: 0 20px;">
@@ -373,28 +253,42 @@
                         </tr>
                     @endif
                 </table>
+                <div class="d-flex justify-content-between align-items-center">
+                    <span id="tableInfo"></span>
+                    
+                    <div class="d-flex align-items-center ms-auto">
+                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-@endsection
 
-@section('scripts')
+<!-- Pastikan urutan JS benar -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+
 <script>
-$(document).ready(function() {
-    $('#spreadsheetTablePendaftaran').DataTable({
+$(document).ready(function () {
+    // Inisialisasi DataTables
+    let table = $('#spreadsheetTablePendaftaran').DataTable({
         paging: true,
-        pageLength: 10, // default 10 per halaman
+        pageLength: 10,
         searching: true,
         info: true,
-        lengthChange: false, // nonaktifkan dropdown "show entries" bawaan
-        scrollX: true,
+        lengthChange: false,
+        scrollX: true, // <-- ini biar tabel bisa digeser horizontal
+        scrollCollapse: true,
         autoWidth: false,
-        dom: 'lrtip', // tampilkan search custom di atas
+        ordering: false,
+        dom: 'lrtip', // Hapus default search box DataTables
         language: {
-            search: "Cari:",
-            lengthMenu: "Tampilkan _MENU_ data per halaman",
-            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+            search: "Search:",
+            lengthMenu: "Tampilkan _MENU_ data",
+            info: "Show _START_ - _END_ from _TOTAL_ data",
             paginate: {
                 previous: "Sebelumnya",
                 next: "Berikutnya"
@@ -402,88 +296,72 @@ $(document).ready(function() {
         }
     });
 
-    // Hubungkan search manual
-    $('#tableSearch').on('keyup', function() {
-        $('#spreadsheetTablePendaftaran').DataTable().search(this.value).draw();
+    // Custom Search (input manual)
+    $('#tableSearch').on('keyup', function () {
+        table.search(this.value).draw();
     });
 
-    // Ganti jumlah data per halaman manual
-    $('#entriesSelect').on('change', function() {
-        $('#spreadsheetTablePendaftaran').DataTable().page.len($(this).val()).draw();
+    // Custom Entries Dropdown (show 10, 25, dst)
+    $('#entriesSelect').on('change', function () {
+        table.page.len($(this).val()).draw();
     });
 });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$(document).ready(function() {
-    $(document).on('click', '.btn-download-cv', function(e) {
-        e.preventDefault();
+$(document).on('click', '.btn-download-cv', function (e) {
+    e.preventDefault();
 
-        const id = $(this).data('id');
-        const nama = $(this).data('nama');
+    const id = $(this).data('id');
+    const nama = $(this).data('nama');
 
-        Swal.fire({
-            title: 'Download CV',
-            text: `Apakah kamu ingin mendownload CV ${nama}?`,
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonText: 'Ya, Download',
-            cancelButtonText: 'Batal',
-            confirmButtonColor: '#046392'
-        }).then((result) => {
-            if (result.isConfirmed) {
+    Swal.fire({
+        title: 'Download CV?',
+        text: "Apakah kamu ingin mengunduh file CV ini?",
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Ya, unduh',
+        cancelButtonText: 'Batal',
+        confirmButtonColor: '#046392'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fetch(`/export-cv-word/${id}`, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Gagal mengunduh');
+                return response.blob();
+            })
+            .then(blob => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                window.URL.revokeObjectURL(url);
+
                 Swal.fire({
-                    title: 'Processing...',
-                    text: 'Mohon tunggu sebentar, file sedang disiapkan.',
-                    allowOutsideClick: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
+                    title: 'Berhasil!',
+                    text: 'File CV berhasil diunduh.',
+                    icon: 'success',
+                    timer: 2000,
+                    showConfirmButton: false
                 });
-
-                fetch(`/export-cv-word/${id}`, {
-                    method: 'GET',
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Download gagal');
-                    }
-                    return response.blob();
-                })
-                .then(blob => {
-                    Swal.close();
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
-                    document.body.appendChild(a);
-                    a.click();
-                    a.remove();
-                    window.URL.revokeObjectURL(url);
-
-                    Swal.fire({
-                        title: 'Berhasil!',
-                        text: 'CV berhasil diunduh.',
-                        icon: 'success',
-                        timer: 2000,
-                        showConfirmButton: false
-                    });
-                })
-                .catch(error => {
-                    Swal.close();
-                    Swal.fire({
-                        title: 'Gagal!',
-                        text: 'Terjadi kesalahan saat mengunduh file.',
-                        icon: 'error'
-                    });
+            })
+            .catch(() => {
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Gagal mengunduh file.',
+                    icon: 'error'
                 });
-            }
-        });
+            });
+        }
     });
 });
 </script>

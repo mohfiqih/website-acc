@@ -98,12 +98,111 @@ class DashboardController extends Controller
 
         arsort($perMentorAll);
 
+        # data konsultasi
+        $response = Http::get("https://script.google.com/macros/s/AKfycbyCSsWEpYv0I9mWJvFbpNdr0hTF1LS-mGk8us4MZrmJdW2xjDAIU_qnkKCMFLPKHbEY5Q/exec");
+
+        if (!$response->successful()) {
+            return back()->with('error', 'Gagal ambil data dari Google Script');
+        }
+
+        $json = $response->json();
+
+        if (!is_array($json)) {
+            \Log::error('Google Script response bukan array', ['body' => $response->body()]);
+            $json = [];
+        }
+
+        $data_konsultasi = $json;
+        $cleanedData = [];
+
+        $perHari      = [];
+        $perBulan     = [];
+        $perTahun     = [];
+        $perProvinsi  = [];
+        $perKabupaten = [];
+        $perUmur      = [];
+        $perGender    = [];
+
+        $namaBulan = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+
+        $tz = new \DateTimeZone('Asia/Jakarta');
+
+        foreach ($data_konsultasi as $row) {
+            $cleanedRow = [];
+            foreach ($row as $key => $value) {
+                if (in_array($key, ['Provinsi', 'Kabupaten', 'Kecamatan', 'Nama Lengkap', 'Alamat (Dukuh/Desa/RT RW)', 'Dapat informasi dari mana?'])) {
+                    $value = ucwords(strtolower(trim($value)));
+                }
+
+                if ($key === 'Timestamp') {
+                    try {
+                        $dt = new \DateTime($value, $tz);
+                    } catch (\Exception $e) {
+                        continue;
+                    }
+
+                    $dateTimeFull = $dt->format('Y-m-d H:i:s');
+                    $cleanedRow[$key] = $dateTimeFull;
+
+                    $dateOnly = $dt->format('Y-m-d');
+                    $perHari[$dateOnly] = ($perHari[$dateOnly] ?? 0) + 1;
+
+                    $bulan = (int) $dt->format('m');
+                    $tahun = $dt->format('Y');
+                    $nama = $namaBulan[$bulan] . ' ' . $tahun;
+                    $perBulan[$nama] = ($perBulan[$nama] ?? 0) + 1;
+                    $perTahun[$tahun] = ($perTahun[$tahun] ?? 0) + 1;
+                } 
+                elseif ($key === 'Usia') {
+                    $usiaAngka = (int) preg_replace('/\D+/', '', $value);
+                    $cleanedRow[$key] = $usiaAngka;
+                    $perUmur[$usiaAngka] = ($perUmur[$usiaAngka] ?? 0) + 1;
+                } 
+                elseif ($key === 'Jenis Kelamin') {
+                    $gender = strtolower(trim($value));
+                    if ($gender === 'laki-laki' || $gender === 'laki laki' || $gender === 'pria') {
+                        $gender = 'Laki-Laki';
+                    } elseif ($gender === 'perempuan' || $gender === 'wanita') {
+                        $gender = 'Perempuan';
+                    } else {
+                        $gender = 'Tidak Diketahui';
+                    }
+                    $cleanedRow[$key] = $gender;
+                    $perGender[$gender] = ($perGender[$gender] ?? 0) + 1;
+                } 
+                else {
+                    $cleanedRow[$key] = $value;
+
+                    if ($key === 'Provinsi') {
+                        $perProvinsi[$value] = ($perProvinsi[$value] ?? 0) + 1;
+                    }
+                    if ($key === 'Kabupaten') {
+                        $perKabupaten[$value] = ($perKabupaten[$value] ?? 0) + 1;
+                    }
+                }
+            }
+            $cleanedData[] = $cleanedRow;
+        }
+
+        ksort($perHari);
+
         return view('dasbor.menu.dasbor', [
             'cleanedData'       => $cleanedData,
             'perMentor'         => $perMentorAll,
             'perMentorPerMonth' => $perMentorPerMonth,
             'months'            => $months,
-            'user'              => $user
+            'user'              => $user,
+            'perHari'           => $perHari,
+            'perBulan'          => $perBulan,
+            'perTahun'          => $perTahun,
+            'perProvinsi'       => $perProvinsi,
+            'perKabupaten'      => $perKabupaten,
+            'perUmur'           => $perUmur,
+            'perGender'         => $perGender,
         ]);
     }
 

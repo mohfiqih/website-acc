@@ -4,8 +4,8 @@
             <span>Copyright &copy;
                 <script>
                     document.write(new Date().getFullYear());
-                </script> - distributed by
-                <b><a href="{{ url('/') }}" target="_blank">LPK ACC Asia Jaya</a></b>
+                </script> - distributed by Staff IT
+                <b><a href="{{ url('/') }}" target="_blank">LPK ACC Japan Centre</a></b>
             </span>
         </div>
     </div>

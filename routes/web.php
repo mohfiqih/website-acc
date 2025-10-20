@@ -53,7 +53,6 @@ Route::post('actionregister', [RegisterController::class, 'register'])->name('re
 // Dashboard
 Route::get('/dasbor', [DashboardController::class, 'index'])->name('index')->middleware('auth');
 Route::post('/logout', [DashboardController::class, 'logout'])->name('logout')->middleware('web');
-// Route::get('/data-pendaftaran-siswa-baru', [DashboardController::class, 'data_pendaftaran_online']);
 Route::get('/data-pendaftaran-siswa-baru', [DashboardController::class, 'data_pendaftaran_online'])->name('data-pendaftaran-siswa-baru');
 Route::get('/data-pendaftaran-siswa-baru/json', [DashboardController::class, 'data_pendaftaran_online_json'])->name('data-pendaftaran-siswa-baru.json');
 // Profil Admin
