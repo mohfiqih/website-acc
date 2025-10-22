@@ -12,6 +12,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\DataKonsultasi;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\DataCOE;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
@@ -93,3 +94,6 @@ Route::get('/data-konsultasi/export-pdf', [DataKonsultasi::class, 'exportPdf'])-
 # absensi siswa
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.form');
 Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
+# data coe turun (manager)
+Route::get('/data-coe', [DataCOE::class, 'index']);
+Route::post('/coe/store', [DataCOE::class, 'store'])->name('coe.store');
