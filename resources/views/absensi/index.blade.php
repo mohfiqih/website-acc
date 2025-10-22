@@ -345,7 +345,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
-    <script>
+    {{-- <script>
       let allData = @json($allData);
 
       const gelombangSelect = document.getElementById('gelombang');
@@ -491,6 +491,158 @@
             }
         });
       });
+    </script> --}}
+
+    <script>
+        let allData = @json($allData);
+
+        const gelombangSelect = document.getElementById('gelombang');
+        const namaSelect      = document.getElementById('nama');
+        const tanggalSelect   = document.getElementById('tanggal');
+        const absensiForm     = document.getElementById('absensiForm');
+
+        // =====================================
+        // Radius office (sementara di-hide)
+        // const officeLat       = -6.9472685;
+        // const officeLng       = 109.1105625;
+        // const allowedRadius   = 150;
+        // function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
+        //     const R = 6371000;
+        //     const dLat = (lat2 - lat1) * Math.PI / 180;
+        //     const dLon = (lon2 - lon1) * Math.PI / 180;
+        //     const a = 
+        //         Math.sin(dLat/2) * Math.sin(dLat/2) +
+        //         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        //         Math.sin(dLon/2) * Math.sin(dLon/2);
+        //     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        //     return R * c;
+        // }
+
+        // function disableForm(disable) {
+        //     const elements = absensiForm.querySelectorAll('input, select, textarea, button');
+        //     elements.forEach(el => el.disabled = disable);
+        // }
+
+        // function checkRadius() {
+        //     if(navigator.geolocation){
+        //         navigator.geolocation.getCurrentPosition(function(position){
+        //             const distance = getDistanceFromLatLonInMeters(
+        //                 officeLat, officeLng,
+        //                 position.coords.latitude, position.coords.longitude
+        //             );
+
+        //             if(distance <= allowedRadius){
+        //                 disableForm(false);
+        //             } else {
+        //                 disableForm(true);
+        //                 Swal.fire({
+        //                     icon: 'warning',
+        //                     title: 'Anda di Luar Area',
+        //                     text: 'Form absensi ini hanya bisa diisi di lingkungan kantor, radius 100 meter dari gedung LPK ACC Japan Centre!'
+        //                 });
+        //             }
+        //         }, function(error){
+        //             disableForm(true);
+        //             Swal.fire({
+        //                 icon: 'error',
+        //                 title: 'Gagal Mendapatkan Lokasi',
+        //                 text: 'Izinkan lokasi untuk bisa mengisi absensi'
+        //             });
+        //         }, { enableHighAccuracy: true });
+        //     } else {
+        //         disableForm(true);
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Browser Tidak Mendukung Geolocation',
+        //             text: 'Form absensi tidak dapat digunakan'
+        //         });
+        //     }
+        // }
+
+        // checkRadius();
+        // setInterval(checkRadius, 5000);
+        // =====================================
+
+        gelombangSelect.addEventListener('change', function() {
+            let sheet = this.value;
+            namaSelect.innerHTML = '<option value="">-- Pilih Nama --</option>';
+            tanggalSelect.innerHTML = '<option value="">-- Pilih Tanggal --</option>';
+
+            if(allData[sheet]){
+                allData[sheet].forEach(item => {
+                    if(item.NAMA){
+                        let opt = document.createElement('option');
+                        opt.value = item.NAMA;
+                        opt.text = item.NAMA;
+                        namaSelect.appendChild(opt);
+                    }
+                });
+
+                let headers = Object.keys(allData[sheet][0]).filter(h => h !== "NAMA");
+                headers.forEach(h => {
+                    let opt = document.createElement('option');
+                    opt.value = h;
+                    opt.text = h;
+                    tanggalSelect.appendChild(opt);
+                });
+            }
+        });
+
+        // Submit AJAX
+        $('#absensiForm').submit(function(e){
+            e.preventDefault();
+
+            let formData = {};
+            $(this).serializeArray().forEach(item => formData[item.name] = item.value);
+
+            Swal.fire({
+                title: 'Mengirim data...',
+                text: 'Mohon Tunggu sebentar',
+                didOpen: () => Swal.showLoading(),
+                allowOutsideClick: false
+            });
+
+            $.ajax({
+                url: "{{ route('absensi.store') }}",
+                type: 'POST',
+                data: formData,
+                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                success: function(res){
+                    Swal.close();
+                    if(res.status === 'success'){
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Berhasil!',
+                            text: res.message
+                        });
+                        $('#absensiForm')[0].reset();
+                        namaSelect.innerHTML = '<option value="">Pilih Nama Siswa</option>';
+                        tanggalSelect.innerHTML = '<option value="">Pilih Tanggal</option>';
+                    } else if(res.status === 'exists'){
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: res.message
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: res.message
+                        });
+                    }
+                },
+                error: function(xhr){
+                    Swal.close();
+                    let msg = xhr.responseJSON?.message || 'Terjadi kesalahan, coba lagi.';
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: msg
+                    });
+                }
+            });
+        });
     </script>
 </body>
 
