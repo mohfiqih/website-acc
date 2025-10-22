@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Http;
 
 class AbsensiController extends Controller
 {
-    protected $data_siswa = "https://script.google.com/macros/s/AKfycbxfZzhEFjTK76mXtLrqZRkEQFXisobiEKKkr6AAEMHiBtBcNCY5UaBQBrkVt14RCVNiCQ/exec";
+    protected $link_spreedsheet = "https://script.google.com/macros/s/AKfycbzcXEhB1_m4pS2oXks6ewEkcwWigi3v7-2coXlhPHNvuv6LkPPeVjnC09g0-fRdfKpA_A/exec";
+    protected $data_siswa       = "https://script.google.com/macros/s/AKfycbxfZzhEFjTK76mXtLrqZRkEQFXisobiEKKkr6AAEMHiBtBcNCY5UaBQBrkVt14RCVNiCQ/exec";
     
     public function index()
     {
