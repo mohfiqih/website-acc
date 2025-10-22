@@ -14,8 +14,9 @@ class DataCOE extends Controller
         $allData    = $response->json();
         $firstSheet = array_key_first($allData);
         $nama_so    = array_keys($allData);
+        $keterangan = '-';
 
-        return view('landing.coe.index', compact('nama_so', 'allData'));
+        return view('landing.coe.index', compact('nama_so', 'allData', 'keterangan'));
     }
 
     public function store(Request $request)
@@ -23,13 +24,14 @@ class DataCOE extends Controller
         $request->validate([
             'nama_so'               => 'required|string',
             'nama_siswa'            => 'required|string',
-            'tanggal_penerbangan'   => 'required|string',
+            'tanggal_penerbangan'   => 'nullable|string',
         ]);
 
         $response = Http::asForm()->post($this->data_coe, [
             'nama_so'               => $request->nama_so,
             'nama_siswa'            => $request->nama_siswa,
-            'tanggal_penerbangan'   => $request->tanggal_penerbangan,
+            'tanggal_penerbangan'   => $request->tanggal_penerbangan ?? '-',
+            'keterangan'           => $request->keterangan ?? '-'
         ]);
 
         $status = $response->json()['status'] ?? 'error';

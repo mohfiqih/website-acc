@@ -114,8 +114,8 @@
                 <input type="text" class="form-control" name="nama_siswa" placeholder="Masukan nama lengkap siswa.." required>
             </div>
             <div class="mb-3">
-                <label class="fw-bold">Tanggal</label>
-                <input type="date" class="form-control" name="tanggal_penerbangan" required>
+                <label class="fw-bold">Tanggal (Opsional)</label>
+                <input type="date" class="form-control" name="tanggal_penerbangan">
             </div>
             <button type="submit" class="btn btn-success mt-3">Submit Data</button>
         </form>
@@ -125,15 +125,17 @@
     {{-- Data COE --}}
     <div class="container">
         <div class="card p-3" style="border-radius: 10px;">
-            <div class="d-flex justify-content-between align-items-center mb-3 mt-2">
-                <h5 class="fw-bold mb-0">Data COE SISWA</h5>
-                <a href="https://docs.google.com/spreadsheets/d/1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4/edit?gid=1983605501#gid=1983605501"
-                target="_blank"
-                class="btn btn-success btn-sm d-flex align-items-center gap-2 px-3 py-2"
-                style="border-radius: 8px;">
-                    <i class="fa fa-file"></i>
-                    <span>Lihat Spreadsheet</span>
-                </a>
+            <div class="mb-3 mt-2">
+                <h5 class="fw-bold mb-3">Data COE SISWA</h5>
+                <div class="d-flex justify-content-start gap-2">
+                    <a href="https://docs.google.com/spreadsheets/d/1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4/edit?gid=1983605501#gid=1983605501"
+                    target="_blank"
+                    class="btn btn-success w-25 d-flex align-items-center justify-content-center gap-2"
+                    style="border-radius: 8px;">
+                        <i class="fa fa-file"></i>
+                        <span>Lihat Spreadsheet</span>
+                    </a>
+                </div>
             </div>
             <ul class="nav nav-tabs" id="coeTabs" role="tablist">
                 @php $first = true; @endphp
@@ -149,20 +151,28 @@
                     @php $first = false; @endphp
                 @endforeach
             </ul>
-
             <div class="tab-content mt-3" id="coeTabsContent">
                 @php $first = true; @endphp
                 @foreach($allData as $so => $items)
                     <div class="tab-pane fade {{ $first ? 'show active' : '' }}" id="tab-{{ Str::slug($so) }}"
                         role="tabpanel" aria-labelledby="tab-{{ Str::slug($so) }}-tab">
+                        <div class="d-flex mb-3">
+                            <button class="btn btn-success exportPDF" data-so="{{ $so }}">
+                                <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                            </button>
+                        </div>
                         <div class="table-responsive mt-4 mb-4">
                             <table class="table table-striped table-bordered align-middle coeTable" id="coeTable-{{ Str::slug($so) }}">
                                 <thead class="table-primary">
                                     <tr class="text-center">
+                                        <th width="10">
+                                            <center><input type="checkbox" class="selectAll ml-3"></center>
+                                        </th>
                                         <th width="10">No</th>
                                         <th>Nama SO</th>
                                         <th>Nama Siswa</th>
-                                        <th>Tanggal Penerbangan</th>
+                                        <th>Tanggal</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -180,10 +190,23 @@
                                             }
                                         @endphp
                                         <tr>
+                                            <td>
+                                                <center><input type="checkbox" class="selectRow" value="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}"></center>
+                                            </td>
                                             <td class="text-center">{{ $no++ }}</td>
                                             <td>{{ $so }}</td>
                                             <td>{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}</td>
                                             <td>{{ $tanggal }}</td>
+                                            <td class="text-center">
+                                                @if(strtolower($keterangan) === 'sudah')
+                                                    <span class="badge bg-success">Sudah</span>
+                                                @else
+                                                    <select class="form-select form-select-sm updateStatus" data-so="{{ $so }}" data-siswa="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}">
+                                                        <option value="">Pilih Keterangan</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                    </select>
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -223,6 +246,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
+    {{-- Submit --}}
     <script>
         // pagination
         $(document).ready(function(){
@@ -314,7 +338,10 @@
                                 Swal.fire({
                                     icon: 'success',
                                     title: 'Berhasil!',
-                                    text: res.message
+                                    text: res.message,
+                                    confirmButtonText: 'OK'
+                                }).then(() => {
+                                    location.reload();
                                 });
                                 $('#coeForm')[0].reset();
                                 nama_so.innerHTML             = '<option value="">Pilih Nama SO</option>';
@@ -346,6 +373,119 @@
                     });
                 }
             });
+        });
+
+        // update keterangan
+        $(document).on('change', '.updateStatus', function() {
+            let select = $(this);
+            let nama_so = select.data('so');
+            let nama_siswa = select.data('siswa');
+            let keterangan = select.val();
+
+            if (keterangan === '') return;
+
+            Swal.fire({
+                title: 'Update Data?',
+                text: 'Keterangan akan disimpan ke spreadsheet.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Menyimpan...',
+                        text: 'Mohon tunggu sebentar',
+                        didOpen: () => Swal.showLoading(),
+                        allowOutsideClick: false
+                    });
+
+                    $.ajax({
+                        url: "{{ route('coe.store') }}",
+                        method: "POST",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: {
+                            nama_so: nama_so,
+                            nama_siswa: nama_siswa,
+                            tanggal_penerbangan: '-', // opsional
+                            keterangan: keterangan
+                        },
+                        success: function(res){
+                            Swal.close();
+                            if(res.status === 'success'){
+                                select.closest('td').html('<span class="badge bg-success">Sudah</span>');
+                                Swal.fire('Berhasil!', 'Data telah diperbarui.', 'success');
+                            } else {
+                                Swal.fire('Gagal', res.message, 'error');
+                            }
+                        },
+                        error: function(){
+                            Swal.close();
+                            Swal.fire('Error', 'Terjadi kesalahan saat menyimpan.', 'error');
+                        }
+                    });
+                } else {
+                    select.val('');
+                }
+            });
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+
+    {{-- export pdf --}}
+    <script>
+        $(document).on('change', '.selectAll', function() {
+            let table = $(this).closest('table');
+            table.find('.selectRow').prop('checked', this.checked);
+        });
+
+        $(document).on('click', '.exportPDF', function() {
+            let soName = $(this).data('so');
+            let tabId = '#tab-' + soName.toLowerCase().replace(/\s+/g, '-');
+            let selectedRows = $(tabId).find('.selectRow:checked');
+
+            if(selectedRows.length === 0) {
+                Swal.fire('Pilih data!', 'Silakan pilih minimal satu siswa untuk dicetak.', 'warning');
+                return;
+            }
+
+            let doc = new jspdf.jsPDF();
+
+            doc.setFontSize(16);
+            doc.text("LPK ACC JAPAN CENTRE", 105, 20, { align: "center" });
+            doc.setFontSize(10);
+            doc.text("Dukuh Gitung, RT 01/RW 02, Desa Harjosari Lor,", 105, 26, { align: "center" });
+            doc.text("Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194", 105, 31, { align: "center" });
+            doc.setLineWidth(0.5);
+            doc.line(10, 35, 200, 35);
+            doc.setFontSize(12);
+            doc.text(soName, 14, 45);
+
+            let rows = [];
+            let i = 1;
+            selectedRows.each(function() {
+                let tr = $(this).closest('tr');
+                let namaSiswa = tr.find('td:eq(3)').text().trim();
+                let tanggal = tr.find('td:eq(4)').text().trim();
+                rows.push([i++, namaSiswa, tanggal]);
+            });
+
+            doc.autoTable({
+                head: [['No', 'Nama Siswa', 'Tanggal']],
+                body: rows,
+                startY: 55,
+                styles: { halign: 'left', valign: 'middle', fontSize: 10 },
+                headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+                columnStyles: {
+                    0: { cellWidth: 15, halign: 'center' },
+                    1: { cellWidth: 100, halign: 'left' },
+                    2: { cellWidth: 50, halign: 'left' }
+                }
+            });
+
+            doc.save(`COE_${soName.replace(/\s+/g, '_')}.pdf`);
         });
     </script>
 </body>
