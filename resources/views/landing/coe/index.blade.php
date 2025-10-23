@@ -127,15 +127,6 @@
         <div class="card p-3" style="border-radius: 10px;">
             <div class="mb-3 mt-2">
                 <h5 class="fw-bold mb-3">Data COE SISWA</h5>
-                <div class="d-flex justify-content-start gap-2">
-                    <a href="https://docs.google.com/spreadsheets/d/1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4/edit?gid=1983605501#gid=1983605501"
-                    target="_blank"
-                    class="btn btn-success w-25 d-flex align-items-center justify-content-center gap-2"
-                    style="border-radius: 8px;">
-                        <i class="fa fa-file"></i>
-                        <span>Lihat Spreadsheet</span>
-                    </a>
-                </div>
             </div>
             <ul class="nav nav-tabs" id="coeTabs" role="tablist">
                 @php $first = true; @endphp
@@ -151,12 +142,36 @@
                     @php $first = false; @endphp
                 @endforeach
             </ul>
+            @php 
+                $sheetLinks = [
+                    'SO ABC'        => '0',
+                    'SO YONAS'      => '65945211',
+                    'SO ATC'        => '1983605501',
+                    'SO ASTA KARYA' => '830965925',
+                    'SO MEGUMI'     => '870361738',
+                    'SO MJI'        => '321136165',
+                    'SO KIRANA INDONESIA' => '1207560434'
+                ];
+                $spreadsheetId = '1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4';
+                $first = true;
+            @endphp
+
             <div class="tab-content mt-3" id="coeTabsContent">
-                @php $first = true; @endphp
                 @foreach($allData as $so => $items)
+                    @php
+                        $gid      = $sheetLinks[$so] ?? '';
+                        $sheetUrl = $gid 
+                            ? "https://docs.google.com/spreadsheets/d/{$spreadsheetId}/edit#gid={$gid}" 
+                            : "#";
+                    @endphp
+
                     <div class="tab-pane fade {{ $first ? 'show active' : '' }}" id="tab-{{ Str::slug($so) }}"
                         role="tabpanel" aria-labelledby="tab-{{ Str::slug($so) }}-tab">
                         <div class="d-flex mb-3">
+                            <a href="{{ $gid !== '' ? 'https://docs.google.com/spreadsheets/d/'.$spreadsheetId.'/edit#gid='.$gid : '#' }}" 
+                                target="_blank" class="btn btn-success btn-xs mr-2" style="border-radius: 8px;">
+                                    <i class="fa fa-file"></i> Lihat Spreadsheet
+                            </a>
                             <button class="btn btn-success exportPDF" data-so="{{ $so }}">
                                 <i class="bi bi-file-earmark-pdf"></i> Export PDF
                             </button>
@@ -165,9 +180,7 @@
                             <table class="table table-striped table-bordered align-middle coeTable" id="coeTable-{{ Str::slug($so) }}">
                                 <thead class="table-primary">
                                     <tr class="text-center">
-                                        <th width="10">
-                                            <center><input type="checkbox" class="selectAll ml-3"></center>
-                                        </th>
+                                        <th width="10"><center><input type="checkbox" class="selectAll ml-3"></center></th>
                                         <th width="10">No</th>
                                         <th>Nama SO</th>
                                         <th>Nama Siswa</th>
@@ -184,15 +197,11 @@
                                                 try {
                                                     $dateObj = \Carbon\Carbon::parse($tanggal);
                                                     $tanggal = $dateObj->format('d/m/Y');
-                                                } catch (\Exception $e) {
-                                                    $tanggal = $tanggal;
-                                                }
+                                                } catch (\Exception $e) {}
                                             }
                                         @endphp
                                         <tr>
-                                            <td>
-                                                <center><input type="checkbox" class="selectRow" value="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}"></center>
-                                            </td>
+                                            <td><center><input type="checkbox" class="selectRow" value="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}"></center></td>
                                             <td class="text-center">{{ $no++ }}</td>
                                             <td>{{ $so }}</td>
                                             <td>{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}</td>
@@ -305,6 +314,7 @@
         const nama_siswa           = document.getElementById('nama_siswa');
         const tanggal_penerbangan  = document.getElementById('tanggal_penerbangan');
 
+        // submit
         $('#coeForm').submit(function(e){
             e.preventDefault();
 
@@ -414,7 +424,7 @@
                             Swal.close();
                             if(res.status === 'success'){
                                 select.closest('td').html('<span class="badge bg-success">Sudah</span>');
-                                Swal.fire('Berhasil!', 'Data telah diperbarui.', 'success');
+                                Swal.fire('Berhasil!', 'Data keterangan telah diperbarui.', 'success');
                             } else {
                                 Swal.fire('Gagal', res.message, 'error');
                             }
