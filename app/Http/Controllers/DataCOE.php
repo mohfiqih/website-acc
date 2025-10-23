@@ -25,13 +25,14 @@ class DataCOE extends Controller
             'nama_so'               => 'required|string',
             'nama_siswa'            => 'required|string',
             'tanggal_penerbangan'   => 'nullable|string',
+            'keterangan'            => 'nullable|string'
         ]);
 
         $response = Http::asForm()->post($this->data_coe, [
             'nama_so'               => $request->nama_so,
             'nama_siswa'            => $request->nama_siswa,
             'tanggal_penerbangan'   => $request->tanggal_penerbangan ?? '-',
-            'keterangan'           => $request->keterangan ?? '-'
+            'keterangan'            => $request->keterangan ?? '-'
         ]);
 
         $status = $response->json()['status'] ?? 'error';
