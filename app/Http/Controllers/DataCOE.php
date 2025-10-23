@@ -14,9 +14,8 @@ class DataCOE extends Controller
         $allData    = $response->json();
         $firstSheet = array_key_first($allData);
         $nama_so    = array_keys($allData);
-        $keterangan = '-';
-
-        return view('landing.coe.index', compact('nama_so', 'allData', 'keterangan'));
+        
+        return view('landing.coe.index', compact('nama_so', 'allData'));
     }
 
     public function store(Request $request)

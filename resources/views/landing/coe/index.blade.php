@@ -206,11 +206,16 @@
                                             <td>{{ $so }}</td>
                                             <td>{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}</td>
                                             <td>{{ $tanggal }}</td>
+                                            @php
+                                                $keterangan = $row['KETERANGAN'] ?? '';
+                                            @endphp
                                             <td class="text-center">
                                                 @if(strtolower($keterangan) === 'sudah')
                                                     <span class="badge bg-success">Sudah</span>
                                                 @else
-                                                    <select class="form-select form-select-sm updateStatus" data-so="{{ $so }}" data-siswa="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}">
+                                                    <select class="form-select form-select-sm updateStatus" 
+                                                            data-so="{{ $so }}" 
+                                                            data-siswa="{{ $row['NAMA LENGKAP SISWA'] ?? '-' }}">
                                                         <option value="">Pilih Keterangan</option>
                                                         <option value="Sudah">Sudah</option>
                                                     </select>
