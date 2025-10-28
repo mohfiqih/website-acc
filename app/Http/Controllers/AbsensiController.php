@@ -45,9 +45,7 @@ class AbsensiController extends Controller
             foreach($allData as $sheetName => $rows){
                 if(preg_match('/^(\d+)/', $sheetName,$matches)){
                     $gelombang[$matches[1]][] = $sheetName;
-                } else {
-                    $gelombang['lainnya'][] = $sheetName;
-                }
+                } 
             }
 
             return response()->json([
