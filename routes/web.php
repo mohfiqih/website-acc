@@ -94,6 +94,8 @@ Route::get('/data-konsultasi/export-pdf', [DataKonsultasi::class, 'exportPdf'])-
 # absensi siswa
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('absensi.form');
 Route::post('/absensi/store', [AbsensiController::class, 'store'])->name('absensi.store');
+Route::get('/absensi/data', [AbsensiController::class, 'fetchData'])->name('absensi.data');
+
 # data coe turun (manager)
 Route::get('/data-coe', [DataCOE::class, 'index']);
 Route::post('/coe/store', [DataCOE::class, 'store'])->name('coe.store');
