@@ -44,7 +44,7 @@ class AbsensiController extends Controller
 
             foreach($allData as $sheetName => $rows){
                 if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
-                    $gelombang[$matches[0]][] = $sheetName; // gunakan seluruh match sebagai gelombang
+                    $gelombang[$matches[0]][] = $sheetName;
                 }
             }
 
