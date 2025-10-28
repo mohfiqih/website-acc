@@ -43,9 +43,9 @@ class AbsensiController extends Controller
             }
 
             foreach($allData as $sheetName => $rows){
-                if(preg_match('/^(\d+)/', $sheetName,$matches)){
-                    $gelombang[$matches[1]][] = $sheetName;
-                } 
+                if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
+                    $gelombang[$matches[0]][] = $sheetName;
+                }
             }
 
             return response()->json([
