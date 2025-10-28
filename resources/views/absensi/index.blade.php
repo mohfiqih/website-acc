@@ -265,63 +265,114 @@
 
     <div class="container mt-4 mb-4">
         <div class="card" style="padding: 30px;border-radius: 10px;" id="stepFirst">
-          {{-- <div class="alert alert-warning" role="alert">
-              <i class="bi bi-exclamation-triangle-fill"></i>
-              Absensi hanya bisa diisi 1 kali dan harus berada radius lingkungan kantor LPK ACC Japan centre!
-          </div> --}}
-          <form id="absensiForm">
-            @csrf
-            {{-- <div class="mb-3">
-                <label class="fw-bold">Gelombang</label>
-                <select name="gelombang" id="gelombang" class="form-select" required>
-                    <option value="">Pilih Gelombang - Bulan - Tahun</option>
-                    @foreach($gelombang as $key => $bulanList)
-                        <optgroup label="Gelombang {{ $key }}">
-                            @foreach($bulanList as $b)
-                                <option value="{{ $b }}">{{ $b }}</option>
-                            @endforeach
-                        </optgroup>
-                    @endforeach
-                </select>
+            {{-- <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Absensi hanya bisa diisi 1 kali dan harus berada radius lingkungan kantor LPK ACC Japan centre!
             </div> --}}
-            <div class="mb-3">
-                <label class="fw-bold">Gelombang</label>
-                <select name="gelombang" id="gelombang" class="form-select" required>
-                    <option value="">Pilih Gelombang</option>
-                </select>
-            </div>
+            {{-- <form id="absensiForm">
+                @csrf
+                <div class="mb-3">
+                    <label class="fw-bold">Gelombang</label>
+                    <select name="gelombang" id="gelombang" class="form-select" required>
+                        <option value="">Pilih Gelombang - Bulan - Tahun</option>
+                        @foreach($gelombang as $key => $bulanList)
+                            <optgroup label="Gelombang {{ $key }}">
+                                @foreach($bulanList as $b)
+                                    <option value="{{ $b }}">{{ $b }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Spreedsheet</label>
+                    <select name="spreedsheet" id="spreedsheet" class="form-select" required>
+                        <option value="">Pilih Spreedsheet</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Gelombang</label>
+                    <select name="gelombang" id="gelombang" class="form-select" required>
+                        <option value="">Pilih Gelombang</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Tanggal</label>
+                    <select name="tanggal" id="tanggal" class="form-select" required>
+                        <option value="">Pilih Tanggal</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Nama Siswa</label>
+                    <select name="nama" id="nama" class="form-select" required>
+                        <option value="">Pilih Nama Siswa</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Keterangan</label>
+                    <select name="keterangan" class="form-select" required>
+                        <option value="">Pilih Keterangan</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Izin">Izin</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Alpa">Alpa</option>
+                        <option value="Mensetsu">Mensetsu</option>
+                        <option value="Pemantapan">Pemantapan</option>
+                        <option value="Cuti">Cuti</option>
+                        <option value="MD">MD</option>
+                    </select>
+                </div>
 
-            <div class="mb-3">
-                <label class="fw-bold">Tanggal</label>
-                <select name="hari" id="tanggal" class="form-select" required>
-                    <option value="">Pilih Tanggal</option>
-                </select>
-            </div>
+                <button type="submit" class="btn btn-success mt-3">Submit</button>
+            </form> --}}
 
-            <div class="mb-3">
-                <label class="fw-bold">Nama Siswa</label>
-                <select name="nama" id="nama" class="form-select" required>
-                    <option value="">Pilih Nama Siswa</option>
-                </select>
-            </div>
+            <form id="absensiForm">
+                @csrf
+                <div class="mb-3">
+                    <label class="fw-bold">Spreedsheet</label>
+                    <select name="spreedsheet" id="spreedsheet" class="form-select" required>
+                        <option value="">Pilih Spreedsheet</option>
+                    </select>
+                </div>
 
-            <div class="mb-3">
-                <label class="fw-bold">Keterangan</label>
-                <select name="keterangan" class="form-select" required>
-                    <option value="">Pilih Keterangan</option>
-                    <option value="Hadir">Hadir</option>
-                    <option value="Izin">Izin</option>
-                    <option value="Sakit">Sakit</option>
-                    <option value="Alpa">Alpa</option>
-                    <option value="Mensetsu">Mensetsu</option>
-                    <option value="Pemantapan">Pemantapan</option>
-                    <option value="Cuti">Cuti</option>
-                    <option value="MD">MD</option>
-                </select>
-            </div>
+                <div class="mb-3">
+                    <label class="fw-bold">Gelombang</label>
+                    <select name="gelombang" id="gelombang" class="form-select" required>
+                        <option value="">Pilih Gelombang</option>
+                    </select>
+                </div>
 
-            <button type="submit" class="btn btn-success mt-3">Submit</button>
-        </form>
+                <div class="mb-3">
+                    <label class="fw-bold">Tanggal</label>
+                    <select name="tanggal" id="tanggal" class="form-select" required>
+                        <option value="">Pilih Tanggal</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Nama Siswa</label>
+                    <select name="nama" id="nama" class="form-select" required>
+                        <option value="">Pilih Nama Siswa</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="fw-bold">Keterangan</label>
+                    <select name="keterangan" class="form-select" required>
+                        <option value="">Pilih Keterangan</option>
+                        <option value="Hadir">Hadir</option>
+                        <option value="Izin">Izin</option>
+                        <option value="Sakit">Sakit</option>
+                        <option value="Alpa">Alpa</option>
+                        <option value="Mensetsu">Mensetsu</option>
+                        <option value="Pemantapan">Pemantapan</option>
+                        <option value="Cuti">Cuti</option>
+                        <option value="MD">MD</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success mt-3">Submit</button>
+            </form>
         </div>
     </div>
 
@@ -351,208 +402,142 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
-    {{-- <script>
-        let allData = @json($allData);
-
-        const gelombangSelect = document.getElementById('gelombang');
-        const namaSelect      = document.getElementById('nama');
-        const tanggalSelect   = document.getElementById('tanggal');
-        const absensiForm     = document.getElementById('absensiForm');
-
-        // =====================================
-        // Radius office (sementara di-hide)
-        // const officeLat       = -6.9472685;
-        // const officeLng       = 109.1105625;
-        // const allowedRadius   = 150;
-        // function getDistanceFromLatLonInMeters(lat1, lon1, lat2, lon2) {
-        //     const R = 6371000;
-        //     const dLat = (lat2 - lat1) * Math.PI / 180;
-        //     const dLon = (lon2 - lon1) * Math.PI / 180;
-        //     const a = 
-        //         Math.sin(dLat/2) * Math.sin(dLat/2) +
-        //         Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-        //         Math.sin(dLon/2) * Math.sin(dLon/2);
-        //     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        //     return R * c;
-        // }
-
-        // function disableForm(disable) {
-        //     const elements = absensiForm.querySelectorAll('input, select, textarea, button');
-        //     elements.forEach(el => el.disabled = disable);
-        // }
-
-        // function checkRadius() {
-        //     if(navigator.geolocation){
-        //         navigator.geolocation.getCurrentPosition(function(position){
-        //             const distance = getDistanceFromLatLonInMeters(
-        //                 officeLat, officeLng,
-        //                 position.coords.latitude, position.coords.longitude
-        //             );
-
-        //             if(distance <= allowedRadius){
-        //                 disableForm(false);
-        //             } else {
-        //                 disableForm(true);
-        //                 Swal.fire({
-        //                     icon: 'warning',
-        //                     title: 'Anda di Luar Area',
-        //                     text: 'Form absensi ini hanya bisa diisi di lingkungan kantor, radius 100 meter dari gedung LPK ACC Japan Centre!'
-        //                 });
-        //             }
-        //         }, function(error){
-        //             disableForm(true);
-        //             Swal.fire({
-        //                 icon: 'error',
-        //                 title: 'Gagal Mendapatkan Lokasi',
-        //                 text: 'Izinkan lokasi untuk bisa mengisi absensi'
-        //             });
-        //         }, { enableHighAccuracy: true });
-        //     } else {
-        //         disableForm(true);
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Browser Tidak Mendukung Geolocation',
-        //             text: 'Form absensi tidak dapat digunakan'
-        //         });
-        //     }
-        // }
-
-        // checkRadius();
-        // setInterval(checkRadius, 5000);
-        // =====================================
-
-        gelombangSelect.addEventListener('change', function() {
-            let sheet = this.value;
-            namaSelect.innerHTML = '<option value="">-- Pilih Nama --</option>';
-            tanggalSelect.innerHTML = '<option value="">-- Pilih Tanggal --</option>';
-
-            if(allData[sheet]){
-                allData[sheet].forEach(item => {
-                    if(item.NAMA){
-                        let opt = document.createElement('option');
-                        opt.value = item.NAMA;
-                        opt.text = item.NAMA;
-                        namaSelect.appendChild(opt);
-                    }
-                });
-
-                let headers = Object.keys(allData[sheet][0]).filter(h => h !== "NAMA");
-                headers.forEach(h => {
-                    let opt = document.createElement('option');
-                    opt.value = h;
-                    opt.text = h;
-                    tanggalSelect.appendChild(opt);
-                });
-            }
-        });
-
-        $('#absensiForm').submit(function(e){
-            e.preventDefault();
-
-            let formData = {};
-            $(this).serializeArray().forEach(item => formData[item.name] = item.value);
-
-            Swal.fire({
-                title: 'Mengirim data...',
-                text: 'Mohon Tunggu sebentar',
-                didOpen: () => Swal.showLoading(),
-                allowOutsideClick: false
-            });
-
-            $.ajax({
-                url: "{{ route('absensi.store') }}",
-                type: 'POST',
-                data: formData,
-                headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                success: function(res){
-                    Swal.close();
-                    if(res.status === 'success'){
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Berhasil!',
-                            text: res.message
-                        });
-                        $('#absensiForm')[0].reset();
-                        namaSelect.innerHTML = '<option value="">Pilih Nama Siswa</option>';
-                        tanggalSelect.innerHTML = '<option value="">Pilih Tanggal</option>';
-                    } else if(res.status === 'exists'){
-                        Swal.fire({
-                            icon: 'warning',
-                            title: 'Warning',
-                            text: res.message
-                        });
-                    } else {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Gagal!',
-                            text: res.message
-                        });
-                    }
-                },
-                error: function(xhr){
-                    Swal.close();
-                    let msg = xhr.responseJSON?.message || 'Terjadi kesalahan, coba lagi.';
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: msg
-                    });
-                }
-            });
-        });
-    </script> --}}
-    
     <script>
         let allData = {};
+        let gelombangMap = {};
+        let links = {};
 
         $(document).ready(function(){
             Swal.fire({
-                title: 'Sedang load data...',
-                text: 'Mohon tunggu sebentar',
-                didOpen: () => Swal.showLoading(),
-                allowOutsideClick: false
+                icon: 'warning',
+                title: 'Sedang load data, mohon tunggu sebentar..',
+                toast: true,
+                position: 'top',
+                timer: 25000,
+                showConfirmButton: false
             });
+
+            // Fetch data dari server
             $.ajax({
                 url: "{{ route('absensi.data') }}",
                 type: 'GET',
                 success: function(res){
                     allData = res.allData || {};
+                    gelombangMap = res.gelombang || {};
+                    links = res.links || {};
 
-                    let html = '<option value="">Pilih Gelombang</option>';
-                    for(let g in res.gelombang){
-                        html += `<optgroup label="Gelombang ${g}">`;
-                        res.gelombang[g].forEach(b => html += `<option value="${b}">${b}</option>`);
-                        html += `</optgroup>`;
-                    }
-                    $('#gelombang').html(html);
-                        Swal.fire({
+                    // Populate spreadsheet
+                    let html = '<option value="">Pilih Spreedsheet</option>';
+                    Object.keys(gelombangMap).forEach(spread => {
+                        html += `<option value="${spread}">Spreedsheet Gelombang ${spread}</option>`;
+                    });
+                    $('#spreedsheet').html(html);
+
+                    Swal.fire({
                         icon: 'success',
                         title: 'Data berhasil di-load!',
                         toast: true,
                         position: 'top',
-                        timer: 3000,
+                        timer: 2000,
                         showConfirmButton: false
                     });
                 },
                 error:function(){
-                    alert('Gagal load data');
-                }
-            });
-
-            $('#gelombang').on('change', function(){
-                let sheet = $(this).val();
-                $('#nama').html('<option>-- Pilih Nama --</option>');
-                $('#tanggal').html('<option>-- Pilih Tanggal --</option>');
-
-                if(allData[sheet]){
-                    allData[sheet].forEach(item=>{
-                        if(item.NAMA) $('#nama').append(`<option value="${item.NAMA}">${item.NAMA}</option>`);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal load data',
+                        text: 'Cek koneksi atau Apps Script'
                     });
-                    let headers = Object.keys(allData[sheet][0]).filter(h=>'NAMA'!==h);
-                    headers.forEach(h=>$('#tanggal').append(`<option value="${h}">${h}</option>`));
                 }
             });
 
+            // Pilih Spreadsheet → populate Gelombang
+            $('#spreedsheet').on('change', function(){
+                const spreedsheet = $(this).val();
+                $('#gelombang').html('<option value="">Pilih Gelombang</option>');
+                $('#tanggal').html('<option value="">Pilih Tanggal</option>');
+                $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+
+                if(!spreedsheet) return;
+
+                const gels = gelombangMap[spreedsheet] || [];
+                gels.forEach(g => {
+                    const link = links[g] || '';
+                    $('#gelombang').append(`<option value="${g}" data-link="${link}">${g}</option>`);
+                });
+            });
+
+            // Pilih Gelombang → populate Tanggal & Nama
+            $('#gelombang').on('change', function(){
+                const gelombang = $(this).val();
+                $('#tanggal').html('<option value="">Pilih Tanggal</option>');
+                $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+
+                if(!gelombang) return;
+
+                const sheetData = allData[gelombang] || [];
+                let namaSet = new Set();
+
+                sheetData.forEach(row => {
+                    if(row.NAMA) namaSet.add(row.NAMA);
+                });
+
+                namaSet.forEach(n => $('#nama').append(new Option(n, n)));
+
+                // Tanggal bisa 1–31
+                for(let i=1; i<=31; i++){
+                    $('#tanggal').append(new Option(i, i));
+                }
+            });
+
+            // Submit form
+            $('#absensiForm').submit(function(e){
+                e.preventDefault();
+
+                let gelombangOption = $('#gelombang option:selected');
+                let linkScript = gelombangOption.data('link');
+
+                if(!linkScript){
+                    Swal.fire({icon:'error', title:'Error', text:'Link Apps Script tidak ditemukan'});
+                    return;
+                }
+
+                let formData = {
+                    link_script: linkScript,
+                    gelombang: gelombangOption.val(),
+                    tanggal: $('#tanggal').val(),
+                    nama: $('#nama').val(),
+                    keterangan: $('select[name="keterangan"]').val()
+                };
+
+                Swal.fire({title:'Mengirim data...', didOpen:()=>Swal.showLoading(), allowOutsideClick:false});
+
+                $.ajax({
+                    url: "{{ route('absensi.store') }}",
+                    type: 'POST',
+                    data: formData,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function(res){
+                        Swal.close();
+                        if(res.status === 'success'){
+                            Swal.fire({icon:'success', title:'Berhasil', text:res.message});
+                            $('#absensiForm')[0].reset();
+                            $('#gelombang').html('<option value="">Pilih Gelombang</option>');
+                            $('#tanggal').html('<option value="">Pilih Tanggal</option>');
+                            $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+                        } else if(res.status === 'exists'){
+                            Swal.fire({icon:'warning', title:'Warning', text:res.message});
+                        } else {
+                            Swal.fire({icon:'error', title:'Gagal', text:res.message});
+                        }
+                    },
+                    error: function(xhr){
+                        Swal.close();
+                        let msg = xhr.responseJSON?.message || 'Terjadi kesalahan';
+                        Swal.fire({icon:'error', title:'Error', text:msg});
+                    }
+                });
+            });
         });
     </script>
 </body>
