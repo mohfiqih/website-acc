@@ -248,9 +248,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <h2 style="text-align: center"></span>FORMULIR ABSENSI SISWA LPK ACC JAPAN CENTRE</h2>
-                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor,
-                        Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
+                    <h2 style="text-align: center"></span>ABSENSI SISWA LPK ACC JAPAN CENTRE</h2>
+                    <p style="text-align: center">Silahkan isi absensi siswa sesuai kelas yang diajar masing-masing sensei, mohon isi semua kehadiran siswa baik yang hadir ataupun tidak hadir atau keterangan lainnya. Absensi digunakan sebagai track record siswa LPK ACC Japan Centre selama masa pendidikan.</p>
                     <div class="d-flex justify-content-center justify-content-lg-start text-center"
                         style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
@@ -326,6 +325,10 @@
                 <button type="submit" class="btn btn-success mt-3">Submit</button>
             </form> --}}
 
+            <div class="alert alert-warning" role="alert">
+                <i class="bi bi-exclamation-triangle-fill"></i>
+                Silahkan refresh halaman jika terjadi error, mohon koneksi internet diaktifkan jika tidak bisa menggunakan Wi-Fi gunakan jaringan data seluler dan tunggu load data hingga selesai kemudian lakukan isi formulir.
+            </div>
             <form id="absensiForm">
                 @csrf
                 <div class="mb-3">
@@ -367,7 +370,9 @@
                         <option value="Mensetsu">Mensetsu</option>
                         <option value="Pemantapan">Pemantapan</option>
                         <option value="Cuti">Cuti</option>
-                        <option value="MD">MD</option>
+                        <option value="MD">Mengundurkan Diri</option>
+                        <option value="Naik Gelombang">Naik Gelombang</option>
+                        <option value="Turun Gelombang">Turun Gelombang</option>
                     </select>
                 </div>
 
@@ -521,10 +526,8 @@
                         Swal.close();
                         if(res.status === 'success'){
                             Swal.fire({icon:'success', title:'Berhasil', text:res.message});
-                            $('#absensiForm')[0].reset();
-                            $('#gelombang').html('<option value="">Pilih Gelombang</option>');
-                            $('#tanggal').html('<option value="">Pilih Tanggal</option>');
-                            $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+                            $('#nama').val('').trigger('change');
+                            $('select[name="keterangan"]').val('').trigger('change');
                         } else if(res.status === 'exists'){
                             Swal.fire({icon:'warning', title:'Warning', text:res.message});
                         } else {
