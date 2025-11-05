@@ -1107,7 +1107,6 @@
     <script src="{{ asset('js/scroll_up_next_previous.js') }}"></script>
 
     <script>
-        // -------------- POST DATA ---------------- //
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.hash === "#galeri") {
                 document.getElementById("galeri").scrollIntoView({
@@ -1143,7 +1142,6 @@
             }
         });
 
-        // insert data
         $(document).ready(function() {
             $('.signup-form').on('submit', function(e) {
                 e.preventDefault();
@@ -1266,7 +1264,6 @@
             });
         });
 
-        // rekomendasi kata
         document.addEventListener("DOMContentLoaded", function() {
             const keahlianInput = document.querySelector('.tagify-keahlian');
             const sifatInput = document.querySelector('.tagify-sifat');
@@ -1352,7 +1349,6 @@
                 }
             });
 
-            // HOBI
             const hobiTagify = new Tagify(hobiInput, {
                 whitelist: [
                     "MEMBACA", "MENULIS", "OLAHRAGA", "SEPAK BOLA", "BULU TANGKIS",
@@ -1370,7 +1366,6 @@
                 }
             });
 
-            // MOTIVASI
             const motivasiTagify = new Tagify(motivasiInput, {
                 whitelist: [
                     "INGIN MANDIRI", "MEMBANTU ORANG TUA", "MENGEMBANGKAN DIRI", "BELAJAR HAL BARU",
@@ -1389,7 +1384,6 @@
                 }
             });
 
-            // PLANNING SETELAH PULANG
             const planningTagify = new Tagify(planningInput, {
                 whitelist: [
                     "BERWIRAUSAHA",
@@ -1432,10 +1426,7 @@
     <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('templates/assets/js/main.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <!-- Lity JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.js"></script>
-
-    {{-- Year Picker --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
@@ -1450,7 +1441,6 @@
         });
     </script>
 
-    {{-- Pengalaman --}}
     <script>
         let pengalamanCount = 0;
         const maxPengalaman = 3;
@@ -1488,7 +1478,6 @@
         });
     </script>
 
-    {{-- Nama Sudara --}}
     <script>
         let saudaraCount = 0;
         const maxSaudara = 6;
@@ -1558,7 +1547,6 @@
         });
     </script>
 
-    {{-- Perguruan Tinggi --}}
     <script>
         let perguruanCount = 0;
         const maxPerguruan = 2;
