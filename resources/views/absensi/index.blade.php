@@ -556,14 +556,16 @@
                 title: 'Sedang load data, mohon tunggu sebentar..',
                 toast: true,
                 position: 'top',
-                timer: 25000,
-                showConfirmButton: false
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-            
+
             fetch(link_spreedsheet)
                 .then(response => response.json())
                 .then(res => {
-                    Swal.close();
                     allData = {};
                     gelombangMap = {};
                     links = {};
@@ -594,6 +596,7 @@
                     });
 
                     Promise.all(promises).then(() => {
+                        Swal.close();
                         Swal.fire({
                             icon: 'success',
                             title: 'Data berhasil dimuat!',
@@ -603,7 +606,7 @@
                             showConfirmButton: false
                         });
 
-                        // Populate spreadsheet dropdown
+                        // isi dropdown
                         let html = '<option value="">Pilih Spreedsheet</option>';
                         Object.keys(gelombangMap).forEach(spread => {
                             html += `<option value="${spread}">Spreedsheet Gelombang ${spread}</option>`;
@@ -616,7 +619,11 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Gagal load data',
-                        text: 'Pastikan koneksi aktif dan Apps Script bisa diakses.'
+                        text: 'Pastikan koneksi aktif dan Apps Script bisa diakses.',
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        timer: 3000
                     });
                     console.error(err);
                 });
@@ -655,51 +662,7 @@
                     $('#tanggal').append(new Option(i, i));
                 }
             });
-
-            // // Submit Form → kirim ke Apps Script via Laravel
-            // $('#absensiForm').submit(function(e) {
-            //     e.preventDefault();
-
-            //     let gelombangOption = $('#gelombang option:selected');
-            //     let linkScript = gelombangOption.data('link');
-            //     if (!linkScript) {
-            //         Swal.fire({ icon: 'error', title: 'Error', text: 'Link Apps Script tidak ditemukan' });
-            //         return;
-            //     }
-
-            //     let formData = {
-            //         link_script: linkScript,
-            //         gelombang: gelombangOption.val(),
-            //         tanggal: $('#tanggal').val(),
-            //         nama: $('#nama').val(),
-            //         keterangan: $('select[name="keterangan"]').val()
-            //     };
-
-            //     Swal.fire({ title: 'Mengirim data...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
-
-            //     $.ajax({
-            //         url: "{{ route('absensi.store') }}",
-            //         type: 'POST',
-            //         data: formData,
-            //         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            //         success: function(res) {
-            //             Swal.close();
-            //             if (res.status === 'success') {
-            //                 Swal.fire({ icon: 'success', title: 'Berhasil', text: res.message });
-            //             } else if (res.status === 'exists') {
-            //                 Swal.fire({ icon: 'warning', title: 'Sudah Pernah Isi', text: res.message });
-            //             } else {
-            //                 Swal.fire({ icon: 'error', title: 'Gagal', text: res.message });
-            //             }
-            //         },
-            //         error: function(xhr) {
-            //             Swal.close();
-            //             let msg = xhr.responseJSON?.message || 'Terjadi kesalahan';
-            //             Swal.fire({ icon: 'error', title: 'Error', text: msg });
-            //         }
-            //     });
-            // });
-
+            
             $('#absensiForm').submit(function(e) {
                 e.preventDefault();
 
