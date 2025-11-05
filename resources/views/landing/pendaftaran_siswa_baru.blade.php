@@ -382,7 +382,8 @@
                     </li>
                 </ul>
 
-                <form action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form">
+                {{-- <form action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form"> --}}
+                <form class="signup-form">
                     @csrf
 
                     @if (session('success'))
@@ -1265,85 +1266,50 @@
         // });
 
         $(document).ready(function() {
-            const scriptURL = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
+            const linkScript = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
 
             $('.signup-form').on('submit', function(e) {
                 e.preventDefault();
 
-                let form = $('.signup-form');
-
-                function joinField(selector, name) {
-                    let val = $(selector).val();
-                    if (val) {
-                        let str = Array.isArray(val) ? val.join(', ') : val;
-                        $('<input>').attr({
-                            type: 'hidden',
-                            name: name,
-                            value: str
-                        }).appendTo(form);
-                    }
-                }
-
-                joinField('#bahasa_asing', 'bahasa_asing');
-                joinField('#sifat_kepribadian', 'sifat_kepribadian');
-                joinField('#kelebihan', 'kelebihan');
-                joinField('#kelemahan', 'kelemahan');
+                const form = this;
+                const formData = new FormData(form);
 
                 Swal.fire({
-                    title: 'Apakah Anda yakin ingin mendaftarkan diri?',
-                    text: 'Pastikan data yang anda masukan sudah benar!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'OK',
-                    cancelButtonText: 'Batal',
-                    confirmButtonColor: '#046392'
-                }).then((result) => {
-                    if (result.isConfirmed) {
+                    title: 'Mengirim data...',
+                    didOpen: () => Swal.showLoading(),
+                    allowOutsideClick: false
+                });
+
+                fetch(linkScript, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(res => res.json())
+                .then(res => {
+                    Swal.close();
+                    if (res.status === 'success' || res.success) {
                         Swal.fire({
-                            text: 'Mohon tunggu, sedang mengirim data ke server...',
-                            icon: 'info',
-                            showConfirmButton: false,
-                            allowOutsideClick: false,
-                            didOpen: () => Swal.showLoading()
+                            icon: 'success',
+                            title: 'Berhasil',
+                            text: 'Data berhasil dikirim ke Apps Script!'
                         });
-
-                        const formData = new FormData(form[0]);
-
-                        fetch(scriptURL, {
-                            method: 'POST',
-                            body: formData
-                        })
-                        .then(response => {
-                            Swal.close();
-                            if (response.ok) {
-                                Swal.fire({
-                                    title: 'Berhasil!',
-                                    text: 'Pendaftaran berhasil dikirim ke LPK ACC Japan Centre!',
-                                    icon: 'success',
-                                    timer: 3000,
-                                    showConfirmButton: false
-                                }).then(() => {
-                                    form[0].reset();
-                                    location.reload();
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: 'error',
-                                    title: 'Gagal!',
-                                    text: 'Terjadi kesalahan saat mengirim data ke server Apps Script.'
-                                });
-                            }
-                        })
-                        .catch(error => {
-                            Swal.close();
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: 'Koneksi gagal atau server Apps Script tidak merespons.'
-                            });
-                            console.error('Error:', error);
+                        form.reset();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: res.message || 'Gagal menyimpan data.'
                         });
                     }
+                })
+                .catch(err => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'Tidak bisa terhubung ke Apps Script.'
+                    });
+                    console.error(err);
                 });
             });
         });
