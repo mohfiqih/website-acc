@@ -1142,54 +1142,156 @@
             }
         });
 
+        // $(document).ready(function() {
+        //     $('.signup-form').on('submit', function(e) {
+        //         e.preventDefault();
+
+        //         let bahasaAsing = $('#bahasa_asing').val();
+        //         if (bahasaAsing) {
+        //             let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') :
+        //                 bahasaAsing;
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: 'bahasa_asing',
+        //                 value: bahasaAsingString
+        //             }).appendTo('.signup-form');
+        //         }
+
+        //         let sifat = $('#sifat_kepribadian').val();
+        //         if (sifat) {
+        //             let sifatString = Array.isArray(sifat) ? sifat.join(', ') : sifat;
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: 'sifat_kepribadian',
+        //                 value: sifatString
+        //             }).appendTo('.signup-form');
+        //         }
+
+        //         let kelebihan = $('#kelebihan').val();
+        //         if (kelebihan) {
+        //             let kelebihanString = Array.isArray(kelebihan) ? kelebihan.join(', ') : kelebihan;
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: 'kelebihan',
+        //                 value: kelebihanString
+        //             }).appendTo('.signup-form');
+        //         }
+
+        //         let kelemahan = $('#kelemahan').val();
+        //         if (kelemahan) {
+        //             let kelemahanString = Array.isArray(kelemahan) ? kelemahan.join(', ') : kelemahan;
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: 'kelemahan',
+        //                 value: kelemahanString
+        //             }).appendTo('.signup-form');
+        //         }
+
+        //         Swal.fire({
+        //             title: 'Apakah Anda yakin ingin mendaftarkan diri?',
+        //             text: 'Pastikan data yang anda masukan sesuai dan benar, jika ada kesalahan hubungi bagian administrasi untuk mengubahnya!',
+        //             icon: 'warning',
+        //             showCancelButton: true,
+        //             confirmButtonText: 'OK',
+        //             cancelButtonText: 'Batal',
+        //             confirmButtonColor: '#046392'
+        //         }).then((result) => {
+        //             if (result.isConfirmed) {
+        //                 var form = $('.signup-form');
+        //                 var formData = form.serialize();
+
+        //                 Swal.fire({
+        //                     text: 'Mohon tunggu sedang memproses pendaftaran...',
+        //                     icon: 'warning',
+        //                     showConfirmButton: false,
+        //                     allowOutsideClick: false,
+        //                     didOpen: () => {
+        //                         Swal.showLoading();
+        //                     }
+        //                 });
+
+        //                 $.ajax({
+        //                     url: form.attr('action'),
+        //                     type: 'POST',
+        //                     data: formData,
+        //                     success: function(response) {
+        //                         Swal.close();
+        //                         if (response.success) {
+        //                             Swal.fire({
+        //                                 title: 'Berhasil!',
+        //                                 text: 'Berhasil daftar di LPK ACC Japan Centre!',
+        //                                 icon: 'success',
+        //                                 timer: 3000,
+        //                                 showConfirmButton: false,
+        //                             }).then(() => {
+        //                                 location.reload();
+        //                             });
+        //                         } else if (response.duplicate) {
+        //                             Swal.fire({
+        //                                 title: 'Warning!',
+        //                                 text: response.message,
+        //                                 icon: 'warning',
+        //                                 timer: 3000,
+        //                                 showConfirmButton: false,
+        //                             });
+        //                         } else {
+        //                             Swal.fire({
+        //                                 icon: 'error',
+        //                                 title: 'Gagal!',
+        //                                 text: 'Terjadi kesalahan saat menyimpan data.'
+        //                             });
+        //                         }
+        //                     },
+        //                     error: function(xhr) {
+        //                         Swal.close();
+        //                         let errorMessage = 'Terjadi kesalahan sistem.';
+        //                         if (xhr.responseJSON?.errors) {
+        //                             errorMessage = Object.values(xhr.responseJSON
+        //                                 .errors).flat().join('\n');
+        //                         } else if (xhr.responseJSON?.message) {
+        //                             errorMessage = xhr.responseJSON.message;
+        //                         }
+        //                         Swal.fire({
+        //                             title: 'Error!',
+        //                             text: errorMessage,
+        //                             icon: 'error',
+        //                             confirmButtonText: 'Tutup'
+        //                         });
+        //                     }
+        //                 });
+        //             }
+        //         });
+        //     });
+        // });
+
         $(document).ready(function() {
+            const scriptURL = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
+
             $('.signup-form').on('submit', function(e) {
                 e.preventDefault();
 
-                let bahasaAsing = $('#bahasa_asing').val();
-                if (bahasaAsing) {
-                    let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') :
-                        bahasaAsing;
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: 'bahasa_asing',
-                        value: bahasaAsingString
-                    }).appendTo('.signup-form');
+                let form = $('.signup-form');
+
+                function joinField(selector, name) {
+                    let val = $(selector).val();
+                    if (val) {
+                        let str = Array.isArray(val) ? val.join(', ') : val;
+                        $('<input>').attr({
+                            type: 'hidden',
+                            name: name,
+                            value: str
+                        }).appendTo(form);
+                    }
                 }
 
-                let sifat = $('#sifat_kepribadian').val();
-                if (sifat) {
-                    let sifatString = Array.isArray(sifat) ? sifat.join(', ') : sifat;
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: 'sifat_kepribadian',
-                        value: sifatString
-                    }).appendTo('.signup-form');
-                }
-
-                let kelebihan = $('#kelebihan').val();
-                if (kelebihan) {
-                    let kelebihanString = Array.isArray(kelebihan) ? kelebihan.join(', ') : kelebihan;
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: 'kelebihan',
-                        value: kelebihanString
-                    }).appendTo('.signup-form');
-                }
-
-                let kelemahan = $('#kelemahan').val();
-                if (kelemahan) {
-                    let kelemahanString = Array.isArray(kelemahan) ? kelemahan.join(', ') : kelemahan;
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: 'kelemahan',
-                        value: kelemahanString
-                    }).appendTo('.signup-form');
-                }
+                joinField('#bahasa_asing', 'bahasa_asing');
+                joinField('#sifat_kepribadian', 'sifat_kepribadian');
+                joinField('#kelebihan', 'kelebihan');
+                joinField('#kelemahan', 'kelemahan');
 
                 Swal.fire({
                     title: 'Apakah Anda yakin ingin mendaftarkan diri?',
-                    text: 'Pastikan data yang anda masukan sesuai dan benar, jika ada kesalahan hubungi bagian administrasi untuk mengubahnya!',
+                    text: 'Pastikan data yang anda masukan sudah benar!',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonText: 'OK',
@@ -1197,67 +1299,49 @@
                     confirmButtonColor: '#046392'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        var form = $('.signup-form');
-                        var formData = form.serialize();
-
                         Swal.fire({
-                            text: 'Mohon tunggu sedang memproses pendaftaran...',
-                            icon: 'warning',
+                            text: 'Mohon tunggu, sedang mengirim data ke server...',
+                            icon: 'info',
                             showConfirmButton: false,
                             allowOutsideClick: false,
-                            didOpen: () => {
-                                Swal.showLoading();
-                            }
+                            didOpen: () => Swal.showLoading()
                         });
 
-                        $.ajax({
-                            url: form.attr('action'),
-                            type: 'POST',
-                            data: formData,
-                            success: function(response) {
-                                Swal.close();
-                                if (response.success) {
-                                    Swal.fire({
-                                        title: 'Berhasil!',
-                                        text: 'Berhasil daftar di LPK ACC Japan Centre!',
-                                        icon: 'success',
-                                        timer: 3000,
-                                        showConfirmButton: false,
-                                    }).then(() => {
-                                        location.reload();
-                                    });
-                                } else if (response.duplicate) {
-                                    Swal.fire({
-                                        title: 'Warning!',
-                                        text: response.message,
-                                        icon: 'warning',
-                                        timer: 3000,
-                                        showConfirmButton: false,
-                                    });
-                                } else {
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Gagal!',
-                                        text: 'Terjadi kesalahan saat menyimpan data.'
-                                    });
-                                }
-                            },
-                            error: function(xhr) {
-                                Swal.close();
-                                let errorMessage = 'Terjadi kesalahan sistem.';
-                                if (xhr.responseJSON?.errors) {
-                                    errorMessage = Object.values(xhr.responseJSON
-                                        .errors).flat().join('\n');
-                                } else if (xhr.responseJSON?.message) {
-                                    errorMessage = xhr.responseJSON.message;
-                                }
+                        const formData = new FormData(form[0]);
+
+                        fetch(scriptURL, {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => {
+                            Swal.close();
+                            if (response.ok) {
                                 Swal.fire({
-                                    title: 'Error!',
-                                    text: errorMessage,
+                                    title: 'Berhasil!',
+                                    text: 'Pendaftaran berhasil dikirim ke LPK ACC Japan Centre!',
+                                    icon: 'success',
+                                    timer: 3000,
+                                    showConfirmButton: false
+                                }).then(() => {
+                                    form[0].reset();
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire({
                                     icon: 'error',
-                                    confirmButtonText: 'Tutup'
+                                    title: 'Gagal!',
+                                    text: 'Terjadi kesalahan saat mengirim data ke server Apps Script.'
                                 });
                             }
+                        })
+                        .catch(error => {
+                            Swal.close();
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Koneksi gagal atau server Apps Script tidak merespons.'
+                            });
+                            console.error('Error:', error);
                         });
                     }
                 });
