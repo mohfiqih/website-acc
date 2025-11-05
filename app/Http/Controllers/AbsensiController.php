@@ -70,7 +70,8 @@ class AbsensiController extends Controller
         $links = [];
 
         try {
-            $path = public_path('json/absensi.json');
+            // $path = public_path('json/absensi.json');
+            $path = base_path('public/json/absensi.json');
 
             if (!file_exists($path)) {
                 throw new \Exception('File JSON tidak ditemukan di: ' . $path);
