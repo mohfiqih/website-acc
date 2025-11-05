@@ -12,7 +12,10 @@ class AbsensiController extends Controller
 
     public function index()
     {
-        return view('absensi.index');
+        // return view('absensi.index');
+        return view('absensi.index', [
+            'link_spreedsheet' => $this->link_spreedsheet
+        ]);
     }
 
     // public function fetchData()
@@ -22,7 +25,8 @@ class AbsensiController extends Controller
     //     $links = [];
 
     //     try {
-    //         $response = Http::timeout(60)->get($this->link_spreedsheet);
+    //         $link = public_path('json/absensi.json');
+    //         $response = Http::timeout(60)->get($link);
     //         $appsList = $response->json()['Data'] ?? [];
 
     //         foreach ($appsList as $item) {
@@ -58,45 +62,43 @@ class AbsensiController extends Controller
     //         return response()->json(['error'=>$e->getMessage()],500);
     //     }
     // }
-    
+
     public function fetchData()
     {
-        $allData   = [];
+        $allData = [];
         $gelombang = [];
-        $links     = [];
+        $links = [];
 
         try {
-            $response = Http::withoutVerifying()
-                ->timeout(60)
-                ->get($this->link_spreedsheet);
+            $path = public_path('json/absensi.json');
 
-            if (!$response->successful()) {
-                throw new \Exception("Gagal mengambil data spreadsheet utama");
+            if (!file_exists($path)) {
+                throw new \Exception('File JSON tidak ditemukan di: ' . $path);
             }
 
-            $appsList = $response->json()['Data'] ?? [];
+            $jsonData = json_decode(file_get_contents($path), true);
+            $appsList = $jsonData['Data'] ?? [];
 
             foreach ($appsList as $item) {
                 $linkApp = trim($item['Link App Script'] ?? '');
                 if (!$linkApp) continue;
 
-                $resp = Http::withoutVerifying()
-                    ->retry(3, 2000)
-                    ->timeout(120)
-                    ->get($linkApp);
+                try {
+                    $resp = Http::timeout(120)->withoutVerifying()->get($linkApp);
 
-                if ($resp->successful()) {
-                    $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
-                    $data = json_decode($raw, true);
+                    if ($resp->successful()) {
+                        $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
+                        $data = json_decode($raw, true);
 
-                    if (is_array($data)) {
-                        foreach ($data as $sheetName => $rows) {
-                            $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
-                            $links[$sheetName]   = $linkApp;
+                        if (is_array($data)) {
+                            foreach ($data as $sheetName => $rows) {
+                                $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
+                                $links[$sheetName] = $linkApp;
+                            }
                         }
                     }
-                } else {
-                    \Log::warning("Gagal ambil data dari: " . $linkApp);
+                } catch (\Exception $e) {
+                    \Log::warning("Gagal ambil dari $linkApp : " . $e->getMessage());
                 }
             }
 
@@ -111,11 +113,9 @@ class AbsensiController extends Controller
                 'gelombang' => $gelombang,
                 'links'     => $links
             ]);
-        } catch (\Throwable $e) {
-            \Log::error('Fetch Data Error: ' . $e->getMessage());
-            return response()->json([
-                'error' => 'Gagal load data: ' . $e->getMessage()
-            ], 500);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Gagal load data: ' . $e->getMessage()], 500);
         }
     }
 
