@@ -329,10 +329,9 @@
                 </ol>
             </nav>
             <div class="signup-content">
-                <div class="alert alert-warning" role="alert">
+                {{-- <div class="alert alert-warning" role="alert">
                     Jika saat mengisi form tidak bisa klik <b>Next</b> maka terdapat kolom yang belum terisi, silahkan bisa di cek kembali formulir yang telah anda isi!
                 </div>
-                {{-- nav pill --}}
                 <ul class="nav nav-pills mb-3 flex-wrap" id="stepNav" style="gap: 10px;">
                     <li class="nav-item">
                         <a class="nav-link active-step" id="nav-step-1" href="javascript:void(0)">1. Data
@@ -380,7 +379,7 @@
                                 terlebih dahulu.</p>
                         </a>
                     </li>
-                </ul>
+                </ul> --}}
 
                 {{-- old --}}
                 {{-- <form action="{{ url('/pendaftaran-siswa-baru') }}" method="POST" class="signup-form">
