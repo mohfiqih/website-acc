@@ -15,35 +15,93 @@ class AbsensiController extends Controller
         return view('absensi.index');
     }
 
+    // public function fetchData()
+    // {
+    //     $allData = [];
+    //     $gelombang = [];
+    //     $links = [];
+
+    //     try {
+    //         $response = Http::timeout(60)->get($this->link_spreedsheet);
+    //         $appsList = $response->json()['Data'] ?? [];
+
+    //         foreach ($appsList as $item) {
+    //             $linkApp = trim($item['Link App Script'] ?? '');
+    //             if(!$linkApp) continue;
+
+    //             $resp = Http::timeout(120)->get($linkApp);
+    //             if ($resp->successful()) {
+    //                 $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
+    //                 $data = json_decode($raw, true);
+    //                 if (is_array($data)) {
+    //                     foreach($data as $sheetName => $rows){
+    //                         $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
+    //                         $links[$sheetName] = $linkApp;
+    //                     }
+    //                 }
+    //             }
+    //         }
+
+    //         foreach($allData as $sheetName => $rows){
+    //             if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
+    //                 $gelombang[$matches[0]][] = $sheetName;
+    //             }
+    //         }
+
+    //         return response()->json([
+    //             'allData'   => $allData,
+    //             'gelombang' => $gelombang,
+    //             'links'     => $links
+    //         ]);
+
+    //     } catch (\Exception $e){
+    //         return response()->json(['error'=>$e->getMessage()],500);
+    //     }
+    // }
+    
     public function fetchData()
     {
-        $allData = [];
+        $allData   = [];
         $gelombang = [];
-        $links = [];
+        $links     = [];
 
         try {
-            $response = Http::timeout(10)->get($this->link_spreedsheet);
+            $response = Http::withoutVerifying()
+                ->timeout(60)
+                ->get($this->link_spreedsheet);
+
+            if (!$response->successful()) {
+                throw new \Exception("Gagal mengambil data spreadsheet utama");
+            }
+
             $appsList = $response->json()['Data'] ?? [];
 
             foreach ($appsList as $item) {
                 $linkApp = trim($item['Link App Script'] ?? '');
-                if(!$linkApp) continue;
+                if (!$linkApp) continue;
 
-                $resp = Http::timeout(120)->get($linkApp);
+                $resp = Http::withoutVerifying()
+                    ->retry(3, 2000)
+                    ->timeout(120)
+                    ->get($linkApp);
+
                 if ($resp->successful()) {
                     $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
                     $data = json_decode($raw, true);
+
                     if (is_array($data)) {
-                        foreach($data as $sheetName => $rows){
+                        foreach ($data as $sheetName => $rows) {
                             $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
-                            $links[$sheetName] = $linkApp;
+                            $links[$sheetName]   = $linkApp;
                         }
                     }
+                } else {
+                    \Log::warning("Gagal ambil data dari: " . $linkApp);
                 }
             }
 
-            foreach($allData as $sheetName => $rows){
-                if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
+            foreach ($allData as $sheetName => $rows) {
+                if (preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)) {
                     $gelombang[$matches[0]][] = $sheetName;
                 }
             }
@@ -53,9 +111,11 @@ class AbsensiController extends Controller
                 'gelombang' => $gelombang,
                 'links'     => $links
             ]);
-
-        } catch (\Exception $e){
-            return response()->json(['error'=>$e->getMessage()],500);
+        } catch (\Throwable $e) {
+            \Log::error('Fetch Data Error: ' . $e->getMessage());
+            return response()->json([
+                'error' => 'Gagal load data: ' . $e->getMessage()
+            ], 500);
         }
     }
 
