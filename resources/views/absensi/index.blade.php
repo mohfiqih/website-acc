@@ -543,6 +543,172 @@
             });
         });
     </script>
+
+    {{-- <script>
+        let allData = {};
+        let gelombangMap = {};
+        let links = {};
+        let link_spreedsheet = "https://script.google.com/macros/s/AKfycbzcXEhB1_m4pS2oXks6ewEkcwWigi3v7-2coXlhPHNvuv6LkPPeVjnC09g0-fRdfKpA_A/exec";
+
+        $(document).ready(function() {
+            // Swal.fire({
+            //     icon: 'info',
+            //     title: 'Sedang memuat data...',
+            //     text: 'Mohon tunggu sebentar.',
+            //     allowOutsideClick: false,
+            //     didOpen: () => Swal.showLoading()
+            // });
+
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sedang load data, mohon tunggu sebentar..',
+                toast: true,
+                position: 'top',
+                timer: 25000,
+                showConfirmButton: false
+            });
+            
+            fetch(link_spreedsheet)
+                .then(response => response.json())
+                .then(res => {
+                    Swal.close();
+                    allData = {};
+                    gelombangMap = {};
+                    links = {};
+
+                    let appsList = res.Data || [];
+
+                    let promises = appsList.map(item => {
+                        let linkApp = item['Link App Script']?.trim();
+                        if (!linkApp) return Promise.resolve();
+
+                        return fetch(linkApp)
+                            .then(r => r.text())
+                            .then(raw => {
+                                raw = raw.replace(/^\)\]\}\'?\n?/, '');
+                                let data = JSON.parse(raw);
+                                Object.entries(data).forEach(([sheetName, rows]) => {
+                                    allData[sheetName] = [...(allData[sheetName] || []), ...rows];
+                                    links[sheetName] = linkApp;
+
+                                    if (/(?:KM)?(\d+)/i.test(sheetName)) {
+                                        let g = sheetName.match(/^(?:KM)?(\d+)/i)[0];
+                                        if (!gelombangMap[g]) gelombangMap[g] = [];
+                                        gelombangMap[g].push(sheetName);
+                                    }
+                                });
+                            })
+                            .catch(err => console.warn('Gagal ambil', linkApp, err));
+                    });
+
+                    Promise.all(promises).then(() => {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Data berhasil dimuat!',
+                            toast: true,
+                            position: 'top',
+                            timer: 2500,
+                            showConfirmButton: false
+                        });
+
+                        // Populate spreadsheet dropdown
+                        let html = '<option value="">Pilih Spreedsheet</option>';
+                        Object.keys(gelombangMap).forEach(spread => {
+                            html += `<option value="${spread}">Spreedsheet Gelombang ${spread}</option>`;
+                        });
+                        $('#spreedsheet').html(html);
+                    });
+                })
+                .catch(err => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Gagal load data',
+                        text: 'Pastikan koneksi aktif dan Apps Script bisa diakses.'
+                    });
+                    console.error(err);
+                });
+
+            // Pilih Spreedsheet → populate Gelombang
+            $('#spreedsheet').on('change', function() {
+                const spreedsheet = $(this).val();
+                $('#gelombang').html('<option value="">Pilih Gelombang</option>');
+                $('#tanggal').html('<option value="">Pilih Tanggal</option>');
+                $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+                if (!spreedsheet) return;
+
+                const gels = gelombangMap[spreedsheet] || [];
+                gels.forEach(g => {
+                    const link = links[g] || '';
+                    $('#gelombang').append(`<option value="${g}" data-link="${link}">${g}</option>`);
+                });
+            });
+
+            // Pilih Gelombang → populate Nama & Tanggal
+            $('#gelombang').on('change', function() {
+                const gelombang = $(this).val();
+                $('#tanggal').html('<option value="">Pilih Tanggal</option>');
+                $('#nama').html('<option value="">Pilih Nama Siswa</option>');
+
+                if (!gelombang) return;
+                const sheetData = allData[gelombang] || [];
+                let namaSet = new Set();
+
+                sheetData.forEach(row => {
+                    if (row.NAMA) namaSet.add(row.NAMA);
+                });
+
+                namaSet.forEach(n => $('#nama').append(new Option(n, n)));
+                for (let i = 1; i <= 31; i++) {
+                    $('#tanggal').append(new Option(i, i));
+                }
+            });
+
+            // Submit Form → kirim ke Apps Script via Laravel
+            $('#absensiForm').submit(function(e) {
+                e.preventDefault();
+
+                let gelombangOption = $('#gelombang option:selected');
+                let linkScript = gelombangOption.data('link');
+                if (!linkScript) {
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'Link Apps Script tidak ditemukan' });
+                    return;
+                }
+
+                let formData = {
+                    link_script: linkScript,
+                    gelombang: gelombangOption.val(),
+                    tanggal: $('#tanggal').val(),
+                    nama: $('#nama').val(),
+                    keterangan: $('select[name="keterangan"]').val()
+                };
+
+                Swal.fire({ title: 'Mengirim data...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+
+                $.ajax({
+                    url: "{{ route('absensi.store') }}",
+                    type: 'POST',
+                    data: formData,
+                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                    success: function(res) {
+                        Swal.close();
+                        if (res.status === 'success') {
+                            Swal.fire({ icon: 'success', title: 'Berhasil', text: res.message });
+                        } else if (res.status === 'exists') {
+                            Swal.fire({ icon: 'warning', title: 'Sudah Pernah Isi', text: res.message });
+                        } else {
+                            Swal.fire({ icon: 'error', title: 'Gagal', text: res.message });
+                        }
+                    },
+                    error: function(xhr) {
+                        Swal.close();
+                        let msg = xhr.responseJSON?.message || 'Terjadi kesalahan';
+                        Swal.fire({ icon: 'error', title: 'Error', text: msg });
+                    }
+                });
+            });
+        });
+    </script> --}}
 </body>
 
 </html>
