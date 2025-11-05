@@ -551,14 +551,6 @@
         let link_spreedsheet = "https://script.google.com/macros/s/AKfycbzcXEhB1_m4pS2oXks6ewEkcwWigi3v7-2coXlhPHNvuv6LkPPeVjnC09g0-fRdfKpA_A/exec";
 
         $(document).ready(function() {
-            // Swal.fire({
-            //     icon: 'info',
-            //     title: 'Sedang memuat data...',
-            //     text: 'Mohon tunggu sebentar.',
-            //     allowOutsideClick: false,
-            //     didOpen: () => Swal.showLoading()
-            // });
-
             Swal.fire({
                 icon: 'warning',
                 title: 'Sedang load data, mohon tunggu sebentar..',
@@ -664,7 +656,50 @@
                 }
             });
 
-            // Submit Form → kirim ke Apps Script via Laravel
+            // // Submit Form → kirim ke Apps Script via Laravel
+            // $('#absensiForm').submit(function(e) {
+            //     e.preventDefault();
+
+            //     let gelombangOption = $('#gelombang option:selected');
+            //     let linkScript = gelombangOption.data('link');
+            //     if (!linkScript) {
+            //         Swal.fire({ icon: 'error', title: 'Error', text: 'Link Apps Script tidak ditemukan' });
+            //         return;
+            //     }
+
+            //     let formData = {
+            //         link_script: linkScript,
+            //         gelombang: gelombangOption.val(),
+            //         tanggal: $('#tanggal').val(),
+            //         nama: $('#nama').val(),
+            //         keterangan: $('select[name="keterangan"]').val()
+            //     };
+
+            //     Swal.fire({ title: 'Mengirim data...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
+
+            //     $.ajax({
+            //         url: "{{ route('absensi.store') }}",
+            //         type: 'POST',
+            //         data: formData,
+            //         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+            //         success: function(res) {
+            //             Swal.close();
+            //             if (res.status === 'success') {
+            //                 Swal.fire({ icon: 'success', title: 'Berhasil', text: res.message });
+            //             } else if (res.status === 'exists') {
+            //                 Swal.fire({ icon: 'warning', title: 'Sudah Pernah Isi', text: res.message });
+            //             } else {
+            //                 Swal.fire({ icon: 'error', title: 'Gagal', text: res.message });
+            //             }
+            //         },
+            //         error: function(xhr) {
+            //             Swal.close();
+            //             let msg = xhr.responseJSON?.message || 'Terjadi kesalahan';
+            //             Swal.fire({ icon: 'error', title: 'Error', text: msg });
+            //         }
+            //     });
+            // });
+
             $('#absensiForm').submit(function(e) {
                 e.preventDefault();
 
@@ -675,36 +710,36 @@
                     return;
                 }
 
-                let formData = {
-                    link_script: linkScript,
-                    gelombang: gelombangOption.val(),
-                    tanggal: $('#tanggal').val(),
+                let data = {
+                    sheet: gelombangOption.val(),
                     nama: $('#nama').val(),
+                    hari: $('#tanggal').val(),
                     keterangan: $('select[name="keterangan"]').val()
                 };
 
                 Swal.fire({ title: 'Mengirim data...', didOpen: () => Swal.showLoading(), allowOutsideClick: false });
 
-                $.ajax({
-                    url: "{{ route('absensi.store') }}",
-                    type: 'POST',
-                    data: formData,
-                    headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-                    success: function(res) {
-                        Swal.close();
-                        if (res.status === 'success') {
-                            Swal.fire({ icon: 'success', title: 'Berhasil', text: res.message });
-                        } else if (res.status === 'exists') {
-                            Swal.fire({ icon: 'warning', title: 'Sudah Pernah Isi', text: res.message });
-                        } else {
-                            Swal.fire({ icon: 'error', title: 'Gagal', text: res.message });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.close();
-                        let msg = xhr.responseJSON?.message || 'Terjadi kesalahan';
-                        Swal.fire({ icon: 'error', title: 'Error', text: msg });
+                fetch(linkScript, {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams(data)
+                })
+                .then(res => res.json())
+                .then(res => {
+                    Swal.close();
+                    if (res.status === 'success') {
+                        Swal.fire({ icon: 'success', title: 'Berhasil', text: 'Absensi berhasil disubmit!' });
+                    } else if (res.status === 'exists') {
+                        Swal.fire({ icon: 'warning', title: 'Sudah Pernah Isi', text: 'Kamu sudah absen untuk tanggal ini.' });
+                    } else {
+                        Swal.fire({ icon: 'error', title: 'Gagal', text: 'Gagal mengirim data ke Apps Script.' });
                     }
+                })
+                .catch(err => {
+                    Swal.close();
+                    Swal.fire({ icon: 'error', title: 'Error', text: 'Tidak bisa terhubung ke Apps Script.' });
+                    console.error(err);
                 });
             });
         });
