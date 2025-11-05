@@ -18,51 +18,6 @@ class AbsensiController extends Controller
         ]);
     }
 
-    // public function fetchData()
-    // {
-    //     $allData = [];
-    //     $gelombang = [];
-    //     $links = [];
-
-    //     try {
-    //         $link = public_path('json/absensi.json');
-    //         $response = Http::timeout(60)->get($link);
-    //         $appsList = $response->json()['Data'] ?? [];
-
-    //         foreach ($appsList as $item) {
-    //             $linkApp = trim($item['Link App Script'] ?? '');
-    //             if(!$linkApp) continue;
-
-    //             $resp = Http::timeout(120)->get($linkApp);
-    //             if ($resp->successful()) {
-    //                 $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
-    //                 $data = json_decode($raw, true);
-    //                 if (is_array($data)) {
-    //                     foreach($data as $sheetName => $rows){
-    //                         $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
-    //                         $links[$sheetName] = $linkApp;
-    //                     }
-    //                 }
-    //             }
-    //         }
-
-    //         foreach($allData as $sheetName => $rows){
-    //             if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
-    //                 $gelombang[$matches[0]][] = $sheetName;
-    //             }
-    //         }
-
-    //         return response()->json([
-    //             'allData'   => $allData,
-    //             'gelombang' => $gelombang,
-    //             'links'     => $links
-    //         ]);
-
-    //     } catch (\Exception $e){
-    //         return response()->json(['error'=>$e->getMessage()],500);
-    //     }
-    // }
-
     public function fetchData()
     {
         $allData = [];
@@ -70,41 +25,28 @@ class AbsensiController extends Controller
         $links = [];
 
         try {
-            // $path = public_path('json/absensi.json');
-            $path = base_path('public/json/absensi.json');
-
-            if (!file_exists($path)) {
-                throw new \Exception('File JSON tidak ditemukan di: ' . $path);
-            }
-
-            $jsonData = json_decode(file_get_contents($path), true);
-            $appsList = $jsonData['Data'] ?? [];
+            $response = Http::timeout(60)->get($this->link_spreedsheet);
+            $appsList = $response->json()['Data'] ?? [];
 
             foreach ($appsList as $item) {
                 $linkApp = trim($item['Link App Script'] ?? '');
-                if (!$linkApp) continue;
+                if(!$linkApp) continue;
 
-                try {
-                    $resp = Http::timeout(120)->withoutVerifying()->get($linkApp);
-
-                    if ($resp->successful()) {
-                        $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
-                        $data = json_decode($raw, true);
-
-                        if (is_array($data)) {
-                            foreach ($data as $sheetName => $rows) {
-                                $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
-                                $links[$sheetName] = $linkApp;
-                            }
+                $resp = Http::timeout(120)->get($linkApp);
+                if ($resp->successful()) {
+                    $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
+                    $data = json_decode($raw, true);
+                    if (is_array($data)) {
+                        foreach($data as $sheetName => $rows){
+                            $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
+                            $links[$sheetName] = $linkApp;
                         }
                     }
-                } catch (\Exception $e) {
-                    \Log::warning("Gagal ambil dari $linkApp : " . $e->getMessage());
                 }
             }
 
-            foreach ($allData as $sheetName => $rows) {
-                if (preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)) {
+            foreach($allData as $sheetName => $rows){
+                if(preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)){
                     $gelombang[$matches[0]][] = $sheetName;
                 }
             }
@@ -115,10 +57,72 @@ class AbsensiController extends Controller
                 'links'     => $links
             ]);
 
-        } catch (\Exception $e) {
-            return response()->json(['error' => 'Gagal load data: ' . $e->getMessage()], 500);
+        } catch (\Exception $e){
+            return response()->json(['error'=>$e->getMessage()],500);
         }
     }
+
+    // public function fetchData()
+    // {
+    //     $path = public_path('json/absensi.json');
+    //     $cachePath = public_path('json/absensi_cache.json');
+
+    //     $allData = [];
+    //     $gelombang = [];
+    //     $links = [];
+
+    //     try {
+    //         $jsonData = json_decode(file_get_contents($path), true);
+    //         $appsList = $jsonData['Data'] ?? [];
+
+    //         foreach ($appsList as $item) {
+    //             $linkApp = trim($item['Link App Script'] ?? '');
+    //             if (!$linkApp) continue;
+
+    //             try {
+    //                 $resp = Http::timeout(120)->withoutVerifying()->get($linkApp);
+
+    //                 if ($resp->successful()) {
+    //                     $raw = preg_replace('/^\)\]\}\'?\n?/', '', trim($resp->body()));
+    //                     $data = json_decode($raw, true);
+
+    //                     if (is_array($data)) {
+    //                         foreach ($data as $sheetName => $rows) {
+    //                             $allData[$sheetName] = array_merge($allData[$sheetName] ?? [], $rows);
+    //                             $links[$sheetName] = $linkApp;
+    //                         }
+    //                     }
+    //                 }
+    //             } catch (\Exception $e) {
+    //                 \Log::warning("Gagal ambil dari $linkApp : " . $e->getMessage());
+    //             }
+    //         }
+
+    //         // Jika kosong, fallback ke cache
+    //         if (empty($allData) && file_exists($cachePath)) {
+    //             \Log::info('🔁 Fallback ke cache JSON');
+    //             $cacheData = json_decode(file_get_contents($cachePath), true);
+    //             $allData = $cacheData['allData'] ?? [];
+    //             $gelombang = $cacheData['gelombang'] ?? [];
+    //             $links = $cacheData['links'] ?? [];
+    //         }
+
+    //         foreach ($allData as $sheetName => $rows) {
+    //             if (preg_match('/^(?:KM)?(\d+)/i', $sheetName, $matches)) {
+    //                 $gelombang[$matches[0]][] = $sheetName;
+    //             }
+    //         }
+
+    //         return response()->json([
+    //             'allData'   => $allData,
+    //             'gelombang' => $gelombang,
+    //             'links'     => $links
+    //         ]);
+
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Gagal load data: ' . $e->getMessage()], 500);
+    //     }
+    // }
 
     public function store(Request $request)
     {
