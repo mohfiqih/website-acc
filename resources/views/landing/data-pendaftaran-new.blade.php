@@ -750,13 +750,20 @@
 
         let dataTable;
         function renderTable() {
+            $('#mentorDataTable tbody').empty();
+
             if ($.fn.DataTable.isDataTable('#mentorDataTable')) {
                 $('#mentorDataTable').DataTable().destroy();
-                $('#mentorDataTable tbody').empty();
             }
 
-            const cleanData = allData.filter(row => row['EMAIL'] && row['EMAIL'].trim() !== '');
+            const cleanData = allData.filter(row =>
+                row['EMAIL'] && row['EMAIL'].trim() !== '' &&
+                row['Timestamp'] && row['Timestamp'].trim() !== ''
+            );
 
+            cleanData.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
+
+            const tbody = $('#mentorDataTable tbody');
             cleanData.forEach((row, idx) => {
                 const columns = [
                     idx + 1,
@@ -836,125 +843,13 @@
                     row['ID'] || ''
                 ];
 
-                $('#mentorDataTable tbody').append(`<tr>${columns.map(c => `<td>${c}</td>`).join('')}</tr>`);
+                tbody.append(`<tr>${columns.map(c => `<td>${c}</td>`).join('')}</tr>`);
             });
 
             const dataTable = $('#mentorDataTable').DataTable({
                 pageLength: parseInt($('#entriesSelect').val()) || 10,
                 lengthMenu: [5, 10, 25, 50, 100],
-                ordering: true,
-                order: [[2, 'desc']],
-                responsive: true,
-                autoWidth: false
-            });
-
-            $('#entriesSelect').on('change', function() {
-                const val = parseInt($(this).val());
-                dataTable.page.len(val).draw();
-            });
-        }
-
-        function renderTable() {
-            if ($.fn.DataTable.isDataTable('#mentorDataTable')) {
-                $('#mentorDataTable').DataTable().destroy();
-                $('#mentorDataTable tbody').empty();
-            }
-
-            const cleanData = allData.filter(row => row['EMAIL'] && row['EMAIL'].trim() !== '');
-
-            cleanData.sort((a, b) => {
-                const dateA = new Date(a.Timestamp);
-                const dateB = new Date(b.Timestamp);
-                return dateA - dateB; // ascending
-            });
-
-            // Generate tabel
-            cleanData.forEach((row, idx) => {
-                const columns = [
-                    idx + 1,
-                    `<button class="btn btn-sm btn-success btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
-                        <i class="fa fa-download"></i> Download CV
-                    </button>`,
-                    formatDate(row['Timestamp']) || '',
-                    row['EMAIL'] || '',
-                    row['NAMA (KATAKANA)'] || '',
-                    row['NAMA (INDONESIA)'] || '',
-                    row['ALAMAT'] || '',
-                    formatDate(row['TANGGAL LAHIR']) || '',
-                    row['USIA'] || '',
-                    row['KELAMIN'] || '',
-                    row['NO HP AKTIF'] || '',
-                    row['AGAMA'] || '',
-                    row['TINGGI'] || '',
-                    row['BERAT'] || '',
-                    row['GOL DARAH'] || '',
-                    row['BUTA WARNA'] || '',
-                    row['MATA KIRI'] || '',
-                    row['MATA KANAN'] || '',
-                    row['PERNAH OPERASI'] || '',
-                    row['APAKAH SEDANG MINUM'] || '',
-                    row['TANGAN'] || '',
-                    row['MEROKOK'] || '',
-                    row['PENYAKIT DALAM'] || '',
-                    row['KEAHLIAN'] || '',
-                    row['SIFAT/KEPRIBADIAN'] || '',
-                    row['KELEBIHAN'] || '',
-                    row['KELEMAHAN'] || '',
-                    row['STATUS'] || '',
-                    row['HOBI'] || '',
-                    row['MOTIVASI'] || '',
-                    row['SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'] || '',
-                    row['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] || '',
-                    row['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] || '',
-                    row['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] || '',
-                    row['SEKOLAH DASAR (SD)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SD)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SD)'] || '',
-                    row['SEKOLAH MENENGAH PERTAMA (SMP)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SMP)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SMP)'] || '',
-                    row['SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SMA/SMK)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SMA/SMK)'] || '',
-                    row['JURUSAN (SMA/SMK)'] || '',
-                    row['PERGURUAN TINGGI'] || '',
-                    row['PENGALAMAN KERJA'] || '',
-                    row['BAHASA ASING YANG DIKUASAI'] || '',
-                    row['PERNAH KE JEPANG'] || '',
-                    row['JIKA YA, SEBUTKAN TGL/BLN/THN'] || '',
-                    row['PERNAH LUAR NEGERI LAINNYA'] || '',
-                    row['JIKA YA, NEGARA APA'] || '',
-                    row['APAKAH ADA KERABAT DI JEPANG'] || '',
-                    row['APA HUBUNGAN KERABAT YANG DI JEPANG'] || '',
-                    row['BELAJAR BAHASA'] || '',
-                    row['BUKU YANG DI PAKAI'] || '',
-                    row['BAB YANG DI PELAJARI'] || '',
-                    row['NAMA AYAH'] || '',
-                    row['HUBUNGAN AYAH'] || '',
-                    row['USIA AYAH'] || '',
-                    row['PEKERJAAN AYAH'] || '',
-                    row['NAMA IBU'] || '',
-                    row['HUBUNGAN IBU'] || '',
-                    row['USIA IBU'] || '',
-                    row['PEKERJAAN IBU'] || '',
-                    row['NAMA SAUDARA'] || '',
-                    row['PENDAPAT KELUARGA'] || '',
-                    row['NO HP KELUARGA'] || '',
-                    row['NAMA MENTOR'] || '',
-                    row['UKURAN BAJU'] || '',
-                    row['NOMOR SEPATU'] || '',
-                    row['PILIH KELAS'] || '',
-                    row['PILIH PROGRAM'] || '',
-                    row['ID'] || ''
-                ];
-
-                $('#mentorDataTable tbody').append(`<tr>${columns.map(c => `<td>${c}</td>`).join('')}</tr>`);
-            });
-
-            const dataTable = $('#mentorDataTable').DataTable({
-                pageLength: parseInt($('#entriesSelect').val()) || 10,
-                lengthMenu: [5, 10, 25, 50, 100],
-                ordering: false, // jangan diubah lagi biar tetap urut Timestamp
+                ordering: false,
                 responsive: true,
                 autoWidth: false
             });

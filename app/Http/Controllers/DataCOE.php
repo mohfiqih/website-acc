@@ -8,14 +8,19 @@ use Illuminate\Support\Facades\Http;
 class DataCOE extends Controller
 {
     protected $data_coe = "https://script.google.com/macros/s/AKfycbxde8fDH3JsU4sbuu_yeio83XUYaM7LC9LZAeVcgdg2EETtOVbzl9Ga_NlLn5gfLy1iSw/exec";
+    // public function index()
+    // {
+    //     $response   = Http::get($this->data_coe);
+    //     $allData    = $response->json();
+    //     $firstSheet = array_key_first($allData);
+    //     $nama_so    = array_keys($allData);
+        
+    //     return view('landing.coe.index', compact('nama_so', 'allData'));
+    // }
+
     public function index()
     {
-        $response   = Http::get($this->data_coe);
-        $allData    = $response->json();
-        $firstSheet = array_key_first($allData);
-        $nama_so    = array_keys($allData);
-        
-        return view('landing.coe.index', compact('nama_so', 'allData'));
+        return view('landing.coe.index');
     }
 
     public function store(Request $request)
