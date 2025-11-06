@@ -197,6 +197,21 @@
         .fixed-header-table td {
             white-space: nowrap;
         }
+        #mentorChart {
+            width: 100% !important;
+            height: 400px !important;
+        }
+
+        @media (max-width: 576px) {
+            #mentorChart {
+                height: 320px !important;
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
 </head>
 
@@ -288,7 +303,21 @@
                 <div>
                     <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
                 </div>
-                <div id="mentorSummary"></div>
+                {{-- <div id="mentorSummary"></div> --}}
+                <div class="mt-3">
+                    <h6>Jumlah Pendaftaran per Mentor</h6>
+                    <table class="table table-sm table-bordered" id="mentorTable">
+                        <thead>
+                            <tr>
+                                <th>Mentor</th>
+                                <th>Jumlah Pendaftar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="2" class="text-center">Sedang proses menampilkan data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -337,13 +366,12 @@
                     </div>
                     <br/>
                     <div class="table-responsive">
-                        <table id="spreadsheetTablePendaftaran" class="table table-striped table-bordered fixed-header-table">
+                        <table id="mentorDataTable" class="table table-striped table-bordered fixed-header-table">
                             @if (!empty($cleanedData))
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Download CV</th>
-                                        <th>WhatsApp</th>
                                         <th>Tanggal</th>
                                         <th>Email</th>
                                         <th>Nama (Katakana)</th>
@@ -417,7 +445,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tableBody">
-                                    @include('partials.table_body')
+                                    <tr><td colspan="72" class="text-center">Sedang proses menampilkan data...</td></tr>
                                 </tbody>
                             @else
                                 <tr>
@@ -450,7 +478,174 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+    {{-- data tabel --}}
     <script>
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
+
+        const allowedMentors = [
+            'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
+            'SELLY', 'ADITYA', 'FAHRUL', 'FADIL', 'FUJIAYU', 'FIRMAN', 'GAZI',
+            'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
+            'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',
+            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', '-'
+        ];
+
+        let allData = [];
+        let perMentorAll = {};
+        let perMentorPerMonth = {};
+        let months = {};
+
+        function fetchData() {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sedang load data, mohon tunggu sebentar..',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => { Swal.showLoading(); }
+            });
+
+            fetch(googleScriptUrl, { method:'GET', mode:'cors', cache:'no-cache' })
+                .then(res => res.text())
+                .then(text => {
+                    let data;
+                    try { data = JSON.parse(text); } 
+                    catch(e) { throw new Error('Response bukan JSON valid'); }
+                    return data;
+                })
+                .then(data => {
+                    allData = data.map(row => {
+                        row.Timestamp = row.Timestamp ? row.Timestamp.substring(0,10) : '';
+                        if (row['NAMA MENTOR']) {
+                            const mentor = row['NAMA MENTOR'].toUpperCase().trim().replace(/[^A-Z ]/g,'').replace(/\s+/g,' ');
+                            const monthKey = row.Timestamp ? row.Timestamp.substring(0,7) : '';
+                            if (mentor && allowedMentors.includes(mentor)) {
+                                perMentorAll[mentor] = (perMentorAll[mentor] || 0) + 1;
+                                if (monthKey) {
+                                    if (!perMentorPerMonth[monthKey]) perMentorPerMonth[monthKey] = {};
+                                    perMentorPerMonth[monthKey][mentor] = (perMentorPerMonth[monthKey][mentor] || 0) + 1;
+                                    months[monthKey] = new Date(monthKey+'-01')
+                                        .toLocaleString('default', { month: 'long', year: 'numeric' });
+                                }
+                            }
+                        }
+                        return row;
+                    });
+
+                    Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
+                    renderChart();
+                    renderTable();
+                    populateMonthFilter();
+                })
+                .catch(err => {
+                    console.error(err);
+                    Swal.fire('Error', 'Gagal mengambil data dari Google Spreadsheet: ' + err.message, 'error');
+                })
+                .finally(() => Swal.close());
+        }
+
+        let mentorChart;
+        function renderChart(selectedMonth = '') {
+            let labels = Object.keys(perMentorAll);
+            let data = labels.map(mentor => {
+                if (selectedMonth && perMentorPerMonth[selectedMonth]) {
+                    return perMentorPerMonth[selectedMonth][mentor] || 0;
+                }
+                return perMentorAll[mentor];
+            });
+
+            const combined = labels.map((label, i) => ({ mentor: label, count: data[i] }));
+            combined.sort((a,b) => b.count - a.count);
+
+            labels = combined.map(c => c.mentor);
+            data = combined.map(c => c.count);
+
+            const ctx = document.getElementById('mentorChart').getContext('2d');
+            if (mentorChart) mentorChart.destroy();
+            mentorChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Jumlah Pendaftaran',
+                        data: data,
+                        backgroundColor: '#046392'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
+
+            const tbody = document.querySelector('#mentorTable tbody');
+            tbody.innerHTML = '';
+            labels.forEach((mentor, i) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `<td>${mentor}</td><td>${data[i]}</td>`;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function populateMonthFilter() {
+            const select = document.getElementById('monthFilter');
+            select.innerHTML = `<option value="">All Month</option>`;
+            Object.keys(months).sort().forEach(key => {
+                select.innerHTML += `<option value="${key}">${months[key]}</option>`;
+            });
+
+            select.addEventListener('change', () => {
+                const month = select.value;
+                renderChart(month);
+            });
+        }
+
+        let dataTable;
+
+        function renderTable() {
+            if ($.fn.DataTable.isDataTable('#mentorDataTable')) {
+                $('#mentorDataTable').DataTable().destroy();
+                $('#mentorDataTable tbody').empty();
+            }
+
+            allData.forEach((row, idx) => {
+                let tr = `<tr>`;
+                tr += `<td>${idx + 1}</td>`;
+                tr += `<td>
+                    <button class="btn btn-sm btn-success btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
+                        <i class="fa fa-download"></i> Download CV
+                    </button>
+                </td>`;
+
+                Object.keys(row).forEach(key => {
+                    if(key !== 'ID') tr += `<td>${row[key] || ''}</td>`;
+                });
+
+                tr += `</tr>`;
+                $('#mentorDataTable tbody').append(tr);
+            });
+
+            dataTable = $('#mentorDataTable').DataTable({
+                pageLength: parseInt($('#entriesSelect').val()) || 10,
+                lengthMenu: [5,10,25,50,100],
+                ordering: true,
+                order: [[2,'desc']],
+                responsive: true,
+                autoWidth: false
+            });
+
+            $('#entriesSelect').on('change', function() {
+                const val = parseInt($(this).val());
+                dataTable.page.len(val).draw();
+            });
+        }
+
+        fetchData();
+    </script>
+
+    {{-- <script>
         // Refresh tabel
         function refreshTable() {
             const indicator = document.getElementById('refreshIndicator');
@@ -507,9 +702,12 @@
                 }
             });
         });
-    </script>
+    </script> --}}
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    {{-- download cv --}}
     <script>
         $(document).on('click', '.btn-download-cv', function(e) {
             e.preventDefault();
@@ -573,204 +771,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
-    <style>
-        #mentorChart {
-            width: 100% !important;
-            height: 400px !important;
-        }
-
-        @media (max-width: 576px) {
-            #mentorChart {
-                height: 320px !important;
-            }
-        }
-
-        .table-responsive {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-    </style>
-
-    <script>
-        const allData = @json($perMentor);
-        const monthlyData = @json($perMentorPerMonth);
-
-        const ctx = document.getElementById('mentorChart').getContext('2d');
-        let chart;
-        let currentData = allData;
-
-        function renderChart(dataObj) {
-            const labels = Object.keys(dataObj);
-            const data = Object.values(dataObj);
-
-            if (chart) chart.destroy();
-
-            chart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels,
-                    datasets: [{
-                        label: 'Jumlah Pendaftar',
-                        data,
-                        borderWidth: 1,
-                        backgroundColor: 'rgba(4, 98, 145, 0.8)',
-                        borderColor: '#046291'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        x: {
-                            ticks: {
-                                autoSkip: false,
-                                maxRotation: 45,
-                                minRotation: 45
-                            }
-                        },
-                        y: {
-                            beginAtZero: true,
-                            ticks: { stepSize: 5, precision: 0 }
-                        }
-                    },
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: { enabled: true },
-                        datalabels: {
-                            color: '#000',
-                            anchor: 'end',
-                            align: 'top',
-                            font: {
-                                size: 9
-                            }
-                        }
-                    },
-                    layout: { padding: { bottom: 20 } }
-                }
-            });
-
-            currentData = dataObj;
-            updateSummaryTable(dataObj);
-        }
-
-        function updateSummaryTable(dataObj) {
-            const summaryContainer = document.getElementById('mentorSummary');
-            const entries = Object.entries(dataObj);
-
-            let tableHTML = `
-                <div class="mt-4">
-                    <b>Keterangan Jumlah Pendaftaran Berdasarkan Mentor (Hanya data pendaftaran online):</b>
-                    <div class="table-responsive mt-2">
-                        <table id="spreadsheetTable" class="table table-bordered table-sm mb-0 text-nowrap" style="min-width: 300px;">
-                            <thead class="table-light">
-                                <tr>
-                                    <th width="10" class="text-center">No</th>
-                                    <th class="text-center">Nama Mentor</th>
-                                    <th class="text-center">Jumlah Pendaftaran</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${entries.map(([mentor, jumlah], i) => `
-                                    <tr>
-                                        <td class="text-center">${i + 1}</td>
-                                        <td class="text-center">${mentor}</td>
-                                        <td class="text-center">${jumlah}</td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            `;
-            summaryContainer.innerHTML = tableHTML;
-        }
-
-        // Render default all data
-        renderChart(allData);
-
-        // Filter bulan
-        document.getElementById('monthFilter').addEventListener('change', function() {
-            const val = this.value;
-            if (val && monthlyData[val]) {
-                renderChart(monthlyData[val]);
-            } else {
-                renderChart(allData);
-            }
-        });
-
-        // EXPORT PDF HD
-        async function exportPDFLandscape() {
-            const { jsPDF } = window.jspdf;
-            const canvas = document.getElementById('mentorChart');
-
-            // Buat canvas resolusi tinggi (HD export)
-            const scale = 5; // perbesar 5x agar super tajam
-            const tempCanvas = document.createElement('canvas');
-            const rect = canvas.getBoundingClientRect();
-            tempCanvas.width = rect.width * scale;
-            tempCanvas.height = rect.height * scale;
-
-            const ctx2 = tempCanvas.getContext('2d');
-            ctx2.scale(scale, scale);
-
-            // Render ulang chart di kanvas baru agar tidak pecah
-            ctx2.drawImage(canvas, 0, 0, rect.width, rect.height);
-
-            const imgData = tempCanvas.toDataURL('image/png', 1.0);
-
-            // Siapkan PDF dengan A4 landscape
-            const pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
-
-            // Atur ukuran gambar agar proporsional di PDF
-            const imgWidth = pageWidth - 20; // margin 10 kiri-kanan
-            const imgHeight = (rect.height / rect.width) * imgWidth;
-            const x = 10;
-            let y = 20;
-
-            // Tambahkan judul
-            pdf.setFontSize(14);
-            pdf.text("Daftar Online Berdasarkan Nama Mentor", pageWidth / 2, 10, { align: 'center' });
-
-            // Tambahkan chart
-            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight, '', 'FAST');
-
-            // Tabel
-            const tableData = Object.entries(currentData).map(([mentor, jumlah]) => [mentor, jumlah]);
-            pdf.autoTable({
-                startY: y + imgHeight + 10,
-                head: [['Nama Mentor', 'Jumlah Pendaftar']],
-                body: tableData,
-                styles: { fontSize: 9, cellPadding: 3 },
-                headStyles: { fillColor: [4, 98, 145], textColor: 255, halign: 'center' },
-                columnStyles: { 0: { cellWidth: 80 }, 1: { halign: 'center' } },
-                margin: { left: 10, right: 10 }
-            });
-
-            pdf.save('daftar_online_per_mentor.pdf');
-        }
-
-        // EXPORT JPG (juga HD)
-        function exportJPG() {
-            const canvas = document.getElementById('mentorChart');
-            const rect = canvas.getBoundingClientRect();
-            const scale = 5;
-
-            const tempCanvas = document.createElement('canvas');
-            tempCanvas.width = rect.width * scale;
-            tempCanvas.height = rect.height * scale;
-            const ctx2 = tempCanvas.getContext('2d');
-            ctx2.scale(scale, scale);
-            ctx2.drawImage(canvas, 0, 0, rect.width, rect.height);
-
-            const link = document.createElement('a');
-            link.download = 'daftar_online_per_mentor.jpg';
-            link.href = tempCanvas.toDataURL('image/jpeg', 1.0);
-            link.click();
-        }
-    </script>
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
