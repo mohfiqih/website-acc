@@ -286,9 +286,6 @@
                 <div class="d-flex align-items-center gap-2 flex-wrap">
                     <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
                         <option value="">All Month</option>
-                        @foreach ($months as $key => $label)
-                            <option value="{{ $key }}">{{ $label }}</option>
-                        @endforeach
                     </select>
 
                     <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
@@ -323,7 +320,7 @@
     </div>
     
     {{-- Data Pendaftaran --}}
-    <div class="container mt-4">
+    {{-- <div class="container mt-4">
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
                 <div class="d-flex justify-content-between mb-3">
@@ -458,6 +455,143 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <span id="tableInfo"></span>
                     
+                    <div class="d-flex align-items-center ms-auto">
+                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+    {{-- Data Pendaftaran --}}
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-body" style="padding: 20px; border-radius: 10px;">
+                <div class="d-flex justify-content-between mb-3">
+                    <div>
+                        <label>
+                            Show 
+                            <select id="entriesSelect" class="form-control d-inline-block w-auto">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div>
+                        <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
+                    </div>
+                </div>
+
+                <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
+                        class="d-flex align-items-center mb-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label><b>Dari Tanggal</b></label>
+                                <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                <label><b>Sampai Tanggal</b></label>
+                                <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                            </div>
+                            <div class="col md-12">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fa fa-download"></i> Export PDF
+                                </button>
+                            </div>
+                        </div>
+                </form>
+
+                <div class="table-responsive">
+                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                        🔄 Refreshing data...
+                    </div>
+                    <br/>
+                    <table id="mentorDataTable" class="table table-striped table-bordered fixed-header-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Download CV</th>
+                                <th>Tanggal</th>
+                                <th>Email</th>
+                                <th>Nama (Katakana)</th>
+                                <th>Nama (Indonesia)</th>
+                                <th>Alamat</th>
+                                <th>Tanggal Lahir</th>
+                                <th>Usia</th>
+                                <th>Kelamin</th>
+                                <th>No HP Aktif</th>
+                                <th>Agama</th>
+                                <th>Tinggi (cm)</th>
+                                <th>Berat (kg)</th>
+                                <th>Gol Darah</th>
+                                <th>Buta Warna</th>
+                                <th>Mata Kiri</th>
+                                <th>Mata Kanan</th>
+                                <th>Pernah Operasi</th>
+                                <th>Apakah Sedang Minum</th>
+                                <th>Tangan</th>
+                                <th>Merokok</th>
+                                <th>Penyakit Dalam</th>
+                                <th>Keahlian</th>
+                                <th>Sifat/Kepribadian</th>
+                                <th>Kelebihan</th>
+                                <th>Kelemahan</th>
+                                <th>Status</th>
+                                <th>Hobi</th>
+                                <th>Motivasi</th>
+                                <th>Rencana Menabung</th>
+                                <th>Rencana Setelah Jepang</th>
+                                <th>Pernah Tinggal/Bekerja di Jepang</th>
+                                <th>Kualifikasi Lamaran</th>
+                                <th>Nama SD</th>
+                                <th>Tahun Masuk SD</th>
+                                <th>Tahun Keluar SD</th>
+                                <th>Nama SMP</th>
+                                <th>Tahun Masuk SMP</th>
+                                <th>Tahun Keluar SMP</th>
+                                <th>Nama SMA/SMK</th>
+                                <th>Tahun Masuk SMA/SMK</th>
+                                <th>Tahun Keluar SMA/SMK</th>
+                                <th>Jurusan SMA/SMK</th>
+                                <th>Perguruan Tinggi</th>
+                                <th>Pengalaman Kerja</th>
+                                <th>Bahasa Asing</th>
+                                <th>Pernah ke Jepang</th>
+                                <th>Tanggal ke Jepang</th>
+                                <th>Luar Negeri Lainnya</th>
+                                <th>Negara</th>
+                                <th>Kerabat di Jepang</th>
+                                <th>Hubungan Kerabat</th>
+                                <th>Belajar Bahasa</th>
+                                <th>Buku yang Dipakai</th>
+                                <th>Bab yang Dipelajari</th>
+                                <th>Nama Ayah</th>
+                                <th>Hubungan Ayah</th>
+                                <th>Usia Ayah</th>
+                                <th>Pekerjaan Ayah</th>
+                                <th>Nama Ibu</th>
+                                <th>Hubungan Ibu</th>
+                                <th>Usia Ibu</th>
+                                <th>Pekerjaan Ibu</th>
+                                <th>Nama Saudara</th>
+                                <th>Pendapat Keluarga</th>
+                                <th>No HP Keluarga</th>
+                                <th>Nama Mentor</th>
+                                <th>Ukuran Baju</th>
+                                <th>Nomor Sepatu</th>
+                                <th>Pilihan Kelas</th>
+                                <th>Pilihan Program</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="72" class="text-center">Sedang proses menampilkan data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <span id="tableInfo"></span>
                     <div class="d-flex align-items-center ms-auto">
                         <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
                     </div>
@@ -645,67 +779,7 @@
         fetchData();
     </script>
 
-    {{-- <script>
-        // Refresh tabel
-        function refreshTable() {
-            const indicator = document.getElementById('refreshIndicator');
-            indicator.style.display = 'inline';
-
-            fetch('{{ route('refresh.pendaftaran') }}')
-                .then(response => response.text())
-                .then(html => {
-                    document.getElementById('tableBody').innerHTML = html;
-                    indicator.style.display = 'none';
-                })
-                .catch(error => {
-                    console.error('Gagal refresh tabel', error);
-                    indicator.innerText = '❌ Gagal memuat data';
-                    setTimeout(() => {
-                        indicator.style.display = 'none';
-                        indicator.innerText = '🔄 Refreshing data...';
-                    }, 6000000);
-                });
-        }
-
-        setInterval(refreshTable, 6000000);
-
-        $(document).ready(function() {
-            let table = $('#spreadsheetTablePendaftaran').DataTable({
-                "paging": true,
-                "pageLength": 10,
-                "searching": true,
-                "info": false,
-                "lengthChange": false,
-                "scrollY": false,
-                "scrollCollapse": false,
-                "dom": 'rtp' 
-            });
-
-            // **Sembunyikan pagination bawaan DataTables**
-            $('.dataTables_paginate').hide();
-
-            // Custom Search
-            $('#tableSearch').on('keyup', function() {
-                table.search(this.value).draw();
-            });
-
-            // Custom Entries Dropdown
-            $('#entriesSelect').on('change', function() {
-                table.page.len(this.value).draw();
-            });
-
-            $(document).on('click', '#paginationControls .page-link', function(e) {
-                e.preventDefault();
-                let page = parseInt($(this).data('page'));
-                if (!isNaN(page)) {
-                    table.page(page).draw('page');
-                }
-            });
-        });
-    </script> --}}
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- download cv --}}
     <script>
@@ -771,7 +845,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
