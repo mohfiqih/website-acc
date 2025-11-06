@@ -346,33 +346,11 @@
                     <br />
                     <div class="table-responsive">
                         <table id="spreadsheetTableKonsultasi" class="table table-striped table-bordered fixed-header-table">
-                            @if (!empty($cleanedData))
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>WhatsApp</th>
-                                        <th>Tanggal Konsultasi</th>
-                                        <th>Email</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Usia</th>
-                                        <th>Pendidikan Terakhir</th>
-                                        <th>Alamat Lengkap</th>
-                                        <th>Kecamatan</th>
-                                        <th>Kabupaten</th>
-                                        <th>Provinsi</th>
-                                        <th>Nomor Aktif (WA)</th>
-                                        <th>Informasi dari mana?</th>
-                                        <th>Jenis Kelamin</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableBody">
-                                    @include('partials.table_konsultasi')
-                                </tbody>
-                            @else
+                            <tbody id="tableBody">
                                 <tr>
-                                    <td colspan="100%" class="text-center">Tidak ada data</td>
+                                    <td colspan="14" class="text-center">Sedang memuat data...</td>
                                 </tr>
-                            @endif
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -400,6 +378,201 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
+        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyCSsWEpYv0I9mWJvFbpNdr0hTF1LS-mGk8us4MZrmJdW2xjDAIU_qnkKCMFLPKHbEY5Q/exec';
+        let allData = [];
+        let currentPage = 1;
+        let entriesPerPage = parseInt(document.getElementById('entriesSelect').value);
+        let chartInstance = null;
+        let currentFilter = 'perHari';
+        const ctx = document.getElementById('mainChart');
+
+        function calculateStats(data) {
+            const stats = {
+                perHari: {}, perBulan: {}, perTahun: {},
+                perProvinsi: {}, perKabupaten: {}, perUmur: {}, perGender: {}
+            };
+            const namaBulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            data.forEach(row => {
+                const ts = new Date(row['Timestamp']);
+                const day = ts.toISOString().slice(0,10);
+                stats.perHari[day] = (stats.perHari[day]||0)+1;
+                const monthName = namaBulan[ts.getMonth()+1] + ' ' + ts.getFullYear();
+                stats.perBulan[monthName] = (stats.perBulan[monthName]||0)+1;
+                stats.perTahun[ts.getFullYear()] = (stats.perTahun[ts.getFullYear()]||0)+1;
+
+                const prov = row['Provinsi'] || 'Tidak Diketahui';
+                stats.perProvinsi[prov] = (stats.perProvinsi[prov]||0)+1;
+
+                const kab = row['Kabupaten'] || 'Tidak Diketahui';
+                stats.perKabupaten[kab] = (stats.perKabupaten[kab]||0)+1;
+
+                const umur = parseInt(row['Usia']) || 0;
+                stats.perUmur[umur] = (stats.perUmur[umur]||0)+1;
+
+                let gender = (row['Jenis Kelamin'] || '').toLowerCase();
+                if(['laki-laki','laki laki','pria'].includes(gender)) gender='Laki-Laki';
+                else if(['perempuan','wanita'].includes(gender)) gender='Perempuan';
+                else gender='Tidak Diketahui';
+                stats.perGender[gender] = (stats.perGender[gender]||0)+1;
+            });
+            return stats;
+        }
+
+        function renderChart(stats, filterKey) {
+            const selected = stats[filterKey];
+            const labels = Object.keys(selected);
+            const data = Object.values(selected);
+
+            if(chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: filterKey==='perHari' ? 'line' : 'bar',
+                data: { labels, datasets:[{label: filterKey, data, backgroundColor:'rgba(4,98,145,0.8)', borderColor:'#046291', borderWidth:1}]},
+                options: { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}, title:{display:true,text:filterKey}}}
+            });
+
+            // Tabel summary
+            const summaryContainer = document.getElementById('chartSummary');
+            let tableHTML = `<table class="table table-bordered table-sm mt-2 text-nowrap"><thead>
+                <tr><th>No</th><th>Kategori</th><th>Jumlah</th></tr></thead><tbody>`;
+            labels.forEach((lbl,i)=> tableHTML+=`<tr><td>${i+1}</td><td>${lbl}</td><td>${data[i]}</td></tr>`);
+            tableHTML+='</tbody></table>';
+            summaryContainer.innerHTML = tableHTML;
+            currentFilter = filterKey;
+        }
+
+        function renderTable() {
+            const table = document.getElementById('spreadsheetTableKonsultasi');
+            const tableBody = document.getElementById('tableBody');
+            const tableInfo = document.getElementById('tableInfo');
+            const paginationControls = document.getElementById('paginationControls');
+            const searchValue = document.getElementById('tableSearch').value.toLowerCase();
+
+            let filtered = allData.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(searchValue)));
+            filtered.sort((a, b) => new Date(a['Timestamp']) - new Date(b['Timestamp']));
+
+            const totalEntries = filtered.length;
+            const totalPages = Math.ceil(totalEntries / entriesPerPage);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+            const start = (currentPage - 1) * entriesPerPage;
+            const end = start + entriesPerPage;
+            const pageData = filtered.slice(start, end);
+
+            const headers = [
+                { text: 'No', width: '40px' },
+                { text: 'Tanggal Konsultasi' },
+                { text: 'Email' },
+                { text: 'Nama Lengkap' },
+                { text: 'Usia' },
+                { text: 'Pendidikan Terakhir' },
+                { text: 'Alamat Lengkap' },
+                { text: 'Kecamatan' },
+                { text: 'Kabupaten' },
+                { text: 'Provinsi' },
+                { text: 'WhatsApp' },
+                { text: 'Informasi dari mana?' },
+                { text: 'Jenis Kelamin' }
+            ];
+
+            let theadHTML = '<thead><tr>';
+            headers.forEach(h => theadHTML += `<th${h.width ? ` style="width:${h.width}"` : ''}>${h.text}</th>`);
+            theadHTML += '</tr></thead>';
+            table.querySelector('thead')?.remove();
+            table.insertAdjacentHTML('afterbegin', theadHTML);
+
+            // Build body
+            tableBody.innerHTML = pageData.length
+                ? pageData.map((row, idx) => {
+                    const ts = new Date(row['Timestamp']);
+                    const day = ts.getDate().toString().padStart(2, '0');
+                    const month = (ts.getMonth() + 1).toString().padStart(2, '0');
+                    const year = ts.getFullYear();
+                    const formattedDate = `${day}-${month}-${year}`;
+
+                    return `
+                        <tr>
+                            <td style="width:40px;" class="text-center">${start + idx + 1}</td>
+                            <td>${formattedDate}</td>
+                            <td>${row['Email Address'] || ''}</td>
+                            <td>${row['Nama Lengkap'] || ''}</td>
+                            <td>${row['Usia'] || ''}</td>
+                            <td>${row['Pendidikan Terakhir'] || ''}</td>
+                            <td>${row['Alamat (Dukuh/Desa/RT RW)'] || ''}</td>
+                            <td>${row['Kecamatan'] || ''}</td>
+                            <td>${row['Kabupaten'] || ''}</td>
+                            <td>${row['Provinsi'] || ''}</td>
+                            <td>${row['WhatsApp'] || ''}</td>
+                            <td>${row['Dapat informasi dari mana?'] || ''}</td>
+                            <td>${row['Jenis Kelamin'] || ''}</td>
+                        </tr>
+                    `;
+                }).join('')
+                : `<tr><td colspan="${headers.length}" class="text-center">Tidak ada data</td></tr>`;
+
+            tableInfo.innerText = `Menampilkan ${start + 1}-${Math.min(end, totalEntries)} dari ${totalEntries} data`;
+
+            // Pagination
+            let pagesHtml = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pagesHtml += `<li class="page-item ${i === currentPage ? 'active' : ''}"><a href="#" class="page-link" data-page="${i}">${i}</a></li>`;
+            }
+            paginationControls.innerHTML = pagesHtml;
+        }
+
+        // Fetch Data
+        function fetchData() {
+            const indicator = document.getElementById('refreshIndicator');
+            indicator.style.display='inline';
+            fetch(googleScriptUrl)
+                .then(res=>res.json())
+                .then(data=>{
+                    allData=data||[];
+                    indicator.style.display='none';
+                    currentPage=1;
+                    renderTable();
+                    const stats=calculateStats(allData);
+                    renderChart(stats,currentFilter);
+
+                    document.getElementById('chartFilter').onchange = (e)=>renderChart(stats,e.target.value);
+                })
+                .catch(err=>{
+                    console.error(err);
+                    indicator.innerText='❌ Gagal memuat data';
+                });
+        }
+
+        // Events Tabel
+        document.getElementById('tableSearch').addEventListener('input',()=>{currentPage=1; renderTable();});
+        document.getElementById('entriesSelect').addEventListener('change', e=>{entriesPerPage=parseInt(e.target.value); currentPage=1; renderTable();});
+        document.getElementById('paginationControls').addEventListener('click', e=>{if(e.target.classList.contains('page-link')){e.preventDefault(); currentPage=parseInt(e.target.dataset.page); renderTable();}});
+
+        // Download PNG
+        function downloadPNG(chartId){
+            const canvas=document.getElementById(chartId);
+            const url=canvas.toDataURL("image/png");
+            const link=document.createElement("a");
+            link.href=url; link.download=currentFilter+".png"; link.click();
+        }
+
+        // Download PDF
+        function downloadPDF(chartId){
+            const canvas=document.getElementById(chartId);
+            const imgData=canvas.toDataURL("image/png");
+            const { jsPDF }=window.jspdf;
+            const doc=new jsPDF({orientation:'landscape',unit:'px',format:'a4'});
+            doc.setFontSize(16); doc.text(currentFilter,doc.internal.pageSize.getWidth()/2,20,{align:'center'});
+            const pageWidth=doc.internal.pageSize.getWidth();
+            const imgWidth=pageWidth*0.8; const imgHeight=(canvas.height/canvas.width)*imgWidth;
+            const x=(pageWidth-imgWidth)/2;
+            doc.addImage(imgData,"PNG",x,40,imgWidth,imgHeight);
+            doc.save(currentFilter+".pdf");
+        }
+
+        fetchData();
+        setInterval(fetchData,600000);
+    </script>
+    
+    {{-- <script>
         // Refresh tabel
         function refreshTable() {
             const indicator = document.getElementById('refreshIndicator');
@@ -490,10 +663,10 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
+    {{-- <script>
         $(document).on('click', '.btn-download-cv', function(e) {
             e.preventDefault();
 
@@ -550,13 +723,13 @@
                 }
             });
         });
-    </script>
+    </script> --}}
 
     {{-- Grafik All --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-    <script>
+    {{-- <script>
         const datasets = {
             perHari: {
                 labels: {!! json_encode(array_keys($perHari)) !!},
@@ -774,7 +947,7 @@
 
         ctx.style.height = '360px';
         ctx.style.width = '100%';
-    </script>
+    </script> --}}
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
