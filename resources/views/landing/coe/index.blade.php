@@ -93,7 +93,7 @@
     </section>
 
     {{-- Formulir --}}
-    <div class="container mt-4 mb-4">
+    {{-- <div class="container mt-4 mb-4">
         <div class="card" style="padding: 30px;border-radius: 10px;" id="stepFirst">
           <div class="alert alert-primary" role="alert">
               Formulir Data COE Turun LPK ACC Japan Centre
@@ -120,10 +120,45 @@
             <button type="submit" class="btn btn-success mt-3">Submit Data</button>
         </form>
         </div>
+    </div> --}}
+
+    <div class="container mt-4 mb-4">
+        <div class="card" style="padding: 30px; border-radius: 10px;" id="stepFirst">
+            <div class="alert alert-primary" role="alert">
+            Formulir Data COE Turun LPK ACC Japan Centre
+            </div>
+            <form id="coeForm">
+            <div class="mb-3">
+                <label class="fw-bold">Nama SO</label>
+                <select name="nama_so" id="nama_so" class="form-select" required>
+                <option value="">Pilih Nama SO</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Nama Siswa</label>
+                <input type="text" class="form-control" name="nama_siswa" placeholder="Masukkan nama lengkap siswa.." required>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold">Tanggal (Opsional)</label>
+                <input type="date" class="form-control" name="tanggal_penerbangan">
+            </div>
+            <button type="submit" class="btn btn-success mt-3">Submit Data</button>
+            </form>
+        </div>
     </div>
 
+    <div class="container mt-4 mb-5">
+        <div class="card p-3" style="border-radius: 10px;">
+            <h5 class="fw-bold mb-3">Data COE SISWA</h5>
+
+            <ul class="nav nav-tabs" id="coeTabs" role="tablist"></ul>
+            <div class="tab-content mt-3" id="coeTabsContent"></div>
+        </div>
+    </div>
+    <br/>
+
     {{-- Data COE --}}
-    <div class="container">
+    {{-- <div class="container">
         <div class="card p-3" style="border-radius: 10px;">
             <div class="mb-3 mt-2">
                 <h5 class="fw-bold mb-3">Data COE SISWA</h5>
@@ -231,8 +266,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
-    <br/>
+    </div> --}}
 
     @include('landing.footer')
 
@@ -260,8 +294,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
+    
     {{-- Submit --}}
-    <script>
+    {{-- <script>
         // pagination
         $(document).ready(function(){
             $('.coeTable').each(function(){
@@ -443,6 +478,320 @@
                     select.val('');
                 }
             });
+        });
+    </script> --}}
+
+    <script>
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbxde8fDH3JsU4sbuu_yeio83XUYaM7LC9LZAeVcgdg2EETtOVbzl9Ga_NlLn5gfLy1iSw/exec";
+
+        async function loadAllData() {
+            try {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Sedang load data, mohon tunggu sebentar..',
+                    toast: true,
+                    position: 'top',
+                    showConfirmButton: false,
+                    allowOutsideClick: false,
+                    didOpen: () => { Swal.showLoading(); }
+                });
+
+                const response = await fetch(`${scriptUrl}?action=getAllData`);
+                const data = await response.json();
+
+                const tabs = document.getElementById("coeTabs");
+                const content = document.getElementById("coeTabsContent");
+
+                tabs.innerHTML = "";
+                content.innerHTML = "";
+
+                let first = true;
+                let idx = 0;
+
+                for (const [so, items] of Object.entries(data)) {
+                    const soSlug = so.replace(/\s+/g, '-').toLowerCase();
+
+                    tabs.innerHTML += `
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link ${first ? 'active' : ''}" id="tab-${soSlug}-tab"
+                                data-bs-toggle="tab" data-bs-target="#tab-${soSlug}"
+                                type="button" role="tab" aria-controls="tab-${soSlug}"
+                                aria-selected="${first}">
+                                ${so}
+                            </button>
+                        </li>
+                    `;
+
+                    let rows = '';
+                    let no = 1;
+                    items.forEach(row => {
+                        const tanggal = row["TANGGAL PENERBANGAN"] || "-";
+                        const namaSiswa = row["NAMA LENGKAP SISWA"] || "-";
+                        const keterangan = (row["KETERANGAN"] || "").toLowerCase();
+
+                        rows += `
+                            <tr>
+                                <td><center><input type="checkbox" class="selectRow"></center></td>
+                                <td class="text-center">${no++}</td>
+                                <td>${so}</td>
+                                <td>${namaSiswa}</td>
+                                <td>${tanggal}</td>
+                                <td class="text-center">
+                                    ${
+                                        keterangan === 'sudah'
+                                        ? '<span class="badge bg-success">Sudah</span>'
+                                        : `<select class="form-select form-select-sm updateStatus" data-so="${so}" data-siswa="${namaSiswa}">
+                                                <option value="">Pilih Keterangan</option>
+                                                <option value="Sudah">Sudah</option>
+                                        </select>`
+                                    }
+                                </td>
+                            </tr>
+                        `;
+                    });
+
+                    content.innerHTML += `
+                        <div class="tab-pane fade ${first ? 'show active' : ''}" id="tab-${soSlug}" role="tabpanel">
+                            <div class="d-flex mb-3">
+                                <a href="https://docs.google.com/spreadsheets/d/1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4/edit" target="_blank"
+                                    class="btn btn-success btn-xs mr-2" style="border-radius: 8px;">
+                                    <i class="fa fa-file"></i> Lihat Spreadsheet
+                                </a>
+                                <button class="btn btn-success exportPDF" data-so="${so}">
+                                    <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                                </button>
+                            </div>
+                            <div class="table-responsive mt-4 mb-4">
+                                <table class="table table-striped table-bordered align-middle coeTable" id="coeTable-${soSlug}">
+                                    <thead class="table-primary text-center">
+                                        <tr>
+                                            <th width="10"><center><input type="checkbox" class="selectAll ml-3"></center></th>
+                                            <th width="10">No</th>
+                                            <th>Nama SO</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>${rows}</tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+
+                    first = false;
+                    idx++;
+                }
+
+                Swal.close();
+                Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
+
+                $('.coeTable').each(function(){
+                    $(this).DataTable({
+                        pageLength: 10,
+                        language: {
+                            search: "Cari:",
+                            lengthMenu: "Tampilkan _MENU_ data",
+                            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                            emptyTable: "Belum ada data siswa",
+                            paginate: { previous: "Prev", next: "Next" }
+                        }
+                    });
+                });
+
+            } catch (error) {
+                Swal.close();
+                console.error(error);
+                Swal.fire("Error", "Gagal memuat data COE dari Apps Script", "error");
+            }
+        }
+
+        async function loadNamaSO() {
+            try {
+                const response = await fetch(scriptUrl + "?action=getSO");
+                const data = await response.json();
+
+                const selectSO = document.getElementById("nama_so");
+                selectSO.innerHTML = `<option value="">Pilih Nama SO</option>`;
+
+                Object.keys(data).forEach(so => {
+                    const opt = document.createElement("option");
+                    opt.value = so;
+                    opt.textContent = so;
+                    selectSO.appendChild(opt);
+                });
+
+            } catch (err) {
+                console.error("Gagal load SO:", err);
+                Swal.fire("Error", "Gagal memuat daftar SO", "error");
+            }
+        }
+
+        async function loadDataBySO(soName) {
+            if (!soName) return;
+            try {
+                const response = await fetch(`${scriptUrl}?action=getDataBySO&nama_so=${encodeURIComponent(soName)}`);
+                const result = await response.json();
+
+                const data = result[soName] || [];
+
+                const tbody = document.querySelector("#coeData tbody");
+                if (!tbody) return;
+                tbody.innerHTML = "";
+
+                if (data.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">Belum ada data</td></tr>`;
+                    return;
+                }
+
+                let no = 1;
+                data.forEach(row => {
+                    tbody.innerHTML += `
+                        <tr>
+                            <td>${no++}</td>
+                            <td>${soName}</td>
+                            <td>${row["NAMA LENGKAP SISWA"] || "-"}</td>
+                            <td>${row["TANGGAL PENERBANGAN"] || "-"}</td>
+                            <td>${row["KETERANGAN"] || "-"}</td>
+                        </tr>
+                    `;
+                });
+                
+                if ($.fn.DataTable.isDataTable('#coeData')) {
+                    $('#coeData').DataTable().clear().destroy();
+                }
+                $('#coeData').DataTable({
+                    pageLength: 10,
+                    language: {
+                        search: "Cari:",
+                        lengthMenu: "Tampilkan _MENU_ data",
+                        info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                        emptyTable: "Belum ada data siswa",
+                        paginate: { previous: "Prev", next: "Next" }
+                    }
+                });
+
+            } catch (err) {
+                console.error("Error loadDataBySO:", err);
+                Swal.fire("Error", "Gagal memuat data siswa", "error");
+            }
+        }
+
+        $('#coeForm').submit(function(e){
+            e.preventDefault();
+
+            const formData = {
+                action: "addData",
+                nama_so: $('#nama_so').val(),
+                nama_siswa: $('input[name="nama_siswa"]').val(),
+                tanggal_penerbangan: $('input[name="tanggal_penerbangan"]').val()
+            };
+
+            if (!formData.nama_so || !formData.nama_siswa) {
+                Swal.fire("Peringatan", "Nama SO dan Nama Siswa wajib diisi", "warning");
+                return;
+            }
+
+            Swal.fire({
+                title: 'Kirim Data?',
+                text: 'Pastikan data sudah benar.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Kirim',
+                cancelButtonText: 'Batal'
+            }).then(result => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Mengirim...',
+                        text: 'Mohon tunggu sebentar',
+                        allowOutsideClick: false,
+                        didOpen: () => Swal.showLoading()
+                    });
+
+                    $.ajax({
+                        url: scriptUrl,
+                        method: "POST",
+                        data: formData,
+                        success: function(res){
+                            Swal.close();
+                            Swal.fire("Berhasil!", "Data berhasil dikirim.", "success");
+                            $('#coeForm')[0].reset();
+
+                            // Reload data sesuai SO
+                            loadDataBySO(formData.nama_so);
+                        },
+                        error: function(err){
+                            console.error(err);
+                            Swal.fire("Gagal", "Tidak dapat mengirim data ke server", "error");
+                        }
+                    });
+                }
+            });
+        });
+
+        $('#nama_so').on('change', function() {
+            const selectedSO = $(this).val();
+            loadDataBySO(selectedSO);
+        });
+
+        // update keterangan
+        $(document).on('change', '.updateStatus', function() {
+            let select = $(this);
+            let nama_so = select.data('so');
+            let nama_siswa = select.data('siswa');
+            let keterangan = select.val();
+
+            if (keterangan === '') return;
+
+            Swal.fire({
+                title: 'Update Data?',
+                text: 'Keterangan akan disimpan ke spreadsheet.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Menyimpan...',
+                        text: 'Mohon tunggu sebentar',
+                        didOpen: () => Swal.showLoading(),
+                        allowOutsideClick: false
+                    });
+
+                    $.ajax({
+                        url: "{{ route('coe.store') }}",
+                        method: "POST",
+                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
+                        data: {
+                            nama_so: nama_so,
+                            nama_siswa: nama_siswa,
+                            tanggal_penerbangan: '-', // opsional
+                            keterangan: keterangan
+                        },
+                        success: function(res){
+                            Swal.close();
+                            if(res.status === 'success'){
+                                select.closest('td').html('<span class="badge bg-success">Sudah</span>');
+                                Swal.fire('Berhasil!', 'Data keterangan telah diperbarui.', 'success');
+                            } else {
+                                Swal.fire('Gagal', res.message, 'error');
+                            }
+                        },
+                        error: function(){
+                            Swal.close();
+                            Swal.fire('Error', 'Terjadi kesalahan saat menyimpan.', 'error');
+                        }
+                    });
+                } else {
+                    select.val('');
+                }
+            });
+        });
+
+        $(document).ready(function(){
+            loadNamaSO();
+            loadAllData();
         });
     </script>
 
