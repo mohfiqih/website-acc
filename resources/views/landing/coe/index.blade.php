@@ -139,8 +139,8 @@
                 <input type="text" class="form-control" name="nama_siswa" placeholder="Masukkan nama lengkap siswa.." required>
             </div>
             <div class="mb-3">
-                <label class="fw-bold">Tanggal (Opsional)</label>
-                <input type="date" class="form-control" name="tanggal_penerbangan">
+                <label class="fw-bold">Keterangan</label>
+                <input type="date" class="form-control" name="keterangan">
             </div>
             <button type="submit" class="btn btn-success mt-3">Submit Data</button>
             </form>
@@ -483,17 +483,27 @@
 
     <script>
         const scriptUrl = "https://script.google.com/macros/s/AKfycbxde8fDH3JsU4sbuu_yeio83XUYaM7LC9LZAeVcgdg2EETtOVbzl9Ga_NlLn5gfLy1iSw/exec";
+        const spreadsheetId = "1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4";
+        const sheetLinks = {
+            "SO ABC": "0",
+            "SO YONAS": "65945211",
+            "SO ATC": "1983605501",
+            "SO ASTA KARYA": "830965925",
+            "SO MEGUMI": "870361738",
+            "SO MJI": "321136165",
+            "SO KIRANA INDONESIA": "1207560434"
+        };
 
         async function loadAllData() {
             try {
                 Swal.fire({
                     icon: 'warning',
-                    title: 'Sedang load data, mohon tunggu sebentar..',
+                    title: 'Sedang load data...',
                     toast: true,
                     position: 'top',
                     showConfirmButton: false,
                     allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
+                    didOpen: () => Swal.showLoading()
                 });
 
                 const response = await fetch(`${scriptUrl}?action=getAllData`);
@@ -501,22 +511,16 @@
 
                 const tabs = document.getElementById("coeTabs");
                 const content = document.getElementById("coeTabsContent");
-
                 tabs.innerHTML = "";
                 content.innerHTML = "";
 
                 let first = true;
-                let idx = 0;
 
                 for (const [so, items] of Object.entries(data)) {
                     const soSlug = so.replace(/\s+/g, '-').toLowerCase();
-
                     tabs.innerHTML += `
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link ${first ? 'active' : ''}" id="tab-${soSlug}-tab"
-                                data-bs-toggle="tab" data-bs-target="#tab-${soSlug}"
-                                type="button" role="tab" aria-controls="tab-${soSlug}"
-                                aria-selected="${first}">
+                        <li class="nav-item">
+                            <button class="nav-link ${first ? 'active' : ''}" data-bs-toggle="tab" data-bs-target="#tab-${soSlug}" type="button">
                                 ${so}
                             </button>
                         </li>
@@ -525,25 +529,57 @@
                     let rows = '';
                     let no = 1;
                     items.forEach(row => {
-                        const tanggal = row["TANGGAL PENERBANGAN"] || "-";
-                        const namaSiswa = row["NAMA LENGKAP SISWA"] || "-";
-                        const keterangan = (row["KETERANGAN"] || "").toLowerCase();
+                        const namaSiswa  = row["NAMA LENGKAP SISWA"] || "-";
+                        const terbang    = (row["TERBANG"] || "").trim();
+                        const pelunasan  = (row["PELUNASAN"] || "").trim();
+                        const keterangan = row["KETERANGAN"] || "-";
+
+                        let formattedTanggal = keterangan;
+                        if (keterangan && keterangan !== "-") {
+                            const d = new Date(keterangan);
+                            if (!isNaN(d)) {
+                                const day = String(d.getDate()).padStart(2, '0');
+                                const month = String(d.getMonth() + 1).padStart(2, '0');
+                                const year = d.getFullYear();
+                                formattedTanggal = `${day}-${month}-${year}`;
+                            }
+                        }
 
                         rows += `
                             <tr>
-                                <td><center><input type="checkbox" class="selectRow"></center></td>
+                                <td class="text-center">
+                                    <input type="checkbox" class="selectRow" ${terbang || pelunasan || keterangan ? 'checked' : ''}>
+                                </td>
                                 <td class="text-center">${no++}</td>
                                 <td>${so}</td>
                                 <td>${namaSiswa}</td>
-                                <td>${tanggal}</td>
                                 <td class="text-center">
                                     ${
-                                        keterangan === 'sudah'
-                                        ? '<span class="badge bg-success">Sudah</span>'
-                                        : `<select class="form-select form-select-sm updateStatus" data-so="${so}" data-siswa="${namaSiswa}">
-                                                <option value="">Pilih Keterangan</option>
+                                        terbang.toLowerCase() === 'sudah'
+                                        ? '<input type="checkbox" checked disabled>'
+                                        : `<select class="form-select form-select-sm updateStatusTerbang" data-so="${so}" data-siswa="${namaSiswa}">
+                                                <option value="">Pilih</option>
                                                 <option value="Sudah">Sudah</option>
                                         </select>`
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    ${
+                                        pelunasan.toLowerCase() === 'sudah'
+                                        ? '<input type="checkbox" checked disabled>'
+                                        : `<select class="form-select form-select-sm updateStatusPelunasan" data-so="${so}" data-siswa="${namaSiswa}">
+                                                <option value="">Pilih</option>
+                                                <option value="Sudah">Sudah</option>
+                                        </select>`
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    ${
+                                        (keterangan.trim() === '' || !isNaN(Date.parse(keterangan)))
+                                        ? formattedTanggal
+                                        : keterangan.trim() === '-' 
+                                            ? `<input type="date" class="form-select form-select-sm updateStatusKeterangan" data-so="${so}" data-siswa="${namaSiswa}">`
+                                            : keterangan
                                     }
                                 </td>
                             </tr>
@@ -551,26 +587,27 @@
                     });
 
                     content.innerHTML += `
-                        <div class="tab-pane fade ${first ? 'show active' : ''}" id="tab-${soSlug}" role="tabpanel">
+                        <div class="tab-pane fade ${first ? 'show active' : ''}" id="tab-${soSlug}">
                             <div class="d-flex mb-3">
-                                <a href="https://docs.google.com/spreadsheets/d/1DHKx-TLLpP7PXwDo5ps9Snzk9XMi8Md3nk6Zgvl0UQ4/edit" target="_blank"
-                                    class="btn btn-success btn-xs mr-2" style="border-radius: 8px;">
+                                <a href="https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit#gid=${sheetLinks[so] || '0'}"
+                                target="_blank" class="btn btn-success btn-xs mr-4">
                                     <i class="fa fa-file"></i> Lihat Spreadsheet
                                 </a>
-                                <button class="btn btn-success exportPDF" data-so="${so}">
-                                    <i class="bi bi-file-earmark-pdf"></i> Export PDF
+                                <button class="btn btn-danger mr-1 btn-xs exportPDF" data-so="${so}">
+                                    <i class="fa fa-file-pdf"></i> Export PDF
                                 </button>
                             </div>
                             <div class="table-responsive mt-4 mb-4">
                                 <table class="table table-striped table-bordered align-middle coeTable" id="coeTable-${soSlug}">
                                     <thead class="table-primary text-center">
                                         <tr>
-                                            <th width="10"><center><input type="checkbox" class="selectAll ml-3"></center></th>
-                                            <th width="10">No</th>
+                                            <th><center><input type="checkbox" class="selectAll"></center></th>
+                                            <th>No</th>
                                             <th>Nama SO</th>
                                             <th>Nama Siswa</th>
-                                            <th>Tanggal</th>
-                                            <th>Keterangan</th>
+                                            <th>Terbang</th>
+                                            <th>Pelunasan</th>
+                                            <th>Keterangan (Tanggal)</th>
                                         </tr>
                                     </thead>
                                     <tbody>${rows}</tbody>
@@ -578,31 +615,25 @@
                             </div>
                         </div>
                     `;
-
                     first = false;
-                    idx++;
                 }
 
                 Swal.close();
-                Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
 
-                $('.coeTable').each(function(){
-                    $(this).DataTable({
-                        pageLength: 10,
-                        language: {
-                            search: "Cari:",
-                            lengthMenu: "Tampilkan _MENU_ data",
-                            info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
-                            emptyTable: "Belum ada data siswa",
-                            paginate: { previous: "Prev", next: "Next" }
-                        }
-                    });
+                $('.coeTable').DataTable({
+                    pageLength: 10,
+                    language: {
+                        search: "Cari:",
+                        lengthMenu: "Tampilkan _MENU_ data",
+                        info: "Menampilkan _START_ - _END_ dari _TOTAL_ data",
+                        emptyTable: "Belum ada data siswa",
+                        paginate: { previous: "Prev", next: "Next" }
+                    }
                 });
 
-            } catch (error) {
+            } catch (err) {
                 Swal.close();
-                console.error(error);
-                Swal.fire("Error", "Gagal memuat data COE dari Apps Script", "error");
+                Swal.fire("Error", "Gagal memuat data", "error");
             }
         }
 
@@ -651,7 +682,6 @@
                             <td>${no++}</td>
                             <td>${soName}</td>
                             <td>${row["NAMA LENGKAP SISWA"] || "-"}</td>
-                            <td>${row["TANGGAL PENERBANGAN"] || "-"}</td>
                             <td>${row["KETERANGAN"] || "-"}</td>
                         </tr>
                     `;
@@ -684,7 +714,7 @@
                 action: "addData",
                 nama_so: $('#nama_so').val(),
                 nama_siswa: $('input[name="nama_siswa"]').val(),
-                tanggal_penerbangan: $('input[name="tanggal_penerbangan"]').val()
+                keterangan: $('input[name="keterangan"]').val()
             };
 
             if (!formData.nama_so || !formData.nama_siswa) {
@@ -716,8 +746,6 @@
                             Swal.close();
                             Swal.fire("Berhasil!", "Data berhasil dikirim.", "success");
                             $('#coeForm')[0].reset();
-
-                            // Reload data sesuai SO
                             loadDataBySO(formData.nama_so);
                         },
                         error: function(err){
@@ -734,18 +762,18 @@
             loadDataBySO(selectedSO);
         });
 
-        // update keterangan
-        $(document).on('change', '.updateStatus', function() {
+        // update terbang
+        $(document).on('change', '.updateStatusTerbang', function() {
             let select = $(this);
             let nama_so = select.data('so');
             let nama_siswa = select.data('siswa');
-            let keterangan = select.val();
+            let terbang = select.val();
 
-            if (keterangan === '') return;
+            if (terbang === '') return;
 
             Swal.fire({
                 title: 'Update Data?',
-                text: 'Keterangan akan disimpan ke spreadsheet.',
+                text: 'data akan disimpan ke spreadsheet.',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'OK',
@@ -760,20 +788,133 @@
                     });
 
                     $.ajax({
-                        url: "{{ route('coe.store') }}",
+                        url: scriptUrl,
                         method: "POST",
-                        headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
                         data: {
                             nama_so: nama_so,
                             nama_siswa: nama_siswa,
-                            tanggal_penerbangan: '-', // opsional
-                            keterangan: keterangan
+                            terbang: terbang
                         },
                         success: function(res){
                             Swal.close();
                             if(res.status === 'success'){
                                 select.closest('td').html('<span class="badge bg-success">Sudah</span>');
-                                Swal.fire('Berhasil!', 'Data keterangan telah diperbarui.', 'success');
+                                Swal.fire('Berhasil!', 'Data telah diperbarui.', 'success');
+                            } else {
+                                Swal.fire('Gagal', res.message, 'error');
+                            }
+                        },
+                        error: function(){
+                            Swal.close();
+                            Swal.fire('Error', 'Terjadi kesalahan saat menyimpan.', 'error');
+                        }
+                    });
+                } else {
+                    select.val('');
+                }
+            });
+        });
+
+        // update pelunasan
+        $(document).on('change', '.updateStatusPelunasan', function() {
+            let select = $(this);
+            let nama_so = select.data('so');
+            let nama_siswa = select.data('siswa');
+            let pelunasan = select.val();
+
+            if (pelunasan === '') return;
+
+            Swal.fire({
+                title: 'Update Data?',
+                text: 'data akan disimpan ke spreadsheet.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Menyimpan...',
+                        text: 'Mohon tunggu sebentar',
+                        didOpen: () => Swal.showLoading(),
+                        allowOutsideClick: false
+                    });
+
+                    $.ajax({
+                        url: scriptUrl,
+                        method: "POST",
+                        data: {
+                            nama_so: nama_so,
+                            nama_siswa: nama_siswa,
+                            pelunasan: pelunasan
+                        },
+                        success: function(res){
+                            Swal.close();
+                            if(res.status === 'success'){
+                                select.closest('td').html('<span class="badge bg-success">Sudah</span>');
+                                Swal.fire('Berhasil!', 'Data telah diperbarui.', 'success');
+                            } else {
+                                Swal.fire('Gagal', res.message, 'error');
+                            }
+                        },
+                        error: function(){
+                            Swal.close();
+                            Swal.fire('Error', 'Terjadi kesalahan saat menyimpan.', 'error');
+                        }
+                    });
+                } else {
+                    select.val('');
+                }
+            });
+        });
+
+        // update keterangan
+        $(document).on('change', '.updateStatusKeterangan', function() {
+            let select = $(this);
+            let nama_so = select.data('so');
+            let nama_siswa = select.data('siswa');
+            let keterangan = select.val(); // ini adalah tanggal dari input type="date"
+
+            if (keterangan === '') return;
+
+            Swal.fire({
+                title: 'Update Data?',
+                text: 'Data akan disimpan ke spreadsheet.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'OK',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Menyimpan...',
+                        text: 'Mohon tunggu sebentar',
+                        didOpen: () => Swal.showLoading(),
+                        allowOutsideClick: false
+                    });
+
+                    $.ajax({
+                        url: scriptUrl,
+                        method: "POST",
+                        data: {
+                            nama_so: nama_so,
+                            nama_siswa: nama_siswa,
+                            keterangan: keterangan
+                        },
+                        success: function(res){
+                            Swal.close();
+                            if(res.status === 'success'){
+                                // Format tanggal dari input (YYYY-MM-DD → DD-MM-YYYY)
+                                let d = new Date(keterangan);
+                                let day = String(d.getDate()).padStart(2, '0');
+                                let month = String(d.getMonth() + 1).padStart(2, '0');
+                                let year = d.getFullYear();
+                                let formattedDate = `${day}-${month}-${year}`;
+
+                                // Tampilkan tanggal yang dipilih
+                                select.closest('td').html(`<span>${formattedDate}</span>`);
+
+                                Swal.fire('Berhasil!', 'Tanggal berhasil diperbarui.', 'success');
                             } else {
                                 Swal.fire('Gagal', res.message, 'error');
                             }
@@ -798,58 +939,91 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
 
-    {{-- export pdf --}}
+    <!-- EXPORT PDF -->
     <script>
-        $(document).on('change', '.selectAll', function() {
-            let table = $(this).closest('table');
-            table.find('.selectRow').prop('checked', this.checked);
-        });
-
         $(document).on('click', '.exportPDF', function() {
             let soName = $(this).data('so');
             let tabId = '#tab-' + soName.toLowerCase().replace(/\s+/g, '-');
             let selectedRows = $(tabId).find('.selectRow:checked');
 
-            if(selectedRows.length === 0) {
+            if (selectedRows.length === 0) {
                 Swal.fire('Pilih data!', 'Silakan pilih minimal satu siswa untuk dicetak.', 'warning');
                 return;
             }
 
-            let doc = new jspdf.jsPDF();
+            // Buat dokumen PDF
+            let doc = new jspdf.jsPDF({ orientation: "portrait", unit: "mm", format: "a4" });
 
+            // Header
             doc.setFontSize(16);
-            doc.text("LPK ACC JAPAN CENTRE", 105, 20, { align: "center" });
+            doc.text("LPK ACC JAPAN CENTRE", 105, 15, { align: "center" });
             doc.setFontSize(10);
-            doc.text("Dukuh Gitung, RT 01/RW 02, Desa Harjosari Lor,", 105, 26, { align: "center" });
-            doc.text("Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194", 105, 31, { align: "center" });
-            doc.setLineWidth(0.5);
-            doc.line(10, 35, 200, 35);
-            doc.setFontSize(12);
-            doc.text(soName, 14, 45);
+            doc.text("Dukuh Gitung, RT 01/RW 02, Desa Harjosari Lor,", 105, 21, { align: "center" });
+            doc.text("Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194", 105, 26, { align: "center" });
 
+            // Garis pembatas
+            doc.setLineWidth(0.5);
+            doc.line(10, 30, 200, 30);
+
+            // Judul
+            doc.setFontSize(12);
+            doc.text(`Daftar Siswa - ${soName}`, 105, 38, { align: "center" });
+
+            // Ambil data baris
             let rows = [];
             let i = 1;
             selectedRows.each(function() {
                 let tr = $(this).closest('tr');
-                let namaSiswa = tr.find('td:eq(3)').text().trim();
-                let tanggal = tr.find('td:eq(4)').text().trim();
-                rows.push([i++, namaSiswa, tanggal]);
+                let nama = tr.find('td:eq(3)').text().trim();
+
+                // ✅ ambil status checkbox dengan benar
+                let terbang = tr.find('td:eq(4)').find('input[type="checkbox"]').is(':checked') ? 'Sudah' : '-';
+                let pelunasan = tr.find('td:eq(5)').find('input[type="checkbox"]').is(':checked') ? 'Sudah' : '-';
+                
+                let keterangan = tr.find('td:eq(6)').text().trim();
+
+                rows.push([i++, nama, terbang, pelunasan, keterangan]);
             });
 
+            // Buat tabel PDF
             doc.autoTable({
-                head: [['No', 'Nama Siswa', 'Tanggal']],
+                head: [['No', 'Nama Siswa', 'Terbang', 'Pelunasan', 'Keterangan']],
                 body: rows,
-                startY: 55,
-                styles: { halign: 'left', valign: 'middle', fontSize: 10 },
-                headStyles: { fillColor: [41, 128, 185], textColor: 255 },
+                startY: 45,
+                styles: {
+                    halign: 'center',    // Semua kolom center
+                    valign: 'middle',
+                    fontSize: 10,
+                    cellPadding: 3,
+                    lineWidth: 0.1
+                },
+                headStyles: {
+                    fillColor: [41, 128, 185],
+                    textColor: 255,
+                    halign: 'center',
+                    valign: 'middle'
+                },
                 columnStyles: {
-                    0: { cellWidth: 15, halign: 'center' },
-                    1: { cellWidth: 100, halign: 'left' },
-                    2: { cellWidth: 50, halign: 'left' }
-                }
+                    0: { cellWidth: 10, halign: 'center' },
+                    1: { cellWidth: 70, halign: 'center' }, // Nama siswa juga center
+                    2: { cellWidth: 25, halign: 'center' },
+                    3: { cellWidth: 25, halign: 'center' },
+                    4: { cellWidth: 50, halign: 'center' }
+                },
+                margin: { left: 10, right: 10 }
             });
 
-            doc.save(`COE_${soName.replace(/\s+/g, '_')}.pdf`);
+            // Footer tanggal cetak
+            let today = new Date();
+            let tanggalCetak = today.toLocaleDateString('id-ID', {
+                day: '2-digit', month: 'long', year: 'numeric'
+            });
+
+            doc.setFontSize(9);
+            doc.text(`Dicetak pada: ${tanggalCetak}`, 200, 290, { align: 'right' });
+
+            // Simpan PDF
+            doc.save(`Data_Siswa_${soName.replace(/\s+/g, '_')}.pdf`);
         });
     </script>
 </body>
