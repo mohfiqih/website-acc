@@ -1075,12 +1075,8 @@
                     </div>
                 </form> --}}
 
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
-                <form class="signup-form" id="pendaftaranForm" action="https://script.google.com/macros/s/AKfycby0WlyWJEOtG8o8Wlbt9WkxfYdgfv3ecibfa8d0U3PS_BsmL-1EqA5hUFlky2maextbqA/exec" method="POST" target="hidden_iframe">
+                <form class="signup-form" id="pendaftaranForm">
                     @csrf
-
-                        <h5 class="mb-1" style="font-weight: bold">Page 1: Data Diri Siswa</h5>
-                        <hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">EMAIL:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan email isian wajib.</p>
@@ -1110,7 +1106,7 @@
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TANGGAL LAHIR:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih tanggal lahir isian wajib.
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih tanggal lahir, isian wajib.
                             </p>
                             <input type="date" class="form-control" name="tanggal_lahir"
                                 placeholder="Pilih tanggal lahir anda" required>
@@ -1127,7 +1123,7 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih jenis kelamin, isian wajib.
                             </p>
                             <select name="jenis_kelamin" class="form-control" required>
-                                <option value="" disabled selected>Pilih jenis kelamin</option>
+                                <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                 <option value="LAKI-LAKI">LAKI-LAKI</option>
                                 <option value="PEREMPUAN">PEREMPUAN</option>
                             </select>
@@ -1152,9 +1148,6 @@
                                 <option value="KONGHUCU">KONGHUCU</option>
                             </select>
                         </div>
-                        <br/>
-                        <h5 class="mb-1" style="font-weight: bold">Page 2: Kesehatan dan Fisik</h5>
-                        <hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TINGGI (cm):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tinggi badan, isian
@@ -1170,10 +1163,10 @@
                                 placeholder="Masukan berat badan anda" required>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">GOL. DARAH:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih golongan darah.</p>
+                            <label class="text-label" style="font-weight: bold">GOLONGAN DARAH:</label>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih golongan darah, jika tidak tahu pilih "Belum Mengetahui"</p>
                             <select name="golongan_darah" class="form-control">
-                                <option value="" disabled selected>Pilih golongan darah</option>
+                                <option value="" disabled selected>Pilih Golongan Darah</option>
                                 <option value="Belum Mengetahui">Belum Mengetahui</option>
                                 <option value="A">A</option>
                                 <option value="B">B</option>
@@ -1186,21 +1179,21 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih buta warna atau tidak,
                                 isian wajib.</p>
                             <select name="buta_warna" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi buta warna atau tidak</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KANAN:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kanan, jika
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan berapa minus mata kanan, jika
                                 belum tau kosongkan saja.</p>
                             <input type="text" class="form-control" name="mata_kanan"
                                 placeholder="Masukan minus mata kanan anda. ex: 0,5">
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MATA KIRI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan minus mata kiri, jika
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan berapa minus mata kiri, jika
                                 belum tau kosongkan saja.</p>
                             <input type="text" class="form-control" name="mata_kiri"
                                 placeholder="Masukan minus mata kiri anda. ex: 1,5">
@@ -1210,17 +1203,17 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah operasi atau tidak,
                                 isian wajib.</p>
                             <select name="pernah_operasi" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi pernah operasi atau tidak</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label class="text-label" style="font-weight: bold">APAKAH SEDANG MINUM:</label>
+                            <label class="text-label" style="font-weight: bold">APAKAH SEDANG MINUM (MINUMAN KERAS):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih pernah minum atau tidak,
                                 isian wajib.</p>
                             <select name="apakah_sedang_minum" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi sedang minum atau tidak</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
@@ -1230,7 +1223,7 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih penggunaan tangan, isian
                                 wajib.</p>
                             <select name="tangan" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi tangan</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="KANAN">KANAN</option>
                                 <option value="KIRI">KIRI</option>
                             </select>
@@ -1239,7 +1232,7 @@
                             <label class="text-label" style="font-weight: bold">MEROKOK:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi merokok atau tidak, isian wajib.</p>
                             <select name="merokok" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi merokok</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
@@ -1249,14 +1242,11 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih memliki riwayat penyakit dalam atau tidak, isian wajib.
                             </p>
                             <select name="penyakit_dalam" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi penyakit dalam</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-                        <br/>
-                        <h5 class="mb-1" style="font-weight: bold">Page 3: Motivasi dan Lainnya</h5>
-                        <hr>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KEAHLIAN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan keahlian, maksimal 1
@@ -1264,7 +1254,6 @@
                             <input type="text" class="form-control tagify-keahlian" name="keahlian"
                                 placeholder="Contoh: peternakan, pertanian" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SIFAT/KEPRIBADIAN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sifat/kepribadian,
@@ -1272,7 +1261,6 @@
                             <input name="sifat_kepribadian" id="sifat_kepribadian" class="form-control tagify-sifat"
                                 placeholder="Contoh: disiplin, jujur">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEBIHAN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelebihan, maksimal 1
@@ -1280,7 +1268,6 @@
                             <input name="kelebihan" id="kelebihan" class="form-control tagify-kelebihan"
                                 placeholder="Contoh: kerja tim, cepat belajar">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">KELEMAHAN:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan kelemahan, maksimal 1
@@ -1288,26 +1275,29 @@
                             <input name="kelemahan" id="kelemahan" class="form-control tagify-kelemahan"
                                 placeholder="Contoh: mudah panik, kurang percaya diri" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">STATUS:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih status, isian wajib.</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon pilih status pernikahan, isian wajib.</p>
                             <select name="status" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi status</option>
-                                <option value="SUDAH MENIKAH">SUDAH MENIKAH</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="BELUM MENIKAH">BELUM MENIKAH</option>
+                                <option value="SUDAH MENIKAH">SUDAH MENIKAH</option>
+                                <option value="CERAI HIDUP">CERAI HIDUP</option>
+                                <option value="CERAI MATI">CERAI MATI</option>
+                                <option value="JANDA">JANDA</option>
+                                <option value="DUDA">DUDA</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">HOBI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi, maksimal 1 pilihan.
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan hobi anda, maksimal hanya 1 pilihan.
                             </p>
                             <input type="text" class="form-control tagify-hobi" id="hobi" name="hobi"
                                 placeholder="Contoh: sepak bola, pemrograman" required>
                         </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">MOTIVASI:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, maksimal 1
+                            <p class="text-danger" style="font-size: 11px;">*) Mohon masukan motivasi, maksimal hanya 1
                                 pilihan.</p>
                             <input type="text" class="form-control tagify-motivasi" id="motivasi"
                                 name="motivasi" placeholder="Contoh: Ingin mendapat uang banyak" required>
@@ -1318,7 +1308,7 @@
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan planning, isian wajib.
                             </p>
                             <select class="form-control" name="nabung_berapa" required>
-                                <option value="" disabled selected>Pilih planning nabung</option>
+                                <option value="" disabled selected>Pilih planning menabung</option>
                                 <option value="150 JT / 3 TAHUN">150 JT / 3 TAHUN</option>
                                 <option value="200 JT / 3 TAHUN">200 JT / 3 TAHUN</option>
                                 <option value="250 JT / 3 TAHUN">250 JT / 3 TAHUN</option>
@@ -1340,7 +1330,7 @@
                                 JEPANG:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi isian wajib.</p>
                             <select name="pernah_tinggal_dijepang" class="form-control" required>
-                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
@@ -1351,10 +1341,6 @@
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak ada kosongkan saja</p>
                             <textarea type="text" class="form-control" name="kualifikasi" placeholder="Masukan kualifikasi apa yang dilamar"></textarea>
                         </div>
-                        <br/>
-                        <h5 class="mb-1" style="font-weight: bold">Page 4: Pendidikan</h5>
-                        <hr>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SEKOLAH DASAR (SD):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan sekolah dasar dengan
@@ -1362,7 +1348,6 @@
                             <input type="text" class="form-control" name="sekolah_dasar"
                                 placeholder="Masukan nama SD, gunakan huruf KAPITAL" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SD):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.
@@ -1370,7 +1355,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_masuk_sd"
                                 placeholder="Masukan tahun masuk SD" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SD):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian
@@ -1379,7 +1363,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_keluar_sd"
                                 placeholder="Masukan tahun keluar SD" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH PERTAMA
                                 (SMP):</label>
@@ -1389,7 +1372,6 @@
                             <input type="text" class="form-control" name="sekolah_menengah_pertama"
                                 placeholder="Masukan nama SMP, gunakan huruf KAPITAL" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMP):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk, isian wajib.
@@ -1397,7 +1379,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_masuk_smp"
                                 placeholder="Masukan tahun masuk SMP" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMP):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun keluar, isian
@@ -1406,7 +1387,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_keluar_smp"
                                 placeholder="Masukan tahun keluar SMP" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">SEKOLAH MENENGAH ATAS/KEJURUAN
                                 (SMA/SMK):</label>
@@ -1415,7 +1395,6 @@
                             <input type="text" class="form-control" name="sekolah_menengah_atas"
                                 placeholder="Masukan nama SMA/SMK, gunakan huruf KAPITAL" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN MASUK (SMA/SMK):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon masukan tahun masuk isian
@@ -1424,7 +1403,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_masuk_smak"
                                 placeholder="Masukan tahun masuk SMA/SMK" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">TAHUN KELUAR (SMA/SMK):</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1433,7 +1411,6 @@
                             <input type="number" class="form-control yearpicker" name="tahun_keluar_smak"
                                 placeholder="Masukan tahun keluar SMA/SMK" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JURUSAN (SMA/SMK):</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1442,7 +1419,6 @@
                             <input type="text" class="form-control" name="jurusan"
                                 placeholder="Masukan jurusan (SMA/SMK), gunakan huruf KAPITAL">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERGURUAN TINGGI (JIKA ADA) - PROGRAM
                                 STUDI:</label>
@@ -1458,11 +1434,6 @@
                                 + Tambah Perguruan Tinggi
                             </button>
                         </div>
-                        <br/>
-
-                        <h5 class="mb-1" style="font-weight: bold">Page 5: Pengalaman & Lain-Lain</h5>
-                        <hr>
-
                         <div class="form-group">
                             <label class="text-label font-weight-bold">PENGALAMAN KERJA:</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1476,28 +1447,40 @@
                                 + Tambah Pengalaman
                             </button>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAHASA ASING YANG DIKUASAI
                                 (KAPITAL):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Silahkan ketik bahasa asing yang ingin
                                 anda cari, jika tidak ada kosongkan saja.</p>
-                            <select name="bahasa_asing[]" class="form-control" multiple="multiple"
-                                id="bahasa_asing"></select>
-                        </div>
 
+                            <select name="bahasa_asing" class="form-control" id="bahasa_asing" required>
+                                <option value="" disabled selected>Pilih Opsi</option>
+                                <option value="INGGRIS">INGGRIS</option>
+                                <option value="JEPANG">JEPANG</option>
+                                <option value="JERMAN">JERMAN</option>
+                                <option value="KOREA">KOREA</option>
+                                <option value="MALAYSIA">MALAYSIA</option>
+                                <option value="THAILAND">THAILAND</option>
+                                <option value="ITALIA">ITALIA</option>
+                                <option value="BELANDA">BELANDA</option>
+                                <option value="MANDARIN">MANDARIN</option>
+                                <option value="ARAB">ARAB</option>
+                                <option value="PERANCIS">PERANCIS</option>
+                                <option value="SPANYOL">SPANYOL</option>
+                                <option value="RUSIA">RUSIA</option>
+                                <option value="PORTUGIS">PORTUGIS</option>
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH KE JEPANG:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
                                 Tidak, jika pernah ke negara lain ketik nama negara dikolom, isian wajib.</p>
-                            <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri"
-                                required>
-                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                            <select name="pernah_keluar_negeri" class="form-control" id="pernah_keluar_negeri" required>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="YA">YA</option>
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA YA, SEBUTKAN
                                 TANGGAL/BULAN/TAHUN:</label>
@@ -1505,7 +1488,6 @@
                             <input type="date" class="form-control" name="tanggal_keluar_negeri"
                                 placeholder="Pilih tanggal anda pernah ke luar negeri">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PERNAH KE LUAR NEGERI LAINNYA:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
@@ -1518,14 +1500,12 @@
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA YA, NEGARA APA:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Jika tidak pernah kosongkan saja.</p>
                             <input type="text" class="form-control" name="negara"
                                 placeholder="Jika tidak pernah kosongkan saja">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">APAKAH ADA KERABAT DI JEPANG:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak pernah klik
@@ -1537,7 +1517,6 @@
                                 <option value="TIDAK">TIDAK</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">JIKA ADA, APA HUBUNGAN KERABAT YANG DI
                                 JEPANG:</label>
@@ -1549,7 +1528,6 @@
                                 <option value="TETANGGA">TETANGGA</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BELAJAR BAHASA:</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1571,7 +1549,6 @@
                                 <option value="LAINNYA">LAINNYA</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">BAB YANG DIPELAJARI:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi bab berapa yang telah anda
@@ -1579,11 +1556,6 @@
                             <input type="number" class="form-control" name="bab_yang_dipelajari"
                                 placeholder="Masukan bab berapa yang di pelajari">
                         </div>
-                        <br/>
-
-                        <h5 class="mb-1" style="font-weight: bold">Page 6: Data Keluarga & Ukuran</h5>
-                        <hr>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA AYAH:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi nama ayah gunakan huruf
@@ -1598,25 +1570,22 @@
                             <input type="number" class="form-control" name="usia_ayah"
                                 placeholder="Masukan usia ayah">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN AYAH:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi pekerjaan ayah, jika tidak ada kosongkan saja.
+                                *) Mohon isi pekerjaan ayah, jika sudah tidak ada kosongkan saja.
                             </p>
                             <input type="text" class="form-control" name="pekerjaan_ayah"
                                 placeholder="Masukan pekerjaan ayah">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
-                                *) Mohon isi nama ibu gunakan huruf kapital, jika tidak ada kosongkan saja.
+                                *) Mohon isi nama ibu gunakan huruf kapital, jika sudah tidak ada kosongkan saja.
                             </p>
                             <input type="text" class="form-control" name="nama_ibu"
                                 placeholder="Masukan nama lengkap ibu">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">USIA IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1625,7 +1594,6 @@
                             <input type="number" class="form-control" name="usia_ibu"
                                 placeholder="Masukan usia ibu">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PEKERJAAN IBU:</label>
                             <p class="text-danger" style="font-size: 11px;">
@@ -1634,7 +1602,6 @@
                             <input type="text" class="form-control" name="pekerjaan_ibu"
                                 placeholder="Masukan pekerjaan ibu">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">
                                 NAMA SAUDARA (maks. 6 data)
@@ -1649,35 +1616,30 @@
                                 style="cursor: pointer;background-color: #046392;font-weight: bold;"
                                 id="add-saudara-btn">+ Tambah Saudara</button>
                         </div>
-
                         <input type="hidden" name="nama_saudara" id="nama_saudara_hidden">
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PENDAPAT KELUARGA:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih opsi jika tidak setuju klik
                                 Tidak, isian wajib.</p>
                             <select name="pendapat_keluarga" class="form-control" id="pendapat_keluarga">
-                                <option value="" disabled selected>Pilih opsi pertanyaan</option>
+                                <option value="" disabled selected>Pilih Opsi</option>
                                 <option value="SETUJU">SETUJU</option>
                                 <option value="TIDAK SETUJU">TIDAK SETUJU</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NOMOR HP KELUARGA (AKTIF):</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon nomor HP Keluarga, isian wajib.
                             </p>
-                            <input type="text" class="form-control" name="no_hp_keluarga"
+                            <input type="number" class="form-control" name="no_hp_keluarga"
                                 placeholder="Masukan nomor hp keluarga" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NAMA MENTOR:</label>
-                            <p class="text-danger" style="font-size: 11px;">*) Jika sudah terisi gunakan yang sudah ada, jika belum beri tanda (-)</p>
+                            <p class="text-danger" style="font-size: 11px;">*) Masukan nama mentor sesuai anda sudah konsultasi dengan siapa, bisa tanyakan dengan nama staff yang terkait tersebut.</p>
                             <input type="text" class="form-control" name="nama_mentor"
                                 value="{{ $mentor }}" placeholder="Masukan nama mentor">
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">UKURAN BAJU:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih ukuran baju, isian wajib.
@@ -1690,7 +1652,6 @@
                                 <option value="XXL">XXL</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">NOMOR SEPATU:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon isi ukuran sepatu, isian wajib.
@@ -1698,7 +1659,6 @@
                             <input type="number" class="form-control" name="ukuran_sepatu"
                                 placeholder="Masukan ukuran sepatu" required>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PILIH KELAS:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih kelas, isian wajib.
@@ -1709,7 +1669,6 @@
                                 <option value="Kelas Malam">Kelas Malam</option>
                             </select>
                         </div>
-
                         <div class="form-group">
                             <label class="text-label" style="font-weight: bold">PILIH PROGRAM:</label>
                             <p class="text-danger" style="font-size: 11px;">*) Mohon pilih program, isian wajib.
@@ -1717,12 +1676,12 @@
                             <select name="pilih_program" class="form-control" id="pilih_program" required>
                                 <option value="" disabled selected>Pilih opsi program</option>
                                 <option value="Program Magang">Program Magang</option>
-                                <option value="Program TG Nol">Program TG Nol</option>
+                                <option value="Program Tokutei Ginou (TG)">Program Tokutei Ginou (TG)</option>
                                 <option value="Program Matching Job Magang">Program Matching Job Magang</option>
                                 <option value="Program Matching Job TG">Program Matching Job TG</option>
                             </select>
                         </div>
-                        <button type="butsubmitton" class="btn btn-success mt-3"
+                        <button type="butsubmitton" class="btn btn-success mt-4"
                             style="cursor: pointer;background-color: #046392;font-weight: bold;">Submit</button>
                 </form>
             </div>
@@ -1765,268 +1724,186 @@
                 }
             }
         });
-
-        $('#pernah_keluar_negeri').select2({
-            tags: true,
-            placeholder: "Pilih atau ketik jawaban...",
-            allowClear: true,
-            width: '100%',
-            language: {
-                noResults: function() {
-                    return "Tidak ditemukan, tekan Enter untuk menambahkan";
-                }
-            }
-        });
-
+        
         // $(document).ready(function() {
-        //     $('.signup-form').on('submit', function(e) {
+        //     $('#pendaftaranForm').submit(function(e) {
         //         e.preventDefault();
 
-        //         let bahasaAsing = $('#bahasa_asing').val();
-        //         if (bahasaAsing) {
-        //             let bahasaAsingString = Array.isArray(bahasaAsing) ? bahasaAsing.join(', ') :
-        //                 bahasaAsing;
-        //             $('<input>').attr({
-        //                 type: 'hidden',
-        //                 name: 'bahasa_asing',
-        //                 value: bahasaAsingString
-        //             }).appendTo('.signup-form');
-        //         }
-
-        //         let sifat = $('#sifat_kepribadian').val();
-        //         if (sifat) {
-        //             let sifatString = Array.isArray(sifat) ? sifat.join(', ') : sifat;
-        //             $('<input>').attr({
-        //                 type: 'hidden',
-        //                 name: 'sifat_kepribadian',
-        //                 value: sifatString
-        //             }).appendTo('.signup-form');
-        //         }
-
-        //         let kelebihan = $('#kelebihan').val();
-        //         if (kelebihan) {
-        //             let kelebihanString = Array.isArray(kelebihan) ? kelebihan.join(', ') : kelebihan;
-        //             $('<input>').attr({
-        //                 type: 'hidden',
-        //                 name: 'kelebihan',
-        //                 value: kelebihanString
-        //             }).appendTo('.signup-form');
-        //         }
-
-        //         let kelemahan = $('#kelemahan').val();
-        //         if (kelemahan) {
-        //             let kelemahanString = Array.isArray(kelemahan) ? kelemahan.join(', ') : kelemahan;
-        //             $('<input>').attr({
-        //                 type: 'hidden',
-        //                 name: 'kelemahan',
-        //                 value: kelemahanString
-        //             }).appendTo('.signup-form');
-        //         }
-
         //         Swal.fire({
-        //             title: 'Apakah Anda yakin ingin mendaftarkan diri?',
-        //             text: 'Pastikan data yang anda masukan sesuai dan benar, jika ada kesalahan hubungi bagian administrasi untuk mengubahnya!',
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonText: 'OK',
-        //             cancelButtonText: 'Batal',
-        //             confirmButtonColor: '#046392'
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 var form = $('.signup-form');
-        //                 var formData = form.serialize();
-
-        //                 Swal.fire({
-        //                     text: 'Mohon tunggu sedang memproses pendaftaran...',
-        //                     icon: 'warning',
-        //                     showConfirmButton: false,
-        //                     allowOutsideClick: false,
-        //                     didOpen: () => {
-        //                         Swal.showLoading();
-        //                     }
-        //                 });
-
-        //                 $.ajax({
-        //                     url: form.attr('action'),
-        //                     type: 'POST',
-        //                     data: formData,
-        //                     success: function(response) {
-        //                         Swal.close();
-        //                         if (response.success) {
-        //                             Swal.fire({
-        //                                 title: 'Berhasil!',
-        //                                 text: 'Berhasil daftar di LPK ACC Japan Centre!',
-        //                                 icon: 'success',
-        //                                 timer: 3000,
-        //                                 showConfirmButton: false,
-        //                             }).then(() => {
-        //                                 location.reload();
-        //                             });
-        //                         } else if (response.duplicate) {
-        //                             Swal.fire({
-        //                                 title: 'Warning!',
-        //                                 text: response.message,
-        //                                 icon: 'warning',
-        //                                 timer: 3000,
-        //                                 showConfirmButton: false,
-        //                             });
-        //                         } else {
-        //                             Swal.fire({
-        //                                 icon: 'error',
-        //                                 title: 'Gagal!',
-        //                                 text: 'Terjadi kesalahan saat menyimpan data.'
-        //                             });
-        //                         }
-        //                     },
-        //                     error: function(xhr) {
-        //                         Swal.close();
-        //                         let errorMessage = 'Terjadi kesalahan sistem.';
-        //                         if (xhr.responseJSON?.errors) {
-        //                             errorMessage = Object.values(xhr.responseJSON
-        //                                 .errors).flat().join('\n');
-        //                         } else if (xhr.responseJSON?.message) {
-        //                             errorMessage = xhr.responseJSON.message;
-        //                         }
-        //                         Swal.fire({
-        //                             title: 'Error!',
-        //                             text: errorMessage,
-        //                             icon: 'error',
-        //                             confirmButtonText: 'Tutup'
-        //                         });
-        //                     }
-        //                 });
-        //             }
+        //             title: 'Mengirim data pendaftaran...',
+        //             didOpen: () => Swal.showLoading(),
+        //             allowOutsideClick: false
         //         });
+
+        //         let data = {
+        //             email: $('#email').val(),
+        //             nama_katakana: $('#nama_katakana').val(),
+        //             nama_indonesia: $('#nama_indonesia').val(),
+        //             alamat: $('#alamat').val(),
+        //             tanggal_lahir: $('#tanggal_lahir').val(),
+        //             usia: $('#usia').val(),
+        //             jenis_kelamin: $('select[name="jenis_kelamin"]').val(),
+        //             no_hp_aktif: $('#no_hp_aktif').val(),
+        //             agama: $('select[name="agama"]').val(),
+        //             tinggi_badan: $('#tinggi_badan').val(),
+        //             berat_badan: $('#berat_badan').val(),
+        //             golongan_darah: $('select[name="golongan_darah"]').val(),
+        //             buta_warna: $('select[name="buta_warna"]').val(),
+        //             mata_kanan: $('#mata_kanan').val(),
+        //             mata_kiri: $('#mata_kiri').val(),
+        //             pernah_operasi: $('select[name="pernah_operasi"]').val(),
+        //             apakah_sedang_minum: $('select[name="apakah_sedang_minum"]').val(),
+        //             tangan: $('select[name="tangan"]').val(),
+        //             merokok: $('select[name="merokok"]').val(),
+        //             penyakit_dalam: $('select[name="penyakit_dalam"]').val(),
+        //             keahlian: $('#keahlian').val(),
+        //             sifat_kepribadian: $('#sifat_kepribadian').val(),
+        //             kelebihan: $('#kelebihan').val(),
+        //             kelemahan: $('#kelemahan').val(),
+        //             status: $('select[name="status"]').val(),
+        //             hobi: $('#hobi').val(),
+        //             motivasi: $('#motivasi').val(),
+        //             nabung_berapa: $('select[name="nabung_berapa"]').val(),
+        //             planning: $('#planning').val(),
+        //             pernah_tinggal_dijepang: $('select[name="pernah_tinggal_dijepang"]').val(),
+        //             kualifikasi: $('#kualifikasi').val(),
+        //             sekolah_dasar: $('#sekolah_dasar').val(),
+        //             tahun_masuk_sd: $('#tahun_masuk_sd').val(),
+        //             tahun_keluar_sd: $('#tahun_keluar_sd').val(),
+        //             sekolah_menengah_pertama: $('#sekolah_menengah_pertama').val(),
+        //             tahun_masuk_smp: $('#tahun_masuk_smp').val(),
+        //             tahun_keluar_smp: $('#tahun_keluar_smp').val(),
+        //             sekolah_menengah_atas: $('#sekolah_menengah_atas').val(),
+        //             tahun_masuk_smak: $('#tahun_masuk_smak').val(),
+        //             tahun_keluar_smak: $('#tahun_keluar_smak').val(),
+        //             jurusan: $('#jurusan').val(),
+        //             bahasa_asing: $('#bahasa_asing').val(),
+        //             pernah_keluar_negeri: $('select[name="pernah_keluar_negeri"]').val(),
+        //             tanggal_keluar_negeri: $('#tanggal_keluar_negeri').val(),
+        //             pernah_keluar_negeri_lain: $('select[name="pernah_keluar_negeri_lain"]').val(),
+        //             negara: $('#negara').val(),
+        //             kerabat_dijepang: $('select[name="kerabat_dijepang"]').val(),
+        //             hubungan_kerabat_dijepang: $('select[name="hubungan_kerabat_dijepang"]').val(),
+        //             belajar_bahasa: $('select[name="belajar_bahasa"]').val(),
+        //             buku_yang_dipakai: $('select[name="buku_yang_dipakai"]').val(),
+        //             bab_yang_dipelajari: $('#bab_yang_dipelajari').val(),
+        //             nama_ayah: $('#nama_ayah').val(),
+        //             usia_ayah: $('#usia_ayah').val(),
+        //             pekerjaan_ayah: $('#pekerjaan_ayah').val(),
+        //             nama_ibu: $('#nama_ibu').val(),
+        //             usia_ibu: $('#usia_ibu').val(),
+        //             pekerjaan_ibu: $('#pekerjaan_ibu').val(),
+        //             pendapat_keluarga: $('select[name="pendapat_keluarga"]').val(),
+        //             no_hp_keluarga: $('#no_hp_keluarga').val(),
+        //             nama_mentor: $('#nama_mentor').val(),
+        //             ukuran_baju: $('select[name="ukuran_baju"]').val(),
+        //             ukuran_sepatu: $('select[name="ukuran_sepatu"]').val(),
+        //             pilih_kelas: $('select[name="pilih_kelas"]').val(),
+        //             pilih_program: $('select[name="pilih_program"]').val()
+        //         };
+
+        //         const perguruanData = [];
+        //         document.querySelectorAll('.perguruan-row').forEach(row => {
+        //             const nama = row.querySelector('input[name="nama_perguruan[]"]').value.trim();
+        //             const program = row.querySelector('input[name="program_studi[]"]').value.trim();
+        //             if (nama && program) perguruanData.push(`${nama} - ${program}`);
+        //         });
+        //         data.perguruan_tinggi = perguruanData.join(', ');
+
+        //         const pengalamanData = [];
+        //         document.querySelectorAll('.pengalaman-row').forEach(row => {
+        //             const awal = row.querySelector('input[name="tahun_awal[]"]').value.trim();
+        //             const akhir = row.querySelector('input[name="tahun_akhir[]"]').value.trim();
+        //             const perusahaan = row.querySelector('input[name="nama_perusahaan[]"]').value.trim();
+        //             const bagian = row.querySelector('input[name="bagian[]"]').value.trim();
+        //             if (awal && akhir && perusahaan && bagian) pengalamanData.push(`${awal}-${akhir}: ${perusahaan} (${bagian})`);
+        //         });
+        //         data.pengalaman_kerja = pengalamanData.join(', ');
+
+        //         const saudaraData = [];
+        //         document.querySelectorAll('.saudara-row').forEach(row => {
+        //             const hubungan = row.querySelector('.hubungan').value.trim().toUpperCase();
+        //             const nama = row.querySelector('.nama').value.trim().toUpperCase();
+        //             const usia = row.querySelector('.usia').value.trim();
+        //             const pekerjaan = row.querySelector('.pekerjaan').value.trim().toUpperCase();
+        //             if (hubungan && nama && usia && pekerjaan) saudaraData.push(`${hubungan} - ${nama} - ${usia} - ${pekerjaan}`);
+        //         });
+        //         data.nama_saudara = saudaraData.join(', ');
+
+        //         $('#pendaftaranForm input.dynamic-field').remove();
+
+        //         Object.entries(data).forEach(([key, value]) => {
+        //             $('<input>').attr({
+        //                 type: 'hidden',
+        //                 name: key,
+        //                 value: value,
+        //                 class: 'dynamic-field'
+        //             }).appendTo('#pendaftaranForm');
+        //         });
+
+        //         this.submit();
+
+        //         setTimeout(() => {
+        //             Swal.close();
+        //             Swal.fire({
+        //                 icon: 'success',
+        //                 title: 'Berhasil!',
+        //                 text: 'Data pendaftaran telah dikirim. Silahkan cek mentor untuk konfirmasi.'
+        //             });
+        //         }, 3000);
         //     });
         // });
-        
-        $(document).ready(function() {
-            $('#pendaftaranForm').submit(function(e) {
-                e.preventDefault();
 
-                Swal.fire({
-                    title: 'Mengirim data pendaftaran...',
-                    didOpen: () => Swal.showLoading(),
-                    allowOutsideClick: false
-                });
+        //submit
+        document.getElementById('pendaftaranForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-                let data = {
-                    email: $('#email').val(),
-                    nama_katakana: $('#nama_katakana').val(),
-                    nama_indonesia: $('#nama_indonesia').val(),
-                    alamat: $('#alamat').val(),
-                    tanggal_lahir: $('#tanggal_lahir').val(),
-                    usia: $('#usia').val(),
-                    jenis_kelamin: $('select[name="jenis_kelamin"]').val(),
-                    no_hp_aktif: $('#no_hp_aktif').val(),
-                    agama: $('select[name="agama"]').val(),
-                    tinggi_badan: $('#tinggi_badan').val(),
-                    berat_badan: $('#berat_badan').val(),
-                    golongan_darah: $('select[name="golongan_darah"]').val(),
-                    buta_warna: $('select[name="buta_warna"]').val(),
-                    mata_kanan: $('#mata_kanan').val(),
-                    mata_kiri: $('#mata_kiri').val(),
-                    pernah_operasi: $('select[name="pernah_operasi"]').val(),
-                    apakah_sedang_minum: $('select[name="apakah_sedang_minum"]').val(),
-                    tangan: $('select[name="tangan"]').val(),
-                    merokok: $('select[name="merokok"]').val(),
-                    penyakit_dalam: $('select[name="penyakit_dalam"]').val(),
-                    keahlian: $('#keahlian').val(),
-                    sifat_kepribadian: $('#sifat_kepribadian').val(),
-                    kelebihan: $('#kelebihan').val(),
-                    kelemahan: $('#kelemahan').val(),
-                    status: $('select[name="status"]').val(),
-                    hobi: $('#hobi').val(),
-                    motivasi: $('#motivasi').val(),
-                    nabung_berapa: $('select[name="nabung_berapa"]').val(),
-                    planning: $('#planning').val(),
-                    pernah_tinggal_dijepang: $('select[name="pernah_tinggal_dijepang"]').val(),
-                    kualifikasi: $('#kualifikasi').val(),
-                    sekolah_dasar: $('#sekolah_dasar').val(),
-                    tahun_masuk_sd: $('#tahun_masuk_sd').val(),
-                    tahun_keluar_sd: $('#tahun_keluar_sd').val(),
-                    sekolah_menengah_pertama: $('#sekolah_menengah_pertama').val(),
-                    tahun_masuk_smp: $('#tahun_masuk_smp').val(),
-                    tahun_keluar_smp: $('#tahun_keluar_smp').val(),
-                    sekolah_menengah_atas: $('#sekolah_menengah_atas').val(),
-                    tahun_masuk_smak: $('#tahun_masuk_smak').val(),
-                    tahun_keluar_smak: $('#tahun_keluar_smak').val(),
-                    jurusan: $('#jurusan').val(),
-                    bahasa_asing: $('#bahasa_asing').val(),
-                    pernah_keluar_negeri: $('select[name="pernah_keluar_negeri"]').val(),
-                    tanggal_keluar_negeri: $('#tanggal_keluar_negeri').val(),
-                    pernah_keluar_negeri_lain: $('select[name="pernah_keluar_negeri_lain"]').val(),
-                    negara: $('#negara').val(),
-                    kerabat_dijepang: $('select[name="kerabat_dijepang"]').val(),
-                    hubungan_kerabat_dijepang: $('select[name="hubungan_kerabat_dijepang"]').val(),
-                    belajar_bahasa: $('select[name="belajar_bahasa"]').val(),
-                    buku_yang_dipakai: $('select[name="buku_yang_dipakai"]').val(),
-                    bab_yang_dipelajari: $('#bab_yang_dipelajari').val(),
-                    nama_ayah: $('#nama_ayah').val(),
-                    usia_ayah: $('#usia_ayah').val(),
-                    pekerjaan_ayah: $('#pekerjaan_ayah').val(),
-                    nama_ibu: $('#nama_ibu').val(),
-                    usia_ibu: $('#usia_ibu').val(),
-                    pekerjaan_ibu: $('#pekerjaan_ibu').val(),
-                    pendapat_keluarga: $('select[name="pendapat_keluarga"]').val(),
-                    no_hp_keluarga: $('#no_hp_keluarga').val(),
-                    nama_mentor: $('#nama_mentor').val(),
-                    ukuran_baju: $('select[name="ukuran_baju"]').val(),
-                    ukuran_sepatu: $('select[name="ukuran_sepatu"]').val(),
-                    pilih_kelas: $('select[name="pilih_kelas"]').val(),
-                    pilih_program: $('select[name="pilih_program"]').val()
-                };
-
-                const perguruanData = [];
-                document.querySelectorAll('.perguruan-row').forEach(row => {
-                    const nama = row.querySelector('input[name="nama_perguruan[]"]').value.trim();
-                    const program = row.querySelector('input[name="program_studi[]"]').value.trim();
-                    if (nama && program) perguruanData.push(`${nama} - ${program}`);
-                });
-                data.perguruan_tinggi = perguruanData.join(', ');
-
-                const pengalamanData = [];
-                document.querySelectorAll('.pengalaman-row').forEach(row => {
-                    const awal = row.querySelector('input[name="tahun_awal[]"]').value.trim();
-                    const akhir = row.querySelector('input[name="tahun_akhir[]"]').value.trim();
-                    const perusahaan = row.querySelector('input[name="nama_perusahaan[]"]').value.trim();
-                    const bagian = row.querySelector('input[name="bagian[]"]').value.trim();
-                    if (awal && akhir && perusahaan && bagian) pengalamanData.push(`${awal}-${akhir}: ${perusahaan} (${bagian})`);
-                });
-                data.pengalaman_kerja = pengalamanData.join(', ');
-
-                const saudaraData = [];
-                document.querySelectorAll('.saudara-row').forEach(row => {
-                    const hubungan = row.querySelector('.hubungan').value.trim().toUpperCase();
-                    const nama = row.querySelector('.nama').value.trim().toUpperCase();
-                    const usia = row.querySelector('.usia').value.trim();
-                    const pekerjaan = row.querySelector('.pekerjaan').value.trim().toUpperCase();
-                    if (hubungan && nama && usia && pekerjaan) saudaraData.push(`${hubungan} - ${nama} - ${usia} - ${pekerjaan}`);
-                });
-                data.nama_saudara = saudaraData.join(', ');
-
-                $('#pendaftaranForm input.dynamic-field').remove();
-
-                Object.entries(data).forEach(([key, value]) => {
-                    $('<input>').attr({
-                        type: 'hidden',
-                        name: key,
-                        value: value,
-                        class: 'dynamic-field'
-                    }).appendTo('#pendaftaranForm');
-                });
-
-                this.submit();
-
-                setTimeout(() => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Berhasil!',
-                        text: 'Data pendaftaran telah dikirim. Silahkan cek mentor untuk konfirmasi.'
-                    });
-                }, 3000);
+            const result = await Swal.fire({
+                title: 'Yakin ingin kirim data?',
+                text: 'Pastikan semua data sudah benar sebelum dikirim.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Daftar',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
             });
+
+            if (!result.isConfirmed) return;
+
+            Swal.fire({
+                title: 'Mengirim data pendaftaran...',
+                didOpen: () => Swal.showLoading(),
+                allowOutsideClick: false
+            });
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            try {
+                await fetch("https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec", {
+                    method: "POST",
+                    body: formData,
+                    mode: "no-cors"
+                });
+
+                Swal.close();
+                    Swal.fire({
+                    icon: 'success',
+                    title: 'Berhasil!',
+                    text: 'Data pendaftaran telah dikirim. Silakan konfirmasi ke mentor.'
+                });
+
+                form.reset();
+
+            } catch (error) {
+                Swal.close();
+                Swal.fire({
+                icon: 'error',
+                title: 'Gagal!',
+                text: 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.'
+                });
+                console.error('Error:', error);
+            }
         });
 
         document.addEventListener("DOMContentLoaded", function() {
@@ -2175,6 +2052,74 @@
                 }
             });
         });
+
+        // save session form
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('pendaftaranForm');
+            const formInputs = form.querySelectorAll('input, select, textarea');
+            const storageKey = 'pendaftaranFormData';
+
+            function saveFormData() {
+                const data = {};
+                formInputs.forEach(input => {
+                    if (input.type === 'checkbox' || input.type === 'radio') {
+                        data[input.name] = input.checked;
+                    } else {
+                        data[input.name] = input.value;
+                    }
+                });
+                localStorage.setItem(storageKey, JSON.stringify(data));
+            }
+
+            function loadFormData() {
+                const savedData = localStorage.getItem(storageKey);
+                if (!savedData) return;
+                const data = JSON.parse(savedData);
+
+                formInputs.forEach(input => {
+                    if (data.hasOwnProperty(input.name)) {
+                        if (input.type === 'checkbox' || input.type === 'radio') {
+                            input.checked = data[input.name];
+                        } else {
+                            input.value = data[input.name];
+                        }
+                    }
+                });
+            }
+
+            formInputs.forEach(input => {
+                input.addEventListener('input', saveFormData);
+                input.addEventListener('change', saveFormData);
+            });
+
+            loadFormData();
+
+            const resetBtn = document.createElement('button');
+            resetBtn.type = 'button';
+            resetBtn.textContent = 'Reset Semua';
+            resetBtn.className = 'btn btn-danger mt-4';
+            resetBtn.style.fontWeight = 'bold';
+            resetBtn.onclick = function () {
+                Swal.fire({
+                    title: 'Yakin ingin menghapus semua data?',
+                    text: 'Semua isian akan dikosongkan permanen dari penyimpanan browser!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Ya, hapus semua',
+                    cancelButtonText: 'Batal'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.removeItem(storageKey);
+                        form.reset();
+                        Swal.fire('Berhasil!', 'Semua data berhasil dihapus.', 'success');
+                    }
+                });
+            };
+
+            form.appendChild(resetBtn);
+        });
     </script>
 
     <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
@@ -2202,9 +2147,7 @@
                 autoclose: true
             });
         });
-    </script>
 
-    <script>
         let pengalamanCount = 0;
         const maxPengalaman = 3;
 
@@ -2239,9 +2182,7 @@
                 pengalamanCount--;
             });
         });
-    </script>
 
-    <script>
         let saudaraCount = 0;
         const maxSaudara = 6;
 
@@ -2308,9 +2249,7 @@
         document.querySelector('form').addEventListener('submit', function(e) {
             generateNamaSaudaraString();
         });
-    </script>
 
-    <script>
         let perguruanCount = 0;
         const maxPerguruan = 2;
 
