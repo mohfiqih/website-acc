@@ -867,7 +867,64 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- download cv --}}
     <script>
-        $(document).on('click', '.btn-download-cv', function(e) {
+        // $(document).on('click', '.btn-download-cv', function(e) {
+        //     e.preventDefault();
+
+        //     const id = $(this).data('id');
+        //     const nama = $(this).data('nama');
+
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: "Do you want to download this CV?",
+        //         icon: 'question',
+        //         showCancelButton: true,
+        //         confirmButtonText: 'OK',
+        //         confirmButtonColor: '#046392'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             fetch(`/export-cv-word/${id}`, {
+        //                 method: 'GET',
+        //                 headers: {
+        //                     'X-Requested-With': 'XMLHttpRequest',
+        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //                 }
+        //             })
+        //             .then(response => {
+        //                 if (!response.ok) {
+        //                     throw new Error('Download failed');
+        //                 }
+        //                 return response.blob();
+        //             })
+        //             .then(blob => {
+        //                 const url = window.URL.createObjectURL(blob);
+        //                 const a = document.createElement('a');
+        //                 a.href = url;
+        //                 a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
+        //                 document.body.appendChild(a);
+        //                 a.click();
+        //                 a.remove();
+        //                 window.URL.revokeObjectURL(url);
+
+        //                 Swal.fire({
+        //                     title: 'Success!',
+        //                     text: 'File has been downloaded.',
+        //                     icon: 'success',
+        //                     timer: 2000,
+        //                     showConfirmButton: false
+        //                 });
+        //             })
+        //             .catch(error => {
+        //                 Swal.fire({
+        //                     title: 'Error!',
+        //                     text: 'Failed to download file.',
+        //                     icon: 'error'
+        //                 });
+        //             });
+        //         }
+        //     });
+        // });
+
+        $(document).on('click', '.btn-download-cv', async function(e) {
             e.preventDefault();
 
             const id = $(this).data('id');
@@ -880,22 +937,41 @@
                 showCancelButton: true,
                 confirmButtonText: 'OK',
                 confirmButtonColor: '#046392'
-            }).then((result) => {
+            }).then(async (result) => {
                 if (result.isConfirmed) {
-                    fetch(`/export-cv-word/${id}`, {
-                        method: 'GET',
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Download failed');
-                        }
-                        return response.blob();
-                    })
-                    .then(blob => {
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Sedang download CV, mohon tunggu sebentar...',
+                        toast: true,
+                        position: 'top',
+                        showConfirmButton: false,
+                        allowOutsideClick: false,
+                        didOpen: () => Swal.showLoading()
+                    });
+
+                    try {
+                        // Ambil data dari Google Apps Script
+                        const res = await fetch("https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec");
+                        const data = await res.json();
+                        const rowData = data.reverse().find(d => d.ID == id);
+
+                        if (!rowData) throw new Error('Data tidak ditemukan');
+
+                        // Kirim data ke Laravel
+                        const formData = new FormData();
+                        formData.append('data', JSON.stringify(rowData));
+
+                        const response = await fetch('/export-cv-word', {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                            },
+                            body: formData
+                        });
+
+                        if (!response.ok) throw new Error('Download gagal');
+
+                        const blob = await response.blob();
                         const url = window.URL.createObjectURL(blob);
                         const a = document.createElement('a');
                         a.href = url;
@@ -912,14 +988,15 @@
                             timer: 2000,
                             showConfirmButton: false
                         });
-                    })
-                    .catch(error => {
+
+                    } catch (err) {
+                        console.error(err);
                         Swal.fire({
                             title: 'Error!',
-                            text: 'Failed to download file.',
+                            text: err.message,
                             icon: 'error'
                         });
-                    });
+                    }
                 }
             });
         });
