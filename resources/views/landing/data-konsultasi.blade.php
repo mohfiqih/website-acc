@@ -772,6 +772,16 @@
         document.getElementById('entriesSelect').addEventListener('change', e=>{entriesPerPage=parseInt(e.target.value); currentPage=1; renderTable();});
         document.getElementById('paginationControls').addEventListener('click', e=>{if(e.target.classList.contains('page-link')){e.preventDefault();currentPage=parseInt(e.target.dataset.page);renderTable();}});
 
+        document.getElementById('chartFilter').addEventListener('change', function () {
+            const selected = this.value;
+            const stats = calculateStats(allData);
+
+            renderChart(stats, selected);
+
+            document.getElementById('chartTitle').innerText =
+                this.options[this.selectedIndex].text;
+        });
+
         fetchData();
         setInterval(fetchData, 600000);
     </script>

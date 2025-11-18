@@ -614,6 +614,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
     {{-- data tabel --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
 
@@ -863,7 +864,6 @@
         fetchData();
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- download cv --}}
     <script>
@@ -1003,7 +1003,6 @@
     </script>
 
     {{-- Chart --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
