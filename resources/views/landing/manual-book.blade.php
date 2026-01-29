@@ -155,10 +155,15 @@
                             Biaya dan Fasilitas. <b>Lokasi:</b> Dk. Gitung, Harjosari Lor, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</p>
                         <p>Klik Website LPK JAPAN CENTRE : <a href="/">https://amanahcitracemerlang.id/</a></p>
                         <div class="d-flex">
-                            <a href="{{ asset('book/manual_book_acc.pdf') }}" 
+                            <a href="{{ asset('book/manual_book_magang(A4).pdf') }}" 
                                 class="btn-get-started"
                                 download>
-                                PDF Manual Book
+                                Manual Book Magang
+                            </a>
+                            <a href="{{ asset('book/manual_book_tg(A4).pdf') }}" 
+                                class="btn-get-started" style="margin-left: 5px;"
+                                download>
+                                Manual Book TG
                             </a>
                             <a href="https://amanahcitracemerlang.id/bg-video.mp4"
                                 class="glightbox btn-watch-video d-flex align-items-center"><i

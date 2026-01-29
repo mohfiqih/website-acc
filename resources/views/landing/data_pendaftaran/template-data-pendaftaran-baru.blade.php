@@ -4,9 +4,197 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>Data Pendaftaran</title>
   <link rel="shortcut icon" type="image/png" href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
   <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
+  <style>
+        .text-label {
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            padding-top: 15px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0px 0px;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .pagination li {
+            display: inline-block;
+        }
+
+        .pagination li a,
+        .pagination li span {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: 1px solid #046392;
+            background-color: white;
+            color: #046392;
+            font-weight: bold;
+        }
+
+        .pagination li a:hover {
+            background-color: #046392;
+            color: white;
+        }
+
+        .pagination li.active span {
+            background-color: #046392;
+            color: white;
+        }
+
+        .pagination li.disabled span {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 768px) {
+            .pagination-container {
+                padding: 10px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .pagination {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .pagination li a,
+            .pagination li span {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+
+        body::before {
+            content: "";
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg") center center/cover no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: -2;
+        }
+
+        .container {
+            overflow-x: auto;
+        }
+
+        .card-body {
+            padding: 30px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            min-width: 1200px;
+            border-collapse: collapse;
+            white-space: nowrap;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .table-responsive {
+            max-width: 100%;
+            overflow-x: auto;
+        }
+
+        .dataTables_paginate {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @media (max-width: 576px) {
+            #refreshIndicator {
+                margin-bottom: 10px;
+            }
+        }
+
+        .fixed-header-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .fixed-header-table thead th {
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+        }
+
+        .table-scroll-wrapper {
+            overflow-x: auto;
+        }
+
+        .fixed-header-table th, 
+        .fixed-header-table td {
+            white-space: nowrap;
+        }
+        #mentorChart {
+            width: 100% !important;
+            height: 400px !important;
+        }
+
+        @media (max-width: 576px) {
+            #mentorChart {
+                height: 320px !important;
+            }
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,7 +221,7 @@
               <span class="hide-menu">Home</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./index.html" aria-expanded="false">
+              <a class="sidebar-link" href="/" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -45,7 +233,7 @@
               <span class="hide-menu">Menu</span>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
+              <a class="sidebar-link" href="/pendaftaran-siswa-baru" aria-expanded="false">
                 <span>
                   <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
@@ -61,19 +249,35 @@
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-forms.html" aria-expanded="false">
+              <a class="sidebar-link" href="/manual-book" aria-expanded="false">
                 <span>
-                  <iconify-icon icon="solar:file-text-bold-duotone" class="fs-6"></iconify-icon>
+                  <iconify-icon icon="solar:book-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu">Forms</span>
+                <span class="hide-menu">Manual Book</span>
               </a>
             </li>
             <li class="sidebar-item">
-              <a class="sidebar-link" href="./ui-typography.html" aria-expanded="false">
+              <a class="sidebar-link" href="/upload" aria-expanded="false">
                 <span>
-                  <iconify-icon icon="solar:text-field-focus-bold-duotone" class="fs-6"></iconify-icon>
+                  <iconify-icon icon="solar:upload-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu">Typography</span>
+                <span class="hide-menu">Upload Dokumentasi</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/data-konsultasi" aria-expanded="false">
+                <span>
+                  <iconify-icon icon="solar:letter-bold-duotone" class="fs-6"></iconify-icon>
+                </span>
+                <span class="hide-menu">Data Konsultasi</span>
+              </a>
+            </li>
+            <li class="sidebar-item">
+              <a class="sidebar-link" href="/data-coe" aria-expanded="false">
+                <span>
+                  <iconify-icon icon="solar:file-bold-duotone" class="fs-6"></iconify-icon>
+                </span>
+                <span class="hide-menu">Data COE</span>
               </a>
             </li>
           </ul>
@@ -95,8 +299,14 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="javascript:void(0)">
-                <i class="ti ti-bell-ringing"></i>
+              <a class="nav-link nav-icon-hover" href="/">
+                <i class="ti ti-home"></i>
+                <div class="notification bg-primary rounded-circle"></div>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link nav-icon-hover" href="/">
+                <i class="ti ti-book"></i>
                 <div class="notification bg-primary rounded-circle"></div>
               </a>
             </li>
@@ -116,167 +326,184 @@
       <!--  Header End -->
       <div class="container-fluid">
         <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" alt="image" class="img-fluid" width="205">
+                        <h4 class="mt-7">DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h4>
+                        <p class="card-subtitle mt-2 mb-3">
+                            LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.
+                        </p>
+                        <button class="btn btn-primary mb-3">Home</button>
+                        <p>Jumlah Pendaftaran Online per Mentor</p>
+                        <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-8">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title d-flex align-items-center gap-2 mb-4">
                             Daftar Online Berdasarkan Nama Mentor
-                            <span>
-                                <iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Traffic Overview"></iconify-icon>
-                            </span>
                         </h5>
-                        <div id="traffic-overview" >
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
+                                <option value="">All Month</option>
+                            </select>
+
+                            <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
+                                Export JPG
+                            </button>
+                            <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="exportPDFLandscape()">
+                                Export PDF
+                            </button>
+                        </div>
+                        {{-- <div id="traffic-overview"></div> --}}
+                        <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
+                        <div class="mt-3">
+                            <h6>Jumlah Pendaftaran per Mentor</h6>
+                            <table class="table table-sm table-bordered" id="mentorTable">
+                                <thead>
+                                    <tr>
+                                        <th>Mentor</th>
+                                        <th>Jumlah Pendaftar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="2" class="text-center">Sedang proses menampilkan data...</td></tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-            </div>
-        <div class="col-lg-4">
+        </div>
+        <div class="col-lg-12">
           <div class="card">
-            <div class="card-body text-center">
-                <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" alt="image" class="img-fluid" width="205">
-                <h4 class="mt-7">DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h4>
-                <p class="card-subtitle mt-2 mb-3">
-                    LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.
-                </p>
-                <button class="btn btn-primary mb-3">Home</button>
+            <div class="card-body">
+              <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
+                    class="d-flex align-items-center mb-3">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label><b>Dari Tanggal</b></label>
+                            <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                            <label><b>Sampai Tanggal</b></label>
+                            <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                        </div>
+                        <div class="col md-12">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-download"></i> Export PDF
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                        🔄 Refreshing data...
+                    </div>
+                    <br/>
+                    <table id="mentorDataTable" class="table table-striped table-bordered fixed-header-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Download CV</th>
+                                <th>Timestamp</th>
+                                <th>EMAIL</th>
+                                <th>NAMA (KATAKANA)</th>
+                                <th>NAMA (INDONESIA)</th>
+                                <th>ALAMAT</th>
+                                <th>TANGGAL LAHIR</th>
+                                <th>USIA</th>
+                                <th>KELAMIN</th>
+                                <th>NO HP AKTIF</th>
+                                <th>AGAMA</th>
+                                <th>TINGGI</th>
+                                <th>BERAT</th>
+                                <th>GOL DARAH</th>
+                                <th>BUTA WARNA</th>
+                                <th>MATA KIRI</th>
+                                <th>MATA KANAN</th>
+                                <th>PERNAH OPERASI</th>
+                                <th>APAKAH SEDANG MINUM</th>
+                                <th>TANGAN</th>
+                                <th>MEROKOK</th>
+                                <th>PENYAKIT DALAM</th>
+                                <th>KEAHLIAN</th>
+                                <th>SIFAT/KEPRIBADIAN</th>
+                                <th>KELEBIHAN</th>
+                                <th>KELEMAHAN</th>
+                                <th>STATUS</th>
+                                <th>HOBI</th>
+                                <th>MOTIVASI</th>
+                                <th>SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA</th>
+                                <th>SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN</th>
+                                <th>APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG</th>
+                                <th>JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR</th>
+                                <th>SEKOLAH DASAR (SD)</th>
+                                <th>TAHUN MASUK SEKOLAH (SD)</th>
+                                <th>TAHUN KELUAR SEKOLAH (SD)</th>
+                                <th>SEKOLAH MENENGAH PERTAMA (SMP)</th>
+                                <th>TAHUN MASUK SEKOLAH (SMP)</th>
+                                <th>TAHUN KELUAR SEKOLAH (SMP)</th>
+                                <th>SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)</th>
+                                <th>TAHUN MASUK SEKOLAH (SMA/SMK)</th>
+                                <th>TAHUN KELUAR SEKOLAH (SMA/SMK)</th>
+                                <th>JURUSAN (SMA/SMK)</th>
+                                <th>PERGURUAN TINGGI</th>
+                                <th>PENGALAMAN KERJA</th>
+                                <th>BAHASA ASING YANG DIKUASAI</th>
+                                <th>PERNAH KE JEPANG</th>
+                                <th>JIKA YA, SEBUTKAN TGL/BLN/THN</th>
+                                <th>PERNAH LUAR NEGERI LAINNYA</th>
+                                <th>JIKA YA, NEGARA APA</th>
+                                <th>APAKAH ADA KERABAT DI JEPANG</th>
+                                <th>APA HUBUNGAN KERABAT YANG DI JEPANG</th>
+                                <th>BELAJAR BAHASA</th>
+                                <th>BUKU YANG DI PAKAI</th>
+                                <th>BAB YANG DI PELAJARI</th>
+                                <th>NAMA AYAH</th>
+                                <th>HUBUNGAN AYAH</th>
+                                <th>USIA AYAH</th>
+                                <th>PEKERJAAN AYAH</th>
+                                <th>NAMA IBU</th>
+                                <th>HUBUNGAN IBU</th>
+                                <th>USIA IBU</th>
+                                <th>PEKERJAAN IBU</th>
+                                <th>NAMA SAUDARA</th>
+                                <th>PENDAPAT KELUARGA</th>
+                                <th>NO HP KELUARGA</th>
+                                <th>NAMA MENTOR</th>
+                                <th>UKURAN BAJU</th>
+                                <th>NOMOR SEPATU</th>
+                                <th>PILIH KELAS</th>
+                                <th>PILIH PROGRAM</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td colspan="74" class="text-center">Sedang proses menampilkan data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2">
+                    <span id="tableInfo"></span>
+                    <div class="d-flex align-items-center ms-auto">
+                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                    </div>
+                </div>
             </div>
           </div>
         </div>
-        <div class="col-lg-8">
+        {{-- <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">View by page title and screen class</h5>
-              <div class="table-responsive">
-                <table class="table text-nowrap align-middle mb-0">
-                  <thead>
-                    <tr class="border-2 border-bottom border-primary border-0"> 
-                      <th scope="col" class="ps-0">Page Title</th>
-                      <th scope="col" >Link</th>
-                      <th scope="col" class="text-center">Pageviews</th>
-                      <th scope="col" class="text-center">Page Value</th>
-                    </tr>
-                  </thead>
-                  <tbody class="table-group-divider">
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Welcome to our
-                          website</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/index.html</a>
-                      </td>
-                      <td class="text-center fw-medium">18,456</td>
-                      <td class="text-center fw-medium">$2.40</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Modern Admin
-                          Dashboard Template</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/dashboard</a>
-                      </td>
-                      <td class="text-center fw-medium">17,452</td>
-                      <td class="text-center fw-medium">$0.97</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Explore our
-                          product catalog</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/product-checkout</a>
-                      </td>
-                      <td class="text-center fw-medium">12,180</td>
-                      <td class="text-center fw-medium">$7,50</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium">
-                        <span class="table-link1 text-truncate d-block">Comprehensive
-                          User Guide</span>
-                      </th>
-                      <td>
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/docs</a>
-                      </td>
-                      <td class="text-center fw-medium">800</td>
-                      <td class="text-center fw-medium">$5,50</td>
-                    </tr>
-                    <tr>
-                      <th scope="row" class="ps-0 fw-medium border-0">
-                        <span class="table-link1 text-truncate d-block">Check out our
-                          services</span>
-                      </th>
-                      <td class="border-0">
-                        <a href="javascript:void(0)" class="link-primary text-dark fw-medium d-block">/services</a>
-                      </td>
-                      <td class="text-center fw-medium border-0">1300</td>
-                      <td class="text-center fw-medium border-0">$2,15</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title d-flex align-items-center gap-2 mb-5 pb-3">Sessions by
-                device<span><iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Locations"></iconify-icon></span>
+              <h5 class="card-title d-flex align-items-center gap-2 mb-1 pb-3">Nama Mentor<span><iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Locations"></iconify-icon></span>
               </h5>
-              <div class="row">
-                <div class="col-4">
-                  <iconify-icon icon="solar:laptop-minimalistic-line-duotone" class="fs-7 d-flex text-primary"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Computers</span>
-                  <h4 class="mb-0 mt-1">87%</h4>
-                </div>
-                <div class="col-4">
-                  <iconify-icon icon="solar:smartphone-line-duotone" class="fs-7 d-flex text-secondary"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Smartphone</span>
-                  <h4 class="mb-0 mt-1">9.2%</h4>
-                </div>
-                <div class="col-4">
-                  <iconify-icon icon="solar:tablet-line-duotone" class="fs-7 d-flex text-success"></iconify-icon>
-                  <span class="fs-11 mt-2 d-block text-nowrap">Tablets</span>
-                  <h4 class="mb-0 mt-1">3.1%</h4>
-                </div>
-              </div>
-
-              <div class="vstack gap-4 mt-7 pt-2">
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Computers</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">87%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-primary" style="width: 100%"></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Smartphones</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">9.2%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-secondary" style="width: 50%"></div>
-                  </div>
-                </div>
-
-                <div>
-                  <div class="hstack justify-content-between">
-                    <span class="fs-3 fw-medium">Tablets</span>
-                    <h6 class="fs-3 fw-medium text-dark lh-base mb-0">3.1%</h6>
-                  </div>
-                  <div class="progress mt-6" role="progressbar" aria-label="Warning example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
-                    <div class="progress-bar bg-success" style="width: 35%"></div>
-                  </div>
-                </div>
-
-              </div>
+              <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
             </div>
           </div>
-        </div>
+        </div> --}}
         <div class="py-6 px-6 text-center">
           <p class="mb-0 fs-4">Design and Developed by IT LPK ACC
         </div>
@@ -291,7 +518,14 @@
   <script src="{{ asset('template_baru/assets/js/app.min.js') }}"></script>
   <script src="{{ asset('template_baru/assets/js/dashboard.js') }}"></script>
   <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-  {{-- data tabel --}}
+  
+   <!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+    {{-- data tabel --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
@@ -351,6 +585,7 @@
                     renderChart();
                     renderTable();
                     populateMonthFilter();
+                    renderMentorProgressBar();
                 })
                 .catch(err => {
                     console.error(err);
@@ -413,6 +648,7 @@
             select.addEventListener('change', () => {
                 const month = select.value;
                 renderChart(month);
+                renderMentorProgressBar(month);
             });
         }
 
@@ -540,6 +776,43 @@
         }
 
         fetchData();
+
+        function renderMentorProgressBar(selectedMonth = '') {
+            let labels = Object.keys(perMentorAll);
+            let data = labels.map(mentor => {
+                if (selectedMonth && perMentorPerMonth[selectedMonth]) {
+                    return perMentorPerMonth[selectedMonth][mentor] || 0;
+                }
+                return perMentorAll[mentor];
+            });
+
+            const combined = labels.map((m, i) => ({
+                mentor: m,
+                count: data[i]
+            })).sort((a, b) => b.count - a.count);
+
+            const maxValue = combined[0]?.count || 1;
+            const container = document.getElementById("mentorProgressBar");
+            container.innerHTML = "";
+
+            const colors = ['bg-primary','bg-success','bg-warning','bg-danger','bg-info','bg-secondary'];
+
+            combined.forEach((item, i) => {
+                const percent = ((item.count / maxValue) * 100).toFixed(1);
+                const color = colors[i % colors.length];
+
+                container.innerHTML += `
+                <div>
+                    <div class="hstack justify-content-between">
+                        <span class="fs-3 fw-medium">${item.mentor}</span>
+                        <h6 class="fs-3 fw-medium text-dark mb-0">${item.count} siswa</h6>
+                    </div>
+                    <div class="progress mt-2" style="height: 10px;">
+                        <div class="progress-bar ${color}" style="width: ${percent}%"></div>
+                    </div>
+                </div>`;
+            });
+        }
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -622,6 +895,29 @@
             });
         });
     </script>
+
+    {{-- Chart --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+    <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/js/kc.fab.js') }}"></script>
+    <script src='https://widgets.sociablekit.com/google-reviews/widget.js' async defer></script>
+    <script src="{{ asset('templates/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('templates/assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ asset('templates/assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap4.js"></script>
 </body>
 
 </html>
