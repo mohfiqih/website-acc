@@ -2,15 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
-  <title>Data Pendaftaran</title>
-  <link rel="shortcut icon" type="image/png" href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
-  <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
-  <style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Data Pendaftaran</title>
+    <link rel="shortcut icon" type="image/png"
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
+    <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
+    <style>
         .text-label {
             padding-bottom: 10px;
         }
@@ -87,7 +88,7 @@
 
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -129,7 +130,8 @@
             white-space: nowrap;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -175,10 +177,11 @@
             overflow-x: auto;
         }
 
-        .fixed-header-table th, 
+        .fixed-header-table th,
         .fixed-header-table td {
             white-space: nowrap;
         }
+
         #mentorChart {
             width: 100% !important;
             height: 400px !important;
@@ -194,332 +197,286 @@
             overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
+
+        .mentor-table-compact {
+            font-size: 13px;
+            table-layout: fixed;
+            /* penting */
+            width: 100%;
+        }
+
+        .mentor-col {
+            width: 70%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .jumlah-col {
+            width: 30%;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
-  <!--  Body Wrapper -->
-  <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
-    data-sidebar-position="fixed" data-header-position="fixed">
-    <!-- Sidebar Start -->
-    <aside class="left-sidebar">
-      <!-- Sidebar scroll-->
-      <div>
-        <div class="brand-logo d-flex align-items-center justify-content-between">
-          <a class="text-nowrap logo-img">
-            <h5>LPK ACC Japan Centre</h5>
-          </a>
-          <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
-            <i class="ti ti-x fs-8"></i>
-          </div>
-        </div>
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-          <ul id="sidebarnav">
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-              <span class="hide-menu">Home</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Landing Page</span>
-              </a>
-            </li>
-            <li class="nav-small-cap">
-              <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
-              <span class="hide-menu">Menu</span>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/pendaftaran-siswa-baru" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Pendaftaran Online</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/data-pendaftaran" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Data Pendaftaran</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/manual-book" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:book-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Manual Book</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/upload" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:upload-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Upload Dokumentasi</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/data-konsultasi" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:letter-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Data Konsultasi</span>
-              </a>
-            </li>
-            <li class="sidebar-item">
-              <a class="sidebar-link" href="/data-coe" aria-expanded="false">
-                <span>
-                  <iconify-icon icon="solar:file-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Data COE</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- End Sidebar navigation -->
-      </div>
-      <!-- End Sidebar scroll-->
-    </aside>
-    <!--  Sidebar End -->
-    <!--  Main wrapper -->
-    <div class="body-wrapper">
-      <!--  Header Start -->
-      <header class="app-header">
-        <nav class="navbar navbar-expand-lg navbar-light">
-          <ul class="navbar-nav">
-            <li class="nav-item d-block d-xl-none">
-              <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                <i class="ti ti-menu-2"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="/">
-                <i class="ti ti-home"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link nav-icon-hover" href="/">
-                <i class="ti ti-book"></i>
-                <div class="notification bg-primary rounded-circle"></div>
-              </a>
-            </li>
-          </ul>
-          <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              <li class="nav-item dropdown">
-                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" alt="" width="35" height="35" class="rounded-circle">
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </header>
-      <!--  Header End -->
-      <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card">
-                    <div class="card-body text-center">
-                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" alt="image" class="img-fluid" width="205">
-                        <h4 class="mt-7">DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h4>
-                        <p class="card-subtitle mt-2 mb-3">
-                            LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.
-                        </p>
-                        <button class="btn btn-primary mb-3">Home</button>
-                        <p>Jumlah Pendaftaran Online per Mentor</p>
-                        <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
+    <!--  Body Wrapper -->
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
+        data-sidebar-position="fixed" data-header-position="fixed">
+        <!-- Sidebar Start -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div>
+                <div class="brand-logo d-flex align-items-center justify-content-between">
+                    <a class="text-nowrap logo-img">
+                        <h5>LPK ACC Japan Centre</h5>
+                    </a>
+                    <div class="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+                        <i class="ti ti-x fs-8"></i>
                     </div>
+                </div>
+                @include('landing.sidebar.nav')
+            </div>
+        </aside>
+        <div class="body-wrapper">
+            <header class="app-header">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <ul class="navbar-nav">
+                        <li class="nav-item d-block d-xl-none">
+                            <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse"
+                                href="javascript:void(0)">
+                                <i class="ti ti-menu-2"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-icon-hover" href="/">
+                                <i class="ti ti-home"></i>
+                                <div class="notification bg-primary rounded-circle"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-icon-hover" href="/">
+                                <i class="ti ti-book"></i>
+                                <div class="notification bg-primary rounded-circle"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
+                        <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+                                        alt="" width="35" height="35" class="rounded-circle">
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!--  Header End -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+                                    alt="image" class="img-fluid" width="205">
+                                <h4 class="mt-7">DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h4>
+                                <p class="card-subtitle mt-2 mb-3">
+                                    LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan
+                                    Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.
+                                </p>
+                                <button class="btn btn-primary mb-3">Home</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title d-flex align-items-center gap-2 mb-4">
+                                    Grafir Pendaftaran Online Berdasarkan Nama Mentor
+                                </h5>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
+                                        <option value="">All Month</option>
+                                    </select>
+
+                                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
+                                        Export JPG
+                                    </button>
+                                    <button class="btn btn-danger btn-sm px-4 text-nowrap"
+                                        onclick="exportPDFLandscape()">
+                                        Export PDF
+                                    </button>
+                                </div>
+                                <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
+                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor</p>
+                                <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="display:none;">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mt-3">
+                                <h6>Data Keseluruhan Pendaftaran Online</h6>
+                                <table class="table table-sm table-bordered" id="mentorTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Mentor</th>
+                                            <th>Jumlah Pendaftar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2" class="text-center">Sedang proses menampilkan data...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
+                                class="d-flex align-items-center mb-3">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label><b>Dari Tanggal</b></label>
+                                        <input type="date" name="start_date" class="form-control me-2 mb-2" required>
+                                        <label><b>Sampai Tanggal</b></label>
+                                        <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                                    </div>
+                                    <div class="col md-12">
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fa fa-download"></i> Export PDF
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="table-responsive">
+                                <div id="refreshIndicator"
+                                    style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                                    🔄 Refreshing data...
+                                </div>
+                                <br />
+                                <table id="mentorDataTable"
+                                    class="table table-striped table-bordered fixed-header-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Download CV</th>
+                                            <th>Timestamp</th>
+                                            <th>EMAIL</th>
+                                            <th>NAMA (KATAKANA)</th>
+                                            <th>NAMA (INDONESIA)</th>
+                                            <th>ALAMAT</th>
+                                            <th>TANGGAL LAHIR</th>
+                                            <th>USIA</th>
+                                            <th>KELAMIN</th>
+                                            <th>NO HP AKTIF</th>
+                                            <th>AGAMA</th>
+                                            <th>TINGGI</th>
+                                            <th>BERAT</th>
+                                            <th>GOL DARAH</th>
+                                            <th>BUTA WARNA</th>
+                                            <th>MATA KIRI</th>
+                                            <th>MATA KANAN</th>
+                                            <th>PERNAH OPERASI</th>
+                                            <th>APAKAH SEDANG MINUM</th>
+                                            <th>TANGAN</th>
+                                            <th>MEROKOK</th>
+                                            <th>PENYAKIT DALAM</th>
+                                            <th>KEAHLIAN</th>
+                                            <th>SIFAT/KEPRIBADIAN</th>
+                                            <th>KELEBIHAN</th>
+                                            <th>KELEMAHAN</th>
+                                            <th>STATUS</th>
+                                            <th>HOBI</th>
+                                            <th>MOTIVASI</th>
+                                            <th>SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA</th>
+                                            <th>SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN</th>
+                                            <th>APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG</th>
+                                            <th>JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR</th>
+                                            <th>SEKOLAH DASAR (SD)</th>
+                                            <th>TAHUN MASUK SEKOLAH (SD)</th>
+                                            <th>TAHUN KELUAR SEKOLAH (SD)</th>
+                                            <th>SEKOLAH MENENGAH PERTAMA (SMP)</th>
+                                            <th>TAHUN MASUK SEKOLAH (SMP)</th>
+                                            <th>TAHUN KELUAR SEKOLAH (SMP)</th>
+                                            <th>SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)</th>
+                                            <th>TAHUN MASUK SEKOLAH (SMA/SMK)</th>
+                                            <th>TAHUN KELUAR SEKOLAH (SMA/SMK)</th>
+                                            <th>JURUSAN (SMA/SMK)</th>
+                                            <th>PERGURUAN TINGGI</th>
+                                            <th>PENGALAMAN KERJA</th>
+                                            <th>BAHASA ASING YANG DIKUASAI</th>
+                                            <th>PERNAH KE JEPANG</th>
+                                            <th>JIKA YA, SEBUTKAN TGL/BLN/THN</th>
+                                            <th>PERNAH LUAR NEGERI LAINNYA</th>
+                                            <th>JIKA YA, NEGARA APA</th>
+                                            <th>APAKAH ADA KERABAT DI JEPANG</th>
+                                            <th>APA HUBUNGAN KERABAT YANG DI JEPANG</th>
+                                            <th>BELAJAR BAHASA</th>
+                                            <th>BUKU YANG DI PAKAI</th>
+                                            <th>BAB YANG DI PELAJARI</th>
+                                            <th>NAMA AYAH</th>
+                                            <th>HUBUNGAN AYAH</th>
+                                            <th>USIA AYAH</th>
+                                            <th>PEKERJAAN AYAH</th>
+                                            <th>NAMA IBU</th>
+                                            <th>HUBUNGAN IBU</th>
+                                            <th>USIA IBU</th>
+                                            <th>PEKERJAAN IBU</th>
+                                            <th>NAMA SAUDARA</th>
+                                            <th>PENDAPAT KELUARGA</th>
+                                            <th>NO HP KELUARGA</th>
+                                            <th>NAMA MENTOR</th>
+                                            <th>UKURAN BAJU</th>
+                                            <th>NOMOR SEPATU</th>
+                                            <th>PILIH KELAS</th>
+                                            <th>PILIH PROGRAM</th>
+                                            <th>ID</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="74" class="text-center">Sedang proses menampilkan data...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span id="tableInfo"></span>
+                                <div class="d-flex align-items-center ms-auto">
+                                    <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-6 px-6 text-center">
+                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre
                 </div>
             </div>
-            <div class="col-lg-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title d-flex align-items-center gap-2 mb-4">
-                            Daftar Online Berdasarkan Nama Mentor
-                        </h5>
-                        <div class="d-flex align-items-center gap-2 flex-wrap">
-                            <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
-                                <option value="">All Month</option>
-                            </select>
-
-                            <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
-                                Export JPG
-                            </button>
-                            <button class="btn btn-danger btn-sm px-4 text-nowrap" onclick="exportPDFLandscape()">
-                                Export PDF
-                            </button>
-                        </div>
-                        {{-- <div id="traffic-overview"></div> --}}
-                        <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
-                        <div class="mt-3">
-                            <h6>Jumlah Pendaftaran per Mentor</h6>
-                            <table class="table table-sm table-bordered" id="mentorTable">
-                                <thead>
-                                    <tr>
-                                        <th>Mentor</th>
-                                        <th>Jumlah Pendaftar</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td colspan="2" class="text-center">Sedang proses menampilkan data...</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
         </div>
-        <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
-                    class="d-flex align-items-center mb-3">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label><b>Dari Tanggal</b></label>
-                            <input type="date" name="start_date" class="form-control me-2 mb-2" required>
-                            <label><b>Sampai Tanggal</b></label>
-                            <input type="date" name="end_date" class="form-control me-2 mb-2" required>
-                        </div>
-                        <div class="col md-12">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-download"></i> Export PDF
-                            </button>
-                        </div>
-                    </div>
-                </form>
-
-                <div class="table-responsive">
-                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
-                        🔄 Refreshing data...
-                    </div>
-                    <br/>
-                    <table id="mentorDataTable" class="table table-striped table-bordered fixed-header-table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Download CV</th>
-                                <th>Timestamp</th>
-                                <th>EMAIL</th>
-                                <th>NAMA (KATAKANA)</th>
-                                <th>NAMA (INDONESIA)</th>
-                                <th>ALAMAT</th>
-                                <th>TANGGAL LAHIR</th>
-                                <th>USIA</th>
-                                <th>KELAMIN</th>
-                                <th>NO HP AKTIF</th>
-                                <th>AGAMA</th>
-                                <th>TINGGI</th>
-                                <th>BERAT</th>
-                                <th>GOL DARAH</th>
-                                <th>BUTA WARNA</th>
-                                <th>MATA KIRI</th>
-                                <th>MATA KANAN</th>
-                                <th>PERNAH OPERASI</th>
-                                <th>APAKAH SEDANG MINUM</th>
-                                <th>TANGAN</th>
-                                <th>MEROKOK</th>
-                                <th>PENYAKIT DALAM</th>
-                                <th>KEAHLIAN</th>
-                                <th>SIFAT/KEPRIBADIAN</th>
-                                <th>KELEBIHAN</th>
-                                <th>KELEMAHAN</th>
-                                <th>STATUS</th>
-                                <th>HOBI</th>
-                                <th>MOTIVASI</th>
-                                <th>SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA</th>
-                                <th>SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN</th>
-                                <th>APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG</th>
-                                <th>JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR</th>
-                                <th>SEKOLAH DASAR (SD)</th>
-                                <th>TAHUN MASUK SEKOLAH (SD)</th>
-                                <th>TAHUN KELUAR SEKOLAH (SD)</th>
-                                <th>SEKOLAH MENENGAH PERTAMA (SMP)</th>
-                                <th>TAHUN MASUK SEKOLAH (SMP)</th>
-                                <th>TAHUN KELUAR SEKOLAH (SMP)</th>
-                                <th>SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)</th>
-                                <th>TAHUN MASUK SEKOLAH (SMA/SMK)</th>
-                                <th>TAHUN KELUAR SEKOLAH (SMA/SMK)</th>
-                                <th>JURUSAN (SMA/SMK)</th>
-                                <th>PERGURUAN TINGGI</th>
-                                <th>PENGALAMAN KERJA</th>
-                                <th>BAHASA ASING YANG DIKUASAI</th>
-                                <th>PERNAH KE JEPANG</th>
-                                <th>JIKA YA, SEBUTKAN TGL/BLN/THN</th>
-                                <th>PERNAH LUAR NEGERI LAINNYA</th>
-                                <th>JIKA YA, NEGARA APA</th>
-                                <th>APAKAH ADA KERABAT DI JEPANG</th>
-                                <th>APA HUBUNGAN KERABAT YANG DI JEPANG</th>
-                                <th>BELAJAR BAHASA</th>
-                                <th>BUKU YANG DI PAKAI</th>
-                                <th>BAB YANG DI PELAJARI</th>
-                                <th>NAMA AYAH</th>
-                                <th>HUBUNGAN AYAH</th>
-                                <th>USIA AYAH</th>
-                                <th>PEKERJAAN AYAH</th>
-                                <th>NAMA IBU</th>
-                                <th>HUBUNGAN IBU</th>
-                                <th>USIA IBU</th>
-                                <th>PEKERJAAN IBU</th>
-                                <th>NAMA SAUDARA</th>
-                                <th>PENDAPAT KELUARGA</th>
-                                <th>NO HP KELUARGA</th>
-                                <th>NAMA MENTOR</th>
-                                <th>UKURAN BAJU</th>
-                                <th>NOMOR SEPATU</th>
-                                <th>PILIH KELAS</th>
-                                <th>PILIH PROGRAM</th>
-                                <th>ID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="74" class="text-center">Sedang proses menampilkan data...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="d-flex justify-content-between align-items-center mt-2">
-                    <span id="tableInfo"></span>
-                    <div class="d-flex align-items-center ms-auto">
-                        <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div>
-        {{-- <div class="col-lg-12">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title d-flex align-items-center gap-2 mb-1 pb-3">Nama Mentor<span><iconify-icon icon="solar:question-circle-bold" class="fs-7 d-flex text-muted" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-success" data-bs-title="Locations"></iconify-icon></span>
-              </h5>
-              <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
-            </div>
-          </div>
-        </div> --}}
-        <div class="py-6 px-6 text-center">
-          <p class="mb-0 fs-4">Design and Developed by IT LPK ACC
-        </div>
-      </div>
     </div>
-  </div>
-  <script src="{{ asset('template_baru/assets/libs/jquery/dist/jquery.min.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/libs/simplebar/dist/simplebar.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/js/sidebarmenu.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/js/app.min.js') }}"></script>
-  <script src="{{ asset('template_baru/assets/js/dashboard.js') }}"></script>
-  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
-  
-   <!-- JS -->
+    <script src="{{ asset('template_baru/assets/libs/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/libs/apexcharts/dist/apexcharts.min.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/libs/simplebar/dist/simplebar.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/js/sidebarmenu.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/js/app.min.js') }}"></script>
+    <script src="{{ asset('template_baru/assets/js/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
+
+    <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.17/dist/sweetalert2.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -339,13 +339,13 @@
                             </div>
                         </div>
                     </form>
-                    <div id="refreshIndicator"
-                        style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
                     </div>
                     <br />
                     <div class="table-responsive">
-                        <table id="spreadsheetTableKonsultasi" class="table table-striped table-bordered fixed-header-table">
+                        <table id="spreadsheetTableKonsultasi"
+                            class="table table-striped table-bordered fixed-header-table">
                             <tbody id="tableBody">
                                 <tr>
                                     <td colspan="14" class="text-center">Sedang memuat data...</td>
@@ -366,7 +366,7 @@
             </div>
         </div>
     </div> --}}
-    
+
     <div class="container mt-2">
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
@@ -409,7 +409,8 @@
                             </div>
                         </div>
                     </form>
-                    <table id="spreadsheetTableKonsultasi" class="table table-striped table-bordered fixed-header-table">
+                    <table id="spreadsheetTableKonsultasi"
+                        class="table table-striped table-bordered fixed-header-table">
                         <thead></thead>
                         <tbody id="tableBody">
                             <tr>
