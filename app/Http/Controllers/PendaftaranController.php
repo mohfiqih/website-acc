@@ -311,6 +311,7 @@ class PendaftaranController extends Controller
     public function data_pendaftaran_new()
     {
         return view('landing.data-pendaftaran-new');
+        // return view('landing.data_pendaftaran.template-data-pendaftaran-baru');
     }
     
     // public function data_pendaftaran_new()

@@ -467,24 +467,6 @@
     <div class="container mt-4">
         <div class="card">
             <div class="card-body" style="padding: 20px; border-radius: 10px;">
-                <div class="d-flex justify-content-between mb-3">
-                    <div>
-                        <label>
-                            Show 
-                            <select id="entriesSelect" class="form-control d-inline-block w-auto">
-                                <option value="5">5</option>
-                                <option value="10" selected>10</option>
-                                <option value="20">20</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div>
-                        <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
-                    </div>
-                </div>
-
                 <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
                     class="d-flex align-items-center mb-3">
                     <div class="row">
@@ -620,10 +602,10 @@
 
         const allowedMentors = [
             'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
-            'SELLY', 'ADITYA', 'FAHRUL', 'FADIL', 'FUJIAYU', 'FIRMAN', 'GAZI',
+            'SELLY', 'ADITYA', 'FAHRUL', 'FUJIAYU', 'FIRMAN', 'GAZI',
             'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
             'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',
-            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', '-'
+            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', 'TYA', 'NUROHMAN'
         ];
 
         let allData = [];
@@ -867,63 +849,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- download cv --}}
     <script>
-        // $(document).on('click', '.btn-download-cv', function(e) {
-        //     e.preventDefault();
-
-        //     const id = $(this).data('id');
-        //     const nama = $(this).data('nama');
-
-        //     Swal.fire({
-        //         title: 'Are you sure?',
-        //         text: "Do you want to download this CV?",
-        //         icon: 'question',
-        //         showCancelButton: true,
-        //         confirmButtonText: 'OK',
-        //         confirmButtonColor: '#046392'
-        //     }).then((result) => {
-        //         if (result.isConfirmed) {
-        //             fetch(`/export-cv-word/${id}`, {
-        //                 method: 'GET',
-        //                 headers: {
-        //                     'X-Requested-With': 'XMLHttpRequest',
-        //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //                 }
-        //             })
-        //             .then(response => {
-        //                 if (!response.ok) {
-        //                     throw new Error('Download failed');
-        //                 }
-        //                 return response.blob();
-        //             })
-        //             .then(blob => {
-        //                 const url = window.URL.createObjectURL(blob);
-        //                 const a = document.createElement('a');
-        //                 a.href = url;
-        //                 a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
-        //                 document.body.appendChild(a);
-        //                 a.click();
-        //                 a.remove();
-        //                 window.URL.revokeObjectURL(url);
-
-        //                 Swal.fire({
-        //                     title: 'Success!',
-        //                     text: 'File has been downloaded.',
-        //                     icon: 'success',
-        //                     timer: 2000,
-        //                     showConfirmButton: false
-        //                 });
-        //             })
-        //             .catch(error => {
-        //                 Swal.fire({
-        //                     title: 'Error!',
-        //                     text: 'Failed to download file.',
-        //                     icon: 'error'
-        //                 });
-        //             });
-        //         }
-        //     });
-        // });
-
         $(document).on('click', '.btn-download-cv', async function(e) {
             e.preventDefault();
 
