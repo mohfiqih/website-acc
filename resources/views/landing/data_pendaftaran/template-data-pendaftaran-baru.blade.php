@@ -462,7 +462,8 @@
                     </div>
                 </div>
                 <div class="py-6 px-6 text-center">
-                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre
+                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre <br />
+                        @include('version.index')
                 </div>
             </div>
         </div>

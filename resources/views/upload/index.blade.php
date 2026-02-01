@@ -10,7 +10,9 @@
     <meta content="" name="keywords">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+        rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -53,15 +55,18 @@
             min-height: 100vh;
             margin: 0;
             padding: 0;
-            overflow-y: auto; /* scroll vertikal aktif */
-            overflow-x: hidden; /* cegah scroll horizontal */
+            overflow-y: auto;
+            /* scroll vertikal aktif */
+            overflow-x: hidden;
+            /* cegah scroll horizontal */
             background-attachment: fixed;
             zoom: 100%;
             transform: scale(1);
         }
+
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -74,6 +79,7 @@
             z-index: -1;
             pointer-events: none;
         }
+
         input,
         button,
         select,
@@ -332,16 +338,20 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome Upload Foto ACC 👋</p>
+                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome
+                        Upload Foto ACC 👋</p>
                     <h2 class="text-justify"></span>Upload a file</h2>
                     <p style="text-align: justify;" class="justify-content-center">
-                        Halaman Upload foto seluruh kegiatan LPK Amanah Citra Cemerlang, untuk di tampilkan dihalaman utama website LPK Amanah Citra Cemerlang.
+                        Halaman Upload foto seluruh kegiatan LPK Amanah Citra Cemerlang, untuk di tampilkan dihalaman
+                        utama website LPK Amanah Citra Cemerlang.
                     </p>
                     <ul>
-                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dk. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
+                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dk. Gitung, Desa Harjosari Lor,
+                            Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
                         <li class="text-white">LPK ACC Japan Centre lembaga Resmi dan Legal.</li>
                     </ul>
-                    <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
+                    <div class="d-flex justify-content-center justify-content-lg-start text-center"
+                        style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Website LPK ACC Japan Centre
@@ -358,7 +368,7 @@
                 <h2 class="modal-title">Upload a file</h2>
                 <p class="modal-description">Attach the file below</p>
                 @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
                 <form id="uploadForm" action="{{ route('images.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -380,7 +390,7 @@
                             </div>
                         </label>
                     </div>
-        
+
                     <div class="modal-footer" style="margin-top: 10px;">
                         <button type="submit" class="btn btn-primary" style="background-color: #046392;">Upload</button>
                     </div>
@@ -396,50 +406,50 @@
             </div>
             <div class="row">
                 @foreach ($images_db as $image)
-                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                            <div class="card h-100">
-                                <div class="card-body p-0">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}" 
-                                        class="card-img-top lazyload img-fluid" 
-                                        data-lity 
-                                        alt="Image"
-                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
-                                </div>
-                                <div class="card-footer text-body-secondary">
-                                    <b>Date:</b> {{ $image->created_at }}<br/>
-                                    {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
-                                </div>
-                            </div>
+                <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body p-0">
+                            <img src="{{ asset('storage/' . $image->filepath) }}"
+                                class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                        </div>
+                        <div class="card-footer text-body-secondary">
+                            <b>Date:</b> {{ $image->created_at }}<br />
+                            {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                        </div>
                     </div>
+                </div>
                 @endforeach
             </div>
-    
+
             <!-- Custom Pagination -->
             <div class="pagination-container" style="padding: 0px;">
                 <ul class="pagination">
                     @if ($images_db->onFirstPage())
-                        <li class="disabled"><span>&lt;</span></li>
+                    <li class="disabled"><span>&lt;</span></li>
                     @else
-                        <li><a class="text-white" style="background-color: #046392" href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
+                    <li><a class="text-white" style="background-color: #046392"
+                            href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
                     @endif
-            
+
                     @foreach ($images_db->links()->elements[0] as $page => $url)
-                        @if ($page == $images_db->currentPage())
-                            <li class="active"><span>{{ $page }}</span></li>
-                        @else
-                            <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
-                        @endif
-                    @endforeach
-            
-                    @if ($images_db->hasMorePages())
-                        <li><a class="text-white" style="background-color: #046392" href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                    @if ($page == $images_db->currentPage())
+                    <li class="active"><span>{{ $page }}</span></li>
                     @else
-                        <li class="disabled"><span>&gt;</span></li>
+                    <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
+                    @endif
+                    @endforeach
+
+                    @if ($images_db->hasMorePages())
+                    <li><a class="text-white" style="background-color: #046392"
+                            href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                    @else
+                    <li class="disabled"><span>&gt;</span></li>
                     @endif
                 </ul>
-            </div>            
+            </div>
         </div>
-    </section> 
+    </section>
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

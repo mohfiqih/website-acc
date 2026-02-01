@@ -11,7 +11,7 @@ class ImageUploadController extends Controller
     public function index()
     {
         $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
-        return view('upload.index', ['images_db' => $images_db]);
+        return view('landing.upload.upload_dokumentasi_baru', ['images_db' => $images_db]);
     }
 
     public function store(Request $request)

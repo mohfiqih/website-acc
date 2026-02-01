@@ -9,7 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+        rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -118,14 +120,14 @@
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="..." data-lity>
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
+                                    class="d-block w-100" alt="..." data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="..." data-lity>
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
+                                    class="d-block w-100" alt="..." data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -150,11 +152,14 @@
                     <p class="justify-content-center;">
                         <i class="fa fa-map-pin" style="padding-right: 10px;"></i>
                         Adiwerna, Kabupaten Tegal,
-                        Central Java</p>
+                        Central Java
+                    </p>
                     <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
                         membimbing dan
-                        membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya
-                        Program Magang, Program Tokutei Ginou dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.
+                        membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC
+                        Japan Centre memiliki program diantaranya
+                        Program Magang, Program Tokutei Ginou dan Matching Job. ACC Japan Centre memiliki banyak Job
+                        dari berbagai sektor kerja di Jepang.
                     </p>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <marquee scrollamount="10"><b>Announcement!</b> LPK Amanah Citra Cemerlang tidak membuka
@@ -163,8 +168,7 @@
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
                             oknum yang mengaku cabang kami! Terimakasih
                         </marquee>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"
-                            aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
@@ -172,7 +176,8 @@
                             <i class="bi bi-book"></i>
                             Daftar
                         </a>
-                        <a href="https://www.youtube.com/@AmanahCitraCemerlang" class="btn-get-started" style="width: 100%;">
+                        <a href="https://www.youtube.com/@AmanahCitraCemerlang" class="btn-get-started"
+                            style="width: 100%;">
                             <i class="bi bi-play-circle"></i>
                             YouTube
                         </a>
@@ -314,7 +319,8 @@
                                                     <tr>
                                                         <th>Alamat</th>
                                                         <td>:</td>
-                                                        <td>LPK ACC Japan Center, Unnamed Road, Gitung, Harjosari Lor, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</td>
+                                                        <td>LPK ACC Japan Center, Unnamed Road, Gitung, Harjosari Lor,
+                                                            Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah 52194</td>
                                                     </tr>
                                                     <tr>
                                                         <th>Latitude</th>
@@ -334,7 +340,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="table-responsive">
                                             <table class="table table-borderless">
@@ -342,8 +348,23 @@
                                                     <tr>
                                                         <th>Deskripsi</th>
                                                         <td>:</td>
-                                                        <td style="text-align: justify;">LPK ACC JAPAN CENTRE merupakan suatu lembaga pendidikan dan pelatihan bahasa wilayah Jawa Tengah, khususnya Kabupaten/Kota Tegal yang independen berdasarkan Akte Notaris No.19 Tanggal 19 April 2021. Program LPK ACC Japan Centre yaitu Pelatihan Bahasa Jepang, Pelatihan Mental dan Fisik, Program Magang dan TG (Tokutei Ginou) ke Jepang, dan Pelatihan kerja sesuai Job.
-                                                            Kami membantu anda menentukan sebuah pilihan, banyak dari kita yang ingin bekerja ke Luar Negeri tetapi tidak tau mau kemana/tujuannya tidak jelas, sehingga beberapa di antara kita asal pilih LPKPT/Meaning Agency dan ujung-ujungnya pekerjaan atau tujuan tidak sesuai dengan apa yang kita harapkan, di LPK kami dalam meningkatkan kualitas dan kuantitas CPMI dengan melalui edukasi masyarakat yang ingin bekerja di Luar Negeri dan banyak diantaranya yang telah kami tolong serta kami bantu karena sebelumnya salah atau kurang tepat memilih tujuan Negara dimana dia mau bekerja
+                                                        <td style="text-align: justify;">LPK ACC JAPAN CENTRE merupakan
+                                                            suatu lembaga pendidikan dan pelatihan bahasa wilayah Jawa
+                                                            Tengah, khususnya Kabupaten/Kota Tegal yang independen
+                                                            berdasarkan Akte Notaris No.19 Tanggal 19 April 2021.
+                                                            Program LPK ACC Japan Centre yaitu Pelatihan Bahasa Jepang,
+                                                            Pelatihan Mental dan Fisik, Program Magang dan TG (Tokutei
+                                                            Ginou) ke Jepang, dan Pelatihan kerja sesuai Job.
+                                                            Kami membantu anda menentukan sebuah pilihan, banyak dari
+                                                            kita yang ingin bekerja ke Luar Negeri tetapi tidak tau mau
+                                                            kemana/tujuannya tidak jelas, sehingga beberapa di antara
+                                                            kita asal pilih LPKPT/Meaning Agency dan ujung-ujungnya
+                                                            pekerjaan atau tujuan tidak sesuai dengan apa yang kita
+                                                            harapkan, di LPK kami dalam meningkatkan kualitas dan
+                                                            kuantitas CPMI dengan melalui edukasi masyarakat yang ingin
+                                                            bekerja di Luar Negeri dan banyak diantaranya yang telah
+                                                            kami tolong serta kami bantu karena sebelumnya salah atau
+                                                            kurang tepat memilih tujuan Negara dimana dia mau bekerja
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -354,7 +375,9 @@
                                                                 <div class="col-lg-12">
                                                                     <iframe class="mb-4 mb-lg-0"
                                                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
-                                                                        frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+                                                                        frameborder="0"
+                                                                        style="border:0; width: 100%; height: 384px;"
+                                                                        allowfullscreen></iframe>
                                                                 </div>
                                                             </div>
                                                         </td>
@@ -393,8 +416,8 @@
                             nasional.
                         </p>
                         <div class="position-relative mt-4">
-                            <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4"
-                                alt="" data-lity>
+                            <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4" alt=""
+                                data-lity>
                             <a href="{{ url('/galeri') }}" class="play-btn"></a>
                         </div>
 
@@ -415,7 +438,11 @@
                                     <div class="card">
                                         <div class="card-body">
                                             <p style="text-align: justify;">
-                                                LPK ACC telah membimbing dan membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre memiliki program diantaranya Program Magang, Program Tokutei Ginou (TG) dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai sektor kerja di Jepang.<br /><br />
+                                                LPK ACC telah membimbing dan membina banyak anak hingga berangkat
+                                                bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC Japan Centre
+                                                memiliki program diantaranya Program Magang, Program Tokutei Ginou (TG)
+                                                dan Matching Job. ACC Japan Centre memiliki banyak Job dari berbagai
+                                                sektor kerja di Jepang.<br /><br />
                                                 <b>Prosedur LPK ACC Japan Centre</b>
                                             </p>
                                             <ul>
@@ -467,65 +494,66 @@
                 </div>
                 <div class="row">
                     @foreach ($images_db as $image)
-                        <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                            <div class="card h-100">
-                                <div class="card-body p-0">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}" 
-                                        class="card-img-top lazyload img-fluid" 
-                                        data-lity 
-                                        alt="Image"
-                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
-                                </div>
-                                <div class="card-footer text-body-secondary">
-                                    <b>Date:</b> {{ $image->created_at }}<br/>
-                                    {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
-                                </div>
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body p-0">
+                                <img src="{{ asset('storage/' . $image->filepath) }}"
+                                    class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                    style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                            </div>
+                            <div class="card-footer text-body-secondary">
+                                <b>Date:</b> {{ $image->created_at }}<br />
+                                {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
                             </div>
                         </div>
+                    </div>
                     @endforeach
                 </div>
-        
+
                 <!-- Custom Pagination -->
                 <div class="pagination-container" style="padding: 0px;">
                     <ul class="pagination">
                         @if ($images_db->onFirstPage())
-                            <li class="disabled"><span>&lt;</span></li>
+                        <li class="disabled"><span>&lt;</span></li>
                         @else
-                            <li><a class="text-white" style="background-color: #046392" href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
+                        <li><a class="text-white" style="background-color: #046392"
+                                href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
                         @endif
-                
+
                         @foreach ($images_db->links()->elements[0] as $page => $url)
-                            @if ($page == $images_db->currentPage())
-                                <li class="active"><span>{{ $page }}</span></li>
-                            @else
-                                <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
-                            @endif
-                        @endforeach
-                
-                        @if ($images_db->hasMorePages())
-                            <li><a class="text-white" style="background-color: #046392" href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                        @if ($page == $images_db->currentPage())
+                        <li class="active"><span>{{ $page }}</span></li>
                         @else
-                            <li class="disabled"><span>&gt;</span></li>
+                        <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
+                        @endif
+                        @endforeach
+
+                        @if ($images_db->hasMorePages())
+                        <li><a class="text-white" style="background-color: #046392"
+                                href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                        @else
+                        <li class="disabled"><span>&gt;</span></li>
                         @endif
                     </ul>
-                </div>            
+                </div>
             </div>
-        </section> 
+        </section>
 
         <section id="stats-counter" class="stats-counter sections-bg">
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4 align-items-center">
                     <div class="col-lg-4">
-                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg" data-lity alt="" class="img-fluid">
+                        <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg"
+                            data-lity alt="" class="img-fluid">
                     </div>
                     <div class="col-lg-4">
-                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
-                            class="img-fluid" data-lity>
+                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt="" class="img-fluid"
+                            data-lity>
                     </div>
                     <div class="col-lg-4">
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="10000"
-                                data-purecounter-duration="1" class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="10000" data-purecounter-duration="1"
+                                class="purecounter"></span>
                             <p><strong>+ Happy Clients</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
 
@@ -577,11 +605,12 @@
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item  position-relative">
-                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg" data-lity class="img-fluid rounded-4 mb-4"
-                                alt="">
+                            <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg"
+                                data-lity class="img-fluid rounded-4 mb-4" alt="">
                             <h3>Program Magang</h3>
                             <p>
-                                Program Magang adalah program pelatihan kerja untuk warga negara asing yang dikenal dengan nama Kenshusei<br/>
+                                Program Magang adalah program pelatihan kerja untuk warga negara asing yang dikenal
+                                dengan nama Kenshusei<br />
                                 (Visa Magang,
                                 Kontrak Kerja 1-3 Tahun,
                                 Pendidikan 25 BAB,
@@ -598,7 +627,8 @@
                                 class="img-fluid rounded-4 mb-4" alt="" data-lity>
                             <h3>Program Tokutei Ginou (TG)</h3>
                             <p>
-                                Tokutei Ginou (TG) adalah program kerja untuk warga negara asing yang memiliki keahlian khusus.
+                                Tokutei Ginou (TG) adalah program kerja untuk warga negara asing yang memiliki keahlian
+                                khusus.
                                 (Visa Kerja,
                                 Pendidikan 50 BAB,
                                 Memiliki Sertifikat Bahasa (JFT) dan SSW)
@@ -722,7 +752,8 @@
                                     placeholder="Subject" disabled>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="7" placeholder="Message" required disabled></textarea>
+                                <textarea class="form-control" name="message" rows="7" placeholder="Message" required
+                                    disabled></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
@@ -743,8 +774,7 @@
     {{-- <div id="preloader"></div> --}}
 
     <!-- Modal WhatsApp -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -758,9 +788,8 @@
                                 <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="card-img-top"
                                     alt="ACC Japan" data-lity>
                                 <div class="card-body">
-                                    <a href="" target="_blank" class="btn btn-success"
-                                        style="width: 100%;"><i class="bi bi-whatsapp"
-                                            style="padding-right: 10px;"></i>
+                                    <a href="" target="_blank" class="btn btn-success" style="width: 100%;"><i
+                                            class="bi bi-whatsapp" style="padding-right: 10px;"></i>
                                         Japan Center</a>
                                 </div>
                             </div>
