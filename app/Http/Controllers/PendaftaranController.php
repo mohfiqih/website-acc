@@ -15,7 +15,6 @@ use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
-    // protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyD5ZXIfgbgye-VPdNKWlsDHAVnPEamLAowRtaOiRAidPsoYWVxwt_SWNdUpqS2ulaB/exec";
     protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
 
     public function index()
@@ -266,21 +265,6 @@ class PendaftaranController extends Controller
                 $data['nama_saudara'] = implode(', ', $formattedList);
             }
 
-            // array_walk_recursive($data, function (&$value) {
-            //     if (is_string($value)) {
-            //         $value = mb_convert_encoding($value, 'UTF-8', 'auto');
-            //     }
-            // });
-
-            // $jsonData = json_encode($data, JSON_UNESCAPED_UNICODE);
-
-            // if ($jsonData === false) {
-            //     return response()->json([
-            //         'success' => false,
-            //         'message' => 'json_encode error: ' . json_last_error_msg(),
-            //     ]);
-            // }
-
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
             ])->post($this->googleScriptUrl, $data);
@@ -310,7 +294,6 @@ class PendaftaranController extends Controller
 
     public function data_pendaftaran_new()
     {
-        // return view('landing.data-pendaftaran-new');
         return view('landing.data_pendaftaran.template-data-pendaftaran-baru');
     }
 
@@ -525,49 +508,6 @@ class PendaftaranController extends Controller
         $endDate   = $request->input('end_date');
 
         $data = [];
-        // foreach ($json as $row) {
-        //     $cleanedRow = [];
-        //     foreach ($row as $key => $value) {
-        //         if ($key === 'Timestamp') {
-        //             $dateOnly = substr($value, 0, 10);
-        //             $cleanedRow[$key] = $dateOnly;
-
-        //             if ($startDate && $endDate) {
-        //                 if ($dateOnly < $startDate || $dateOnly > $endDate) {
-        //                     continue 2;
-        //                 }
-        //             }
-        //         }
-
-        //         if (in_array($key, ['KEAHLIAN', 'MOTIVASI', 'HOBI', 'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN', 'SIFAT/KEPRIBADIAN', 'KELEBIHAN', 'KELEMAHAN'])) {
-        //             $cleanedRow[$key] = $this->convertJsonToText($value);
-        //             continue;
-        //         }
-
-        //         if (in_array($key, ['NAMA (KATAKANA)', 'NAMA (INDONESIA)', 
-        //                 'TAHUN MASUK SEKOLAH (SD)', 'TAHUN KELUAR SEKOLAH (SD)', 
-        //                 'TAHUN MASUK SEKOLAH (SMP)', 'TAHUN KELUAR SEKOLAH (SMP)',
-        //                 'TAHUN MASUK SEKOLAH (SMA/SMK)', 'TAHUN KELUAR SEKOLAH (SMA/SMK)'])) 
-        //         {
-        //             // $cleanedRow[$key] = $value;
-        //             if (stripos($key, 'EMAIL') !== false) {
-        //                 $cleanedRow[$key] = $value;
-        //             } else {
-        //                 $cleanedRow[$key] = strtoupper($value);
-        //             }
-        //         } else {
-        //             $newKey = preg_replace('/\s*\(.*?\).*/', '', $key);
-        //             // $cleanedRow[$newKey] = $value;
-        //             if (stripos($newKey, 'EMAIL') !== false) {
-        //                 $cleanedRow[$newKey] = $value;
-        //             } else {
-        //                 $cleanedRow[$newKey] = strtoupper($value);
-        //             }
-        //         }
-        //     }
-        //     $data[] = $cleanedRow;
-        // }
-
         foreach ($json as $row) {
             $cleanedRow = [];
             foreach ($row as $key => $value) {
@@ -680,5 +620,9 @@ class PendaftaranController extends Controller
     function escapeXml($value)
     {
         return htmlspecialchars($value ?? '', ENT_QUOTES | ENT_XML1, 'UTF-8');
+    }
+
+    function link_pendaftaran_mentor() {
+        return view('landing.data_pendaftaran.link-pendaftaran-online-mentor');
     }
 }

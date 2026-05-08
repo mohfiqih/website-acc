@@ -80,6 +80,7 @@ Route::get('/pendaftaran-siswa-baru', [PendaftaranController::class, 'pendaftara
 # for mentor
 Route::get('/pendaftaran-siswa-baru/{mentor}', [PendaftaranController::class, 'pendaftaran_baru']);
 Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pendaftaran_baru']);
+Route::get('/link-pendaftaran-mentor', [PendaftaranController::class, 'link_pendaftaran_mentor']);
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
 Route::get('/data-pendaftaran/export-pdf', [PendaftaranController::class, 'exportPdf'])->name('data-pendaftaran.export-pdf');

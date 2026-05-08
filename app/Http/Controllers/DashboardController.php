@@ -37,11 +37,14 @@ class DashboardController extends Controller
         $perMentorPerMonth = [];
         $months = [];
         $allowedMentors = [
-            'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
-            'SELLY', 'ADITYA', 'FAHRUL', 'FADIL', 'FUJIAYU', 'FIRMAN', 'GAZI',
-            'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
-            'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',
-            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', '-'
+            "HESTI", "NADIA",
+            "AVILA", "REZA", "GAZI", "PIPIT", "VIA", "YANI", "ZULFI",
+            "FIQIH",
+            "ALVAN", "SELA", "USWATUN",
+            "JAMAL", "ARIFUDIN", "TYA",
+            "ERWIN", "FUJIAYU", "UMAY", "QOLBI", "ILHAM", "SONY", "BAGUS", "FATONI", "NUR",
+            "IBNU", "FAIZAL", "ADITYA", "TRIO", "PHILLIP", "NUROKHMAN", "BANGKIT", "HERA", "CAMELIA", "SELY", "DIANA", "ASTRI",
+            "FIRMAN", "IPUT", "IZAH"
         ];
 
         foreach ($data as $row) {

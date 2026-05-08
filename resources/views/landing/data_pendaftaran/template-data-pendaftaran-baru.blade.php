@@ -100,6 +100,7 @@
             opacity: 0.1;
             z-index: -1;
             pointer-events: none;
+            font-size: 13px;
         }
 
         body::after {
@@ -111,6 +112,7 @@
             height: 100%;
             background: rgba(255, 255, 255, 0.5);
             z-index: -2;
+            font-size: 13px;
         }
 
         .container {
@@ -535,49 +537,6 @@
         }
 
         let mentorChart;
-        // function renderChart(selectedMonth = '') {
-        //     let labels = Object.keys(perMentorAll);
-        //     let data = labels.map(mentor => {
-        //         if (selectedMonth && perMentorPerMonth[selectedMonth]) {
-        //             return perMentorPerMonth[selectedMonth][mentor] || 0;
-        //         }
-        //         return perMentorAll[mentor];
-        //     });
-
-        //     const combined = labels.map((label, i) => ({ mentor: label, count: data[i] }));
-        //     combined.sort((a,b) => b.count - a.count);
-
-        //     labels = combined.map(c => c.mentor);
-        //     data = combined.map(c => c.count);
-
-        //     const ctx = document.getElementById('mentorChart').getContext('2d');
-        //     if (mentorChart) mentorChart.destroy();
-        //     mentorChart = new Chart(ctx, {
-        //         type: 'bar',
-        //         data: {
-        //             labels: labels,
-        //             datasets: [{
-        //                 label: 'Jumlah Pendaftaran',
-        //                 data: data,
-        //                 backgroundColor: '#046392'
-        //             }]
-        //         },
-        //         options: {
-        //             responsive: true,
-        //             plugins: { legend: { display: false } },
-        //             scales: { y: { beginAtZero: true } }
-        //         }
-        //     });
-
-        //     const tbody = document.querySelector('#mentorTable tbody');
-        //     tbody.innerHTML = '';
-        //     labels.forEach((mentor, i) => {
-        //         const tr = document.createElement('tr');
-        //         tr.innerHTML = `<td>${mentor}</td><td>${data[i]}</td>`;
-        //         tbody.appendChild(tr);
-        //     });
-        // }
-
         function renderChart(selectedMonth = '') {
             let combined = allowedMentors.map(mentor => ({
                 mentor: mentor,
@@ -761,43 +720,6 @@
         }
 
         fetchData();
-
-        // function renderMentorProgressBar(selectedMonth = '') {
-        //     let labels = Object.keys(perMentorAll);
-        //     let data = labels.map(mentor => {
-        //         if (selectedMonth && perMentorPerMonth[selectedMonth]) {
-        //             return perMentorPerMonth[selectedMonth][mentor] || 0;
-        //         }
-        //         return perMentorAll[mentor];
-        //     });
-
-        //     const combined = labels.map((m, i) => ({
-        //         mentor: m,
-        //         count: data[i]
-        //     })).sort((a, b) => b.count - a.count);
-
-        //     const maxValue = combined[0]?.count || 1;
-        //     const container = document.getElementById("mentorProgressBar");
-        //     container.innerHTML = "";
-
-        //     const colors = ['bg-primary'];
-
-        //     combined.forEach((item, i) => {
-        //         const percent = ((item.count / maxValue) * 100).toFixed(1);
-        //         const color = colors[i % colors.length];
-
-        //         container.innerHTML += `
-        //         <div>
-        //             <div class="hstack justify-content-between">
-        //                 <span class="fs-3 fw-medium">${item.mentor}</span>
-        //                 <h6 class="fs-3 fw-medium text-dark mb-0">${item.count} siswa</h6>
-        //             </div>
-        //             <div class="progress mt-2" style="height: 10px;">
-        //                 <div class="progress-bar ${color}" style="width: ${percent}%"></div>
-        //             </div>
-        //         </div>`;
-        //     });
-        // }
 
         function renderMentorProgressBar(selectedMonth = '') {
             let combined = allowedMentors.map(mentor => ({

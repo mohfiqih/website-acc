@@ -93,6 +93,10 @@
                 font-size: 14px;
             }
         }
+
+        body {
+            font-size: 13px;
+        }
     </style>
 </head>
 
@@ -148,7 +152,7 @@
                     <p class="justify-content-center;">
                         Welcome to LPK ACC Japan Centre 👋
                     </p>
-                    <h2>LPK Amanah Citra Cemerlang (ACC Japan Centre)</span></h2>
+                    <h2>LPK ACC Japan Centre (Yayasan Amanah Citra Cemerlang)</span></h2>
                     <p class="justify-content-center;">
                         <i class="fa fa-map-pin" style="padding-right: 10px;"></i>
                         Adiwerna, Kabupaten Tegal,

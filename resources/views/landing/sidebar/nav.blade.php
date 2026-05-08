@@ -1,3 +1,16 @@
+<style>
+    .sidebar-nav .sidebar-link {
+        font-size: 13px;
+    }
+
+    .sidebar-nav .nav-small-cap {
+        font-size: 11px;
+    }
+
+    .sidebar-nav .sidebar-link .hide-menu {
+        font-size: 13px;
+    }
+</style>
 <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
     <ul id="sidebarnav">
         <li class="nav-small-cap">
@@ -15,6 +28,14 @@
         <li class="nav-small-cap">
             <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
             <span class="hide-menu">Menu</span>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="/link-pendaftaran-mentor" aria-expanded="false">
+                <span>
+                    <iconify-icon icon="solar:link-bold-duotone" class="fs-6"></iconify-icon>
+                </span>
+                <span class="hide-menu">Link Online Mentor</span>
+            </a>
         </li>
         <li class="sidebar-item">
             <a class="sidebar-link" href="/pendaftaran-siswa-baru" aria-expanded="false">
@@ -43,19 +64,19 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="/manual-book" aria-expanded="false">
-                <span>
-                    <iconify-icon icon="solar:book-bold-duotone" class="fs-6"></iconify-icon>
-                </span>
-                <span class="hide-menu">Manual Book</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
             <a class="sidebar-link" href="/upload" aria-expanded="false">
                 <span>
                     <iconify-icon icon="solar:upload-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
                 <span class="hide-menu">Upload Dokumentasi</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="/manual-book" aria-expanded="false">
+                <span>
+                    <iconify-icon icon="solar:book-bold-duotone" class="fs-6"></iconify-icon>
+                </span>
+                <span class="hide-menu">Manual Book</span>
             </a>
         </li>
         <li class="sidebar-item">
