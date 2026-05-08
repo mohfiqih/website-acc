@@ -750,7 +750,7 @@
             cleanData.forEach((row, idx) => {
                 const columns = [
                     idx + 1,
-                    `<button class="btn btn-sm btn-success btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
+                    `<button class="btn btn-sm btn-primary btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
                         <i class="fa fa-download"></i> Download CV
                     </button>`,
                     formatDate(row['Timestamp']) || '',

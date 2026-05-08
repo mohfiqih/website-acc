@@ -277,41 +277,27 @@
             <!--  Header End -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body text-center">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
-                                    alt="image" class="img-fluid" width="205">
-                                <h4 class="mt-7">DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h4>
-                                <p class="card-subtitle mt-2 mb-3">
-                                    LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan
-                                    Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.
-                                </p>
-                                <button class="btn btn-primary mb-3">Home</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title d-flex align-items-center gap-2 mb-4">
-                                    Grafir Pendaftaran Online Berdasarkan Nama Mentor
+                                    Grafik Pendaftaran Online Berdasarkan Nama Mentor
                                 </h5>
                                 <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
                                         <option value="">All Month</option>
                                     </select>
 
-                                    <button class="btn btn-success btn-sm px-4 text-nowrap" onclick="exportJPG()">
+                                    <button class="btn btn-primary btn-sm px-4 text-nowrap" onclick="exportJPG()">
                                         Export JPG
                                     </button>
-                                    <button class="btn btn-danger btn-sm px-4 text-nowrap"
+                                    <button class="btn btn-primary btn-sm px-4 text-nowrap"
                                         onclick="exportPDFLandscape()">
                                         Export PDF
                                     </button>
                                 </div>
                                 <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
-                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor</p>
+                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data kotor yang terecord secara online melalui formulir pendaftaran online setiap mentor)</b></p>
                                 <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
                             </div>
                         </div>
@@ -352,7 +338,7 @@
                                         <input type="date" name="end_date" class="form-control me-2 mb-2" required>
                                     </div>
                                     <div class="col md-12">
-                                        <button type="submit" class="btn btn-success">
+                                        <button type="submit" class="btn btn-primary btn-sm px-4 text-nowrap">
                                             <i class="fa fa-download"></i> Export PDF
                                         </button>
                                     </div>
@@ -483,18 +469,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 
+    <script src="{{ asset('js/allowed-mentors.js') }}"></script>
+
     {{-- data tabel --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
 
-        const allowedMentors = [
-            'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
-            'SELLY', 'ADITYA', 'FAHRUL', 'FUJIAYU', 'FIRMAN', 'GAZI',
-            'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
-            'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',
-            'AKHMAD ARIFUDIN', 'NUR', 'FATONI', 'ERWIN', 'TYA', 'NUROHMAN'
-        ];
+        console.log(allowedMentors);
 
         let allData = [];
         let perMentorAll = {};
@@ -553,23 +535,67 @@
         }
 
         let mentorChart;
-        function renderChart(selectedMonth = '') {
-            let labels = Object.keys(perMentorAll);
-            let data = labels.map(mentor => {
-                if (selectedMonth && perMentorPerMonth[selectedMonth]) {
-                    return perMentorPerMonth[selectedMonth][mentor] || 0;
-                }
-                return perMentorAll[mentor];
-            });
+        // function renderChart(selectedMonth = '') {
+        //     let labels = Object.keys(perMentorAll);
+        //     let data = labels.map(mentor => {
+        //         if (selectedMonth && perMentorPerMonth[selectedMonth]) {
+        //             return perMentorPerMonth[selectedMonth][mentor] || 0;
+        //         }
+        //         return perMentorAll[mentor];
+        //     });
 
-            const combined = labels.map((label, i) => ({ mentor: label, count: data[i] }));
+        //     const combined = labels.map((label, i) => ({ mentor: label, count: data[i] }));
+        //     combined.sort((a,b) => b.count - a.count);
+
+        //     labels = combined.map(c => c.mentor);
+        //     data = combined.map(c => c.count);
+
+        //     const ctx = document.getElementById('mentorChart').getContext('2d');
+        //     if (mentorChart) mentorChart.destroy();
+        //     mentorChart = new Chart(ctx, {
+        //         type: 'bar',
+        //         data: {
+        //             labels: labels,
+        //             datasets: [{
+        //                 label: 'Jumlah Pendaftaran',
+        //                 data: data,
+        //                 backgroundColor: '#046392'
+        //             }]
+        //         },
+        //         options: {
+        //             responsive: true,
+        //             plugins: { legend: { display: false } },
+        //             scales: { y: { beginAtZero: true } }
+        //         }
+        //     });
+
+        //     const tbody = document.querySelector('#mentorTable tbody');
+        //     tbody.innerHTML = '';
+        //     labels.forEach((mentor, i) => {
+        //         const tr = document.createElement('tr');
+        //         tr.innerHTML = `<td>${mentor}</td><td>${data[i]}</td>`;
+        //         tbody.appendChild(tr);
+        //     });
+        // }
+
+        function renderChart(selectedMonth = '') {
+            let combined = allowedMentors.map(mentor => ({
+                mentor: mentor,
+                count: selectedMonth && perMentorPerMonth[selectedMonth]
+                    ? (perMentorPerMonth[selectedMonth][mentor] || 0)
+                    : (perMentorAll[mentor] || 0)
+            }));
+
+            // urutkan dari terbesar
             combined.sort((a,b) => b.count - a.count);
 
-            labels = combined.map(c => c.mentor);
-            data = combined.map(c => c.count);
+            const labels = combined.map(x => x.mentor);
+            const data = combined.map(x => x.count);
 
             const ctx = document.getElementById('mentorChart').getContext('2d');
+
             if (mentorChart) mentorChart.destroy();
+
             mentorChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
@@ -589,6 +615,7 @@
 
             const tbody = document.querySelector('#mentorTable tbody');
             tbody.innerHTML = '';
+
             labels.forEach((mentor, i) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `<td>${mentor}</td><td>${data[i]}</td>`;
@@ -640,7 +667,7 @@
             cleanData.forEach((row, idx) => {
                 const columns = [
                     idx + 1,
-                    `<button class="btn btn-sm btn-success btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
+                    `<button class="btn btn-sm btn-primary btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
                         <i class="fa fa-download"></i> Download CV
                     </button>`,
                     formatDate(row['Timestamp']) || '',
@@ -735,29 +762,61 @@
 
         fetchData();
 
-        function renderMentorProgressBar(selectedMonth = '') {
-            let labels = Object.keys(perMentorAll);
-            let data = labels.map(mentor => {
-                if (selectedMonth && perMentorPerMonth[selectedMonth]) {
-                    return perMentorPerMonth[selectedMonth][mentor] || 0;
-                }
-                return perMentorAll[mentor];
-            });
+        // function renderMentorProgressBar(selectedMonth = '') {
+        //     let labels = Object.keys(perMentorAll);
+        //     let data = labels.map(mentor => {
+        //         if (selectedMonth && perMentorPerMonth[selectedMonth]) {
+        //             return perMentorPerMonth[selectedMonth][mentor] || 0;
+        //         }
+        //         return perMentorAll[mentor];
+        //     });
 
-            const combined = labels.map((m, i) => ({
-                mentor: m,
-                count: data[i]
-            })).sort((a, b) => b.count - a.count);
+        //     const combined = labels.map((m, i) => ({
+        //         mentor: m,
+        //         count: data[i]
+        //     })).sort((a, b) => b.count - a.count);
+
+        //     const maxValue = combined[0]?.count || 1;
+        //     const container = document.getElementById("mentorProgressBar");
+        //     container.innerHTML = "";
+
+        //     const colors = ['bg-primary'];
+
+        //     combined.forEach((item, i) => {
+        //         const percent = ((item.count / maxValue) * 100).toFixed(1);
+        //         const color = colors[i % colors.length];
+
+        //         container.innerHTML += `
+        //         <div>
+        //             <div class="hstack justify-content-between">
+        //                 <span class="fs-3 fw-medium">${item.mentor}</span>
+        //                 <h6 class="fs-3 fw-medium text-dark mb-0">${item.count} siswa</h6>
+        //             </div>
+        //             <div class="progress mt-2" style="height: 10px;">
+        //                 <div class="progress-bar ${color}" style="width: ${percent}%"></div>
+        //             </div>
+        //         </div>`;
+        //     });
+        // }
+
+        function renderMentorProgressBar(selectedMonth = '') {
+            let combined = allowedMentors.map(mentor => ({
+                mentor: mentor,
+                count: selectedMonth && perMentorPerMonth[selectedMonth]
+                    ? (perMentorPerMonth[selectedMonth][mentor] || 0)
+                    : (perMentorAll[mentor] || 0)
+            }));
+
+            combined.sort((a,b) => b.count - a.count);
 
             const maxValue = combined[0]?.count || 1;
+
             const container = document.getElementById("mentorProgressBar");
             container.innerHTML = "";
 
-            const colors = ['bg-primary','bg-success','bg-warning','bg-danger','bg-info','bg-secondary'];
+            combined.forEach(item => {
 
-            combined.forEach((item, i) => {
                 const percent = ((item.count / maxValue) * 100).toFixed(1);
-                const color = colors[i % colors.length];
 
                 container.innerHTML += `
                 <div>
@@ -766,7 +825,7 @@
                         <h6 class="fs-3 fw-medium text-dark mb-0">${item.count} siswa</h6>
                     </div>
                     <div class="progress mt-2" style="height: 10px;">
-                        <div class="progress-bar ${color}" style="width: ${percent}%"></div>
+                        <div class="progress-bar bg-primary" style="width: ${percent}%"></div>
                     </div>
                 </div>`;
             });
