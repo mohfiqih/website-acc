@@ -13,53 +13,53 @@
     <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
     <style>
         .table-responsive{
-    width:100%;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-}
+          width:100%;
+          overflow-x:auto;
+          -webkit-overflow-scrolling:touch;
+          }
 
-/* default desktop */
-#mentorDataTable{
-    width:100%;
-    font-size:12px;
-}
+          /* default desktop */
+          #mentorDataTable{
+          width:100%;
+          font-size:12px;
+          }
 
-/* cell tabel */
-#mentorDataTable th,
-#mentorDataTable td{
-    padding:6px 8px;
-    vertical-align:middle;
-}
+          /* cell tabel */
+          #mentorDataTable th,
+          #mentorDataTable td{
+          padding:6px 8px;
+          vertical-align:middle;
+          }
 
-/* kolom */
-.col-no{ width:60px; }
-.col-copy{ width:90px; text-align:center; }
-.col-mentor{ min-width:180px; }
-.col-link{ min-width:420px; }
+          /* kolom */
+          .col-no{ width:60px; }
+          .col-copy{ width:90px; text-align:center; }
+          .col-mentor{ min-width:180px; }
+          .col-link{ min-width:420px; }
 
-/* link panjang */
-.link-text{
-    white-space:nowrap;
-}
+          /* link panjang */
+          .link-text{
+          white-space:nowrap;
+          }
 
-/* tombol copy kecil */
-.copyLink{
-    font-size:11px;
-    padding:3px 8px;
-}
+          /* tombol copy kecil */
+          .copyLink{
+          font-size:11px;
+          padding:3px 8px;
+          }
 
-/* mode HP */
-@media (max-width:768px){
+          /* mode HP */
+          @media (max-width:768px){
 
-    .table-responsive{
-        overflow-x:auto;
-    }
+          .table-responsive{
+               overflow-x:auto;
+          }
 
-    #mentorDataTable{
-        min-width:650px; /* supaya bisa geser */
-    }
+          #mentorDataTable{
+               min-width:650px; /* supaya bisa geser */
+          }
 
-}
+          }
     </style>
 </head>
 
