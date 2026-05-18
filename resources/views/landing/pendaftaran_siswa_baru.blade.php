@@ -1878,9 +1878,10 @@
 
             const form = e.target;
             const formData = new FormData(form);
+            console.log("formData :", formData);
 
             try {
-                await fetch("https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec", {
+                await fetch("https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec", {
                     method: "POST",
                     body: formData,
                     mode: "no-cors"

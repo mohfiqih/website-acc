@@ -15,7 +15,7 @@ use Illuminate\Validation\ValidationException;
 
 class PendaftaranController extends Controller
 {
-    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec";
+    protected $googleScriptUrl = "https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec";
 
     public function index()
     {
@@ -54,7 +54,7 @@ class PendaftaranController extends Controller
             $data                 = $request->all();
             $bahasa_asing         = implode(', ', $data['bahasa_asing']);
             $data['bahasa_asing'] = $bahasa_asing;
-            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec";
+            $googleScriptUrl      = "https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec";
 
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
@@ -69,7 +69,7 @@ class PendaftaranController extends Controller
     }
 
     public function data_pendaftaran_old() {
-        $url = 'https://script.google.com/macros/s/AKfycbwF3L65UYA-fQWjoGySmpK0E65LJnv1-4FExs0rQvpcJ6TVDa4BXJ7ZUBdggP8Ylb-d/exec';
+        $url = 'https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec';
         $response = Http::get($url);
         $data = array_reverse($response->json());
         
@@ -83,13 +83,11 @@ class PendaftaranController extends Controller
         $provinsi  = ProvinsiModel::all();
         $mentor    = $mentor ? strtoupper(str_replace('-', ' ', $mentor)) : null;
 
-        // return view('landing.pendaftaran_siswa_baru', [
-        //     'images_db' => $images_db,
-        //     'provinsi'  => $provinsi,
-        //     'mentor'    => $mentor
-        // ]);
-
-        return view('landing.template_maintenance');
+        return view('landing.pendaftaran_siswa_baru', [
+            'images_db' => $images_db,
+            'provinsi'  => $provinsi,
+            'mentor'    => $mentor
+        ]);
     }
 
     public function store_pendaftaran_baru(Request $request)
