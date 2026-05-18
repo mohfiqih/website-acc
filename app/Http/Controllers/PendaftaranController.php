@@ -83,11 +83,13 @@ class PendaftaranController extends Controller
         $provinsi  = ProvinsiModel::all();
         $mentor    = $mentor ? strtoupper(str_replace('-', ' ', $mentor)) : null;
 
-        return view('landing.pendaftaran_siswa_baru', [
-            'images_db' => $images_db,
-            'provinsi'  => $provinsi,
-            'mentor'    => $mentor
-        ]);
+        // return view('landing.pendaftaran_siswa_baru', [
+        //     'images_db' => $images_db,
+        //     'provinsi'  => $provinsi,
+        //     'mentor'    => $mentor
+        // ]);
+
+        return view('landing.template_maintenance');
     }
 
     public function store_pendaftaran_baru(Request $request)
