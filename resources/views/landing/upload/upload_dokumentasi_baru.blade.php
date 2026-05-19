@@ -324,12 +324,12 @@
                                 style="border-color: black; border: 1px solid black;border-radius: 10px;">
                                 <label for="images" class="upload-area" style="cursor: pointer;">
                                     <span class="upload-area-icon">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="250" height="300"
                                             viewBox="0 0 340.531 419.116">
                                         </svg>
                                     </span>
                                     <span class="upload-area-description" id="fileCount">
-                                        <label for="images" class="file-upload-label">Please Choose Image</label>
+                                        <label for="images" class="file-upload-label">Please Choose Image (Max 10 MB)</label>
                                         <input type="file" name="images[]" id="images" class="d-none" multiple required>
                                         No file selected
                                     </span>

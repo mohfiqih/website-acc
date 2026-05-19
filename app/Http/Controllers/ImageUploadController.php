@@ -17,21 +17,22 @@ class ImageUploadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240'
+            'images' => 'required',
+            'images.*' => 'image|mimes:jpeg,png,jpg,png|max:10240'
         ]);
 
-        if ($request->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName();
-                $path = $image->storeAs('public/images', $filename);
+        foreach ($request->file('images') as $image) {
 
-                Image::create([
-                    'filepath' => 'images/' . $filename,
-                ]);
-            }
+            $path = $image->store('images', 'public');
+
+            Image::create([
+                'filepath' => $path
+            ]);
         }
 
-        return back()->with('success', 'Images uploaded successfully');
+        return response()->json([
+            'success' => true
+        ]);
     }
 
     public function delete($id)

@@ -385,7 +385,7 @@
                             </span>
                             <p id="fileCount" style="margin-top: 10px;">No file selected</p>
                             <div class="file-upload-wrapper">
-                                <label for="images" class="file-upload-label">Choose Image</label>
+                                <label for="images" class="file-upload-label">Choose Image (Max 10 MB)</label>
                                 <input type="file" name="images[]" id="images" class="d-none" multiple required>
                             </div>
                         </label>
@@ -484,6 +484,11 @@
                     cancelButtonColor: "#d33",
                     confirmButtonText: "Upload"
                 }).then((result) => {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
                     if (result.isConfirmed) {
                         $.ajax({
                             url: "{{ route('images.store') }}",
