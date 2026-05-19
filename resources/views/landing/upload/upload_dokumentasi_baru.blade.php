@@ -308,6 +308,7 @@
                     </div>
                 </nav>
             </header>
+
             <!--  Header End -->
             <div class="container fluid" style="padding-top: 80px;">
                 <div class="card">
@@ -328,10 +329,18 @@
                                             viewBox="0 0 340.531 419.116">
                                         </svg>
                                     </span>
-                                    <span class="upload-area-description" id="fileCount">
+                                    <!-- <span class="upload-area-description" id="fileCount">
                                         <label for="images" class="file-upload-label">Please Choose Image (Max 10 MB)</label>
                                         <input type="file" name="images[]" id="images" class="d-none" multiple required>
                                         No file selected
+                                    </span> -->
+                                    <span class="upload-area-description">
+                                        <label for="images" class="file-upload-label">
+                                            Please Choose Image (Max 10 MB)
+                                            <p id="fileCount">No file selected</p>
+                                        </label>
+
+                                        <input type="file" name="images[]" id="images" class="d-none" multiple required>                                        
                                     </span>
                                 </label>
                             </div>
@@ -429,15 +438,19 @@
         $(document).ready(function() {
                 $("#images").on("change", function() {
                     let fileCount = this.files.length;
-                    
+
                     if (fileCount > 10) {
-                        Swal.fire("Warning!", "Maksimal 10 file yang bisa diupload!", "warning");
+                        Swal.fire("Warning!", "Maksimal 10 file!", "warning");
                         this.value = "";
                         fileCount = 0;
                     }
-    
-                    let fileCountText = fileCount > 0 ? `${fileCount} file(s) selected` : "No file selected";
-                    $("#fileCount").text(fileCountText);
+
+                    let text = fileCount > 0 
+                        ? fileCount + " file(s) selected"
+                        : "No file selected";
+
+                    $("#fileCount").text(text);
+
                 });
     
                 // Upload

@@ -18,7 +18,7 @@ class ImageUploadController extends Controller
     {
         $request->validate([
             'images' => 'required',
-            'images.*' => 'image|mimes:jpeg,png,jpg,png|max:10240'
+            'images.*' => 'image|mimes:jpeg,png,jpg|max:10240'
         ]);
 
         foreach ($request->file('images') as $image) {
