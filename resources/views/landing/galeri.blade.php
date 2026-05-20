@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Galeri - ACC Asia Jaya</title>
+    <title>Galeri LPK ACC Japan Centre</title>
     <script type="text/javascript">
         (function() {
             var css = document.createElement('link');
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset('template_galeri/assets/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('template_galeri/assets/css/theme.css') }}">
 
-    <link href="{{ asset('templates/assets/img/logo.jpg') }}" rel="icon">
+    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -35,214 +35,182 @@
 </head>
 
 <body>
-    <header id="header" class="header d-flex align-items-center" style="padding: 10px;">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="#" class="logo d-flex align-items-center">
-                <h1><img src="{{ asset('templates/assets/img/logo.jpg') }}" alt="" class="img-fluid"
-                        width="40px"> Galeri ACC<span>.</span></h1>
-            </a>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                </ul>
-            </nav>
-            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        </div>
-    </header>
+    @include('landing.header')
 
-    <div class="hero">
+    <section id="hero" class="hero" style="padding-top: 20px;">
         <div class="container position-relative">
             <div class="row gy-5" data-aos="fade-in" style="">
-                <div class="col-lg-6 order-2  d-flex flex-column justify-content-center text-center text-lg-start"
-                    style="padding-bottom: 50px;">
-                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="{{ asset('templates/assets/img/japan/9.jpg') }}" class="d-block w-100"
-                                    alt="..." style="border-radius: 10px;width: 370px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('templates/assets/img/acc/4.jpg') }}" class="d-block w-100"
-                                    alt="..." style="border-radius: 10px;width: 370px;">
-                            </div>
-                            <div class="carousel-item">
-                                <img src="{{ asset('templates/assets/img/acc/3.jpg') }}" class="d-block w-100"
-                                    alt="..." style="border-radius: 10px;width: 370px;">
-                            </div>
-
+                <div class="col-lg-6 order-2  d-flex flex-column justify-content-center text-center text-lg-start">
+                    <div id="carouselExampleCaptions" class="carousel slide" style="width: 100%;">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
                         </div>
+                        <div class="carousel-inner" style="border-radius: 20px;">
+                            <div class="carousel-item active">
+                                <video class="d-block w-100" id="video-background" autoplay muted loop>
+                                    <source src="{{ asset('bg-video.mp4') }}" type="video/mp4">
+                                </video>
+                                <div class="carousel-caption d-none d-md-block"></div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
+                                    class="d-block w-100" alt="..." data-lity>
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
+                                    class="d-block w-100" alt="..." data-lity>
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 0px 30px 0 20px;">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>
-                        Kabupaten Tegal,
-                        Central Java</p>
-                    <h1 style="color: white">Galeri ACC Asia Jaya</h1>
-                    <p style="text-align: justify;">Foto kegiatan LPK Yayasan Amanah Citra Cemerlang, Pembelajaran dan
-                        Tempat ACC Japan & ACC
-                        Korean. <br /> Kami membantu anda menentukan sebuah pilihan,
-                        Banyak Dari kita yang Ingin ke Luar negri tetapi tidak tau mau kemana / Tujuan nya tidak jelas,
-                        sehingga beberapa di antara Kita Asal pilih Lpk / PT / meaning Agentcy dan ujung2 nya pekerjaan
-                        atau
-                        Tujuan Tidak sesuai dengan Apa yang kita Harapkan. </p>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <marquee scrollamount="4"><b>Announcement!</b> Kami LPK Amanah Citra Cemerlang tidak membuka
-                            cabang diwilayah
+                    <p class="justify-content-center;">
+                        Welcome to LPK ACC JAPAN CENTRE 👋
+                    </p>
+                    <h2>LPK ACC JAPAN CENTRE (Yayasan Amanah Citra Cemerlang)</span></h2>
+                    <p class="justify-content-center;">
+                        <i class="fa fa-map-pin" style="padding-right: 10px;"></i>
+                        Kecamatan Adiwerna, Kabupaten Tegal,
+                        Central Java
+                    </p>
+                    <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
+                        membimbing dan
+                        membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC
+                        Japan Centre memiliki program diantaranya
+                        Program Magang, Program Tokutei Ginou dan Matching Job. ACC Japan Centre memiliki banyak Job
+                        dari berbagai sektor kerja di Jepang.
+                    </p>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <marquee scrollamount="10"><b>Announcement!</b> Yayasan Amanah Citra Cemerlang tidak membuka LPK
+                            dicabang wilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
                             oknum yang mengaku cabang kami! Terimakasih
                         </marquee>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
+
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
-                        <a href="{{ url('/') }}" class="btn-get-started" style="width: 80%;"><i class="fa fa-home"
-                                style="padding-right: 10px;"></i>
-                            Home</a>
-                        <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang"
-                            class="btn-watch-video d-flex align-items-center" style="margin-left: 15px;">
-                            <i class="bi bi-play-circle"></i><span> YouTube</span></a>
+                        <a href="{{ url('/pendaftaran-siswa-baru') }}" class="btn-get-started" style="width: 100%;">
+                            <i class="bi bi-book"></i>
+                            Daftar
+                        </a>
+                        <a href="#lokasi-acc" class="btn-get-started"
+                            style="width: 100%;"><i class="bi bi-maps"></i> LOKASI
+                        </a>
                     </div>
-                    <br />
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="breadcrumbs">
-        <nav>
-            <div class="container">
-                <ol>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li>Galeri ACC Asia Jaya</li>
-                </ol>
-            </div>
-        </nav>
-    </div>
-
-    <section id="testimonials" class="testimonials">
-        <div class="container" data-aos="fade-up">
-            <div class="section-header">
-                <h2>Program ACC Japan Centre</h2>
-            </div>
-
-            <div class="row">
-                @foreach ($images as $index => $image)
-                    <div class="col-md-3 mb-4">
-                        <div class="card"
-                            style="background-image: url('{{ asset('templates/assets/img/japan/' . ($index + 1) . '.jpg') }}'); background-size: cover; border-radius: 10px; height: 250px;">
+        <div class="icon-boxes position-relative">
+            <div class="container position-relative">
+                <div class="row gy-4 mt-2">
+                    <div class="col-xl-4 col-md-12" style="border-color: azure">
+                        <div class="icon-box">
+                            <p class="title" style="margin-top: 10px;">
+                                <a href="#" class="stretched-link"><i class="bi bi-book"
+                                        style="padding-right: 10px;"></i>
+                                    Program Magang
+                                </a>
+                            </p>
                         </div>
                     </div>
-                @endforeach
-            </div>
-
-            <div class="section-header">
-                <h2>Program ACC Korean Centre</h2>
-            </div>
-
-            <div class="row">
-                @foreach ($images as $index => $image)
-                    <div class="col-md-3 mb-4">
-                        <div class="card"
-                            style="background-image: url('{{ asset('templates/assets/img/acc/' . ($index + 1) . '.jpg') }}'); background-size: cover; border-radius: 10px; height: 250px;">
+                    <div class="col-xl-4 col-md-12">
+                        <div class="icon-box">
+                            <p class="title" style="margin-top: 10px;">
+                                <a href="#" class="stretched-link"><i class="bi bi-book"
+                                        style="padding-right: 10px;"></i>
+                                    Program Tokutei Ginou
+                                </a>
+                            </p>
                         </div>
                     </div>
-                @endforeach
+                    <div class="col-xl-4 col-md-12">
+                        <div class="icon-box">
+                            <p class="title" style="margin-top: 10px;">
+                                <a href="#" class="stretched-link"><i class="bi bi-book"
+                                        style="padding-right: 10px;"></i>
+                                    Program Matching Job</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    {{-- <section class="mt-2 mb-2">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="card-columns">
-                    <div id="image-container">
-                        @foreach ($images as $index => $image)
-                            <div class="card card-pin">
-                                <img class="card-img"
-                                    src="{{ asset('templates/assets/img/acc/' . ($index + 1) . '.jpg') }}"
-                                    alt="Card image">
-                                <div class="overlay">
-                                    <h2 class="card-title title">ACC Asia Jaya</h2>
-                                    <div class="more">
-                                        <a href="#" class="more-link">
-                                            <i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i> More </a>
-                                    </div>
-                                </div>
+    <section class="testimonials" id="galeri">
+            <div class="container" data-aos="fade-up">
+                <div class="section-header">
+                    <h2>Galeri LPK ACC Japan Centre</h2>
+                </div>
+                <div class="row">
+                    @foreach ($images_db as $image)
+                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                        <div class="card h-100">
+                            <div class="card-body p-0">
+                                <img src="{{ asset('storage/' . $image->filepath) }}"
+                                    class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                    style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
                             </div>
-                        @endforeach
+                            <div class="card-footer text-body-secondary">
+                                <b>Date:</b> {{ $image->created_at }}<br />
+                                {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                            </div>
+                        </div>
                     </div>
+                    @endforeach
+                </div>
 
+                <!-- Custom Pagination -->
+                <div class="pagination-container" style="padding: 0px;">
+                    <ul class="pagination">
+                        @if ($images_db->onFirstPage())
+                        <li class="disabled"><span>&lt;</span></li>
+                        @else
+                        <li><a class="text-white" style="background-color: #046392"
+                                href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
+                        @endif
 
+                        @foreach ($images_db->links()->elements[0] as $page => $url)
+                        @if ($page == $images_db->currentPage())
+                        <li class="active"><span>{{ $page }}</span></li>
+                        @else
+                        <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
+                        @endif
+                        @endforeach
+
+                        @if ($images_db->hasMorePages())
+                        <li><a class="text-white" style="background-color: #046392"
+                                href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                        @else
+                        <li class="disabled"><span>&gt;</span></li>
+                        @endif
+                    </ul>
                 </div>
             </div>
-        </div>
-    </section> --}}
-
-    <div class="container">
-        <section id="blog" class="blog">
-            <div class='sk-ww-google-business-photo' data-embed-id='25372651'></div>
-            <script src='https://widgets.sociablekit.com/google-business-photos/widget.js' async defer></script>
-        </section>
-    </div>
-
-    <div class="kc_fab_wrapper"></div>
+    </section>
 
     @include('landing.footer')
-
-
-    <script src="{{ asset('templates/assets/js/kc.fab.min.js') }}"></script>
-    <script src="{{ asset('templates/assets/js/kc.fab.js') }}"></script>
-    <script>
-        $(document).ready(function() {
-            var links = [{
-                    "bgcolor": "#128c7e",
-                    "icon": "<i class='fa fa-whatsapp'></i>"
-                },
-                {
-                    "url": "https://wa.me/6285158270107",
-                    "title": "WhatsApp Korea",
-                    "bgcolor": "#128c7e",
-                    "color": "#fffff",
-                    "icon": "<i class='fa fa-whatsapp'></i>",
-                    "target": "_blank"
-                },
-                {
-                    "url": "https://www.facebook.com/lpkacckorea1?mibextid=ZbWKwL",
-                    "title": "Facebook Korea",
-                    "bgcolor": "#4267B2",
-                    "color": "#ffffff",
-                    "icon": "<i class='fa fa-facebook'></i>",
-                    "target": "_blank"
-                },
-                {
-                    "url": "https://www.tiktok.com/@amanahcitracemerlang?_t=8kFrsqGlsbh&_r=1",
-                    "title": "Tiktok Korea",
-                    "bgcolor": "#000000",
-                    "color": "#ffffff",
-                    "icon": "<i class='fa fa-play'></i>",
-                    "target": "_blank"
-                },
-                {
-                    "url": "https://www.instagram.com/amanahcitracemerlang?igsh=MWM2NGVvZm95ajBudg",
-                    "title": "Instagram",
-                    "bgcolor": "#F56040",
-                    "color": "#ffffff",
-                    "icon": "<i class='fa fa-instagram'></i>",
-                    "target": "_blank"
-                },
-                {
-                    "url": "https://www.youtube.com/@AmanahCitraCemerlang",
-                    "title": "YouTube",
-                    "bgcolor": "red",
-                    "color": "white",
-                    "icon": "<i class='fa fa-youtube'></i>",
-                    "target": "_blank"
-                }
-            ]
-            $('.kc_fab_wrapper').kc_fab(links);
-        })
-    </script>
 
     <script src="{{ asset('templates/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('templates/assets/vendor/aos/aos.js') }}"></script>

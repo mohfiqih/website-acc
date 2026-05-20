@@ -13,6 +13,7 @@ use App\Http\Controllers\DataKonsultasi;
 use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DataCOE;
+use App\Models\Image;
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
@@ -32,12 +33,8 @@ Route::get('/program-korea', function () {
 });
 
 Route::get('/galeri', function () {
-    $images = [
-        '1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg','7.jpg','8.jpg',
-        '9.jpg','10.jpg','11.jpg'
-    ];
-
-    return view('landing/galeri', ['images' => $images]);
+    $images_db = Image::orderBy('created_at', 'desc')->paginate(12);
+    return view('landing/galeri', ['images_db' => $images_db]);
 });
 
 Route::get('/daftar-online', function () {

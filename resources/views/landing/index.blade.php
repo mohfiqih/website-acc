@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>LPK Amanah Citra Cemerlang</title>
+    <title>Yayasan Amanah Citra Cemerlang</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -150,12 +150,12 @@
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 justify-content-center" style="padding: 0px 30px 0 20px;">
                     <p class="justify-content-center;">
-                        Welcome to LPK ACC Japan Centre 👋
+                        Welcome to LPK ACC JAPAN CENTRE 👋
                     </p>
-                    <h2>LPK ACC Japan Centre (Yayasan Amanah Citra Cemerlang)</span></h2>
+                    <h2>LPK ACC JAPAN CENTRE (Yayasan Amanah Citra Cemerlang)</span></h2>
                     <p class="justify-content-center;">
                         <i class="fa fa-map-pin" style="padding-right: 10px;"></i>
-                        Adiwerna, Kabupaten Tegal,
+                        Kecamatan Adiwerna, Kabupaten Tegal,
                         Central Java
                     </p>
                     <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
@@ -166,8 +166,8 @@
                         dari berbagai sektor kerja di Jepang.
                     </p>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <marquee scrollamount="10"><b>Announcement!</b> LPK Amanah Citra Cemerlang tidak membuka
-                            cabang diwilayah
+                        <marquee scrollamount="10"><b>Announcement!</b> Yayasan Amanah Citra Cemerlang tidak membuka LPK
+                            dicabang wilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
                             oknum yang mengaku cabang kami! Terimakasih
@@ -180,10 +180,8 @@
                             <i class="bi bi-book"></i>
                             Daftar
                         </a>
-                        <a href="https://www.youtube.com/@AmanahCitraCemerlang" class="btn-get-started"
-                            style="width: 100%;">
-                            <i class="bi bi-play-circle"></i>
-                            YouTube
+                        <a href="#lokasi-acc" class="btn-get-started"
+                            style="width: 100%;"><i class="bi bi-maps"></i> LOKASI
                         </a>
                     </div>
                 </div>
@@ -251,7 +249,7 @@
                     </div>
                     <div class="panel">
                         <div class="bio-graph-heading">
-                            <p style="font-weight: bold;">Profil LPK Amanah Citra Cemerlang (ACC)</p>
+                            <p style="font-weight: bold;">Profil LPK ACC JAPAN CENTRE (YAYASAN AMANAH CITRA CEMERLANG)</p>
                         </div>
                         <div class="card" style="padding: 30px;">
                             <div class="panel-body bio-graph-info">
@@ -647,42 +645,28 @@
             </div>
         </section>
 
-        {{-- Maps Utama Center --}}
-        {{-- <section class="contact sections-bg">
+        {{-- Maps Japan Center (Gedung 1) --}}
+        <section class="contact" id="lokasi-acc">
             <div class="container" data-aos="fade-up">
-                <h5><b>1. Kantor Utama Yayasan Amanah Citra Cemerlang</b></h5>
-                <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-12">
-                        <iframe class="mb-4 mb-lg-0"
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15842.558236060304!2d109.1208579!3d-6.9336119!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb922f774f609%3A0xbf2bea14e0cdf740!2sAmanah%20Citra%20Cemerlang!5e0!3m2!1sid!2sid!4v1708186829998!5m2!1sid!2sid"
-                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
-        {{-- Maps Korean Center --}}
-        {{-- <section class="contact sections-bg">
-            <div class="container" data-aos="fade-up">
-                <h5><b>3. Lokasi Pendidikan ACC Korean Center</b></h5>
-                <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-12">
-                        <iframe class="mb-4 mb-lg-0"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.644972716883!2d109.11854047484533!3d-6.932967867863948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb9401f4c5c9b%3A0xae67cf08f521bb7f!2sACC%20Korean%20Center!5e0!3m2!1sid!2sid!4v1707996932165!5m2!1sid!2sid"
-                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
-
-        {{-- Maps Japan Center --}}
-        <section class="contact">
-            <div class="container" data-aos="fade-up">
-                <h5><b>Lokasi Kantor & Pendidikan ACC Japan Center</b></h5>
+                <h5><b>Lokasi Gedung 1 LPK ACC JAPAN CENTRE</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
                         <iframe class="mb-4 mb-lg-0"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
+                            frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- Maps Japan Center (Gedung 2) --}}
+        <section class="contact">
+            <div class="container" data-aos="fade-up">
+                <h5><b>Lokasi GEDUNG 2 LPK ACC JAPAN CENTRE</b></h5>
+                <div class="row gx-lg-0 gy-4">
+                    <div class="col-lg-12">
+                        <iframe class="mb-4 mb-lg-0"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5237300552067!2d109.10930867430935!3d-6.947377068011707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb960aa5701dd%3A0x47a423a3a5e544b6!2sGedung%202%20LPK%20ACC%20Japan%20Center%20(Gedung%20Baru)!5e0!3m2!1sid!2sid!4v1779252567317!5m2!1sid!2sid"
                             frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                     </div>
                 </div>
@@ -707,8 +691,7 @@
                 </div>
 
                 <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-6">
-
+                    <div class="col-lg-12">
                         <div class="info-container d-flex flex-column align-items-center justify-content-center">
                             <div class="info-item d-flex">
                                 <i class="bi bi-geo-alt flex-shrink-0"></i>
@@ -723,8 +706,6 @@
                                 <div>
                                     <h4>Email:</h4>
                                     <p>amanahcitracemerlang1@gmail.com</p>
-                                    <p>accjapanmanagement@gmail.com</p>
-                                    {{-- <p>lpkacckorea@gmail.com</p> --}}
                                 </div>
                             </div>
 
@@ -732,14 +713,15 @@
                                 <i class="bi bi-clock flex-shrink-0"></i>
                                 <div>
                                     <h4>Open:</h4>
-                                    <p>09.00 - 16.00 WIB</p>
+                                    <p>(Pagi) 09.00 - 16.00 WIB</p>
+                                    <p>(Malam) 16.00 - 22.00 WIB</p>
                                 </div>
                             </div>
                         </div>
 
                     </div>
 
-                    <div class="col-lg-6">
+                    <!-- <div class="col-lg-6">
                         <form action="forms/contact.php" method="post" role="form" class="php-email-form">
                             <div class="row">
                                 <div class="col-md-6 form-group">
@@ -768,7 +750,7 @@
                                 <a href="https://wa.me/6285640110822"><button type="submit">Send Whatsapp</button></a>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </section>

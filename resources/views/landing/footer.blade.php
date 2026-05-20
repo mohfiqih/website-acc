@@ -27,13 +27,12 @@
             <div class="col-lg-2 col-8 footer-links">
                 <h4>Our Services</h4>
                 <ul>
-                    <li><a href="#">ACC Japan Center</a></li>
-                    {{-- <li><a href="#">ACC Korean Center</a></li> --}}
+                    <li><a href="#">LPK ACC Japan Center</a></li>
                 </ul>
             </div>
 
             <div class="col-lg-2 col-8 footer-links">
-                <h4>ACC Asia Jaya</h4>
+                <h4>LPK ACC JAPAN CENTRE</h4>
                 <ul>
                     <li><a href="#">About</a></li>
                     <li><a href="#">Testimoni</a></li>
@@ -47,11 +46,10 @@
 
     <div class="container mt-4">
         <div class="copyright">
-            Copyright &copy; by <strong><span>IT LPK ACC Japan Centre</span></strong> @include('version.index')
+            Copyright &copy; by <strong><span>IT LPK ACC</span></strong> @include('version.index')
         </div>
         <div class="credits">
             Kecamatan Adiwerna, Kabupaten Tegal, Jawa tengah, Indonesia</a>
         </div>
     </div>
-
 </footer>
