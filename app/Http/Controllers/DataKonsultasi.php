@@ -19,7 +19,6 @@ class DataKonsultasi extends Controller
 
     public function data_konsultasi()
     {
-        // return view('landing.data-konsultasi');
         return view('landing.data_konsultasi.data_konsultasi_baru');
     }
 
@@ -64,7 +63,7 @@ class DataKonsultasi extends Controller
             $data[] = $cleanedRow;
         }
 
-        $pdf = Pdf::loadView('landing.export_konsultasi', ['data' => $data])
+        $pdf = Pdf::loadView('landing.data_konsultasi.export_konsultasi', ['data' => $data])
             ->setPaper('a4', 'landscape');
 
         $hariIndo = [

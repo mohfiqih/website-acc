@@ -83,7 +83,7 @@ class PendaftaranController extends Controller
         $provinsi  = ProvinsiModel::all();
         $mentor    = $mentor ? strtoupper(str_replace('-', ' ', $mentor)) : null;
 
-        return view('landing.pendaftaran_siswa_baru', [
+        return view('landing.data_pendaftaran.pendaftaran_siswa_baru', [
             'images_db' => $images_db,
             'provinsi'  => $provinsi,
             'mentor'    => $mentor
@@ -562,7 +562,7 @@ class PendaftaranController extends Controller
             $data[] = $cleanedRow;
         }
 
-        $pdf = Pdf::loadView('landing.export_pendaftaran', ['data' => $data])
+        $pdf = Pdf::loadView('landing.data_pendaftaran.export_pendaftaran', ['data' => $data])
             ->setPaper('a4', 'landscape');
 
         $hariIndo = [
