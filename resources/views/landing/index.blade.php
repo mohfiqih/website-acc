@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Yayasan Amanah Citra Cemerlang</title>
+    <title>LPK Amanah Citra Cemerlang</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -166,13 +166,15 @@
                         dari berbagai sektor kerja di Jepang.
                     </p>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <marquee scrollamount="10"><b>Announcement!</b> Yayasan Amanah Citra Cemerlang tidak membuka LPK
+                        <marquee scrollamount="10"><b>Announcement!</b> Yayasan Amanah Citra Cemerlang tidak membuka
+                            LPK
                             dicabang wilayah
                             <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
                             diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
                             oknum yang mengaku cabang kami! Terimakasih
                         </marquee>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
                     </div>
 
                     <div class="d-flex justify-content-center justify-content-lg-start text-center">
@@ -180,8 +182,8 @@
                             <i class="bi bi-book"></i>
                             Daftar
                         </a>
-                        <a href="#lokasi-acc" class="btn-get-started"
-                            style="width: 100%;"><i class="bi bi-maps"></i> LOKASI
+                        <a href="#lokasi-acc" class="btn-get-started" style="width: 100%;"><i
+                                class="bi bi-maps"></i> LOKASI
                         </a>
                     </div>
                 </div>
@@ -249,7 +251,8 @@
                     </div>
                     <div class="panel">
                         <div class="bio-graph-heading">
-                            <p style="font-weight: bold;">Profil LPK ACC JAPAN CENTRE (YAYASAN AMANAH CITRA CEMERLANG)</p>
+                            <p style="font-weight: bold;">Profil LPK ACC JAPAN CENTRE (YAYASAN AMANAH CITRA CEMERLANG)
+                            </p>
                         </div>
                         <div class="card" style="padding: 30px;">
                             <div class="panel-body bio-graph-info">
@@ -418,8 +421,8 @@
                             nasional.
                         </p>
                         <div class="position-relative mt-4">
-                            <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4" alt=""
-                                data-lity>
+                            <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4"
+                                alt="" data-lity>
                             <a href="{{ url('/galeri') }}" class="play-btn"></a>
                         </div>
 
@@ -496,19 +499,19 @@
                 </div>
                 <div class="row">
                     @foreach ($images_db as $image)
-                    <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                        <div class="card h-100">
-                            <div class="card-body p-0">
-                                <img src="{{ asset('storage/' . $image->filepath) }}"
-                                    class="card-img-top lazyload img-fluid" data-lity alt="Image"
-                                    style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
-                            </div>
-                            <div class="card-footer text-body-secondary">
-                                <b>Date:</b> {{ $image->created_at }}<br />
-                                {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body p-0">
+                                    <img src="{{ asset('storage/' . $image->filepath) }}"
+                                        class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="card-footer text-body-secondary">
+                                    <b>Date:</b> {{ $image->created_at }}<br />
+                                    {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
 
@@ -516,25 +519,25 @@
                 <div class="pagination-container" style="padding: 0px;">
                     <ul class="pagination">
                         @if ($images_db->onFirstPage())
-                        <li class="disabled"><span>&lt;</span></li>
+                            <li class="disabled"><span>&lt;</span></li>
                         @else
-                        <li><a class="text-white" style="background-color: #046392"
-                                href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
+                            <li><a class="text-white" style="background-color: #046392"
+                                    href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">&lt;</a></li>
                         @endif
 
                         @foreach ($images_db->links()->elements[0] as $page => $url)
-                        @if ($page == $images_db->currentPage())
-                        <li class="active"><span>{{ $page }}</span></li>
-                        @else
-                        <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
-                        @endif
+                            @if ($page == $images_db->currentPage())
+                                <li class="active"><span>{{ $page }}</span></li>
+                            @else
+                                <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
+                            @endif
                         @endforeach
 
                         @if ($images_db->hasMorePages())
-                        <li><a class="text-white" style="background-color: #046392"
-                                href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
+                            <li><a class="text-white" style="background-color: #046392"
+                                    href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">&gt;</a></li>
                         @else
-                        <li class="disabled"><span>&gt;</span></li>
+                            <li class="disabled"><span>&gt;</span></li>
                         @endif
                     </ul>
                 </div>
@@ -549,25 +552,25 @@
                             data-lity alt="" class="img-fluid">
                     </div>
                     <div class="col-lg-4">
-                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt="" class="img-fluid"
-                            data-lity>
+                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
+                            class="img-fluid" data-lity>
                     </div>
                     <div class="col-lg-4">
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="10000" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="10000"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p><strong>+ Happy Clients</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
 
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="2500" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="2500"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p><strong>+ Penerbangan</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
 
                         <div class="stats-item d-flex align-items-center">
-                            <span data-purecounter-start="0" data-purecounter-end="1000" data-purecounter-duration="1"
-                                class="purecounter"></span>
+                            <span data-purecounter-start="0" data-purecounter-end="1000"
+                                data-purecounter-duration="1" class="purecounter"></span>
                             <p><strong>+ Student / Tahun</strong> LPK Amanah Citra Cemerlang</p>
                         </div>
 
@@ -738,8 +741,7 @@
                                     placeholder="Subject" disabled>
                             </div>
                             <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="7" placeholder="Message" required
-                                    disabled></textarea>
+                                <textarea class="form-control" name="message" rows="7" placeholder="Message" required disabled></textarea>
                             </div>
                             <div class="my-3">
                                 <div class="loading">Loading</div>
@@ -760,7 +762,8 @@
     {{-- <div id="preloader"></div> --}}
 
     <!-- Modal WhatsApp -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -774,8 +777,9 @@
                                 <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="card-img-top"
                                     alt="ACC Japan" data-lity>
                                 <div class="card-body">
-                                    <a href="" target="_blank" class="btn btn-success" style="width: 100%;"><i
-                                            class="bi bi-whatsapp" style="padding-right: 10px;"></i>
+                                    <a href="" target="_blank" class="btn btn-success"
+                                        style="width: 100%;"><i class="bi bi-whatsapp"
+                                            style="padding-right: 10px;"></i>
                                         Japan Center</a>
                                 </div>
                             </div>
@@ -793,7 +797,9 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.hash === "#galeri") {
-                document.getElementById("galeri").scrollIntoView({ behavior: "smooth" });
+                document.getElementById("galeri").scrollIntoView({
+                    behavior: "smooth"
+                });
             }
         });
     </script>
