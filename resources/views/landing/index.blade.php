@@ -28,6 +28,269 @@
     <!-- Lity CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lity/2.4.1/lity.min.css">
     <style>
+        :root {
+            --landing-primary: #046392;
+            --landing-primary-soft: #1e6c93;
+            --landing-accent: #f85a40;
+            --landing-ink: #163247;
+            --landing-muted: #607586;
+            --landing-surface: #ffffff;
+            --landing-soft: #f3f8fb;
+            --landing-shadow: 0 18px 45px rgba(4, 99, 146, 0.12);
+        }
+
+        body {
+            font-size: 14px;
+            background: var(--landing-soft);
+            color: var(--landing-ink);
+        }
+
+        .landing-page section {
+            padding: 68px 0;
+        }
+
+        .landing-page .hero {
+            padding: 78px 0 92px;
+            background: linear-gradient(135deg, var(--landing-primary) 0%, var(--landing-primary-soft) 68%, #2d7ea7 100%);
+        }
+
+        .landing-page .hero .container {
+            z-index: 1;
+        }
+
+        .landing-page .hero h2 {
+            font-size: clamp(2rem, 3.4vw, 3.2rem);
+            line-height: 1.12;
+            letter-spacing: -0.02em;
+            margin-bottom: 18px;
+        }
+
+        .landing-page .hero p {
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.8;
+        }
+
+        .landing-page .hero>.container>.row {
+            align-items: center;
+        }
+
+        .landing-page .topbar {
+            background: #03577f;
+        }
+
+        .landing-page .header {
+            height: 78px;
+            padding: 0 10px !important;
+            box-shadow: 0 8px 24px rgba(0, 42, 68, 0.12);
+        }
+
+        .landing-page .header .logo h1 {
+            font-size: clamp(0.9rem, 1.7vw, 1.2rem);
+            line-height: 1.2;
+        }
+
+        .landing-page .header .logo img {
+            max-height: 44px;
+        }
+
+        .landing-page .carousel {
+            overflow: hidden;
+            border-radius: 24px;
+            box-shadow: 0 24px 55px rgba(0, 30, 50, 0.24);
+            background: #0f4e70;
+        }
+
+        .landing-page .carousel-item img,
+        .landing-page .carousel-item video {
+            aspect-ratio: 4 / 3;
+            object-fit: cover;
+        }
+
+        .landing-page .carousel-indicators [data-bs-target] {
+            width: 24px;
+            height: 4px;
+            border: 0;
+            border-radius: 99px;
+        }
+
+        .landing-page .hero .btn-get-started {
+            background: var(--landing-accent);
+            border: 0;
+            box-shadow: 0 10px 22px rgba(248, 90, 64, 0.24);
+            margin: 4px 8px 0 0;
+        }
+
+        .landing-page .hero .btn-get-started:hover {
+            background: #e94d35;
+            transform: translateY(-2px);
+        }
+
+        .landing-page .announcement {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin: 24px 0 22px;
+            padding: 15px 18px;
+            border: 1px solid rgba(255, 193, 7, 0.45);
+            border-radius: 14px;
+            background: rgba(255, 193, 7, 0.13);
+            color: #fff;
+            line-height: 1.65;
+        }
+
+        .landing-page .announcement i {
+            color: #ffc107;
+            font-size: 1.2rem;
+            flex: 0 0 auto;
+        }
+
+        .landing-page .announcement strong {
+            color: #ffd56a;
+        }
+
+        .landing-page .announcement .btn-close {
+            filter: invert(1);
+            margin-left: auto;
+            flex: 0 0 auto;
+        }
+
+        .landing-page .hero .icon-boxes {
+            padding-top: 52px;
+            padding-bottom: 0;
+        }
+
+        .landing-page .hero .icon-boxes:before {
+            display: none;
+        }
+
+        .landing-page .hero .icon-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 82px;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: none;
+            backdrop-filter: blur(8px);
+        }
+
+        .landing-page .hero .icon-box .title {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .landing-page .hero .icon-box:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-4px);
+        }
+
+        .landing-page .panel,
+        .landing-page .card,
+        .landing-page .service-item,
+        .landing-page .info-container {
+            border: 0;
+            border-radius: 18px;
+            box-shadow: var(--landing-shadow);
+        }
+
+        .landing-page .about,
+        .landing-page .testimonials,
+        .landing-page .contact,
+        .landing-page #reviews {
+            background: var(--landing-soft);
+        }
+
+        .landing-page .bio-graph-heading {
+            border-radius: 18px 18px 0 0;
+            background: var(--landing-primary);
+        }
+
+        .landing-page .section-header h2 {
+            color: var(--landing-ink);
+            font-size: clamp(1.8rem, 3vw, 2.35rem);
+            letter-spacing: -0.02em;
+        }
+
+        .landing-page .table th {
+            color: var(--landing-ink);
+            white-space: nowrap;
+        }
+
+        .landing-page .table td,
+        .landing-page .table th {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            vertical-align: top;
+        }
+
+        .landing-page .testimonials .card {
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .landing-page .testimonials .card:hover,
+        .landing-page .service-item:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 22px 48px rgba(4, 99, 146, 0.18);
+        }
+
+        .landing-page .services .service-item {
+            padding: 20px;
+        }
+
+        .landing-page .services .service-item img {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+
+        .landing-page .stats-counter,
+        .landing-page .call-to-action {
+            background: linear-gradient(135deg, #eaf4f8 0%, #ffffff 100%);
+        }
+
+        .landing-page .stats-counter img {
+            max-height: 220px;
+            object-fit: contain;
+        }
+
+        @media (max-width: 767px) {
+            .landing-page section {
+                padding: 46px 0;
+            }
+
+            .landing-page .hero {
+                padding: 42px 0 60px;
+            }
+
+            .landing-page .header .logo h1 {
+                max-width: 190px;
+                font-size: 0.86rem;
+            }
+
+            .landing-page .header .logo img {
+                max-height: 36px;
+            }
+
+            .landing-page .hero .row {
+                gap: 28px;
+            }
+
+            .landing-page .hero .icon-boxes {
+                padding-top: 30px;
+            }
+
+            .landing-page .hero .icon-box {
+                min-height: 64px;
+            }
+
+            .landing-page .announcement {
+                font-size: 12px;
+            }
+        }
+
         .pagination-container {
             display: flex;
             justify-content: center;
@@ -94,16 +357,1290 @@
             }
         }
 
-        body {
+        /* Light visual direction for the landing page. */
+        .landing-page {
+            background: #fff;
+        }
+
+        .landing-page #main {
+            padding: 0 !important;
+            background: #fff;
+        }
+
+        .landing-page .topbar {
+            background: #fff;
+            border-bottom: 1px solid #e8f0f5;
+            color: var(--landing-ink);
+        }
+
+        .landing-page .topbar .contact-info i a,
+        .landing-page .topbar .contact-info i span,
+        .landing-page .topbar .social-links a {
+            color: var(--landing-ink);
+        }
+
+        .landing-page .topbar .social-links a:hover {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .header {
+            background: #fff;
+            border-bottom: 1px solid #edf3f7;
+            box-shadow: 0 8px 25px rgba(4, 99, 146, 0.07);
+        }
+
+        .landing-page .header .logo h1 {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .navbar a,
+        .landing-page .navbar a:focus {
+            color: var(--landing-ink);
+        }
+
+        .landing-page .navbar a:hover,
+        .landing-page .navbar .active,
+        .landing-page .navbar .active:focus,
+        .landing-page .navbar li:hover>a {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .mobile-nav-show {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .hero {
+            isolation: isolate;
+            overflow: hidden;
+            padding: 88px 0 100px;
+            background: #fff;
+        }
+
+        .landing-page .hero::before,
+        .landing-page .hero::after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            border: 2px solid rgba(4, 99, 146, 0.1);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .landing-page .hero::before {
+            width: 410px;
+            height: 410px;
+            top: -190px;
+            right: -120px;
+        }
+
+        .landing-page .hero::after {
+            width: 270px;
+            height: 270px;
+            bottom: 110px;
+            left: -160px;
+            background: rgba(4, 99, 146, 0.035);
+        }
+
+        .landing-page .hero h2 {
+            color: var(--landing-ink);
+        }
+
+        .landing-page .hero p {
+            color: var(--landing-muted);
+        }
+
+        .landing-page .hero .carousel {
+            border: 8px solid #fff;
+            outline: 1px solid #dcebf3;
+            box-shadow: 0 22px 55px rgba(4, 99, 146, 0.16);
+        }
+
+        .landing-page .hero .btn-get-started {
+            background: var(--landing-primary);
+            color: #fff;
+            box-shadow: 0 10px 22px rgba(4, 99, 146, 0.2);
+        }
+
+        .landing-page .hero .btn-get-started:hover {
+            background: var(--landing-primary-soft);
+        }
+
+        .landing-page .announcement {
+            border-color: #cfe3ee;
+            background: #f3f9fc;
+            color: var(--landing-ink);
+        }
+
+        .landing-page .announcement i,
+        .landing-page .announcement strong {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .announcement .btn-close {
+            filter: none;
+        }
+
+        .landing-page .hero .icon-boxes {
+            position: relative;
+        }
+
+        .landing-page .hero .icon-box {
+            background: #fff;
+            border: 1px solid #d7e9f2;
+            box-shadow: 0 12px 30px rgba(4, 99, 146, 0.08);
+        }
+
+        .landing-page .hero .icon-box .title a {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .hero .icon-box:hover {
+            background: #f5fbfe;
+            border-color: var(--landing-primary);
+        }
+
+        .landing-page .about,
+        .landing-page .testimonials,
+        .landing-page .contact,
+        .landing-page #reviews,
+        .landing-page .sections-bg {
+            background: #fff;
+        }
+
+        .landing-page .about::before,
+        .landing-page .services::before,
+        .landing-page .testimonials::before {
+            content: "";
+            display: block;
+            width: 56px;
+            height: 4px;
+            margin: 0 auto 28px;
+            border-radius: 99px;
+            background: var(--landing-primary);
+            opacity: 0.2;
+        }
+
+        .landing-page .section-header h2 {
+            color: var(--landing-ink);
+        }
+
+        .landing-page .card,
+        .landing-page .panel,
+        .landing-page .service-item,
+        .landing-page .info-container {
+            background: #fff;
+            border: 1px solid #e1edf3;
+            box-shadow: 0 14px 34px rgba(4, 99, 146, 0.07);
+        }
+
+        .landing-page .bio-graph-heading {
+            background: var(--landing-primary);
+        }
+
+        .landing-page .stats-counter,
+        .landing-page .call-to-action {
+            background: #fff;
+        }
+
+        .landing-page .call-to-action {
+            position: relative;
+            border-top: 1px solid #e2eef4;
+            border-bottom: 1px solid #e2eef4;
+        }
+
+        .landing-page .footer.modern-footer {
+            position: relative;
+            overflow: hidden;
+            background: #fff;
+            color: #1b2b36;
+            border-top: 1px solid #dcebf3;
+            padding-top: 64px;
+        }
+
+        .landing-page .footer.modern-footer::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            top: -180px;
+            right: 8%;
+            border: 24px solid rgba(4, 99, 146, 0.05);
+            border-radius: 50%;
+        }
+
+        .landing-page .footer.modern-footer .footer-info .logo span,
+        .landing-page .footer.modern-footer h4 {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .footer.modern-footer .footer-info p,
+        .landing-page .footer.modern-footer .footer-links ul a,
+        .landing-page .footer.modern-footer .credits,
+        .landing-page .footer.modern-footer .copyright {
+            color: #53636d;
+        }
+
+        .landing-page .footer.modern-footer .footer-links ul a:hover,
+        .landing-page .footer.modern-footer .credits a {
+            color: var(--landing-primary);
+        }
+
+        .landing-page .footer.modern-footer .copyright {
+            border-top: 1px solid #e3edf2;
+            padding-top: 18px;
+        }
+
+        @media (max-width: 1279px) {
+            .landing-page .navbar ul {
+                background: #fff;
+                border-left: 1px solid #dcebf3;
+            }
+
+            .landing-page .navbar a,
+            .landing-page .navbar a:focus {
+                color: var(--landing-ink);
+            }
+
+            .landing-page .navbar .dropdown ul,
+            .landing-page .navbar .dropdown .dropdown ul {
+                background: #f4f9fb;
+                border-color: #dcebf3;
+            }
+
+            .landing-page .mobile-nav-hide {
+                color: var(--landing-primary);
+            }
+        }
+
+        @media (max-width: 767px) {
+            .landing-page .hero {
+                padding: 54px 0 70px;
+            }
+
+            .landing-page .hero::before {
+                width: 260px;
+                height: 260px;
+                right: -140px;
+            }
+        }
+
+        /* Modern landing layout */
+        .landing-page .topbar {
+            height: 10px;
+            font-size: 11px;
+        }
+
+        .landing-page .topbar .social-links a {
+            margin-left: 14px;
+        }
+
+        .landing-page .header {
+            height: 68px;
+        }
+
+        .landing-page .header .logo h1 {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 16px;
+            letter-spacing: 0.3px;
+        }
+
+        .landing-page .header .logo img {
+            max-height: 34px;
+            margin-right: 0;
+        }
+
+        .landing-page section {
+            position: relative;
+            padding: 86px 0;
+        }
+
+        .landing-page .hero {
+            padding: 96px 0 80px;
+        }
+
+        .landing-page .hero>.container>.row {
+            min-height: 470px;
+        }
+
+        .landing-page .hero .col-lg-6:last-child {
+            max-width: 560px;
+        }
+
+        .landing-page .hero h2 {
+            max-width: 620px;
+            font-size: clamp(2.3rem, 4.2vw, 4.2rem);
+            line-height: 1.04;
+        }
+
+        .landing-page .hero .hero-title {
+            max-width: 480px;
+            margin-bottom: 8px;
+            font-size: clamp(2rem, 3.1vw, 3rem);
+            line-height: 1.08;
+        }
+
+        .landing-page .hero .hero-subtitle {
+            margin-bottom: 16px;
+            color: var(--landing-primary);
+            font-family: var(--font-primary);
             font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .landing-page .hero .hero-description {
+            max-width: 500px;
+            margin-bottom: 16px;
+            text-align: justify;
+            line-height: 1.65;
+        }
+
+        .landing-page .hero h2::after {
+            content: "";
+            display: block;
+            width: 58px;
+            height: 5px;
+            margin-top: 22px;
+            border-radius: 99px;
+            background: var(--landing-primary);
+        }
+
+        .landing-page .hero .carousel {
+            transform: rotate(-1.5deg);
+            transition: transform 0.35s ease;
+        }
+
+        .landing-page .hero .carousel:hover {
+            transform: rotate(0deg) translateY(-4px);
+        }
+
+        .landing-page .hero .icon-boxes {
+            padding-top: 28px;
+        }
+
+        .landing-page .hero .icon-boxes .row {
+            margin-left: -8px;
+            margin-right: -8px;
+        }
+
+        .landing-page .hero .icon-boxes .col-xl-4 {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .landing-page .hero .icon-box {
+            min-height: 74px;
+            justify-content: flex-start;
+            padding: 16px 20px;
+        }
+
+        .landing-page .hero .icon-box .title {
+            text-align: left;
+        }
+
+        .landing-page .panel {
+            overflow: hidden;
+        }
+
+        .landing-page .panel>.card {
+            border: 0;
+            box-shadow: none;
+        }
+
+        .landing-page .bio-graph-heading {
+            padding: 22px 30px;
+        }
+
+        .landing-page .bio-graph-heading p {
+            margin: 0;
+            font-size: 15px;
+            letter-spacing: 0.04em;
+        }
+
+        .landing-page .about .table-responsive {
+            scrollbar-width: thin;
+        }
+
+        .landing-page .about .table th {
+            min-width: 120px;
+            font-size: 12px;
+            color: var(--landing-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .landing-page .about .table td {
+            font-size: 14px;
+            color: var(--landing-ink);
+        }
+
+        .landing-page #story {
+            background: #f7fbfd;
+        }
+
+        .landing-page #story .row {
+            align-items: center;
+        }
+
+        .landing-page .story-highlight {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 26px;
+            padding: 18px 20px;
+            border-left: 4px solid var(--landing-primary);
+            border-radius: 0 12px 12px 0;
+            background: #fff;
+            color: var(--landing-primary);
+            font-family: var(--font-primary);
+            font-size: 17px;
+            font-weight: 600;
+            box-shadow: 0 12px 28px rgba(4, 99, 146, 0.07);
+        }
+
+        .landing-page .story-highlight i {
+            font-size: 26px;
+        }
+
+        .landing-page #story .card {
+            height: 100%;
+        }
+
+        .landing-page #story .card-body {
+            padding: 28px;
+        }
+
+        .landing-page #story .card ul {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 14px;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .landing-page #story .card li {
+            color: var(--landing-ink);
+            font-size: 13px;
+        }
+
+        .landing-page #story .card li i {
+            margin-right: 6px;
+            color: var(--landing-primary);
+        }
+
+        .landing-page #story img,
+        .landing-page #galeri img,
+        .landing-page #services img {
+            display: block;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .landing-page #story .position-relative img {
+            max-height: 270px;
+        }
+
+        .landing-page #galeri .row {
+            row-gap: 22px;
+        }
+
+        .landing-page #galeri .col-12 {
+            margin-bottom: 0 !important;
+        }
+
+        .landing-page #galeri .card {
+            height: 100%;
+        }
+
+        .landing-page #galeri .card-footer {
+            border-top: 1px solid #edf3f6;
+            background: #fff;
+            font-size: 11px;
+        }
+
+        .landing-page #stats-counter .row {
+            padding: 34px;
+            border: 1px solid #e2edf3;
+            border-radius: 24px;
+            background: #fff;
+            box-shadow: 0 16px 38px rgba(4, 99, 146, 0.07);
+        }
+
+        .landing-page #stats-counter .stats-item {
+            padding: 10px 0;
+        }
+
+        .landing-page #stats-counter .stats-item span {
+            min-width: 76px;
+            color: var(--landing-primary);
+            font-size: 34px;
+            font-weight: 700;
+        }
+
+        .landing-page #services .row {
+            align-items: stretch;
+        }
+
+        .landing-page #services .service-item {
+            display: flex;
+            flex-direction: column;
+            padding: 22px;
+        }
+
+        .landing-page #services .service-item h3 {
+            margin-top: 4px;
+            font-size: 21px;
+        }
+
+        .landing-page #services .service-item p {
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .landing-page .contact iframe {
+            display: block;
+            border-radius: 18px !important;
+            box-shadow: 0 14px 32px rgba(4, 99, 146, 0.1);
+        }
+
+        .landing-page #reviews,
+        .landing-page #review {
+            content-visibility: auto;
+            contain-intrinsic-size: 420px;
+        }
+
+        @media (max-width: 767px) {
+            .landing-page .topbar .contact-info a {
+                font-size: 10px;
+            }
+
+            .landing-page .header .logo h1 {
+                max-width: 210px;
+                font-size: 13px;
+            }
+
+            .landing-page .hero {
+                padding: 62px 0 68px;
+            }
+
+            .landing-page .hero>.container>.row {
+                min-height: 0;
+            }
+
+            .landing-page .hero .carousel {
+                transform: none;
+            }
+
+            .landing-page section {
+                padding: 58px 0;
+            }
+
+            .landing-page #story .card ul {
+                grid-template-columns: 1fr;
+            }
+
+            .landing-page #stats-counter .row {
+                padding: 20px 16px;
+            }
+        }
+
+        /* Compact header and denser mobile rhythm. */
+        .landing-page .topbar {
+            height: 10px;
+            min-height: 10px;
+            overflow: hidden;
+        }
+
+        .landing-page .topbar>.container {
+            max-width: 1180px;
+            min-height: 10px;
+        }
+
+        .landing-page .topbar .contact-info {
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .landing-page .topbar .contact-info i {
+            font-size: 10px;
+        }
+
+        .landing-page .topbar .contact-info a {
+            display: block;
+            max-width: min(100%, 320px);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .landing-page .topbar .social-links a {
+            font-size: 11px;
+            margin-left: 10px;
+        }
+
+        @media (max-width: 767px) {
+            .landing-page .topbar>.container {
+                justify-content: flex-start !important;
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .landing-page .topbar .contact-info a {
+                max-width: 235px;
+                font-size: 9px;
+            }
+
+            .landing-page .header {
+                height: 60px;
+            }
+
+            .landing-page .header .logo h1 {
+                max-width: 200px;
+                gap: 5px;
+                font-size: 12px;
+            }
+
+            .landing-page .header .logo img {
+                max-height: 30px;
+            }
+
+            .landing-page section {
+                padding: 38px 0;
+            }
+
+            .landing-page .hero {
+                padding: 34px 0 42px;
+            }
+
+            .landing-page .hero>.container>.row {
+                gap: 16px;
+            }
+
+            .landing-page .hero h2 {
+                margin-bottom: 12px;
+                font-size: clamp(2rem, 10vw, 2.7rem);
+            }
+
+            .landing-page .hero .hero-title {
+                margin-bottom: 6px;
+                font-size: clamp(1.9rem, 9vw, 2.5rem);
+            }
+
+            .landing-page .hero .hero-subtitle {
+                margin-bottom: 10px;
+                font-size: 10px;
+            }
+
+            .landing-page .hero .hero-description {
+                text-align: center;
+                line-height: 1.5;
+            }
+
+            .landing-page .hero h2::after {
+                width: 42px;
+                height: 4px;
+                margin-top: 14px;
+            }
+
+            .landing-page .hero p {
+                margin-bottom: 10px;
+                line-height: 1.55;
+            }
+
+            .landing-page .hero .carousel {
+                border-width: 5px;
+                border-radius: 18px;
+            }
+
+            .landing-page .hero .icon-boxes {
+                padding-top: 18px;
+            }
+
+            .landing-page .hero .icon-boxes .row {
+                row-gap: 10px;
+            }
+
+            .landing-page .hero .icon-box {
+                min-height: 54px;
+                padding: 10px 14px;
+                border-radius: 12px;
+            }
+
+            .landing-page .hero .icon-box .title {
+                font-size: 12px;
+            }
+
+            .landing-page .announcement {
+                gap: 8px;
+                margin: 14px 0;
+                padding: 11px 12px;
+                font-size: 11px;
+                line-height: 1.45;
+            }
+
+            .landing-page .hero .d-flex.justify-content-center {
+                gap: 6px;
+            }
+
+            .landing-page .hero .btn-get-started {
+                min-height: 42px;
+                padding: 10px 12px;
+                margin-right: 0;
+                font-size: 12px;
+                letter-spacing: 0;
+            }
+
+            .landing-page .bio-graph-heading {
+                padding: 16px 18px;
+            }
+
+            .landing-page .bio-graph-heading p {
+                font-size: 12px;
+                line-height: 1.4;
+            }
+
+            .landing-page .about .card {
+                padding: 16px !important;
+                border-radius: 14px;
+            }
+
+            .landing-page .about .table {
+                margin-bottom: 0;
+            }
+
+            .landing-page .about .table th {
+                min-width: 82px;
+                font-size: 10px;
+            }
+
+            .landing-page .about .table td {
+                font-size: 12px;
+                line-height: 1.45;
+            }
+
+            .landing-page #story .story-highlight {
+                margin-bottom: 16px;
+                padding: 12px 14px;
+                font-size: 14px;
+            }
+
+            .landing-page #story .card-body {
+                padding: 18px;
+            }
+
+            .landing-page #story .card ul {
+                gap: 7px;
+                margin-bottom: 0;
+            }
+
+            .landing-page #story .position-relative img {
+                max-height: 210px;
+            }
+
+            .landing-page .section-header h2 {
+                margin-bottom: 14px;
+                padding-bottom: 14px;
+                font-size: 24px;
+            }
+
+            .landing-page #stats-counter .row {
+                row-gap: 12px;
+            }
+
+            .landing-page #stats-counter .stats-item {
+                padding: 5px 0;
+            }
+
+            .landing-page #stats-counter .stats-item span {
+                min-width: 64px;
+                font-size: 26px;
+            }
+
+            .landing-page #stats-counter .stats-item p {
+                margin-bottom: 0;
+                font-size: 12px;
+            }
+
+            .landing-page #services .service-item {
+                padding: 14px;
+                border-radius: 14px;
+            }
+
+            .landing-page #services .service-item img {
+                margin-bottom: 12px !important;
+            }
+
+            .landing-page #services .service-item h3 {
+                margin-bottom: 8px;
+                font-size: 18px;
+            }
+
+            .landing-page #services .service-item p {
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .landing-page .contact h5 {
+                font-size: 15px;
+            }
+
+            .landing-page .contact iframe {
+                height: 250px !important;
+            }
+
+            .landing-page #reviews {
+                padding-top: 30px !important;
+                padding-bottom: 30px !important;
+            }
+
+            .landing-page #review .info-container {
+                padding: 18px 12px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .landing-page #about .bio-graph-heading {
+                padding: 15px 17px;
+            }
+
+            .landing-page #about .bio-graph-heading p {
+                font-size: 11px;
+                line-height: 1.45;
+                letter-spacing: 0.02em;
+            }
+
+            .landing-page #about .table-responsive {
+                overflow: visible;
+            }
+
+            .landing-page #about .table,
+            .landing-page #about .table tbody,
+            .landing-page #about .table tr {
+                display: block;
+                width: 100%;
+            }
+
+            .landing-page #about .table tr {
+                padding: 10px 0;
+                border-bottom: 1px solid #edf3f6;
+            }
+
+            .landing-page #about .table tr:last-child {
+                border-bottom: 0;
+            }
+
+            .landing-page #about .table th,
+            .landing-page #about .table td {
+                display: block;
+                width: 100%;
+                min-width: 0;
+                padding: 0;
+                text-align: left !important;
+                overflow-wrap: anywhere;
+                word-break: normal;
+            }
+
+            .landing-page #about .table th {
+                margin-bottom: 3px;
+                color: var(--landing-primary);
+                font-size: 10px;
+                line-height: 1.3;
+            }
+
+            .landing-page #about .table td {
+                color: var(--landing-ink);
+                font-size: 12px;
+                line-height: 1.5;
+            }
+
+            .landing-page #about .table td:nth-child(2) {
+                display: none;
+            }
+
+            .landing-page #about .table td iframe {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 767px) {
+
+            .landing-page section,
+            .landing-page #story,
+            .landing-page .contact-section,
+            .landing-page .reviews-section {
+                padding-top: 26px;
+                padding-bottom: 26px;
+            }
+
+            .landing-page .hero {
+                padding-top: 30px;
+                padding-bottom: 32px;
+            }
+
+            .landing-page .hero .hero-description {
+                max-width: 100%;
+                margin-bottom: 12px;
+                text-align: justify !important;
+                line-height: 1.45;
+            }
+
+            .landing-page .hero .row,
+            .landing-page .about .row,
+            .landing-page #story .row,
+            .landing-page #services .row,
+            .landing-page .contact .row {
+                row-gap: 14px;
+            }
+
+            .landing-page .section-header {
+                margin-bottom: 14px;
+            }
+
+            .landing-page .section-header h2 {
+                margin-bottom: 10px;
+                padding-bottom: 10px;
+            }
+
+            .landing-page .about::before,
+            .landing-page .services::before,
+            .landing-page .testimonials::before {
+                margin-bottom: 18px;
+            }
+
+            .landing-page .panel,
+            .landing-page .card,
+            .landing-page .service-item,
+            .landing-page .info-container,
+            .landing-page .contact-card {
+                margin-bottom: 0;
+            }
+
+            .landing-page #story .story-highlight {
+                margin-bottom: 12px;
+            }
+
+            .landing-page #story .position-relative {
+                margin-top: 10px !important;
+            }
+
+            .landing-page #galeri .row {
+                row-gap: 12px;
+            }
+
+            .landing-page #galeri .card-footer {
+                padding: 8px 10px;
+            }
+
+            .landing-page #stats-counter .row {
+                row-gap: 8px;
+            }
+
+            .landing-page #services .service-item {
+                margin-bottom: 0;
+            }
+
+            .landing-page .contact h5 {
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Desktop hero: calm, balanced, and fully visible without the tilt. */
+        @media (min-width: 992px) {
+            .landing-page .hero {
+                padding: 56px 0 46px;
+            }
+
+            .landing-page .hero>.container>.row {
+                min-height: 0;
+                align-items: center;
+            }
+
+            .landing-page .hero .carousel {
+                transform: none;
+            }
+
+            .landing-page .hero .carousel:hover {
+                transform: translateY(-3px);
+            }
+
+            .landing-page .hero .col-lg-6:last-child {
+                padding-left: 42px;
+            }
+
+            .landing-page .hero h2 {
+                max-width: 560px;
+                font-size: clamp(2.4rem, 3.4vw, 3.45rem);
+            }
+
+            .landing-page .hero .announcement {
+                margin: 16px 0;
+                padding: 12px 16px;
+                font-size: 12px;
+            }
+
+            .landing-page .hero .icon-boxes {
+                padding-top: 34px;
+            }
+
+            .landing-page .hero .icon-box {
+                min-height: 66px;
+                padding: 13px 16px;
+            }
+
+            .landing-page .hero .icon-box .title {
+                font-size: 13px;
+            }
+        }
+
+        @media (min-width: 992px) and (max-height: 850px) {
+            .landing-page .hero {
+                padding-top: 38px;
+                padding-bottom: 32px;
+            }
+
+            .landing-page .hero h2 {
+                font-size: 2.7rem;
+                margin-bottom: 12px;
+            }
+
+            .landing-page .hero p {
+                line-height: 1.5;
+                margin-bottom: 10px;
+            }
+
+            .landing-page .hero .icon-boxes {
+                padding-top: 22px;
+            }
+        }
+
+        /* Keep the story card distinct from the supporting photo grid. */
+        .landing-page section {
+            padding-top: 52px;
+            padding-bottom: 52px;
+        }
+
+        .landing-page #story {
+            padding-top: 52px;
+            padding-bottom: 52px;
+        }
+
+        .landing-page #story .content>.row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 26px;
+            margin-right: 0;
+            margin-left: 0;
+        }
+
+        .landing-page #story .content>.row>.col-md-6 {
+            width: 100%;
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .landing-page #story .content>.row>.col-md-6:first-child {
+            padding: 0;
+        }
+
+        .landing-page #story .content>.row>.col-md-6:first-child .card {
+            border: 1px solid #dcebf3;
+            box-shadow: 0 14px 32px rgba(4, 99, 146, 0.1);
+        }
+
+        .landing-page #story .content>.row>.col-md-6:nth-child(2) {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .landing-page #story .content>.row>.col-md-6:nth-child(2) .position-relative {
+            margin-top: 0 !important;
+        }
+
+        .landing-page #story .content>.row>.col-md-6:nth-child(2) img {
+            height: 150px;
+            max-height: none;
+            border-radius: 12px !important;
+        }
+
+        @media (max-width: 767px) {
+
+            .landing-page section,
+            .landing-page #story {
+                padding-top: 32px;
+                padding-bottom: 32px;
+            }
+
+            .landing-page #story .content>.row {
+                gap: 18px;
+            }
+
+            .landing-page #story .content>.row>.col-md-6:nth-child(2) {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 10px;
+            }
+
+            .landing-page #story .content>.row>.col-md-6:nth-child(2) img {
+                height: 125px;
+            }
+        }
+
+        .landing-page .reviews-section {
+            padding-top: 48px;
+            padding-bottom: 48px;
+            background: #f7fbfd;
+        }
+
+        .landing-page .reviews-section .section-header p,
+        .landing-page .contact-section .section-header p {
+            max-width: 580px;
+            margin: -4px auto 24px;
+            color: var(--landing-muted);
+        }
+
+        .landing-page .reviews-panel {
+            min-height: 180px;
+            padding: 24px;
+            border: 1px solid #dcebf3;
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: 0 14px 34px rgba(4, 99, 146, 0.08);
+        }
+
+        .landing-page .contact-section {
+            padding-top: 54px;
+            padding-bottom: 58px;
+        }
+
+        .landing-page .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .landing-page .contact-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            min-height: 150px;
+            padding: 22px;
+            border: 1px solid #dcebf3;
+            border-radius: 18px;
+            background: #fff;
+            color: var(--landing-ink);
+            box-shadow: 0 12px 28px rgba(4, 99, 146, 0.07);
+            transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .landing-page a.contact-card:hover {
+            border-color: var(--landing-primary);
+            color: var(--landing-ink);
+            transform: translateY(-4px);
+            box-shadow: 0 18px 34px rgba(4, 99, 146, 0.13);
+        }
+
+        .landing-page .contact-card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 44px;
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: #eaf5fa;
+            color: var(--landing-primary);
+            font-size: 21px;
+        }
+
+        .landing-page .contact-card-content {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            min-width: 0;
+        }
+
+        .landing-page .contact-card-content small {
+            color: var(--landing-primary);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .landing-page .contact-card-content strong {
+            color: var(--landing-ink);
+            font-family: var(--font-primary);
+            font-size: 17px;
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+
+        .landing-page .contact-card-content>span {
+            color: var(--landing-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .landing-page .contact-card-content>span i {
+            color: var(--landing-primary);
+        }
+
+        @media (max-width: 767px) {
+            .landing-page .reviews-section {
+                padding-top: 34px;
+                padding-bottom: 34px;
+            }
+
+            .landing-page .reviews-panel {
+                padding: 14px;
+                border-radius: 14px;
+            }
+
+            .landing-page .contact-section {
+                padding-top: 38px;
+                padding-bottom: 40px;
+            }
+
+            .landing-page .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                margin-top: 20px;
+            }
+
+            .landing-page .contact-card {
+                min-height: 0;
+                padding: 15px;
+                gap: 12px;
+                border-radius: 14px;
+            }
+
+            .landing-page .contact-card-icon {
+                flex-basis: 38px;
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+                font-size: 18px;
+            }
+
+            .landing-page .contact-card-content strong {
+                font-size: 14px;
+            }
+
+            .landing-page .contact-card-content>span {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
 
-<body>
+<body class="landing-page">
     @include('landing.header')
 
-    <section id="hero" class="hero" style="padding-top: 20px;">
+    <section id="hero" class="hero">
         <div class="container position-relative">
             <div class="row gy-5" data-aos="fade-in" style="">
                 <div class="col-lg-6 order-2  d-flex flex-column justify-content-center text-center text-lg-start">
@@ -118,20 +1655,23 @@
                         </div>
                         <div class="carousel-inner" style="border-radius: 20px;">
                             <div class="carousel-item active">
-                                <video class="d-block w-100" id="video-background" autoplay muted loop>
+                                <video class="d-block w-100" id="video-background" autoplay muted loop
+                                    preload="metadata" playsinline>
                                     <source src="{{ asset('bg-video.mp4') }}" type="video/mp4">
                                 </video>
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
-                                    class="d-block w-100" alt="..." data-lity>
+                                    class="d-block w-100" alt="Kegiatan LPK ACC Japan Centre" loading="lazy"
+                                    decoding="async" data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
                                 <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
-                                    class="d-block w-100" alt="..." data-lity>
+                                    class="d-block w-100" alt="Gedung LPK ACC Japan Centre" loading="lazy"
+                                    decoding="async" data-lity>
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -152,27 +1692,21 @@
                     <p class="justify-content-center;">
                         Welcome to LPK ACC JAPAN CENTRE 👋
                     </p>
-                    <h2>LPK ACC JAPAN CENTRE (Yayasan Amanah Citra Cemerlang)</span></h2>
+                    <h2 class="hero-title">LPK ACC Japan Centre</h2>
+                    <p class="hero-subtitle">Yayasan Amanah Citra Cemerlang</p>
                     <p class="justify-content-center;">
                         <i class="fa fa-map-pin" style="padding-right: 10px;"></i>
                         Kecamatan Adiwerna, Kabupaten Tegal,
                         Central Java
                     </p>
-                    <p style="text-align: justify;" class="justify-content-center">LPK ACC telah
-                        membimbing dan
-                        membina banyak anak hingga berangkat bekerja di Luar Negeri khususnya Negara Jepang. LPK ACC
-                        Japan Centre memiliki program diantaranya
-                        Program Magang, Program Tokutei Ginou dan Matching Job. ACC Japan Centre memiliki banyak Job
-                        dari berbagai sektor kerja di Jepang.
+                    <p class="hero-description">LPK ACC Japan Centre menyediakan pelatihan bahasa, mental, dan
+                        keterampilan kerja untuk mempersiapkan peserta mengikuti program kerja ke Jepang.
                     </p>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <marquee scrollamount="10"><b>Announcement!</b> Yayasan Amanah Citra Cemerlang tidak membuka
-                            LPK
-                            dicabang wilayah
-                            <b>Kota Tegal/sekitarnya!</b> apabila ada lembaga atau perorangan mengatasnamakan kami mohon
-                            diklarifikasikan terlebih dahulu kepada kami, dan kami tidak bertanggung jawab apabila ada
-                            oknum yang mengaku cabang kami! Terimakasih
-                        </marquee>
+                    <div class="announcement" role="alert">
+                        <i class="bi bi-megaphone-fill"></i>
+                        <div><strong>Announcement:</strong> Yayasan Amanah Citra Cemerlang tidak membuka LPK di cabang
+                            wilayah Kota Tegal dan sekitarnya. Mohon klarifikasi terlebih dahulu jika ada pihak yang
+                            mengatasnamakan kami. Terima kasih.</div>
                         <button type="button" class="btn-close" data-bs-dismiss="alert"
                             aria-label="Close"></button>
                     </div>
@@ -230,25 +1764,6 @@
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
                 <div class="col-md-12">
-                    <div class="panel">
-                        {{-- <button class="btn btn-warning pull-right" style="border-radius: 0px;">Profil</button> --}}
-                        <footer class="panel-footer">
-                            <ul class="nav nav-pills">
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                                <li>
-                                    <a href="#"></a>
-                                </li>
-                            </ul>
-                        </footer>
-                    </div>
                     <div class="panel">
                         <div class="bio-graph-heading">
                             <p style="font-weight: bold;">Profil LPK ACC JAPAN CENTRE (YAYASAN AMANAH CITRA CEMERLANG)
@@ -378,7 +1893,8 @@
                                                         <td style="text-align: justify;">
                                                             <div class="row gx-lg-0 gy-4">
                                                                 <div class="col-lg-12">
-                                                                    <iframe class="mb-4 mb-lg-0"
+                                                                    <iframe class="mb-4 mb-lg-0" loading="lazy"
+                                                                        title="Lokasi LPK ACC Japan Centre"
                                                                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
                                                                         frameborder="0"
                                                                         style="border:0; width: 100%; height: 384px;"
@@ -399,12 +1915,13 @@
             </div>
         </section>
 
-        <section id="about" class="about">
+        <section id="story" class="about">
             <div class="container" data-aos="fade-up">
                 <div class="row gy-4">
                     <div class="col-lg-6">
-                        <div class="alert alert-primary" role="alert">
-                            <marquee>Bahasa Adalah Jendela Untuk Melihat Dunia Lebih Luas</marquee>
+                        <div class="story-highlight" role="note">
+                            <i class="bi bi-quote"></i>
+                            <span>Bahasa adalah jendela untuk melihat dunia lebih luas.</span>
                         </div>
                         <p style="text-align: justify;padding-right: 10px;"><b>Visi</b><br />Terwujudnya lembaga
                             pelatihan yang
@@ -422,20 +1939,22 @@
                         </p>
                         <div class="position-relative mt-4">
                             <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="img-fluid rounded-4"
-                                alt="" data-lity>
+                                alt="Gedung LPK ACC Japan Centre" loading="lazy" decoding="async" data-lity>
                             <a href="{{ url('/galeri') }}" class="play-btn"></a>
                         </div>
 
                         <div class="position-relative mt-4">
                             <img src="https://lh3.googleusercontent.com/p/AF1QipPBj7J-RI4unahwIDe4sRie09PYD2lKpjSRvM8C=s1360-w1360-h1020"
-                                class="img-fluid rounded-4" alt="" data-lity>
+                                class="img-fluid rounded-4" alt="Aktivitas LPK ACC Japan Centre" loading="lazy"
+                                decoding="async" data-lity>
                         </div>
 
                     </div>
                     <div class="col-lg-6">
                         <div class="position-relative mt-2">
                             <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.26.16.jpeg"
-                                class="img-fluid rounded-4 mb-4" alt="" data-lity>
+                                class="img-fluid rounded-4 mb-4" alt="Kegiatan pelatihan LPK ACC" loading="lazy"
+                                decoding="async" data-lity>
                         </div>
                         <div class="content ps-0">
                             <div class="row">
@@ -454,14 +1973,15 @@
                                                 <li><i class="bi bi-check-circle-fill"></i> Pendaftaran</li>
                                                 <li><i class="bi bi-check-circle-fill"></i> Pendidikan dan Pelatihan
                                                 </li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Interview</li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Pengajuan Job</li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Pengambilan Job</li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Interview Job</li>
                                                 <li><i class="bi bi-check-circle-fill"></i> Kontrak Turun</li>
                                                 <li><i class="bi bi-check-circle-fill"></i> Pemantapan</li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Apply Visa</li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Medical Full</li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Terbang</li>
-                                                <li><i class="bi bi-check-circle-fill"></i> Kerja</li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Pengurusan Visa & COE</li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Medical Checkup (MCU) Full
+                                                </li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Penerbangan</li>
+                                                <li><i class="bi bi-check-circle-fill"></i> Bekerja di Jepang</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -469,19 +1989,23 @@
                                 <div class="col-md-6">
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
-                                            class="img-fluid rounded-4" alt="" data-lity>
+                                            class="img-fluid rounded-4" alt="Kegiatan peserta LPK ACC" loading="lazy"
+                                            decoding="async" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-08-08-217_com.whatsapp-edit.jpg"
-                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
+                                            class="img-fluid rounded-4 mb-4" alt="Program kerja Jepang"
+                                            loading="lazy" decoding="async" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="https://www.amanahcitracemerlang.id/storage/images/1726219639_Screenshot_2024-09-11-16-41-34-961_com.whatsapp-edit.jpg"
-                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
+                                            class="img-fluid rounded-4 mb-4" alt="Pelatihan bahasa Jepang"
+                                            loading="lazy" decoding="async" data-lity>
                                     </div>
                                     <div class="position-relative mt-2">
                                         <img src="{{ asset('templates/assets/img/poster.jpg') }}"
-                                            class="img-fluid rounded-4 mb-4" alt="" data-lity>
+                                            class="img-fluid rounded-4 mb-4" alt="Poster LPK ACC Japan Centre"
+                                            loading="lazy" decoding="async" data-lity>
                                     </div>
                                 </div>
                             </div>
@@ -497,13 +2021,14 @@
                 <div class="section-header">
                     <h2>Galeri LPK ACC Japan Centre</h2>
                 </div>
-                <div class="row">
+                <div class="row" id="gallery-grid" data-gallery-endpoint="{{ route('gallery.data') }}">
                     @foreach ($images_db as $image)
                         <div class="col-12 col-sm-6 col-lg-3 mb-4">
                             <div class="card h-100">
                                 <div class="card-body p-0">
                                     <img src="{{ asset('storage/' . $image->filepath) }}"
-                                        class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                        class="card-img-top lazyload img-fluid" data-lity
+                                        alt="Galeri LPK ACC Japan Centre" loading="lazy" decoding="async"
                                         style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
                                 </div>
                                 <div class="card-footer text-body-secondary">
@@ -516,7 +2041,7 @@
                 </div>
 
                 <!-- Custom Pagination -->
-                <div class="pagination-container" style="padding: 0px;">
+                <div class="pagination-container" id="gallery-pagination" style="padding: 0px;">
                     <ul class="pagination">
                         @if ($images_db->onFirstPage())
                             <li class="disabled"><span>&lt;</span></li>
@@ -549,11 +2074,12 @@
                 <div class="row gy-4 align-items-center">
                     <div class="col-lg-4">
                         <img src="https://www.amanahcitracemerlang.id/storage/images/1738848428_WhatsApp%20Image%202025-02-06%20at%2020.24.39.jpeg"
-                            data-lity alt="" class="img-fluid">
+                            data-lity alt="Aktivitas peserta LPK ACC" loading="lazy" decoding="async"
+                            class="img-fluid">
                     </div>
                     <div class="col-lg-4">
-                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt=""
-                            class="img-fluid" data-lity>
+                        <img src="{{ asset('templates/assets/img/japan/logojepang.png') }}" alt="Logo Jepang"
+                            class="img-fluid" loading="lazy" decoding="async" data-lity>
                     </div>
                     <div class="col-lg-4">
                         <div class="stats-item d-flex align-items-center">
@@ -611,7 +2137,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item  position-relative">
                             <img src="https://www.amanahcitracemerlang.id/storage/images/1738774200_Screenshot_2025_0204_193622.jpg"
-                                data-lity class="img-fluid rounded-4 mb-4" alt="">
+                                data-lity class="img-fluid rounded-4 mb-4" alt="Program Magang Jepang" loading="lazy"
+                                decoding="async">
                             <h3>Program Magang</h3>
                             <p>
                                 Program Magang adalah program pelatihan kerja untuk warga negara asing yang dikenal
@@ -629,7 +2156,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div class="service-item position-relative">
                             <img src="https://www.amanahcitracemerlang.id/storage/images/1727241978_Screenshot_2024-09-10-09-07-58-609_com.whatsapp-edit.jpg"
-                                class="img-fluid rounded-4 mb-4" alt="" data-lity>
+                                class="img-fluid rounded-4 mb-4" alt="Program Tokutei Ginou Jepang" loading="lazy"
+                                decoding="async" data-lity>
                             <h3>Program Tokutei Ginou (TG)</h3>
                             <p>
                                 Tokutei Ginou (TG) adalah program kerja untuk warga negara asing yang memiliki keahlian
@@ -654,7 +2182,7 @@
                 <h5><b>Lokasi Gedung 1 LPK ACC JAPAN CENTRE</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
-                        <iframe class="mb-4 mb-lg-0"
+                        <iframe class="mb-4 mb-lg-0" loading="lazy" title="Lokasi Gedung 1 LPK ACC Japan Centre"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.524644510538!2d109.1131374!3d-6.9472685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb913ec72ac99%3A0x15c1e344784a1ea2!2sACC%20Japan%20Centre!5e0!3m2!1sid!2sid!4v1707996435480!5m2!1sid!2sid"
                             frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                     </div>
@@ -668,7 +2196,7 @@
                 <h5><b>Lokasi GEDUNG 2 LPK ACC JAPAN CENTRE</b></h5>
                 <div class="row gx-lg-0 gy-4">
                     <div class="col-lg-12">
-                        <iframe class="mb-4 mb-lg-0"
+                        <iframe class="mb-4 mb-lg-0" loading="lazy" title="Lokasi Gedung 2 LPK ACC Japan Centre"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5237300552067!2d109.10930867430935!3d-6.947377068011707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fb960aa5701dd%3A0x47a423a3a5e544b6!2sGedung%202%20LPK%20ACC%20Japan%20Center%20(Gedung%20Baru)!5e0!3m2!1sid!2sid!4v1779252567317!5m2!1sid!2sid"
                             frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
                     </div>
@@ -677,82 +2205,53 @@
         </section>
 
         {{-- Testimoni Japan Center --}}
-        <div id="reviews" style="padding-top: 20px;padding-bottom: 20px;">
+        <div id="reviews" class="reviews-section">
             <div class="container" data-aos="fade-up">
                 <div class="section-header">
-                    <h2>Reviews ACC Japan</h2>
+                    <h2>Ulasan Google Maps</h2>
+                    <p>Pengalaman dan penilaian dari peserta serta keluarga yang telah mengenal ACC Japan Centre.</p>
                 </div>
-                <div class='sk-ww-google-reviews' data-embed-id='25365701'></div>
+                <div class="reviews-panel">
+                    <div class='sk-ww-google-reviews' data-embed-id='25365701'></div>
+                </div>
             </div>
         </div>
 
-        <section id="review" class="contact ">
+        <section id="review" class="contact contact-section">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-header">
-                    <h2>Review</h2>
+                    <h2>Hubungi ACC Japan Centre</h2>
+                    <p>Temukan informasi lokasi, email, dan jam layanan kami.</p>
                 </div>
 
-                <div class="row gx-lg-0 gy-4">
-                    <div class="col-lg-12">
-                        <div class="info-container d-flex flex-column align-items-center justify-content-center">
-                            <div class="info-item d-flex">
-                                <i class="bi bi-geo-alt flex-shrink-0"></i>
-                                <div>
-                                    <h4>Location:</h4>
-                                    <p>Tegal, Central Java</p>
-                                </div>
-                            </div>
+                <div class="contact-grid">
+                    <a class="contact-card" href="#lokasi-acc">
+                        <span class="contact-card-icon"><i class="bi bi-geo-alt"></i></span>
+                        <span class="contact-card-content">
+                            <small>Location</small>
+                            <strong>Tegal, Central Java</strong>
+                            <span>Lihat lokasi ACC Japan Centre <i class="bi bi-arrow-up-right"></i></span>
+                        </span>
+                    </a>
 
-                            <div class="info-item d-flex">
-                                <i class="bi bi-envelope flex-shrink-0"></i>
-                                <div>
-                                    <h4>Email:</h4>
-                                    <p>amanahcitracemerlang1@gmail.com</p>
-                                </div>
-                            </div>
+                    <a class="contact-card" href="mailto:amanahcitracemerlang1@gmail.com">
+                        <span class="contact-card-icon"><i class="bi bi-envelope"></i></span>
+                        <span class="contact-card-content">
+                            <small>Email</small>
+                            <strong>amanahcitracemerlang1@gmail.com</strong>
+                            <span>Kirim pertanyaan melalui email <i class="bi bi-arrow-up-right"></i></span>
+                        </span>
+                    </a>
 
-                            <div class="info-item d-flex">
-                                <i class="bi bi-clock flex-shrink-0"></i>
-                                <div>
-                                    <h4>Open:</h4>
-                                    <p>(Pagi) 09.00 - 16.00 WIB</p>
-                                    <p>(Malam) 16.00 - 22.00 WIB</p>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div class="contact-card">
+                        <span class="contact-card-icon"><i class="bi bi-clock"></i></span>
+                        <span class="contact-card-content">
+                            <small>Open</small>
+                            <strong>09.00 - 22.00 WIB</strong>
+                            <span>Pagi 09.00 - 16.00 · Malam 16.00 - 22.00</span>
+                        </span>
                     </div>
-
-                    <!-- <div class="col-lg-6">
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-                            <div class="row">
-                                <div class="col-md-6 form-group">
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Your Name" disabled>
-                                </div>
-                                <div class="col-md-6 form-group mt-3 mt-md-0">
-                                    <input type="email" class="form-control" name="email" id="email"
-                                        placeholder="Your Email" disabled>
-                                </div>
-                            </div>
-                            <div class="form-group mt-3">
-                                <input type="text" class="form-control" name="subject" id="subject"
-                                    placeholder="Subject" disabled>
-                            </div>
-                            <div class="form-group mt-3">
-                                <textarea class="form-control" name="message" rows="7" placeholder="Message" required disabled></textarea>
-                            </div>
-                            <div class="my-3">
-                                <div class="loading">Loading</div>
-                                <div class="error-message"></div>
-                                <div class="sent-message">Your message has been sent. Thank you!</div>
-                            </div>
-                            <div class="text-center">
-                                <a href="https://wa.me/6285640110822"><button type="submit">Send Whatsapp</button></a>
-                            </div>
-                        </form>
-                    </div> -->
                 </div>
             </div>
         </section>
@@ -775,7 +2274,7 @@
                         <div class="col-md-6" style="padding: 10px;">
                             <div class="card" style="width: 100%;">
                                 <img src="{{ asset('templates/assets/img/acc.jpg') }}" class="card-img-top"
-                                    alt="ACC Japan" data-lity>
+                                    alt="ACC Japan" loading="lazy" decoding="async" data-lity>
                                 <div class="card-body">
                                     <a href="" target="_blank" class="btn btn-success"
                                         style="width: 100%;"><i class="bi bi-whatsapp"
@@ -794,6 +2293,161 @@
 
     @include('landing.footer')
 
+    <script>
+        (function() {
+            const galleryGrid = document.getElementById('gallery-grid');
+            const galleryPagination = document.getElementById('gallery-pagination');
+
+            if (!galleryGrid || !galleryPagination) {
+                return;
+            }
+
+            const cacheKey = 'acc-gallery-images-v1';
+            const cacheLifetime = 10 * 60 * 1000;
+            const pageSize = 12;
+            let images = null;
+
+            function escapeHtml(value) {
+                return String(value ?? '').replace(/[&<>'"]/g, function(character) {
+                    return {
+                        '&': '&amp;',
+                        '<': '&lt;',
+                        '>': '&gt;',
+                        "'": '&#039;',
+                        '"': '&quot;'
+                    } [character];
+                });
+            }
+
+            function getCachedImages() {
+                try {
+                    const cached = JSON.parse(localStorage.getItem(cacheKey));
+
+                    if (cached && Date.now() - cached.savedAt < cacheLifetime && Array.isArray(cached.images)) {
+                        return cached.images;
+                    }
+                } catch (error) {
+                    localStorage.removeItem(cacheKey);
+                }
+
+                return null;
+            }
+
+            async function loadImages() {
+                if (images) {
+                    return images;
+                }
+
+                images = getCachedImages();
+
+                if (images) {
+                    return images;
+                }
+
+                const response = await fetch(galleryGrid.dataset.galleryEndpoint, {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Gallery data could not be loaded.');
+                }
+
+                images = await response.json();
+
+                try {
+                    localStorage.setItem(cacheKey, JSON.stringify({
+                        savedAt: Date.now(),
+                        images
+                    }));
+                } catch (error) {
+                    // Keep the gallery usable when browser storage is unavailable.
+                }
+
+                return images;
+            }
+
+            function formatDate(value) {
+                const date = new Date(value);
+
+                return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('id-ID', {
+                    day: '2-digit',
+                    month: 'short',
+                    year: 'numeric'
+                });
+            }
+
+            function renderPage(page) {
+                const totalPages = Math.max(1, Math.ceil(images.length / pageSize));
+                const currentPage = Math.min(Math.max(page, 1), totalPages);
+                const firstImage = (currentPage - 1) * pageSize;
+                const storagePath = @json(asset('storage')) + '/';
+
+                galleryGrid.innerHTML = images.slice(firstImage, firstImage + pageSize).map(function(image) {
+                    return `
+                        <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body p-0">
+                                    <img src="${storagePath}${encodeURI(image.filepath)}"
+                                        class="card-img-top lazyload img-fluid" data-lity
+                                        alt="Galeri LPK ACC Japan Centre" loading="lazy" decoding="async"
+                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                                </div>
+                                <div class="card-footer text-body-secondary">
+                                    <b>Date:</b> ${escapeHtml(formatDate(image.created_at))}
+                                </div>
+                            </div>
+                        </div>`;
+                }).join('');
+
+                const pageLinks = [];
+                pageLinks.push(currentPage === 1 ?
+                    '<li class="disabled"><span>&lt;</span></li>' :
+                    `<li><a href="?page=${currentPage - 1}#galeri" data-gallery-page="${currentPage - 1}">&lt;</a></li>`
+                );
+
+                for (let pageNumber = 1; pageNumber <= totalPages; pageNumber += 1) {
+                    pageLinks.push(pageNumber === currentPage ?
+                        `<li class="active"><span>${pageNumber}</span></li>` :
+                        `<li><a href="?page=${pageNumber}#galeri" data-gallery-page="${pageNumber}">${pageNumber}</a></li>`
+                    );
+                }
+
+                pageLinks.push(currentPage === totalPages ?
+                    '<li class="disabled"><span>&gt;</span></li>' :
+                    `<li><a href="?page=${currentPage + 1}#galeri" data-gallery-page="${currentPage + 1}">&gt;</a></li>`
+                );
+
+                galleryPagination.querySelector('.pagination').innerHTML = pageLinks.join('');
+                history.replaceState(null, '', `?page=${currentPage}#galeri`);
+                galleryGrid.closest('#galeri').scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            galleryPagination.addEventListener('click', async function(event) {
+                const link = event.target.closest('a');
+
+                if (!link) {
+                    return;
+                }
+
+                const targetUrl = new URL(link.href, window.location.href);
+                const targetPage = Number(targetUrl.searchParams.get('page') || 1);
+
+                event.preventDefault();
+
+                try {
+                    await loadImages();
+                    renderPage(targetPage);
+                } catch (error) {
+                    window.location.href = link.href;
+                }
+            });
+        })();
+    </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             if (window.location.hash === "#galeri") {

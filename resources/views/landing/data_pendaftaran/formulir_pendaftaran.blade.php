@@ -53,16 +53,428 @@
             bottom: 0;
             background: linear-gradient(to bottom, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.85));
         }
+
+        body.registration-page {
+            background: #f5f9fc;
+            color: #163247;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        body.registration-page::before,
+        body.registration-page::after {
+            display: none;
+        }
+
+        .registration-page .header {
+            position: sticky;
+            top: 0;
+            height: 70px;
+            padding: 0 12px !important;
+            background: rgba(255, 255, 255, 0.96) !important;
+            border-bottom: 1px solid #e4eef4;
+            box-shadow: 0 6px 22px rgba(4, 99, 146, 0.08);
+            backdrop-filter: blur(14px);
+        }
+
+        .registration-page .header .logo h1 {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #046392;
+            font-size: 16px;
+        }
+
+        .registration-page .header .logo img {
+            max-height: 38px;
+            width: auto;
+        }
+
+        .registration-page .navbar a,
+        .registration-page .navbar a:focus {
+            color: #163247;
+        }
+
+        .registration-page .navbar a:hover,
+        .registration-page .navbar li:hover>a,
+        .registration-page .mobile-nav-show {
+            color: #046392;
+        }
+
+        .registration-page .min-h-screen {
+            min-height: 0;
+            padding-bottom: 0;
+        }
+
+        .registration-page .registration-hero {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            height: 360px;
+            background:
+                radial-gradient(circle at 88% 18%, rgba(129, 211, 238, 0.5) 0, rgba(129, 211, 238, 0.08) 22%, transparent 43%),
+                radial-gradient(circle at 8% 100%, rgba(31, 126, 168, 0.7) 0, rgba(31, 126, 168, 0.12) 27%, transparent 48%),
+                linear-gradient(118deg, #023b5a 0%, #046392 54%, #167ba4 100%);
+        }
+
+        .registration-page .registration-hero::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            width: 420px;
+            height: 420px;
+            top: -250px;
+            right: 12%;
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 50%;
+            box-shadow: 0 0 0 32px rgba(255, 255, 255, 0.035), 0 0 0 64px rgba(255, 255, 255, 0.025);
+        }
+
+        .registration-page .registration-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(110deg, rgba(2, 45, 70, 0.7), rgba(4, 99, 146, 0.22));
+            pointer-events: none;
+        }
+
+        .registration-page .registration-hero video {
+            z-index: -2;
+            opacity: 0.16;
+            mix-blend-mode: screen;
+        }
+
+        .registration-page .registration-hero-content {
+            text-align: left;
+        }
+
+        .registration-page .registration-hero-content>span {
+            border: 1px solid rgba(147, 225, 246, 0.3);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .registration-page .registration-hero h2 {
+            max-width: 720px;
+            margin: 0 0 14px;
+            font-size: clamp(2rem, 4vw, 3.6rem);
+            line-height: 1.06;
+            letter-spacing: -0.02em;
+        }
+
+        .registration-page .registration-hero p {
+            max-width: 620px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .registration-page .registration-hero-steps {
+            display: flex;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .registration-page .registration-hero-step {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            min-width: 145px;
+            padding: 10px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 11px;
+            backdrop-filter: blur(8px);
+        }
+
+        .registration-page .registration-hero-step strong {
+            color: #a3e5f7;
+            font-size: 13px;
+        }
+
+        .registration-page .registration-form-shell {
+            max-width: 1080px;
+            margin-top: -54px;
+            padding-bottom: 64px;
+        }
+
+        .registration-page .registration-card {
+            padding: 42px !important;
+            border: 1px solid #e2edf3;
+            border-radius: 24px;
+            box-shadow: 0 22px 55px rgba(4, 99, 146, 0.13);
+        }
+
+        .registration-page #pendaftaranForm>div {
+            padding: 6px 0 30px;
+            border-bottom: 1px solid #e5eef3;
+        }
+
+        .registration-page #pendaftaranForm>div+div {
+            margin-top: 30px;
+        }
+
+        .registration-page #pendaftaranForm h3 {
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            color: #163247;
+            border-color: #dcebf3;
+            font-size: 17px;
+        }
+
+        .registration-page #pendaftaranForm h3 span {
+            width: 4px;
+            height: 22px;
+            border-radius: 99px;
+            background: #046392 !important;
+        }
+
+        .registration-page #pendaftaranForm label {
+            color: #294453;
+        }
+
+        .registration-page #pendaftaranForm input,
+        .registration-page #pendaftaranForm select,
+        .registration-page #pendaftaranForm textarea,
+        .registration-page #pendaftaranForm .tagify {
+            min-height: 44px;
+            border-color: #d7e6ee;
+            border-radius: 10px;
+            background: #fbfdfe;
+            box-shadow: none;
+        }
+
+        .registration-page #pendaftaranForm input:focus,
+        .registration-page #pendaftaranForm select:focus,
+        .registration-page #pendaftaranForm textarea:focus,
+        .registration-page #pendaftaranForm .tagify--focus {
+            border-color: #046392;
+            box-shadow: 0 0 0 3px rgba(4, 99, 146, 0.1);
+            outline: none;
+        }
+
+        .registration-page #button-container {
+            padding-top: 26px !important;
+            border-bottom: 0 !important;
+        }
+
+        .registration-page #button-container button {
+            min-height: 48px;
+            border-radius: 10px;
+        }
+
+        .registration-page #submitBtn {
+            background: #046392 !important;
+        }
+
+        .registration-page #submitBtn:hover {
+            background: #03527a !important;
+        }
+
+        .registration-page .footer.modern-footer {
+            position: relative;
+            overflow: hidden;
+            padding-top: 56px;
+            background: #fff;
+            color: #1b2b36;
+            border-top: 1px solid #dcebf3;
+        }
+
+        .registration-page .footer.modern-footer::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            top: -170px;
+            right: 8%;
+            border: 22px solid rgba(4, 99, 146, 0.05);
+            border-radius: 50%;
+        }
+
+        .registration-page .footer.modern-footer .footer-info .logo span,
+        .registration-page .footer.modern-footer h4 {
+            color: #046392;
+        }
+
+        .registration-page .footer.modern-footer .footer-info p,
+        .registration-page .footer.modern-footer .footer-links ul a,
+        .registration-page .footer.modern-footer .credits,
+        .registration-page .footer.modern-footer .copyright {
+            color: #53636d;
+        }
+
+        .registration-page .footer.modern-footer .footer-links ul a:hover {
+            color: #046392;
+        }
+
+        .registration-page .footer.modern-footer .copyright {
+            border-top: 1px solid #e3edf2;
+            padding-top: 18px;
+        }
+
+        @media (max-width: 1279px) {
+            .registration-page .header {
+                z-index: 10000;
+            }
+
+            .registration-page .navbar {
+                z-index: 10001;
+            }
+
+            .registration-page .navbar ul {
+                z-index: 10003;
+                background: #fff;
+                border-left: 1px solid #dcebf3;
+                box-shadow: -12px 0 30px rgba(4, 99, 146, 0.12);
+            }
+
+            .registration-page .navbar::before {
+                z-index: -1;
+            }
+
+            .registration-page .navbar a,
+            .registration-page .navbar a:focus {
+                color: #163247;
+            }
+
+            .registration-page .mobile-nav-hide {
+                color: #046392;
+                z-index: 10004;
+            }
+        }
+
+        .registration-page .registration-hero {
+            align-items: flex-start !important;
+        }
+
+        .registration-page .registration-hero-content {
+            padding-top: 48px;
+        }
+
+        @media (max-width: 767px) {
+            .registration-page .header {
+                height: 60px;
+            }
+
+            .registration-page .header .logo h1 {
+                max-width: 210px;
+                gap: 5px;
+                font-size: 12px;
+            }
+
+            .registration-page .header .logo img {
+                max-height: 30px;
+            }
+
+            .registration-page .registration-hero {
+                height: 350px;
+            }
+
+            .registration-page .registration-hero h2 {
+                padding: 0 12px;
+                font-size: 1.9rem;
+            }
+
+            .registration-page .registration-hero p {
+                padding: 0 22px;
+                font-size: 12px;
+            }
+
+            .registration-page .registration-hero-content {
+                text-align: center;
+                padding-top: 26px;
+            }
+
+            .registration-page .registration-hero-content>span {
+                margin-bottom: 12px;
+            }
+
+            .registration-page .registration-hero-steps {
+                justify-content: center;
+                gap: 6px;
+                margin: 18px auto 0;
+                padding: 0 8px;
+            }
+
+            .registration-page .registration-hero-step {
+                min-width: 0;
+                flex: 1;
+                flex-direction: column;
+                gap: 3px;
+                padding: 8px 5px;
+                font-size: 9px;
+                text-align: center;
+            }
+
+            .registration-page .registration-form-shell {
+                margin-top: -28px;
+                padding: 0 12px 36px;
+            }
+
+            .registration-page .registration-card {
+                padding: 20px 16px !important;
+                border-radius: 18px;
+            }
+
+            .registration-page #pendaftaranForm>div {
+                padding-bottom: 22px;
+            }
+
+            .registration-page #pendaftaranForm>div+div {
+                margin-top: 22px;
+            }
+
+            .registration-page #pendaftaranForm h3 {
+                margin-bottom: 16px;
+                font-size: 15px;
+                line-height: 1.35;
+            }
+
+            .registration-page #pendaftaranForm .grid {
+                gap: 14px;
+            }
+
+            .registration-page #pendaftaranForm input,
+            .registration-page #pendaftaranForm select,
+            .registration-page #pendaftaranForm textarea {
+                min-height: 46px;
+                font-size: 13px;
+            }
+
+            .registration-page #pendaftaranForm p.text-danger {
+                font-size: 10px;
+                line-height: 1.45;
+            }
+
+            .registration-page .footer.modern-footer {
+                padding-top: 42px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .registration-page .registration-hero {
+                height: 460px;
+            }
+
+            .registration-page .registration-form-shell {
+                margin-top: -44px;
+            }
+
+            .registration-page .registration-hero-steps {
+                position: relative;
+                z-index: 2;
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="registration-page">
     <header id="header" class="header d-flex align-items-center" style="padding: 10px;">
         <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
             <a href="/" class="logo d-flex align-items-center">
                 <h1>
                     <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
-                        class="img-fluid">
+                        class="img-fluid" alt="Logo LPK ACC Japan Centre" width="44" height="44">
                 </h1>
             </a>
             <nav id="navbar" class="navbar">
@@ -87,14 +499,14 @@
 
     <div class="min-h-screen pb-12">
         <section id="hero"
-            class="relative video-container h-[340px] md:h-[400px] flex items-center justify-center overflow-hidden w-full">
-            <video autoplay muted loop playsinline
+            class="registration-hero relative video-container h-[340px] md:h-[400px] flex items-center justify-center overflow-hidden w-full">
+            <video autoplay muted loop playsinline preload="metadata"
                 class="absolute z-0 w-auto min-w-full min-h-full max-w-none object-cover">
                 <source src="https://amanahcitracemerlang.id/bg-video.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
 
-            <div class="container relative z-10 mx-auto px-4 text-center text-white">
+            <div class="registration-hero-content container relative z-10 mx-auto px-4 text-white">
                 <span
                     class="inline-block bg-teal-500/20 text-teal-300 text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full mb-3 backdrop-blur-sm">
                     Pendaftaran Online
@@ -106,11 +518,25 @@
                     class="flex items-center justify-center text-gray-200 text-xs md:text-sm max-w-xl mx-auto space-x-2 drop-shadow">
                     <p>Dukuh Gitung, Desa Harjosari Lor, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah, 52194</p>
                 </div>
+                <div class="registration-hero-steps" aria-label="Tahapan pendaftaran">
+                    <div class="registration-hero-step">
+                        <strong>01</strong>
+                        <span>Isi data diri</span>
+                    </div>
+                    <div class="registration-hero-step">
+                        <strong>02</strong>
+                        <span>Kirim formulir</span>
+                    </div>
+                    <div class="registration-hero-step">
+                        <strong>03</strong>
+                        <span>Konfirmasi staff</span>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <div class="container mx-auto px-4 -mt-10 relative z-20 max-w-4xl">
-            <div class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10">
+        <div class="registration-form-shell container mx-auto px-4 -mt-10 relative z-20 max-w-4xl">
+            <div class="registration-card bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10">
                 <form class="signup-form space-y-8" id="pendaftaranForm">
                     @csrf
 
@@ -877,6 +1303,8 @@
             </div>
         </div>
     </div>
+
+    @include('landing.footer')
 
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

@@ -37,6 +37,12 @@ Route::get('/galeri', function () {
     return view('landing/galeri', ['images_db' => $images_db]);
 });
 
+Route::get('/galeri/data', function () {
+    return response()->json(
+        Image::orderBy('created_at', 'desc')->get(['id', 'filepath', 'created_at'])
+    );
+})->name('gallery.data');
+
 Route::get('/daftar-online', function () {
     return view('landing/daftar');
 });
