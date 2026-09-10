@@ -9,7 +9,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
 
-    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+        rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -103,7 +105,7 @@
 
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -145,7 +147,8 @@
             white-space: nowrap;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -193,14 +196,14 @@
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -218,16 +221,19 @@
                     </div>
                 </div>
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
-                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome LPK ACC Japan Centre 👋</p>
+                    <p class="justify-content-center;"><i class="fa fa-map-pin" style="padding-right: 10px;"></i>Welcome
+                        LPK ACC Japan Centre 👋</p>
                     <h2></span>DATA SISWA PENDAFTARAN ONLINE LPK ACC JAPAN CENTRE</h2>
                     {{-- <p style="text-align: justify;" class="justify-content-center">
                         LPK ACC Japan Centre menerima Program Magang, Tokutei Ginou (TG) dan Matching Job. Silahkan Daftarkan diri anda di LPK ACC Japan Centre.
                     </p> --}}
                     <ul>
-                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
+                        <li class="text-white">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor,
+                            Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</li>
                         <li class="text-white">LPK ACC Japan Centre lembaga Resmi, Amanah dan Legal.</li>
                     </ul>
-                    <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
+                    <div class="d-flex justify-content-center justify-content-lg-start text-center"
+                        style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Website LPK ACC Japan Centre
@@ -244,7 +250,7 @@
                 <div class="d-flex justify-content-between mb-3">
                     <div>
                         <label>
-                            Show 
+                            Show
                             <select id="entriesSelect" class="form-control d-inline-block w-auto">
                                 <option value="5">5</option>
                                 <option value="10">10</option>
@@ -258,20 +264,20 @@
                         <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
                     </div>
                 </div>
-    
+
                 <div class="table-responsive">
                     <table id="spreadsheetTable" class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                @foreach(array_keys($data[0]) as $header)
+                                @foreach (array_keys($data[0]) as $header)
                                     <th>{{ $header }}</th>
                                 @endforeach
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($data as $row)
+                            @foreach ($data as $row)
                                 <tr>
-                                    @foreach($row as $cell)
+                                    @foreach ($row as $cell)
                                         <td>{{ $cell }}</td>
                                     @endforeach
                                 </tr>
@@ -279,7 +285,7 @@
                         </tbody>
                     </table>
                 </div>
-    
+
                 <!-- Pagination di luar DataTables -->
                 <div class="d-flex justify-content-between align-items-center mt-3">
                     <span id="tableInfo"></span>
@@ -288,8 +294,8 @@
             </div>
         </div>
     </div>
-    
-    <br/>    
+
+    <br />
 
     <div id="preloader"></div>
 
@@ -311,7 +317,7 @@
                 "lengthChange": false,
                 "scrollY": false,
                 "scrollCollapse": false,
-                "dom": 'rtp' 
+                "dom": 'rtp'
             });
 
             // **Sembunyikan pagination bawaan DataTables**
@@ -335,7 +341,7 @@
                 }
             });
         });
-    </script>     
+    </script>
 
     <script src='https://widgets.sociablekit.com/google-business-profile/widget.js' async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
