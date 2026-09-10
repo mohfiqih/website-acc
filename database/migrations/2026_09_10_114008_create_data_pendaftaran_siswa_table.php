@@ -98,7 +98,7 @@ return new class extends Migration
             $table->string('pilih_kelas')->nullable();
             $table->string('pilih_program')->nullable();
 
-            $table->string('randomId')->nullable()->unique();
+            $table->string('randomId')->nullable();
 
             $table->timestamps();
         });
