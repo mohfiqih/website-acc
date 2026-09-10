@@ -1,17 +1,3 @@
-<style>
-    .nav-item.active > .nav-link {
-        background-color: #e9f3ff !important;
-        font-weight: bold;
-        color: #0d6efd !important;
-        border-left: 4px solid #0d6efd;
-    }
-
-    .collapse-item.active {
-        font-weight: bold;
-        color: #0d6efd !important;
-    }
-</style>
-
 @if (Auth::check())
     @if (Auth::user()->user_level == 'Super Admin')
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar" style="font-size: 15px;">
@@ -19,7 +5,8 @@
             <!-- Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('dasbor') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" style="width: 45px;">
+                    <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+                        style="width: 45px;">
                 </div>
                 <div class="sidebar-brand-text mx-2 fw-bold">ACC Japan</div>
             </a>
@@ -27,7 +14,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Home -->
-            <div class="sidebar-heading mt-3">Home</div>
+            <div class="sidebar-heading mt-3">OVERVIEW</div>
             <li class="nav-item {{ Request::is('dasbor') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('dasbor') }}">
                     <i class="fas fa-fw fa-tachometer-alt text-primary"></i>
@@ -38,8 +25,9 @@
             <hr class="sidebar-divider">
 
             <!-- Data Siswa -->
-            <div class="sidebar-heading">ALL DATA</div>
-            <li class="nav-item {{ Request::is('data-pendaftaran-siswa-baru') ? 'active' : '' }}" style="padding-left: 10px;">
+            <div class="sidebar-heading">DATA OPERASIONAL</div>
+            <li class="nav-item {{ Request::is('data-pendaftaran-siswa-baru') ? 'active' : '' }}"
+                style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('data-pendaftaran-siswa-baru') }}">
                     <i class="fas fa-fw fa-file-signature text-success"></i>
                     <span>Pendaftaran Online</span>
@@ -47,7 +35,7 @@
             </li>
 
             {{-- Data Siswa --}}
-            <li class="nav-item" style="padding-left: 10px;">
+            <li class="nav-item {{ Request::is('data-siswa') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('data-siswa') }}">
                     <i class="fas fa-fw fa-users text-primary"></i>
                     <span>Data All Siswa</span>
@@ -84,7 +72,7 @@
             <hr class="sidebar-divider">
 
             <!-- Master Data -->
-            <div class="sidebar-heading">Master Data</div>
+            <div class="sidebar-heading">KONFIGURASI</div>
             <li class="nav-item {{ Request::is('data-user') ? 'active' : '' }}" style="padding-left: 10px;">
                 <a class="nav-link" href="{{ url('data-user') }}">
                     <i class="fas fa-fw fa-user-cog text-dark"></i>
@@ -97,12 +85,14 @@
                 $isLandingActive = Request::is('/') || Request::is('program-jepang') || Request::is('program-korea');
             @endphp
             <li class="nav-item {{ $isLandingActive ? 'active' : '' }}" style="padding-left: 10px;">
-                <a class="nav-link {{ $isLandingActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse" data-target="#collapseLanding"
-                    aria-expanded="{{ $isLandingActive ? 'true' : 'false' }}" aria-controls="collapseLanding">
+                <a class="nav-link {{ $isLandingActive ? '' : 'collapsed' }}" href="#" data-toggle="collapse"
+                    data-target="#collapseLanding" aria-expanded="{{ $isLandingActive ? 'true' : 'false' }}"
+                    aria-controls="collapseLanding">
                     <i class="fas fa-fw fa-globe text-primary"></i>
                     <span>Home ACC</span>
                 </a>
-                <div id="collapseLanding" class="collapse {{ $isLandingActive ? 'show' : '' }}" data-parent="#accordionSidebar">
+                <div id="collapseLanding" class="collapse {{ $isLandingActive ? 'show' : '' }}"
+                    data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Landing Page:</h6>
                         <a class="collapse-item" href="{{ url('/') }}" target="_blank">

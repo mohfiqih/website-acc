@@ -11,6 +11,7 @@
     <link rel="shortcut icon" type="image/png"
         href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
     <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('templates/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" />
     <style>
         .text-label {
             padding-bottom: 10px;
@@ -218,6 +219,449 @@
             width: 30%;
             font-weight: bold;
         }
+
+        :root {
+            --dashboard-ink: #172b4d;
+            --dashboard-muted: #718096;
+            --dashboard-primary: #1769aa;
+            --dashboard-primary-dark: #0d4f82;
+            --dashboard-border: #e6edf5;
+            --dashboard-page: #f4f7fb;
+        }
+
+        body {
+            background: var(--dashboard-page);
+            color: var(--dashboard-ink);
+            font-family: var(--bs-body-font-family);
+        }
+
+        body::before,
+        body::after {
+            display: none;
+        }
+
+        .body-wrapper {
+            background: var(--dashboard-page);
+        }
+
+        .app-header {
+            background: rgba(255, 255, 255, .92) !important;
+            border-bottom: 1px solid var(--dashboard-border);
+            box-shadow: 0 4px 18px rgba(35, 61, 90, .05);
+            backdrop-filter: blur(12px);
+        }
+
+        .app-header .navbar {
+            min-height: 70px;
+            padding: 0 28px;
+        }
+
+        .app-header .nav-link {
+            color: var(--dashboard-ink) !important;
+        }
+
+        .app-header .nav-icon-hover:hover {
+            background: #edf6fc;
+            color: var(--dashboard-primary) !important;
+        }
+
+        .left-sidebar {
+            background: #102b46;
+            box-shadow: 12px 0 32px rgba(16, 43, 70, .1);
+        }
+
+        .left-sidebar .brand-logo {
+            min-height: 70px;
+            padding: 0 22px;
+            border-bottom: 1px solid rgba(255, 255, 255, .1);
+        }
+
+        .left-sidebar .brand-logo h5 {
+            margin: 0;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: .01em;
+        }
+
+        .left-sidebar .sidebar-nav {
+            padding: 14px 12px;
+        }
+
+        .left-sidebar .nav-small-cap {
+            color: #8da6bd;
+            letter-spacing: .12em;
+        }
+
+        .left-sidebar .sidebar-link {
+            min-height: 44px;
+            margin-bottom: 4px;
+            border-radius: 10px;
+            color: #c7d5e2;
+            transition: background .2s ease, color .2s ease, transform .2s ease;
+        }
+
+        .left-sidebar .sidebar-link:hover,
+        .left-sidebar .sidebar-link[aria-expanded="true"] {
+            background: rgba(255, 255, 255, .09);
+            color: #fff;
+            transform: translateX(2px);
+        }
+
+        .left-sidebar .sidebar-link iconify-icon {
+            color: #8db9d9;
+        }
+
+        .page-wrapper .container-fluid {
+            padding: 28px;
+        }
+
+        .dashboard-card {
+            border: 1px solid var(--dashboard-border) !important;
+            border-radius: 16px !important;
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(43, 70, 99, .06) !important;
+            overflow: hidden;
+        }
+
+        .dashboard-card .card-body {
+            padding: 24px;
+        }
+
+        .dashboard-card .card-title {
+            color: var(--dashboard-ink);
+            font-size: 1.05rem;
+            font-weight: 400;
+        }
+
+        .dashboard-card .card-title::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            margin-right: 10px;
+            vertical-align: -4px;
+            border-radius: 99px;
+            background: var(--dashboard-primary);
+        }
+
+        .dashboard-card .form-select,
+        .dashboard-card input[type="date"] {
+            min-height: 40px;
+            border: 1px solid #dce6f0;
+            border-radius: 9px;
+            color: #526579;
+            box-shadow: none;
+        }
+
+        .dashboard-card .form-select:focus,
+        .dashboard-card input[type="date"]:focus {
+            border-color: var(--dashboard-primary);
+            box-shadow: 0 0 0 3px rgba(23, 105, 170, .1);
+        }
+
+        .dashboard-card .btn {
+            min-height: 40px;
+            border: 0;
+            border-radius: 9px;
+            font-size: .76rem;
+            font-weight: 400;
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+
+        .dashboard-card .btn-primary {
+            background: var(--dashboard-primary);
+        }
+
+        .dashboard-card .btn-primary:hover {
+            background: var(--dashboard-primary-dark);
+            box-shadow: 0 7px 16px rgba(23, 105, 170, .2);
+            transform: translateY(-1px);
+        }
+
+        .mentor-overview-card canvas {
+            margin: 18px 0 12px;
+            padding: 12px;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            background: #fbfdff;
+        }
+
+        .mentor-overview-card p {
+            color: var(--dashboard-muted);
+            font-size: .78rem;
+            line-height: 1.6;
+        }
+
+        #mentorProgressBar>div {
+            padding: 11px 0;
+            border-bottom: 1px solid #edf1f6;
+        }
+
+        #mentorProgressBar .progress {
+            overflow: hidden;
+            height: 8px !important;
+            border-radius: 99px;
+            background: #edf3f8;
+        }
+
+        #mentorProgressBar .progress-bar {
+            border-radius: inherit;
+            background: linear-gradient(90deg, #1769aa, #48a3d5) !important;
+        }
+
+        .data-table-card .card-body {
+            padding: 0;
+        }
+
+        .data-export-panel {
+            display: flex;
+            align-items: end;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--dashboard-border);
+        }
+
+        .data-export-panel .form-group {
+            margin: 0;
+        }
+
+        .data-export-panel label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--dashboard-muted);
+            font-size: .74rem;
+            font-weight: 400;
+        }
+
+        .data-table-scroll {
+            padding: 22px 24px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .data-table-scroll table {
+            min-width: 1600px;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 13px;
+        }
+
+        .data-table-scroll thead th {
+            padding: 10px;
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            color: #30465e;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: normal;
+            text-transform: none;
+        }
+
+        .data-table-scroll tbody td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            color: #30465e;
+            font-size: 13px;
+            font-weight: 400;
+            vertical-align: middle;
+        }
+
+        .data-table-scroll tbody tr:hover {
+            background: #f8fbfe;
+        }
+
+        .data-table-scroll .btn-download-cv {
+            white-space: nowrap;
+        }
+
+        .data-table-card .dataTables_wrapper {
+            color: var(--dashboard-muted);
+            font-size: 13px;
+            font-weight: 400;
+        }
+
+        .data-table-card .dataTables_info,
+        .data-table-card .dataTables_paginate {
+            margin: 18px 24px;
+        }
+
+        .data-table-card .paginate_button {
+            margin: 0 2px;
+            border: 1px solid #dce6f0 !important;
+            border-radius: 7px !important;
+            background: #fff !important;
+            color: var(--dashboard-primary) !important;
+        }
+
+        .data-table-card .paginate_button.current,
+        .data-table-card .paginate_button.current:hover {
+            border-color: var(--dashboard-primary) !important;
+            background: var(--dashboard-primary) !important;
+            color: #fff !important;
+        }
+
+        .data-table-scroll .btn-download-cv {
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .dashboard-footer {
+            color: var(--dashboard-muted);
+            font-size: .75rem;
+        }
+
+        @media (max-width: 767px) {
+            .app-header .navbar {
+                min-height: 62px;
+                padding: 0 12px;
+            }
+
+            .page-wrapper .container-fluid {
+                padding: 14px 12px 24px;
+            }
+
+            .dashboard-card .card-body {
+                padding: 17px;
+            }
+
+            .dashboard-card .d-flex.align-items-center.gap-2 {
+                align-items: stretch !important;
+                flex-direction: column;
+            }
+
+            .dashboard-card .d-flex.align-items-center.gap-2 .form-select,
+            .dashboard-card .d-flex.align-items-center.gap-2 .btn {
+                width: 100% !important;
+            }
+
+            .data-export-panel {
+                align-items: stretch;
+                flex-direction: column;
+                padding: 17px;
+            }
+
+            .data-export-panel .form-group,
+            .data-export-panel input,
+            .data-export-panel button {
+                width: 100%;
+            }
+
+            .data-table-scroll {
+                padding: 16px 12px 0;
+            }
+
+            .data-table-card .dataTables_info,
+            .data-table-card .dataTables_paginate {
+                margin-right: 12px;
+                margin-left: 12px;
+            }
+
+            #mentorChart {
+                height: 300px !important;
+            }
+        }
+
+        /* Final dashboard theme overrides. */
+        .left-sidebar {
+            background: #0b2239 !important;
+        }
+
+        .left-sidebar .sidebar-link,
+        .left-sidebar .sidebar-link .hide-menu,
+        .left-sidebar .sidebar-link span,
+        .left-sidebar .sidebar-link i,
+        .left-sidebar .sidebar-link iconify-icon {
+            color: #f7fbff !important;
+        }
+
+        .left-sidebar .nav-small-cap,
+        .left-sidebar .nav-small-cap .hide-menu,
+        .left-sidebar .nav-small-cap i {
+            color: #9db4c8 !important;
+        }
+
+        .left-sidebar .sidebar-link {
+            background: transparent !important;
+        }
+
+        .left-sidebar .sidebar-link:hover,
+        .left-sidebar .sidebar-item.active>.sidebar-link {
+            background: linear-gradient(135deg, #1769aa, #0e4d7c) !important;
+            color: #fff !important;
+            box-shadow: 0 8px 18px rgba(3, 20, 36, .24);
+        }
+
+        .left-sidebar .sidebar-link:hover *,
+        .left-sidebar .sidebar-item.active>.sidebar-link * {
+            color: #fff !important;
+        }
+
+        .left-sidebar .close-btn,
+        .left-sidebar .close-btn i {
+            color: #fff !important;
+        }
+
+        .app-header {
+            background: #fff !important;
+        }
+
+        .app-header .nav-link,
+        .app-header .nav-link i {
+            color: #172b4d !important;
+        }
+
+        .dashboard-card {
+            background: #fff !important;
+            border-color: #dfe8f1 !important;
+        }
+
+        .dashboard-card .card-title,
+        .dashboard-card h5,
+        .dashboard-card h6 {
+            color: #172b4d !important;
+        }
+
+        .data-table-scroll thead th {
+            background: #fff !important;
+            color: #30465e !important;
+            border: 1px solid #ddd !important;
+            font-weight: 400 !important;
+            letter-spacing: normal !important;
+            text-transform: none !important;
+        }
+
+        .data-table-scroll tbody td {
+            color: #30465e !important;
+        }
+
+        .dashboard-footer,
+        .dashboard-footer p {
+            color: #718096 !important;
+        }
+
+        body,
+        .left-sidebar .sidebar-link,
+        .data-table-scroll tbody td,
+        .data-table-card .dataTables_wrapper {
+            font-weight: 400;
+        }
+
+        .left-sidebar .sidebar-link .hide-menu,
+        .left-sidebar .nav-small-cap,
+        .data-table-scroll thead th,
+        .data-export-panel label {
+            font-weight: 600 !important;
+        }
+
+        .dashboard-card .card-title {
+            font-weight: 600;
+        }
+
+        .dashboard-card .btn,
+        .data-table-scroll .btn-download-cv {
+            font-weight: 500;
+        }
     </style>
 </head>
 
@@ -266,8 +710,8 @@
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <a class="nav-link nav-icon-hover" href="/" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
                                         alt="" width="35" height="35" class="rounded-circle">
                                 </a>
@@ -280,7 +724,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="card">
+                        <div class="card dashboard-card mentor-overview-card">
                             <div class="card-body">
                                 <h5 class="card-title d-flex align-items-center gap-2 mb-4">
                                     Grafik Pendaftaran Online Berdasarkan Nama Mentor
@@ -299,7 +743,9 @@
                                     </button>
                                 </div>
                                 <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
-                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data kotor yang terecord secara online melalui formulir pendaftaran online setiap mentor)</b></p>
+                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data
+                                        kotor yang terecord secara online melalui formulir pendaftaran online setiap
+                                        mentor)</b></p>
                                 <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
                             </div>
                         </div>
@@ -319,7 +765,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td colspan="2" class="text-center">Sedang proses menampilkan data...</td>
+                                            <td colspan="2" class="text-center">Sedang proses menampilkan data...
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -328,26 +775,26 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="card">
+                    <div class="card dashboard-card data-table-card">
                         <div class="card-body">
                             <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
-                                class="d-flex align-items-center mb-3">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label><b>Dari Tanggal</b></label>
-                                        <input type="date" name="start_date" class="form-control me-2 mb-2" required>
-                                        <label><b>Sampai Tanggal</b></label>
-                                        <input type="date" name="end_date" class="form-control me-2 mb-2" required>
-                                    </div>
-                                    <div class="col md-12">
-                                        <button type="submit" class="btn btn-primary btn-sm px-4 text-nowrap">
-                                            <i class="fa fa-download"></i> Export PDF
-                                        </button>
-                                    </div>
+                                class="data-export-panel">
+                                <div class="form-group">
+                                    <label for="startDate">Dari Tanggal</label>
+                                    <input id="startDate" type="date" name="start_date" class="form-control"
+                                        required>
                                 </div>
+                                <div class="form-group">
+                                    <label for="endDate">Sampai Tanggal</label>
+                                    <input id="endDate" type="date" name="end_date" class="form-control"
+                                        required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm px-4 text-nowrap">
+                                    <i class="fa fa-download mr-1"></i> Export PDF
+                                </button>
                             </form>
 
-                            <div class="table-responsive">
+                            <div class="table-responsive data-table-scroll">
                                 <div id="refreshIndicator"
                                     style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                                     🔄 Refreshing data...
@@ -434,7 +881,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td colspan="74" class="text-center">Sedang proses menampilkan data...</td>
+                                            <td colspan="74" class="text-center">Sedang proses menampilkan data...
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -449,9 +897,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 px-6 text-center">
+                <div class="py-6 px-6 text-center dashboard-footer">
                     <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre <br />
                         @include('version.index')
+                    </p>
                 </div>
             </div>
         </div>
@@ -476,7 +925,8 @@
     {{-- data tabel --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
+        const googleScriptUrl =
+            'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
 
         console.log(allowedMentors);
 
@@ -493,37 +943,59 @@
                 position: 'top',
                 showConfirmButton: false,
                 allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
 
-            fetch(googleScriptUrl, { method:'GET', mode:'cors', cache:'no-cache' })
+            fetch(googleScriptUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache'
+                })
                 .then(res => res.text())
                 .then(text => {
                     let data;
-                    try { data = JSON.parse(text); } 
-                    catch(e) { throw new Error('Response bukan JSON valid'); }
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        throw new Error('Response bukan JSON valid');
+                    }
                     return data;
                 })
                 .then(data => {
                     allData = data.map(row => {
-                        row.Timestamp = row.Timestamp ? row.Timestamp.substring(0,10) : '';
+                        row.Timestamp = row.Timestamp ? row.Timestamp.substring(0, 10) : '';
                         if (row['NAMA MENTOR']) {
-                            const mentor = row['NAMA MENTOR'].toUpperCase().trim().replace(/[^A-Z ]/g,'').replace(/\s+/g,' ');
-                            const monthKey = row.Timestamp ? row.Timestamp.substring(0,7) : '';
+                            const mentor = row['NAMA MENTOR'].toUpperCase().trim().replace(/[^A-Z ]/g, '')
+                                .replace(/\s+/g, ' ');
+                            const monthKey = row.Timestamp ? row.Timestamp.substring(0, 7) : '';
                             if (mentor && allowedMentors.includes(mentor)) {
                                 perMentorAll[mentor] = (perMentorAll[mentor] || 0) + 1;
                                 if (monthKey) {
                                     if (!perMentorPerMonth[monthKey]) perMentorPerMonth[monthKey] = {};
-                                    perMentorPerMonth[monthKey][mentor] = (perMentorPerMonth[monthKey][mentor] || 0) + 1;
-                                    months[monthKey] = new Date(monthKey+'-01')
-                                        .toLocaleString('default', { month: 'long', year: 'numeric' });
+                                    perMentorPerMonth[monthKey][mentor] = (perMentorPerMonth[monthKey][
+                                        mentor
+                                    ] || 0) + 1;
+                                    months[monthKey] = new Date(monthKey + '-01')
+                                        .toLocaleString('default', {
+                                            month: 'long',
+                                            year: 'numeric'
+                                        });
                                 }
                             }
                         }
                         return row;
                     });
 
-                    Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Successfully!',
+                        toast: true,
+                        position: 'top',
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
                     renderChart();
                     renderTable();
                     populateMonthFilter();
@@ -537,16 +1009,16 @@
         }
 
         let mentorChart;
+
         function renderChart(selectedMonth = '') {
             let combined = allowedMentors.map(mentor => ({
                 mentor: mentor,
-                count: selectedMonth && perMentorPerMonth[selectedMonth]
-                    ? (perMentorPerMonth[selectedMonth][mentor] || 0)
-                    : (perMentorAll[mentor] || 0)
+                count: selectedMonth && perMentorPerMonth[selectedMonth] ?
+                    (perMentorPerMonth[selectedMonth][mentor] || 0) : (perMentorAll[mentor] || 0)
             }));
 
             // urutkan dari terbesar
-            combined.sort((a,b) => b.count - a.count);
+            combined.sort((a, b) => b.count - a.count);
 
             const labels = combined.map(x => x.mentor);
             const data = combined.map(x => x.count);
@@ -567,8 +1039,16 @@
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true } }
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
 
@@ -608,11 +1088,15 @@
         }
 
         let dataTable;
-        function renderTable() {
-            $('#mentorDataTable tbody').empty();
+
+        async function renderTable() {
+            const tableElement = $('#mentorDataTable');
+            const refreshIndicator = $('#refreshIndicator');
+
+            refreshIndicator.text('Menyiapkan data per bagian...').show();
 
             if ($.fn.DataTable.isDataTable('#mentorDataTable')) {
-                $('#mentorDataTable').DataTable().destroy();
+                tableElement.DataTable().clear().destroy();
             }
 
             const cleanData = allData.filter(row =>
@@ -622,101 +1106,126 @@
 
             cleanData.sort((a, b) => new Date(b.Timestamp) - new Date(a.Timestamp));
 
-            const tbody = $('#mentorDataTable tbody');
-            cleanData.forEach((row, idx) => {
-                const columns = [
-                    idx + 1,
-                    `<button class="btn btn-sm btn-primary btn-download-cv" data-id="${row['ID'] || idx}" data-nama="${row['NAMA (INDONESIA)'] || ''}">
-                        <i class="fa fa-download"></i> Download CV
-                    </button>`,
-                    formatDate(row['Timestamp']) || '',
-                    row['EMAIL'] || '',
-                    row['NAMA (KATAKANA)'] || '',
-                    row['NAMA (INDONESIA)'] || '',
-                    row['ALAMAT'] || '',
-                    formatDate(row['TANGGAL LAHIR']) || '',
-                    row['USIA'] || '',
-                    row['KELAMIN'] || '',
-                    row['NO HP AKTIF'] || '',
-                    row['AGAMA'] || '',
-                    row['TINGGI'] || '',
-                    row['BERAT'] || '',
-                    row['GOL DARAH'] || '',
-                    row['BUTA WARNA'] || '',
-                    row['MATA KIRI'] || '',
-                    row['MATA KANAN'] || '',
-                    row['PERNAH OPERASI'] || '',
-                    row['APAKAH SEDANG MINUM'] || '',
-                    row['TANGAN'] || '',
-                    row['MEROKOK'] || '',
-                    row['PENYAKIT DALAM'] || '',
-                    row['KEAHLIAN'] || '',
-                    row['SIFAT/KEPRIBADIAN'] || '',
-                    row['KELEBIHAN'] || '',
-                    row['KELEMAHAN'] || '',
-                    row['STATUS'] || '',
-                    row['HOBI'] || '',
-                    row['MOTIVASI'] || '',
-                    row['SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'] || '',
-                    row['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] || '',
-                    row['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] || '',
-                    row['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] || '',
-                    row['SEKOLAH DASAR (SD)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SD)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SD)'] || '',
-                    row['SEKOLAH MENENGAH PERTAMA (SMP)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SMP)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SMP)'] || '',
-                    row['SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)'] || '',
-                    row['TAHUN MASUK SEKOLAH (SMA/SMK)'] || '',
-                    row['TAHUN KELUAR SEKOLAH (SMA/SMK)'] || '',
-                    row['JURUSAN (SMA/SMK)'] || '',
-                    row['PERGURUAN TINGGI'] || '',
-                    row['PENGALAMAN KERJA'] || '',
-                    row['BAHASA ASING YANG DIKUASAI'] || '',
-                    row['PERNAH KE JEPANG'] || '',
-                    row['JIKA YA, SEBUTKAN TGL/BLN/THN'] || '',
-                    row['PERNAH LUAR NEGERI LAINNYA'] || '',
-                    row['JIKA YA, NEGARA APA'] || '',
-                    row['APAKAH ADA KERABAT DI JEPANG'] || '',
-                    row['APA HUBUNGAN KERABAT YANG DI JEPANG'] || '',
-                    row['BELAJAR BAHASA'] || '',
-                    row['BUKU YANG DI PAKAI'] || '',
-                    row['BAB YANG DI PELAJARI'] || '',
-                    row['NAMA AYAH'] || '',
-                    row['HUBUNGAN AYAH'] || '',
-                    row['USIA AYAH'] || '',
-                    row['PEKERJAAN AYAH'] || '',
-                    row['NAMA IBU'] || '',
-                    row['HUBUNGAN IBU'] || '',
-                    row['USIA IBU'] || '',
-                    row['PEKERJAAN IBU'] || '',
-                    row['NAMA SAUDARA'] || '',
-                    row['PENDAPAT KELUARGA'] || '',
-                    row['NO HP KELUARGA'] || '',
-                    row['NAMA MENTOR'] || '',
-                    row['UKURAN BAJU'] || '',
-                    row['NOMOR SEPATU'] || '',
-                    row['PILIH KELAS'] || '',
-                    row['PILIH PROGRAM'] || '',
-                    row['ID'] || ''
-                ];
+            // Keep rows in memory and let DataTables render only the current page.
+            const tableData = [];
+            const sectionSize = 100;
 
-                tbody.append(`<tr>${columns.map(c => `<td>${c}</td>`).join('')}</tr>`);
-            });
+            for (let sectionStart = 0; sectionStart < cleanData.length; sectionStart += sectionSize) {
+                const section = cleanData.slice(sectionStart, sectionStart + sectionSize);
 
-            const dataTable = $('#mentorDataTable').DataTable({
+                section.forEach((row, sectionIndex) => {
+                    const idx = sectionStart + sectionIndex;
+                    tableData.push([
+                        idx + 1,
+                        row,
+                        formatDate(row['Timestamp']) || '',
+                        row['EMAIL'] || '',
+                        row['NAMA (KATAKANA)'] || '',
+                        row['NAMA (INDONESIA)'] || '',
+                        row['ALAMAT'] || '',
+                        formatDate(row['TANGGAL LAHIR']) || '',
+                        row['USIA'] || '',
+                        row['KELAMIN'] || '',
+                        row['NO HP AKTIF'] || '',
+                        row['AGAMA'] || '',
+                        row['TINGGI'] || '',
+                        row['BERAT'] || '',
+                        row['GOL DARAH'] || '',
+                        row['BUTA WARNA'] || '',
+                        row['MATA KIRI'] || '',
+                        row['MATA KANAN'] || '',
+                        row['PERNAH OPERASI'] || '',
+                        row['APAKAH SEDANG MINUM'] || '',
+                        row['TANGAN'] || '',
+                        row['MEROKOK'] || '',
+                        row['PENYAKIT DALAM'] || '',
+                        row['KEAHLIAN'] || '',
+                        row['SIFAT/KEPRIBADIAN'] || '',
+                        row['KELEBIHAN'] || '',
+                        row['KELEMAHAN'] || '',
+                        row['STATUS'] || '',
+                        row['HOBI'] || '',
+                        row['MOTIVASI'] || '',
+                        row['SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'] || '',
+                        row['SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'] || '',
+                        row['APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'] || '',
+                        row['JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'] || '',
+                        row['SEKOLAH DASAR (SD)'] || '',
+                        row['TAHUN MASUK SEKOLAH (SD)'] || '',
+                        row['TAHUN KELUAR SEKOLAH (SD)'] || '',
+                        row['SEKOLAH MENENGAH PERTAMA (SMP)'] || '',
+                        row['TAHUN MASUK SEKOLAH (SMP)'] || '',
+                        row['TAHUN KELUAR SEKOLAH (SMP)'] || '',
+                        row['SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)'] || '',
+                        row['TAHUN MASUK SEKOLAH (SMA/SMK)'] || '',
+                        row['TAHUN KELUAR SEKOLAH (SMA/SMK)'] || '',
+                        row['JURUSAN (SMA/SMK)'] || '',
+                        row['PERGURUAN TINGGI'] || '',
+                        row['PENGALAMAN KERJA'] || '',
+                        row['BAHASA ASING YANG DIKUASAI'] || '',
+                        row['PERNAH KE JEPANG'] || '',
+                        row['JIKA YA, SEBUTKAN TGL/BLN/THN'] || '',
+                        row['PERNAH LUAR NEGERI LAINNYA'] || '',
+                        row['JIKA YA, NEGARA APA'] || '',
+                        row['APAKAH ADA KERABAT DI JEPANG'] || '',
+                        row['APA HUBUNGAN KERABAT YANG DI JEPANG'] || '',
+                        row['BELAJAR BAHASA'] || '',
+                        row['BUKU YANG DI PAKAI'] || '',
+                        row['BAB YANG DI PELAJARI'] || '',
+                        row['NAMA AYAH'] || '',
+                        row['HUBUNGAN AYAH'] || '',
+                        row['USIA AYAH'] || '',
+                        row['PEKERJAAN AYAH'] || '',
+                        row['NAMA IBU'] || '',
+                        row['HUBUNGAN IBU'] || '',
+                        row['USIA IBU'] || '',
+                        row['PEKERJAAN IBU'] || '',
+                        row['NAMA SAUDARA'] || '',
+                        row['PENDAPAT KELUARGA'] || '',
+                        row['NO HP KELUARGA'] || '',
+                        row['NAMA MENTOR'] || '',
+                        row['UKURAN BAJU'] || '',
+                        row['NOMOR SEPATU'] || '',
+                        row['PILIH KELAS'] || '',
+                        row['PILIH PROGRAM'] || '',
+                        row['ID'] || ''
+                    ]);
+                });
+
+                refreshIndicator.text(
+                    `Menyiapkan data... ${Math.min(sectionStart + section.length, cleanData.length)} / ${cleanData.length}`
+                );
+                await new Promise(resolve => requestAnimationFrame(resolve));
+            }
+
+            dataTable = tableElement.DataTable({
+                data: tableData,
                 pageLength: parseInt($('#entriesSelect').val()) || 10,
                 lengthMenu: [5, 10, 25, 50, 100],
                 ordering: false,
-                responsive: true,
-                autoWidth: false
+                responsive: false,
+                deferRender: true,
+                autoWidth: false,
+                processing: true,
+                searchDelay: 250,
+                columnDefs: [{
+                    targets: 1,
+                    render: function(data, type) {
+                        if (type !== 'display') return '';
+                        const id = data['ID'] || '';
+                        const name = String(data['NAMA (INDONESIA)'] || '').replace(/"/g, '&quot;');
+                        return `<button class="btn btn-sm btn-primary btn-download-cv" data-id="${id}" data-nama="${name}">
+                            <i class="fa fa-download"></i> Download CV
+                        </button>`;
+                    }
+                }]
             });
 
-            $('#entriesSelect').on('change', function() {
-                const val = parseInt($(this).val());
-                dataTable.page.len(val).draw();
+            $('#entriesSelect').off('change').on('change', function() {
+                dataTable.page.len(parseInt(this.value)).draw();
             });
+
+            refreshIndicator.hide();
         }
 
         fetchData();
@@ -724,12 +1233,11 @@
         function renderMentorProgressBar(selectedMonth = '') {
             let combined = allowedMentors.map(mentor => ({
                 mentor: mentor,
-                count: selectedMonth && perMentorPerMonth[selectedMonth]
-                    ? (perMentorPerMonth[selectedMonth][mentor] || 0)
-                    : (perMentorAll[mentor] || 0)
+                count: selectedMonth && perMentorPerMonth[selectedMonth] ?
+                    (perMentorPerMonth[selectedMonth][mentor] || 0) : (perMentorAll[mentor] || 0)
             }));
 
-            combined.sort((a,b) => b.count - a.count);
+            combined.sort((a, b) => b.count - a.count);
 
             const maxValue = combined[0]?.count || 1;
 
@@ -784,7 +1292,9 @@
 
                     try {
                         // Ambil data dari Google Apps Script
-                        const res = await fetch("https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec");
+                        const res = await fetch(
+                            "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec"
+                        );
                         const data = await res.json();
                         const rowData = data.reverse().find(d => d.ID == id);
 
