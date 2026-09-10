@@ -647,8 +647,6 @@
             font-weight: 400;
         }
 
-        .left-sidebar .sidebar-link .hide-menu,
-        .left-sidebar .nav-small-cap,
         .data-table-scroll thead th,
         .data-export-panel label {
             font-weight: 600 !important;
@@ -897,11 +895,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 px-6 text-center dashboard-footer">
-                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre <br />
-                        @include('version.index')
-                    </p>
-                </div>
+                @include('version.version_dashboard')
             </div>
         </div>
     </div>
@@ -2190,14 +2184,10 @@
                             emptyTable: 'Belum ada data',
 
                             paginate: {
-
-                                first: 'Pertama',
-
-                                last: 'Terakhir',
-
-                                next: 'Berikutnya',
-
-                                previous: 'Sebelumnya'
+                                first: 'First',
+                                last: 'Last',
+                                next: 'Next',
+                                previous: 'Previous'
                             }
                         }
                     });

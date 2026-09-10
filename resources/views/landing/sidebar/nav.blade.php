@@ -116,12 +116,21 @@
                 <span>
                     <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
                 </span>
-                <span class="hide-menu">Landing Page</span>
+                <span class="hide-menu">Website ACC</span>
             </a>
         </li>
         <li class="nav-small-cap">
             <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
             <span class="hide-menu">Menu</span>
+        </li>
+        <li class="sidebar-item {{ Request::is('data-pendaftaran') ? 'active' : '' }}">
+            <a class="sidebar-link" href="/data-pendaftaran" aria-expanded="false">
+                <span>
+                    <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6">
+                    </iconify-icon>
+                </span>
+                <span class="hide-menu">Data Pendaftaran</span>
+            </a>
         </li>
         <li class="sidebar-item {{ Request::is('link-pendaftaran-mentor') ? 'active' : '' }}">
             <a class="sidebar-link" href="/link-pendaftaran-mentor" aria-expanded="false">
@@ -131,22 +140,13 @@
                 <span class="hide-menu">Link Per Mentor</span>
             </a>
         </li>
-        {{-- <li class="sidebar-item {{ Request::is('pendaftaran-siswa-baru') ? 'active' : '' }}">
+        <li class="sidebar-item {{ Request::is('pendaftaran-siswa-baru') ? 'active' : '' }}">
             <a class="sidebar-link" href="/pendaftaran-siswa-baru" aria-expanded="false">
                 <span>
                     <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6">
                     </iconify-icon>
                 </span>
                 <span class="hide-menu">Pendaftaran Online</span>
-            </a>
-        </li> --}}
-        <li class="sidebar-item {{ Request::is('data-pendaftaran') ? 'active' : '' }}">
-            <a class="sidebar-link" href="/data-pendaftaran" aria-expanded="false">
-                <span>
-                    <iconify-icon icon="solar:bookmark-square-minimalistic-bold-duotone" class="fs-6">
-                    </iconify-icon>
-                </span>
-                <span class="hide-menu">Data Pendaftaran</span>
             </a>
         </li>
         <li class="sidebar-item {{ Request::is('data-konsultasi') ? 'active' : '' }}">

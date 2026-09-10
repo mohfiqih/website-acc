@@ -172,6 +172,7 @@
             display: flex;
             gap: 10px;
             margin-top: 24px;
+            margin-bottom: 24px;
         }
 
         .registration-page .registration-hero-step {
@@ -470,34 +471,6 @@
 </head>
 
 <body class="registration-page">
-    <header id="header" class="header d-flex align-items-center" style="padding: 10px;">
-        <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-            <a href="/" class="logo d-flex align-items-center">
-                <h1>
-                    <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
-                        class="img-fluid" alt="Logo LPK ACC Japan Centre" width="44" height="44">
-                </h1>
-            </a>
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/">About</a></li>
-                    <li class="dropdown"><a href="#"><span>Program LPK ACC</span> <i
-                                class="bi bi-chevron-down dropdown-indicator"></i></a>
-                        <ul>
-                            <li><a href="/">Program Magang</a></li>
-                            <li><a href="/">Program Tokutei Ginou</a></li>
-                            <li><a href="/">Program Matching Job</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="https://maps.app.goo.gl/Vy6Jjeq3v7Y3tMkAA">Lokasi</a></li>
-                </ul>
-            </nav>
-            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        </div>
-    </header>
-
     <div class="min-h-screen pb-12">
         <section id="hero"
             class="registration-hero relative video-container h-[340px] md:h-[400px] flex items-center justify-center overflow-hidden w-full">
@@ -512,11 +485,10 @@
                     class="inline-block bg-teal-500/20 text-teal-300 text-xs font-semibold tracking-wider uppercase px-3 py-1 rounded-full mb-3 backdrop-blur-sm">
                     Pendaftaran Online
                 </span>
-                <h2 class="text-2xl md:text-4xl font-bold tracking-tight mb-3 uppercase drop-shadow-md">
+                <h2 class="text-2xl md:text-4xl font-bold tracking-tight mb-3 uppercase drop-shadow-md justify-center">
                     Formulir Pendaftaran Siswa Baru LPK ACC JAPAN CENTRE
                 </h2>
-                <div
-                    class="flex items-center justify-center text-gray-200 text-xs md:text-sm max-w-xl mx-auto space-x-2 drop-shadow">
+                <div class="">
                     <p>Dukuh Gitung, Desa Harjosari Lor, Kec. Adiwerna, Kabupaten Tegal, Jawa Tengah, 52194</p>
                 </div>
                 <div class="registration-hero-steps" aria-label="Tahapan pendaftaran">
@@ -535,7 +507,7 @@
                 </div>
             </div>
         </section>
-
+        <br /><br />
         <div class="registration-form-shell container mx-auto px-4 -mt-10 relative z-20 max-w-4xl">
             <div class="registration-card bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10">
                 <form class="signup-form space-y-8" id="pendaftaranForm">

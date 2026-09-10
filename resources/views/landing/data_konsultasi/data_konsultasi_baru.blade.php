@@ -294,8 +294,8 @@
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <a class="nav-link nav-icon-hover" href="/" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
                                         alt="" width="35" height="35" class="rounded-circle">
                                 </a>
@@ -383,7 +383,8 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <input type="text" id="tableSearch" class="form-control" placeholder="Search...">
+                                    <input type="text" id="tableSearch" class="form-control"
+                                        placeholder="Search...">
                                 </div>
                             </div>
 
@@ -400,7 +401,8 @@
                                             <input type="date" name="start_date" class="form-control me-2 mb-2"
                                                 required>
                                             <label><b>Sampai Tanggal</b></label>
-                                            <input type="date" name="end_date" class="form-control me-2 mb-2" required>
+                                            <input type="date" name="end_date" class="form-control me-2 mb-2"
+                                                required>
                                         </div>
                                         <div class="col md-12">
                                             <button type="submit" class="btn btn-success">
@@ -428,10 +430,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 px-6 text-center">
-                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre <br />
-                        @include('version.index')
-                </div>
+                @include('version.version_dashboard')
             </div>
         </div>
     </div>
@@ -450,110 +449,129 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
     <script>
-        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyCSsWEpYv0I9mWJvFbpNdr0hTF1LS-mGk8us4MZrmJdW2xjDAIU_qnkKCMFLPKHbEY5Q/exec';
-            let allData = [];
-            let currentPage = 1;
-            let entriesPerPage = parseInt(document.getElementById('entriesSelect').value);
-            let chartInstance = null;
-            let currentFilter = 'perHari';
-            const ctx = document.getElementById('mainChart');
-    
-            function calculateStats(data) {
-                const stats = { perHari:{}, perBulan:{}, perTahun:{}, perProvinsi:{}, perKabupaten:{}, perUmur:{}, perGender:{} };
-                const namaBulan = ['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
-    
-                data.forEach(row => {
-                    const ts = new Date(row['Timestamp']);
-                    const day = ts.toISOString().slice(0,10);
-                    stats.perHari[day] = (stats.perHari[day]||0)+1;
-    
-                    const monthName = namaBulan[ts.getMonth()+1] + ' ' + ts.getFullYear();
-                    stats.perBulan[monthName] = (stats.perBulan[monthName]||0)+1;
-    
-                    stats.perTahun[ts.getFullYear()] = (stats.perTahun[ts.getFullYear()]||0)+1;
-    
-                    const prov = row['Provinsi'] || 'Tidak Diketahui';
-                    stats.perProvinsi[prov] = (stats.perProvinsi[prov]||0)+1;
-    
-                    const kab = row['Kabupaten'] || 'Tidak Diketahui';
-                    stats.perKabupaten[kab] = (stats.perKabupaten[kab]||0)+1;
-    
-                    const umur = parseInt(row['Usia']) || 0;
-                    stats.perUmur[umur] = (stats.perUmur[umur]||0)+1;
-    
-                    let gender = (row['Jenis Kelamin'] || '').toLowerCase();
-                    if(['laki-laki','laki laki','pria'].includes(gender)) gender='Laki-Laki';
-                    else if(['perempuan','wanita'].includes(gender)) gender='Perempuan';
-                    else gender='Tidak Diketahui';
-                    stats.perGender[gender] = (stats.perGender[gender]||0)+1;
-                });
-                return stats;
-            }
-    
-            function renderChart(stats, filterKey) {
-                const selected = stats[filterKey];
-                const labels = Object.keys(selected);
-                const data = Object.values(selected);
-                
-                if (chartInstance) chartInstance.destroy();
-                
-                chartInstance = new Chart(ctx, {
+        const googleScriptUrl =
+            'https://script.google.com/macros/s/AKfycbyCSsWEpYv0I9mWJvFbpNdr0hTF1LS-mGk8us4MZrmJdW2xjDAIU_qnkKCMFLPKHbEY5Q/exec';
+        let allData = [];
+        let currentPage = 1;
+        let entriesPerPage = parseInt(document.getElementById('entriesSelect').value);
+        let chartInstance = null;
+        let currentFilter = 'perHari';
+        const ctx = document.getElementById('mainChart');
+
+        function calculateStats(data) {
+            const stats = {
+                perHari: {},
+                perBulan: {},
+                perTahun: {},
+                perProvinsi: {},
+                perKabupaten: {},
+                perUmur: {},
+                perGender: {}
+            };
+            const namaBulan = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+                'Oktober', 'November', 'Desember'
+            ];
+
+            data.forEach(row => {
+                const ts = new Date(row['Timestamp']);
+                const day = ts.toISOString().slice(0, 10);
+                stats.perHari[day] = (stats.perHari[day] || 0) + 1;
+
+                const monthName = namaBulan[ts.getMonth() + 1] + ' ' + ts.getFullYear();
+                stats.perBulan[monthName] = (stats.perBulan[monthName] || 0) + 1;
+
+                stats.perTahun[ts.getFullYear()] = (stats.perTahun[ts.getFullYear()] || 0) + 1;
+
+                const prov = row['Provinsi'] || 'Tidak Diketahui';
+                stats.perProvinsi[prov] = (stats.perProvinsi[prov] || 0) + 1;
+
+                const kab = row['Kabupaten'] || 'Tidak Diketahui';
+                stats.perKabupaten[kab] = (stats.perKabupaten[kab] || 0) + 1;
+
+                const umur = parseInt(row['Usia']) || 0;
+                stats.perUmur[umur] = (stats.perUmur[umur] || 0) + 1;
+
+                let gender = (row['Jenis Kelamin'] || '').toLowerCase();
+                if (['laki-laki', 'laki laki', 'pria'].includes(gender)) gender = 'Laki-Laki';
+                else if (['perempuan', 'wanita'].includes(gender)) gender = 'Perempuan';
+                else gender = 'Tidak Diketahui';
+                stats.perGender[gender] = (stats.perGender[gender] || 0) + 1;
+            });
+            return stats;
+        }
+
+        function renderChart(stats, filterKey) {
+            const selected = stats[filterKey];
+            const labels = Object.keys(selected);
+            const data = Object.values(selected);
+
+            if (chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
                 type: filterKey === 'perHari' ? 'bar' : 'bar',
                 data: {
-                labels,
-                datasets: [{
-                label: filterKey,
-                data,
-                backgroundColor: 'rgba(4,98,145,0.8)',
-                borderColor: '#046291',
-                borderWidth: 1
-                }]
+                    labels,
+                    datasets: [{
+                        label: filterKey,
+                        data,
+                        backgroundColor: 'rgba(4,98,145,0.8)',
+                        borderColor: '#046291',
+                        borderWidth: 1
+                    }]
                 },
                 options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                legend: { display: false },
-                title: { display: true, text: filterKey }
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: filterKey
+                        }
+                    }
                 }
-                }
-                });
-                
-                renderBarSummary(labels, data);
-                
-                currentFilter = filterKey;
-            }
-    
-            function renderTable() {
-                const table = document.getElementById('spreadsheetTableKonsultasi');
-                const tableBody = document.getElementById('tableBody');
-                const tableInfo = document.getElementById('tableInfo');
-                const paginationControls = document.getElementById('paginationControls');
-                const searchValue = document.getElementById('tableSearch').value.toLowerCase();
-    
-                let filtered = allData.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(searchValue)));
-                filtered.sort((a,b)=> new Date(a['Timestamp']) - new Date(b['Timestamp']));
-    
-                const totalEntries = filtered.length;
-                const totalPages = Math.ceil(totalEntries / entriesPerPage);
-                if(currentPage>totalPages) currentPage = totalPages||1;
-                const start=(currentPage-1)*entriesPerPage;
-                const end=start+entriesPerPage;
-                const pageData=filtered.slice(start,end);
-    
-                const headers = ['No','Tanggal Konsultasi','Email','Nama Lengkap','Usia','Pendidikan Terakhir','Alamat Lengkap','Kecamatan','Kabupaten','Provinsi','WhatsApp','Informasi dari mana?','Jenis Kelamin'];
-    
-                table.querySelector('thead').innerHTML='<tr>'+headers.map(h=>`<th>${h}</th>`).join('')+'</tr>';
-    
-                tableBody.innerHTML = pageData.length
-                    ? pageData.map((row,idx)=>{
-                        const ts=new Date(row['Timestamp']);
-                        const day=ts.getDate().toString().padStart(2,'0');
-                        const month=(ts.getMonth()+1).toString().padStart(2,'0');
-                        const year=ts.getFullYear();
-                        const formattedDate = `${day}-${month}-${year}`;
-    
-                        return `<tr>
+            });
+
+            renderBarSummary(labels, data);
+
+            currentFilter = filterKey;
+        }
+
+        function renderTable() {
+            const table = document.getElementById('spreadsheetTableKonsultasi');
+            const tableBody = document.getElementById('tableBody');
+            const tableInfo = document.getElementById('tableInfo');
+            const paginationControls = document.getElementById('paginationControls');
+            const searchValue = document.getElementById('tableSearch').value.toLowerCase();
+
+            let filtered = allData.filter(r => Object.values(r).some(v => String(v).toLowerCase().includes(searchValue)));
+            filtered.sort((a, b) => new Date(a['Timestamp']) - new Date(b['Timestamp']));
+
+            const totalEntries = filtered.length;
+            const totalPages = Math.ceil(totalEntries / entriesPerPage);
+            if (currentPage > totalPages) currentPage = totalPages || 1;
+            const start = (currentPage - 1) * entriesPerPage;
+            const end = start + entriesPerPage;
+            const pageData = filtered.slice(start, end);
+
+            const headers = ['No', 'Tanggal Konsultasi', 'Email', 'Nama Lengkap', 'Usia', 'Pendidikan Terakhir',
+                'Alamat Lengkap', 'Kecamatan', 'Kabupaten', 'Provinsi', 'WhatsApp', 'Informasi dari mana?',
+                'Jenis Kelamin'
+            ];
+
+            table.querySelector('thead').innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+
+            tableBody.innerHTML = pageData.length ?
+                pageData.map((row, idx) => {
+                    const ts = new Date(row['Timestamp']);
+                    const day = ts.getDate().toString().padStart(2, '0');
+                    const month = (ts.getMonth() + 1).toString().padStart(2, '0');
+                    const year = ts.getFullYear();
+                    const formattedDate = `${day}-${month}-${year}`;
+
+                    return `<tr>
                             <td class="text-center">${start+idx+1}</td>
                             <td>${formattedDate}</td>
                             <td>${row['Email Address']||''}</td>
@@ -568,35 +586,36 @@
                             <td>${row['Dapat informasi dari mana?']||''}</td>
                             <td>${row['Jenis Kelamin']||''}</td>
                         </tr>`;
-                    }).join('')
-                    : `<tr><td colspan="${headers.length}" class="text-center">Tidak ada data</td></tr>`;
-    
-                tableInfo.innerText=`Menampilkan ${start+1}-${Math.min(end,totalEntries)} dari ${totalEntries} data`;
-    
-                let pagesHtml='';
-                for(let i=1;i<=totalPages;i++){
-                    pagesHtml+=`<li class="page-item ${i===currentPage?'active':''}"><a href="#" class="page-link" data-page="${i}">${i}</a></li>`;
-                }
-                paginationControls.innerHTML=pagesHtml;
-            }
+                }).join('') :
+                `<tr><td colspan="${headers.length}" class="text-center">Tidak ada data</td></tr>`;
 
-            function renderBarSummary(labels, data) {
-                const summaryContainer = document.getElementById('chartSummary');
-                let html = '';
-                
-                if(labels.length === 0){
+            tableInfo.innerText = `Menampilkan ${start+1}-${Math.min(end,totalEntries)} dari ${totalEntries} data`;
+
+            let pagesHtml = '';
+            for (let i = 1; i <= totalPages; i++) {
+                pagesHtml +=
+                    `<li class="page-item ${i===currentPage?'active':''}"><a href="#" class="page-link" data-page="${i}">${i}</a></li>`;
+            }
+            paginationControls.innerHTML = pagesHtml;
+        }
+
+        function renderBarSummary(labels, data) {
+            const summaryContainer = document.getElementById('chartSummary');
+            let html = '';
+
+            if (labels.length === 0) {
                 summaryContainer.innerHTML = '<p class="text-muted">Tidak ada data</p>';
                 return;
-                }
-                
-                const maxValue = Math.max(...data);
-                const colors = ['bg-primary','bg-success','bg-warning','bg-danger','bg-info','bg-secondary'];
-                
-                labels.forEach((label, i) => {
+            }
+
+            const maxValue = Math.max(...data);
+            const colors = ['bg-primary', 'bg-success', 'bg-warning', 'bg-danger', 'bg-info', 'bg-secondary'];
+
+            labels.forEach((label, i) => {
                 const count = data[i];
                 const percent = (count / maxValue) * 100;
                 const color = colors[i % colors.length];
-                
+
                 html += `
                 <div class="mb-2">
                     <div class="hstack justify-content-between">
@@ -607,56 +626,78 @@
                         <div class="progress-bar ${color}" style="width:${percent}%"></div>
                     </div>
                 </div>`;
-                });
-                
-                summaryContainer.innerHTML = html;
-            }
-    
-            function fetchData(){
-                const indicator=document.getElementById('refreshIndicator');
-                indicator.style.display='inline';
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Sedang load data, mohon tunggu sebentar..',
-                    toast: true,
-                    position: 'top',
-                    showConfirmButton: false,
-                    allowOutsideClick: false,
-                    didOpen: () => { Swal.showLoading(); }
-                });
-                fetch(googleScriptUrl)
-                    .then(res=>res.json())
-                    .then(data=>{
-                        allData = data||[];
-                        indicator.style.display='none';
-                        currentPage=1;
-                        Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
-                        renderTable();
-                        const stats=calculateStats(allData);
-                        renderChart(stats,currentFilter);
-                    })
-                    .catch(err=>{
-                        console.error(err);
-                        indicator.innerText='❌ Gagal memuat data';
-                    });
-            }
-    
-            document.getElementById('tableSearch').addEventListener('input',()=>{currentPage=1; renderTable();});
-            document.getElementById('entriesSelect').addEventListener('change', e=>{entriesPerPage=parseInt(e.target.value); currentPage=1; renderTable();});
-            document.getElementById('paginationControls').addEventListener('click', e=>{if(e.target.classList.contains('page-link')){e.preventDefault();currentPage=parseInt(e.target.dataset.page);renderTable();}});
-    
-            document.getElementById('chartFilter').addEventListener('change', function () {
-                const selected = this.value;
-                const stats = calculateStats(allData);
-    
-                renderChart(stats, selected);
-    
-                document.getElementById('chartTitle').innerText =
-                    this.options[this.selectedIndex].text;
             });
-    
-            fetchData();
-            setInterval(fetchData, 600000);
+
+            summaryContainer.innerHTML = html;
+        }
+
+        function fetchData() {
+            const indicator = document.getElementById('refreshIndicator');
+            indicator.style.display = 'inline';
+            Swal.fire({
+                icon: 'warning',
+                title: 'Sedang load data, mohon tunggu sebentar..',
+                toast: true,
+                position: 'top',
+                showConfirmButton: false,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+            fetch(googleScriptUrl)
+                .then(res => res.json())
+                .then(data => {
+                    allData = data || [];
+                    indicator.style.display = 'none';
+                    currentPage = 1;
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Successfully!',
+                        toast: true,
+                        position: 'top',
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
+                    renderTable();
+                    const stats = calculateStats(allData);
+                    renderChart(stats, currentFilter);
+                })
+                .catch(err => {
+                    console.error(err);
+                    indicator.innerText = '❌ Gagal memuat data';
+                });
+        }
+
+        document.getElementById('tableSearch').addEventListener('input', () => {
+            currentPage = 1;
+            renderTable();
+        });
+        document.getElementById('entriesSelect').addEventListener('change', e => {
+            entriesPerPage = parseInt(e.target.value);
+            currentPage = 1;
+            renderTable();
+        });
+        document.getElementById('paginationControls').addEventListener('click', e => {
+            if (e.target.classList.contains('page-link')) {
+                e.preventDefault();
+                currentPage = parseInt(e.target.dataset.page);
+                renderTable();
+            }
+        });
+
+        document.getElementById('chartFilter').addEventListener('change', function() {
+            const selected = this.value;
+            const stats = calculateStats(allData);
+
+            renderChart(stats, selected);
+
+            document.getElementById('chartTitle').innerText =
+                this.options[this.selectedIndex].text;
+        });
+
+        fetchData();
+        setInterval(fetchData, 600000);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

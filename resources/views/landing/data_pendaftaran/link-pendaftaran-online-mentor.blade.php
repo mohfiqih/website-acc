@@ -12,54 +12,67 @@
         href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" />
     <link rel="stylesheet" href="{{ asset('template_baru/assets/css/styles.min.css') }}" />
     <style>
-        .table-responsive{
-          width:100%;
-          overflow-x:auto;
-          -webkit-overflow-scrolling:touch;
-          }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
 
-          /* default desktop */
-          #mentorDataTable{
-          width:100%;
-          font-size:12px;
-          }
+        /* default desktop */
+        #mentorDataTable {
+            width: 100%;
+            font-size: 12px;
+        }
 
-          /* cell tabel */
-          #mentorDataTable th,
-          #mentorDataTable td{
-          padding:6px 8px;
-          vertical-align:middle;
-          }
+        /* cell tabel */
+        #mentorDataTable th,
+        #mentorDataTable td {
+            padding: 6px 8px;
+            vertical-align: middle;
+        }
 
-          /* kolom */
-          .col-no{ width:60px; }
-          .col-copy{ width:90px; text-align:center; }
-          .col-mentor{ min-width:180px; }
-          .col-link{ min-width:420px; }
+        /* kolom */
+        .col-no {
+            width: 60px;
+        }
 
-          /* link panjang */
-          .link-text{
-          white-space:nowrap;
-          }
+        .col-copy {
+            width: 90px;
+            text-align: center;
+        }
 
-          /* tombol copy kecil */
-          .copyLink{
-          font-size:11px;
-          padding:3px 8px;
-          }
+        .col-mentor {
+            min-width: 180px;
+        }
 
-          /* mode HP */
-          @media (max-width:768px){
+        .col-link {
+            min-width: 420px;
+        }
 
-          .table-responsive{
-               overflow-x:auto;
-          }
+        /* link panjang */
+        .link-text {
+            white-space: nowrap;
+        }
 
-          #mentorDataTable{
-               min-width:650px; /* supaya bisa geser */
-          }
+        /* tombol copy kecil */
+        .copyLink {
+            font-size: 11px;
+            padding: 3px 8px;
+        }
 
-          }
+        /* mode HP */
+        @media (max-width:768px) {
+
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            #mentorDataTable {
+                min-width: 650px;
+                /* supaya bisa geser */
+            }
+
+        }
     </style>
 </head>
 
@@ -108,8 +121,8 @@
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <a class="nav-link nav-icon-hover" href="/" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
                                         alt="" width="35" height="35" class="rounded-circle">
                                 </a>
@@ -125,18 +138,20 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table id="mentorDataTable"
-                                    class="table table-striped table-bordered fixed-header-table" style="table-layout:fixed;">
+                                    class="table table-striped table-bordered fixed-header-table"
+                                    style="table-layout:fixed;">
                                     <thead>
                                         <tr>
-                                             <th style="width:5%">No</th>
-                                             <th style="width:10%">Nama Mentor</th>
-                                             <th style="width:5%">Copy Link</th>
-                                             <th style="width:20%">Link Pendaftaran Online</th>
+                                            <th style="width:5%">No</th>
+                                            <th style="width:10%">Nama Mentor</th>
+                                            <th style="width:5%">Copy Link</th>
+                                            <th style="width:20%">Link Pendaftaran Online</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td colspan="3" class="text-center">Sedang proses menampilkan data...</td>
+                                            <td colspan="3" class="text-center">Sedang proses menampilkan data...
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -151,10 +166,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 px-6 text-center">
-                    <p class="mb-0 fs-1">Design and Developed by IT LPK ACC Japan Centre <br />
-                        @include('version.index')
-                </div>
+                @include('version.version_dashboard')
             </div>
         </div>
     </div>
@@ -170,13 +182,13 @@
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js"></script>
 
     <script>
-          $(document).ready(function () {
-               const tbody = $("#mentorDataTable tbody");
-               tbody.empty();
-               allowedMentors.forEach((mentor, index) => {
-                    const mentorSlug = mentor.toLowerCase().replace(/\s+/g, "-");
-                    const link = `http://amanahcitracemerlang.id/pendaftaran-siswa-baru/${mentorSlug}`;
-                    const row = `
+        $(document).ready(function() {
+            const tbody = $("#mentorDataTable tbody");
+            tbody.empty();
+            allowedMentors.forEach((mentor, index) => {
+                const mentorSlug = mentor.toLowerCase().replace(/\s+/g, "-");
+                const link = `http://amanahcitracemerlang.id/pendaftaran-siswa-baru/${mentorSlug}`;
+                const row = `
                          <tr>
                               <td style="width:5%">${index + 1}</td>
                               <td style="width:10%">${mentor}</td>
@@ -191,36 +203,36 @@
                               
                          </tr>
                     `;
-                    tbody.append(row);
-               });
-          });
+                tbody.append(row);
+            });
+        });
 
 
-          $(document).on("click", ".copyLink", function () {
-               const link = $(this).data("link");
-               navigator.clipboard.writeText(link).then(() => {
-                    Swal.fire({
-                         icon: "success",
-                         title: "Link berhasil dicopy",
-                         text: link,
-                         timer: 1500,
-                         showConfirmButton: false
-                    });
-               });
-          });
+        $(document).on("click", ".copyLink", function() {
+            const link = $(this).data("link");
+            navigator.clipboard.writeText(link).then(() => {
+                Swal.fire({
+                    icon: "success",
+                    title: "Link berhasil dicopy",
+                    text: link,
+                    timer: 1500,
+                    showConfirmButton: false
+                });
+            });
+        });
 
-          $(document).on("click", ".copyLink", function () {
-               const link = $(this).data("link");
-               navigator.clipboard.writeText(link).then(function(){
-                    Swal.fire({
-                         icon: "success",
-                         title: "Success",
-                         text: "Link berhasil dicopy",
-                         timer: 1200,
-                         showConfirmButton: false
-                    });
-               });
-          });
+        $(document).on("click", ".copyLink", function() {
+            const link = $(this).data("link");
+            navigator.clipboard.writeText(link).then(function() {
+                Swal.fire({
+                    icon: "success",
+                    title: "Success",
+                    text: "Link berhasil dicopy",
+                    timer: 1200,
+                    showConfirmButton: false
+                });
+            });
+        });
     </script>
 
     <!-- JS -->

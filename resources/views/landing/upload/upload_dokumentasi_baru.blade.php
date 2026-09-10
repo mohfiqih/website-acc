@@ -298,8 +298,8 @@
                     <div class="navbar-collapse justify-content-end px-0" id="navbarNav">
                         <ul class="navbar-nav flex-row ms-auto align-items-center justify-content-end">
                             <li class="nav-item dropdown">
-                                <a class="nav-link nav-icon-hover" href="/" id="drop2" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <a class="nav-link nav-icon-hover" href="/" id="drop2"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
                                         alt="" width="35" height="35" class="rounded-circle">
                                 </a>
@@ -316,7 +316,7 @@
                         <h2 class="modal-title">Upload a file</h2>
                         <p class="modal-description">Attach the file below</p>
                         @if (session('success'))
-                        <div class="alert alert-success">{{ session('success') }}</div>
+                            <div class="alert alert-success">{{ session('success') }}</div>
                         @endif
                         <form id="uploadForm" action="{{ route('images.store') }}" method="POST"
                             enctype="multipart/form-data">
@@ -340,7 +340,8 @@
                                             <p id="fileCount">No file selected</p>
                                         </label>
 
-                                        <input type="file" name="images[]" id="images" class="d-none" multiple required>                                        
+                                        <input type="file" name="images[]" id="images" class="d-none" multiple
+                                            required>
                                     </span>
                                 </label>
                             </div>
@@ -361,23 +362,23 @@
                     </div>
                     <div class="row">
                         @foreach ($images_db as $image)
-                        <div class="col-12 col-sm-6 col-lg-3 mb-4">
-                            <div class="card h-100">
-                                <div class="card-body p-0">
-                                    <img src="{{ asset('storage/' . $image->filepath) }}"
-                                        class="card-img-top lazyload img-fluid" data-lity alt="Image"
-                                        style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                            <div class="col-12 col-sm-6 col-lg-3 mb-4">
+                                <div class="card h-100">
+                                    <div class="card-body p-0">
+                                        <img src="{{ asset('storage/' . $image->filepath) }}"
+                                            class="card-img-top lazyload img-fluid" data-lity alt="Image"
+                                            style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 10px;">
+                                    </div>
+                                    <div class="card-footer text-body-secondary">
+                                        <b>Date:</b> {{ $image->created_at }}<br />
+                                        {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
+                                    </div>
+                                    <button class="btn btn-danger delete-image" style="margin: 10px"
+                                        data-id="{{ $image->id }}">
+                                        <i class="fa fa-trash"></i> Delete
+                                    </button>
                                 </div>
-                                <div class="card-footer text-body-secondary">
-                                    <b>Date:</b> {{ $image->created_at }}<br />
-                                    {{ \Carbon\Carbon::parse($image->created_at)->diffForHumans() }}
-                                </div>
-                                <button class="btn btn-danger delete-image" style="margin: 10px"
-                                    data-id="{{ $image->id }}">
-                                    <i class="fa fa-trash"></i> Delete
-                                </button>
                             </div>
-                        </div>
                         @endforeach
                     </div>
 
@@ -385,37 +386,38 @@
                     <div class="pagination-container" style="padding: 0px;">
                         <ul class="pagination">
                             @if ($images_db->onFirstPage())
-                            <li class="disabled"><span>&lt;</span></li>
+                                <li class="disabled"><span>&lt;</span></li>
                             @else
-                            <li>
-                                <a class="text-white" style="background-color: #046392"
-                                    href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">
-                                    &lt;
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="text-white" style="background-color: #046392"
+                                        href="{{ $images_db->previousPageUrl() }}#galeri" rel="prev">
+                                        &lt;
+                                    </a>
+                                </li>
                             @endif
 
                             @foreach ($images_db->links()->elements[0] as $page => $url)
-                            @if ($page == $images_db->currentPage())
-                            <li class="active"><span>{{ $page }}</span></li>
-                            @else
-                            <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
-                            @endif
+                                @if ($page == $images_db->currentPage())
+                                    <li class="active"><span>{{ $page }}</span></li>
+                                @else
+                                    <li><a href="{{ $url }}#galeri">{{ $page }}</a></li>
+                                @endif
                             @endforeach
 
                             @if ($images_db->hasMorePages())
-                            <li>
-                                <a class="text-white" style="background-color: #046392"
-                                    href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">
-                                    &gt;
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="text-white" style="background-color: #046392"
+                                        href="{{ $images_db->nextPageUrl() }}#galeri" rel="next">
+                                        &gt;
+                                    </a>
+                                </li>
                             @else
-                            <li class="disabled"><span>&gt;</span></li>
+                                <li class="disabled"><span>&gt;</span></li>
                             @endif
                         </ul>
                     </div>
                 </div>
+                @include('version.version_dashboard')
             </section>
         </div>
     </div>
@@ -436,113 +438,117 @@
 
     <script>
         $(document).ready(function() {
-                $("#images").on("change", function() {
-                    let fileCount = this.files.length;
+            $("#images").on("change", function() {
+                let fileCount = this.files.length;
 
-                    if (fileCount > 10) {
-                        Swal.fire("Warning!", "Maksimal 10 file!", "warning");
-                        this.value = "";
-                        fileCount = 0;
+                if (fileCount > 10) {
+                    Swal.fire("Warning!", "Maksimal 10 file!", "warning");
+                    this.value = "";
+                    fileCount = 0;
+                }
+
+                let text = fileCount > 0 ?
+                    fileCount + " file(s) selected" :
+                    "No file selected";
+
+                $("#fileCount").text(text);
+
+            });
+
+            // Upload
+            $("#uploadForm").on("submit", function(e) {
+                e.preventDefault();
+
+                let formData = new FormData(this);
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Do you want to upload these files?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#046392",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Upload"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "{{ route('images.store') }}",
+                            type: "POST",
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function(response) {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Your files have been uploaded.",
+                                    icon: "success",
+                                    confirmButtonText: "OK"
+                                }).then(() => {
+                                    location.reload();
+                                });
+
+                                $("#uploadForm")[0].reset();
+                                $("#fileCount").text("No file selected");
+                            },
+                            error: function(xhr) {
+                                Swal.fire({
+                                    title: "Error!",
+                                    text: "Failed to upload files. Please try again.",
+                                    icon: "error",
+                                    confirmButtonText: "OK"
+                                });
+                            }
+                        });
                     }
-
-                    let text = fileCount > 0 
-                        ? fileCount + " file(s) selected"
-                        : "No file selected";
-
-                    $("#fileCount").text(text);
-
-                });
-    
-                // Upload
-                $("#uploadForm").on("submit", function(e) {
-                    e.preventDefault();
-    
-                    let formData = new FormData(this);
-    
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "Do you want to upload these files?",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#046392",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Upload"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "{{ route('images.store') }}",
-                                type: "POST",
-                                data: formData,
-                                processData: false,
-                                contentType: false,
-                                success: function(response) {
-                                    Swal.fire({
-                                        title: "Success!",
-                                        text: "Your files have been uploaded.",
-                                        icon: "success",
-                                        confirmButtonText: "OK"
-                                    }).then(() => {
-                                        location.reload();
-                                    });
-    
-                                    $("#uploadForm")[0].reset();
-                                    $("#fileCount").text("No file selected");
-                                },
-                                error: function(xhr) {
-                                    Swal.fire({
-                                        title: "Error!",
-                                        text: "Failed to upload files. Please try again.",
-                                        icon: "error",
-                                        confirmButtonText: "OK"
-                                    });
-                                }
-                            });
-                        }
-                    });
-                });
-    
-                // Delete
-                $(".delete-image").on("click", function () {
-                    let imageId = $(this).data("id");
-                    let token = $('meta[name="csrf-token"]').attr("content");
-    
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "Hapus file tersebut! hanya terhapus di database.",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#d33",
-                        cancelButtonColor: "#3085d6",
-                        confirmButtonText: "OK",
-                        cancelButtonText: "Batal",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            $.ajax({
-                                url: "/images/" + imageId,
-                                type: "DELETE",
-                                data: {
-                                    _token: token
-                                },
-                                success: function (response) {
-                                    if (response.success) {
-                                        $(".image-card-" + imageId).fadeOut("slow", function () {
-                                            $(this).remove();
-                                        });
-                                        Swal.fire("Dihapus!", "Gambar berhasil dihapus.", "success").then(() => {
-                                            location.reload();
-                                        });
-                                    } else {
-                                        Swal.fire("Gagal!", "Gagal menghapus gambar.", "error");
-                                    }
-                                },
-                                error: function () {
-                                    Swal.fire("Error!", "Terjadi kesalahan saat menghapus.", "error");
-                                },
-                            });
-                        }
-                    });
                 });
             });
+
+            // Delete
+            $(".delete-image").on("click", function() {
+                let imageId = $(this).data("id");
+                let token = $('meta[name="csrf-token"]').attr("content");
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "Hapus file tersebut! hanya terhapus di database.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#d33",
+                    cancelButtonColor: "#3085d6",
+                    confirmButtonText: "OK",
+                    cancelButtonText: "Batal",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: "/images/" + imageId,
+                            type: "DELETE",
+                            data: {
+                                _token: token
+                            },
+                            success: function(response) {
+                                if (response.success) {
+                                    $(".image-card-" + imageId).fadeOut("slow",
+                                        function() {
+                                            $(this).remove();
+                                        });
+                                    Swal.fire("Dihapus!", "Gambar berhasil dihapus.",
+                                        "success").then(() => {
+                                        location.reload();
+                                    });
+                                } else {
+                                    Swal.fire("Gagal!", "Gagal menghapus gambar.",
+                                        "error");
+                                }
+                            },
+                            error: function() {
+                                Swal.fire("Error!", "Terjadi kesalahan saat menghapus.",
+                                    "error");
+                            },
+                        });
+                    }
+                });
+            });
+        });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
