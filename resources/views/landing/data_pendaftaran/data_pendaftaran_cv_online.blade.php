@@ -729,7 +729,7 @@
                                 <h5 class="card-title d-flex align-items-center gap-2 mb-4">
                                     Grafik Pendaftaran Online Berdasarkan Nama Mentor
                                 </h5>
-                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                {{-- <div class="d-flex align-items-center gap-2 flex-wrap">
                                     <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
                                         <option value="">All Month</option>
                                     </select>
@@ -741,7 +741,7 @@
                                         onclick="exportPDFLandscape()">
                                         Export PDF
                                     </button>
-                                </div>
+                                </div> --}}
                                 <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
                                 <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data
                                         kotor yang terecord secara online melalui formulir pendaftaran online setiap
