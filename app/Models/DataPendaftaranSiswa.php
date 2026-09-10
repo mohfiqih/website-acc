@@ -13,10 +13,5 @@ class DataPendaftaranSiswa extends Model
 
     protected $guarded = [];
 
-    protected $casts = [
-        'tanggal_lahir' => 'date',
-        'tanggal_keluar_negeri' => 'date',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-    ];
+    protected $casts = [];
 }

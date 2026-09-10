@@ -11,7 +11,9 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png" rel="icon">
+    <link
+        href="https://www.amanahcitracemerlang.id/storage/images/1738849208_WhatsApp_Image_2025-02-06_at_20.04.03-removebg-preview.png"
+        rel="icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -105,7 +107,7 @@
 
         body::before {
             content: "";
-            position: fixed; 
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -147,7 +149,8 @@
             white-space: nowrap;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border: 1px solid #ddd;
@@ -193,10 +196,11 @@
             overflow-x: auto;
         }
 
-        .fixed-header-table th, 
+        .fixed-header-table th,
         .fixed-header-table td {
             white-space: nowrap;
         }
+
         #mentorChart {
             width: 100% !important;
             height: 400px !important;
@@ -237,14 +241,14 @@
                                 <div class="carousel-caption d-none d-md-block"></div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/storage/images/1738420242_IMG-20250131-WA0006.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg" class="d-block w-100"
-                                    alt="...">
+                                <img src="https://www.amanahcitracemerlang.id/templates/assets/img/acc.jpg"
+                                    class="d-block w-100" alt="...">
                                 <div class="carousel-caption d-none d-md-block">
                                 </div>
                             </div>
@@ -264,8 +268,10 @@
                 <div class="col-lg-6 order-2 order-lg-2 justify-content-center">
                     <h2 style="text-align: center"></span>DATA PENDAFTARAN SISWA BARU (CV ONLINE)</h2>
                     <h2 style="text-align: center">LPK ACC JAPAN CENTRE</h2>
-                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor, Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
-                    <div class="d-flex justify-content-center justify-content-lg-start text-center" style="padding-bottom: 30px;">
+                    <p style="text-align: center">LPK ACC Japan Centre berlokasi di Dukuh. Gitung, Desa Harjosari Lor,
+                        Kecamatan Adiwerna, Kabupaten Tegal, Jawa Tengah 52194.</p>
+                    <div class="d-flex justify-content-center justify-content-lg-start text-center"
+                        style="padding-bottom: 30px;">
                         <a href="{{ url('/') }}" class="btn-get-started" style="width: 100%;">
                             <i class="bi bi-book"></i>
                             Website LPK ACC Japan Centre
@@ -311,7 +317,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="2" class="text-center">Sedang proses menampilkan data...</td></tr>
+                            <tr>
+                                <td colspan="2" class="text-center">Sedang proses menampilkan data...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -341,10 +349,11 @@
                 </form>
 
                 <div class="table-responsive">
-                    <div id="refreshIndicator" style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
+                    <div id="refreshIndicator"
+                        style="display: none; font-size: 15px; color: #888; margin-right: 10px;">
                         🔄 Refreshing data...
                     </div>
-                    <br/>
+                    <br />
                     <table id="mentorDataTable" class="table table-striped table-bordered fixed-header-table">
                         <thead>
                             <tr>
@@ -424,7 +433,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td colspan="74" class="text-center">Sedang proses menampilkan data...</td></tr>
+                            <tr>
+                                <td colspan="74" class="text-center">Sedang proses menampilkan data...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -438,8 +449,8 @@
             </div>
         </div>
     </div>
-    
-    <br/>    
+
+    <br />
 
     {{-- <div id="preloader"></div> --}}
 
@@ -454,7 +465,8 @@
     {{-- data tabel --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
+        const googleScriptUrl =
+            'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
 
         const allowedMentors = [
             'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
@@ -477,37 +489,59 @@
                 position: 'top',
                 showConfirmButton: false,
                 allowOutsideClick: false,
-                didOpen: () => { Swal.showLoading(); }
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
 
-            fetch(googleScriptUrl, { method:'GET', mode:'cors', cache:'no-cache' })
+            fetch(googleScriptUrl, {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'no-cache'
+                })
                 .then(res => res.text())
                 .then(text => {
                     let data;
-                    try { data = JSON.parse(text); } 
-                    catch(e) { throw new Error('Response bukan JSON valid'); }
+                    try {
+                        data = JSON.parse(text);
+                    } catch (e) {
+                        throw new Error('Response bukan JSON valid');
+                    }
                     return data;
                 })
                 .then(data => {
                     allData = data.map(row => {
-                        row.Timestamp = row.Timestamp ? row.Timestamp.substring(0,10) : '';
+                        row.Timestamp = row.Timestamp ? row.Timestamp.substring(0, 10) : '';
                         if (row['NAMA MENTOR']) {
-                            const mentor = row['NAMA MENTOR'].toUpperCase().trim().replace(/[^A-Z ]/g,'').replace(/\s+/g,' ');
-                            const monthKey = row.Timestamp ? row.Timestamp.substring(0,7) : '';
+                            const mentor = row['NAMA MENTOR'].toUpperCase().trim().replace(/[^A-Z ]/g, '')
+                                .replace(/\s+/g, ' ');
+                            const monthKey = row.Timestamp ? row.Timestamp.substring(0, 7) : '';
                             if (mentor && allowedMentors.includes(mentor)) {
                                 perMentorAll[mentor] = (perMentorAll[mentor] || 0) + 1;
                                 if (monthKey) {
                                     if (!perMentorPerMonth[monthKey]) perMentorPerMonth[monthKey] = {};
-                                    perMentorPerMonth[monthKey][mentor] = (perMentorPerMonth[monthKey][mentor] || 0) + 1;
-                                    months[monthKey] = new Date(monthKey+'-01')
-                                        .toLocaleString('default', { month: 'long', year: 'numeric' });
+                                    perMentorPerMonth[monthKey][mentor] = (perMentorPerMonth[monthKey][
+                                        mentor
+                                    ] || 0) + 1;
+                                    months[monthKey] = new Date(monthKey + '-01')
+                                        .toLocaleString('default', {
+                                            month: 'long',
+                                            year: 'numeric'
+                                        });
                                 }
                             }
                         }
                         return row;
                     });
 
-                    Swal.fire({ icon:'success', title:'Data Successfully!', toast:true, position:'top', timer:2500, showConfirmButton:false });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Data Successfully!',
+                        toast: true,
+                        position: 'top',
+                        timer: 2500,
+                        showConfirmButton: false
+                    });
                     renderChart();
                     renderTable();
                     populateMonthFilter();
@@ -520,6 +554,7 @@
         }
 
         let mentorChart;
+
         function renderChart(selectedMonth = '') {
             let labels = Object.keys(perMentorAll);
             let data = labels.map(mentor => {
@@ -529,8 +564,11 @@
                 return perMentorAll[mentor];
             });
 
-            const combined = labels.map((label, i) => ({ mentor: label, count: data[i] }));
-            combined.sort((a,b) => b.count - a.count);
+            const combined = labels.map((label, i) => ({
+                mentor: label,
+                count: data[i]
+            }));
+            combined.sort((a, b) => b.count - a.count);
 
             labels = combined.map(c => c.mentor);
             data = combined.map(c => c.count);
@@ -549,8 +587,16 @@
                 },
                 options: {
                     responsive: true,
-                    plugins: { legend: { display: false } },
-                    scales: { y: { beginAtZero: true } }
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
                 }
             });
 
@@ -588,6 +634,7 @@
         }
 
         let dataTable;
+
         function renderTable() {
             $('#mentorDataTable tbody').empty();
 
@@ -732,7 +779,9 @@
 
                     try {
                         // Ambil data dari Google Apps Script
-                        const res = await fetch("https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec");
+                        const res = await fetch(
+                            "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec"
+                        );
                         const data = await res.json();
                         const rowData = data.reverse().find(d => d.ID == id);
 

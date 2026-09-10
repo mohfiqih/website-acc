@@ -32,216 +32,9 @@ class PendaftaranController extends Controller
         ]);
     }
 
-    // public function store_pendaftaran_baru(Request $request)
-    // {
-    //     $response  = Http::get($this->googleScriptUrl);
-    //     $data_list = array_reverse($response->json());
-
-    //     try {
-    //         $input = $request->all();
-
-    //         $email_input = strtolower(trim($input['email'] ?? ''));
-    //         $nama_input  = strtoupper(trim($input['nama_indonesia'] ?? ''));
-
-    //         foreach ($data_list as $row) {
-    //             $email_lama = strtolower(trim($row['EMAIL'] ?? ''));
-    //             $nama_lama  = strtoupper(trim($row['NAMA (INDONESIA)'] ?? ''));
-
-    //             if ($email_lama === $email_input || $nama_lama === $nama_input) {
-    //                 return response()->json([
-    //                     'success'   => false,
-    //                     'duplicate' => true,
-    //                     'message'   => 'Data anda sudah terdaftar di LPK ACC Japan Centre!'
-    //                 ]);
-    //             }
-    //         }
-
-    //         $pengalamanList = [];
-    //         $perguruanList  = [];
-
-    //         # pengalaman
-    //         if ($request->has('tahun_awal')) {
-    //             foreach ($request->tahun_awal as $i => $tahunAwal) {
-    //                 $tahunAkhir     = $request->tahun_akhir[$i] ?? '-';
-    //                 $perusahaan     = $request->nama_perusahaan[$i] ?? '-';
-    //                 $bagian         = $request->bagian[$i] ?? '-';
-
-    //                 $pengalamanList[] = "{$tahunAwal} - {$tahunAkhir} - {$perusahaan} - {$bagian}";
-    //             }
-    //         }
-
-    //         $input['pengalaman_kerja'] = implode(', ', $pengalamanList);
-
-    //         # perguruan tinggi
-    //         if ($request->has('nama_perguruan')) {
-    //             foreach ($request->nama_perguruan as $i => $nama_perguruan) {
-    //                 $prodi = $request->program_studi[$i] ?? '-';
-    //                 $perguruanList[] = "{$nama_perguruan} - {$prodi}";
-    //             }
-    //         }
-    //         $input['perguruan_tinggi'] = implode(', ', $perguruanList);
-
-
-    //         $fieldJsonFields = ['nama_keluarga', 'bahasa_asing'];
-    //         foreach ($fieldJsonFields as $field) {
-    //             if (isset($input[$field])) {
-    //                 $input[$field] = $this->convertJsonToText($input[$field]);
-    //             }
-    //         }
-
-    //         $request->merge($input);
-
-    //         $request->validate([
-    //             'email'                      => 'nullable|string',
-    //             'nama_katakana'              => 'nullable|string',
-    //             'nama_indonesia'             => 'nullable|string',
-    //             'alamat'                     => 'nullable|string',
-    //             'tanggal_lahir'              => 'nullable|string',
-    //             'usia'                       => 'nullable|string',
-    //             'jenis_kelamin'              => 'nullable|string',
-    //             'no_hp_aktif'                => 'nullable|string',
-    //             'agama'                      => 'nullable|string',
-    //             'tinggi_badan'               => 'nullable|string',
-    //             'berat_badan'                => 'nullable|string',
-    //             'golongan_darah'             => 'nullable|string',
-    //             'buta_warna'                 => 'nullable|string',
-    //             'mata_kanan'                 => 'nullable|string',
-    //             'mata_kiri'                  => 'nullable|string',
-    //             'pernah_operasi'             => 'nullable|string',
-    //             'apakah_sedang_minum'        => 'nullable|string',
-    //             'tangan'                     => 'nullable|string',
-    //             'merokok'                    => 'nullable|string',
-    //             'penyakit_dalam'             => 'nullable|string',
-    //             'keahlian'                   => 'nullable|string',
-    //             'sifat_kepribadian'          => 'nullable|string',
-    //             'kelebihan'                  => 'nullable|string',
-    //             'kelemahan'                  => 'nullable|string',
-    //             'status'                     => 'nullable|string',
-    //             'hobi'                       => 'nullable|string',
-    //             'motivasi'                   => 'nullable|string',
-    //             'nabung_berapa'              => 'nullable|string',
-    //             'apa_yang_akan_dilakukan'    => 'nullable|string',
-    //             'pernah_tinggal_dijepang'    => 'nullable|string',
-    //             'kualifikasi'                => 'nullable|string',
-    //             'sekolah_dasar'              => 'nullable|string',
-    //             'tahun_masuk_sd'             => 'nullable|string',
-    //             'tahun_keluar_sd'            => 'nullable|string',
-    //             'sekolah_menengah_pertama'   => 'nullable|string',
-    //             'tahun_masuk_smp'            => 'nullable|string',
-    //             'tahun_keluar_smp'           => 'nullable|string',
-    //             'sekolah_menengah_atas'      => 'nullable|string',
-    //             'tahun_masuk_smak'           => 'nullable|string',
-    //             'tahun_keluar_smak'          => 'nullable|string',
-    //             'jurusan'                    => 'nullable|string',
-    //             'perguruan_tinggi'           => 'nullable|string',
-    //             'pengalaman_kerja'           => 'nullable|string',
-    //             'bahasa_asing'               => 'nullable|string',
-    //             'pernah_keluar_negeri'       => 'nullable|string',
-    //             'tanggal_keluar_negeri'      => 'nullable|string',
-    //             'pernah_keluar_negeri_lain'  => 'nullable|string',
-    //             'negara'                     => 'nullable|string',
-    //             'kerabat_dijepang'           => 'nullable|string',
-    //             'hubungan_kerabat_dijepang'  => 'nullable|string',
-    //             'belajar_bahasa'             => 'nullable|string',
-    //             'buku_yang_dipakai'          => 'nullable|string',
-    //             'bab_yang_dipelajari'        => 'nullable|string',
-    //             'nama_ayah'                  => 'nullable|string',
-    //             'hubungan_ayah'              => 'nullable|string',
-    //             'usia_ayah'                  => 'nullable|string',
-    //             'pekerjaan_ayah'             => 'nullable|string',
-    //             'nama_ibu'                   => 'nullable|string',
-    //             'hubungan_ibu'               => 'nullable|string',
-    //             'usia_ibu'                   => 'nullable|string',
-    //             'pekerjaan_ibu'              => 'nullable|string',
-    //             'nama_saudara'               => 'nullable|string',
-    //             'pendapat_keluarga'          => 'nullable|string',
-    //             'no_hp_keluarga'             => 'nullable|string',
-    //             'nama_mentor'                => 'nullable|string',
-    //             'ukuran_baju'                => 'nullable|string',
-    //             'ukuran_sepatu'              => 'nullable|string',
-    //             'pilih_kelas'                => 'nullable|string',
-    //             'pilih_program'              => 'nullable|string',
-    //             'id'                         => 'nullable|string'
-    //         ]);
-
-    //         $data = $request->all();
-
-    //         foreach ($data as $key => $value) {
-    //             if ($key === 'email') continue;
-    //             if (is_string($value)) {
-    //                 $data[$key] = strtoupper($value);
-    //             }
-    //         }
-
-    //         if (!empty($data['hubungan_ayah'])) {
-    //             $data['hubungan_ayah'] = 'AYAH';
-    //         }
-    //         if (!empty($data['hubungan_ibu'])) {
-    //             $data['hubungan_ibu'] = 'IBU';
-    //         }
-
-    //         $data['id']             = mt_rand(10000000, 99999999);
-    //         $data['no_hp_aktif']    = "'" . $data['no_hp_aktif'];
-    //         $data['no_hp_keluarga'] = "'" . $data['no_hp_keluarga'];    
-
-    //         # nama saudara
-    //         if (!empty($data['nama_saudara'])) {
-    //             $saudaraList   = explode(';', $data['nama_saudara']);
-    //             $formattedList = [];
-
-    //             foreach ($saudaraList as $saudara) {
-    //                 $parts = array_map('trim', explode(',', $saudara));
-
-    //                 $hubungan  = isset($parts[0]) && $parts[0] !== '' ? strtoupper($parts[0]) : '';
-    //                 $nama      = isset($parts[1]) && $parts[1] !== '' ? strtoupper($parts[1]) : '';
-    //                 $usia      = isset($parts[2]) && $parts[2] !== '' ? $parts[2] : '';
-    //                 $pekerjaan = isset($parts[3]) && $parts[3] !== '' ? strtoupper($parts[3]) : '';
-
-    //                 $filteredParts = array_filter([$hubungan, $nama, $usia, $pekerjaan], function ($value) {
-    //                     return $value !== '';
-    //                 });
-
-    //                 $formattedList[] = implode(' - ', $filteredParts);
-    //             }
-
-    //             $data['nama_saudara'] = implode(', ', $formattedList);
-    //         }
-
-    //         $response = Http::withHeaders([
-    //             'Content-Type' => 'application/json'
-    //         ])->post($this->googleScriptUrl, $data);
-
-    //         if ($response->successful()) {
-    //             return response()->json(['success' => true]);
-    //         } else {
-    //             return response()->json([
-    //                 'success' => false,
-    //                 'message' => 'Gagal mengirim ke Google Script.',
-    //                 'debug_response' => $response->body()
-    //             ]);
-    //         }
-    //     } catch (ValidationException $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => 'Validasi gagal',
-    //             'errors' => $e->errors(),
-    //         ]);
-    //     } catch (\Exception $e) {
-    //         return response()->json([
-    //             'success' => false,
-    //             'message' => $e->getMessage(),
-    //         ]);
-    //     }
-    // }
-
     public function store_pendaftaran_baru(Request $request)
     {
         try {
-
-            // =========================================================
-            // 1. VALIDASI
-            // =========================================================
-
             $request->validate([
                 'email' => 'nullable|email|max:255',
                 'nama_indonesia' => 'required|string|max:255',
@@ -251,17 +44,8 @@ class PendaftaranController extends Controller
             ]);
 
 
-            // =========================================================
-            // 2. DATA UTAMA
-            // =========================================================
-
             $email = trim((string) $request->input('email'));
             $namaIndonesia = trim((string) $request->input('nama_indonesia'));
-
-
-            // =========================================================
-            // 3. CEK DUPLIKAT DATABASE
-            // =========================================================
 
             $duplicate = DataPendaftaranSiswa::where(function ($query) use (
                 $email,
@@ -279,9 +63,7 @@ class PendaftaranController extends Controller
                         $query->where('nama_indonesia', $namaIndonesia);
                     }
                 }
-
             })->exists();
-
 
             if ($duplicate) {
                 return response()->json([
@@ -290,11 +72,6 @@ class PendaftaranController extends Controller
                     'message' => 'Data anda sudah terdaftar di LPK ACC Japan Centre!'
                 ], 422);
             }
-
-
-            // =========================================================
-            // 4. PENGALAMAN KERJA
-            // =========================================================
 
             $namaPerusahaan = $request->input('nama_perusahaan', []);
             $bagian = $request->input('bagian', []);
@@ -339,11 +116,6 @@ class PendaftaranController extends Controller
                 }
             }
 
-
-            // =========================================================
-            // 5. PERGURUAN TINGGI
-            // =========================================================
-
             $namaPerguruan = $request->input('nama_perguruan', []);
             $programStudi = $request->input('program_studi', []);
 
@@ -372,11 +144,6 @@ class PendaftaranController extends Controller
                     ];
                 }
             }
-
-
-            // =========================================================
-            // 6. BAHASA ASING
-            // =========================================================
 
             $bahasaAsing = $request->input('bahasa_asing', []);
 
@@ -424,19 +191,9 @@ class PendaftaranController extends Controller
                         return trim((string) $value) !== '';
                     })
                     ->implode(', ');
-
             } else {
-
                 $bahasaAsing = trim((string) $bahasaAsing);
             }
-
-
-            // =========================================================
-            // 7. NAMA KELUARGA
-            // =========================================================
-            // nama_keluarga TIDAK ADA sebagai kolom database.
-            // Jadi semua nama digabung menjadi satu string.
-            // =========================================================
 
             $namaKeluarga = $request->input('nama_keluarga', []);
 
@@ -481,11 +238,6 @@ class PendaftaranController extends Controller
                 $namaKeluarga = trim((string) $namaKeluarga);
             }
 
-
-            // =========================================================
-            // 8. NAMA SAUDARA
-            // =========================================================
-
             $namaSaudara = $request->input('nama_saudara', []);
 
             if (is_array($namaSaudara)) {
@@ -529,11 +281,6 @@ class PendaftaranController extends Controller
                 $namaSaudara = trim((string) $namaSaudara);
             }
 
-
-            // =========================================================
-            // 9. GABUNG NAMA SAUDARA + NAMA KELUARGA
-            // =========================================================
-
             $semuaNamaSaudara = collect([
                 $namaSaudara,
                 $namaKeluarga,
@@ -546,38 +293,20 @@ class PendaftaranController extends Controller
                 })
                 ->implode(', ');
 
-
-            // =========================================================
-            // 10. AMBIL DATA REQUEST
-            // =========================================================
-
             $data = $request->except([
                 '_token',
-
-                // Dynamic pengalaman kerja
                 'tahun_awal',
                 'tahun_akhir',
                 'nama_perusahaan',
                 'bagian',
-
-                // Dynamic perguruan tinggi
                 'nama_perguruan',
                 'program_studi',
-
-                // BUKAN KOLOM DATABASE
                 'nama_keluarga',
-
-                // Akan diisi manual
                 'nama_saudara',
                 'bahasa_asing',
                 'pengalaman_kerja',
                 'perguruan_tinggi',
             ]);
-
-
-            // =========================================================
-            // 11. DATA HASIL FORMAT
-            // =========================================================
 
             $data['pengalaman_kerja'] = json_encode(
                 $pengalamanKerja,
@@ -590,25 +319,11 @@ class PendaftaranController extends Controller
             );
 
             $data['bahasa_asing'] = $bahasaAsing;
-
-            // HANYA masuk ke kolom nama_saudara
             $data['nama_saudara'] = $semuaNamaSaudara;
-
-
-            // =========================================================
-            // 12. HUBUNGAN AYAH & IBU
-            // =========================================================
-
             $data['hubungan_ayah'] = 'AYAH';
             $data['hubungan_ibu'] = 'IBU';
 
-
-            // =========================================================
-            // 13. UPPERCASE
-            // =========================================================
-
             foreach ($data as $key => $value) {
-
                 if (
                     $key === 'email' ||
                     $key === 'pengalaman_kerja' ||
@@ -618,7 +333,6 @@ class PendaftaranController extends Controller
                 }
 
                 if (is_string($value)) {
-
                     $data[$key] = mb_strtoupper(
                         trim($value),
                         'UTF-8'
@@ -626,22 +340,11 @@ class PendaftaranController extends Controller
                 }
             }
 
-
-            // =========================================================
-            // 14. EMAIL
-            // =========================================================
-
             if (!empty($email)) {
                 $data['email'] = strtolower($email);
             }
 
-
-            // =========================================================
-            // 15. RANDOM ID 8 DIGIT
-            // =========================================================
-
             do {
-
                 $randomId = str_pad(
                     (string) random_int(0, 99999999),
                     8,
@@ -658,17 +361,7 @@ class PendaftaranController extends Controller
 
             $data['randomId'] = $randomId;
 
-
-            // =========================================================
-            // 16. SIMPAN DATABASE
-            // =========================================================
-
             $siswa = DataPendaftaranSiswa::create($data);
-
-
-            // =========================================================
-            // 17. RESPONSE
-            // =========================================================
 
             return response()->json([
                 'success' => true,
@@ -676,19 +369,13 @@ class PendaftaranController extends Controller
                 'id' => $siswa->id,
                 'randomId' => $siswa->randomId,
             ], 200);
-
-
         } catch (ValidationException $e) {
-
             return response()->json([
                 'success' => false,
                 'message' => 'Validasi gagal.',
                 'errors' => $e->errors(),
             ], 422);
-
-
         } catch (\Throwable $e) {
-
             \Log::error(
                 'Gagal menyimpan data pendaftaran siswa',
                 [
@@ -708,8 +395,229 @@ class PendaftaranController extends Controller
 
     public function data_pendaftaran_new()
     {
-        return view('landing.data_pendaftaran.template-data-pendaftaran-baru');
+        return view('landing.data_pendaftaran.data_pendaftaran_cv_online');
     }
+
+    // public function data_pendaftaran_json()
+    // {
+    //     $data = DataPendaftaranSiswa::orderByDesc('id')
+    //         ->get()
+    //         ->map(function ($row) {
+    //             return [
+    //                 'ID' => $row->id,
+    //                 'EMAIL' => $row->email,
+    //                 'NAMA (KATAKANA)' => $row->nama_katakana,
+    //                 'NAMA (INDONESIA)' => $row->nama_indonesia,
+    //                 'ALAMAT' => $row->alamat,
+    //                 'TANGGAL LAHIR' => $row->tanggal_lahir,
+    //                 'USIA' => $row->usia,
+    //                 'KELAMIN' => $row->jenis_kelamin,
+    //                 'NO HP AKTIF' => $row->no_hp_aktif,
+    //                 'AGAMA' => $row->agama,
+    //                 'TINGGI' => $row->tinggi_badan,
+    //                 'BERAT' => $row->berat_badan,
+    //                 'GOL DARAH' => $row->golongan_darah,
+    //                 'BUTA WARNA' => $row->buta_warna,
+    //                 'MATA KIRI' => $row->mata_kiri,
+    //                 'MATA KANAN' => $row->mata_kanan,
+    //                 'PERNAH OPERASI' => $row->pernah_operasi,
+    //                 'APAKAH SEDANG MINUM' => $row->apakah_sedang_minum,
+    //                 'TANGAN' => $row->tangan,
+    //                 'MEROKOK' => $row->merokok,
+    //                 'PENYAKIT DALAM' => $row->penyakit_dalam,
+    //                 'KEAHLIAN' => $row->keahlian,
+    //                 'SIFAT/KEPRIBADIAN' => $row->sifat_kepribadian,
+    //                 'KELEBIHAN' => $row->kelebihan,
+    //                 'KELEMAHAN' => $row->kelemahan,
+    //                 'STATUS' => $row->status,
+    //                 'HOBI' => $row->hobi,
+    //                 'MOTIVASI' => $row->motivasi,
+
+    //                 'SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'
+    //                     => $row->nabung_berapa,
+
+    //                 'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'
+    //                     => $row->apa_yang_akan_dilakukan,
+
+    //                 'APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'
+    //                     => $row->pernah_tinggal_dijepang,
+
+    //                 'JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'
+    //                     => $row->kualifikasi,
+
+    //                 'SEKOLAH DASAR (SD)' => $row->sekolah_dasar,
+    //                 'TAHUN MASUK SEKOLAH (SD)' => $row->tahun_masuk_sd,
+    //                 'TAHUN KELUAR SEKOLAH (SD)' => $row->tahun_keluar_sd,
+
+    //                 'SEKOLAH MENENGAH PERTAMA (SMP)'
+    //                     => $row->sekolah_menengah_pertama,
+
+    //                 'TAHUN MASUK SEKOLAH (SMP)' => $row->tahun_masuk_smp,
+    //                 'TAHUN KELUAR SEKOLAH (SMP)' => $row->tahun_keluar_smp,
+
+    //                 'SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)'
+    //                     => $row->sekolah_menengah_atas,
+
+    //                 'TAHUN MASUK SEKOLAH (SMA/SMK)' => $row->tahun_masuk_smak,
+    //                 'TAHUN KELUAR SEKOLAH (SMA/SMK)' => $row->tahun_keluar_smak,
+    //                 'JURUSAN (SMA/SMK)' => $row->jurusan,
+    //                 'PERGURUAN TINGGI' => $row->perguruan_tinggi,
+    //                 'PENGALAMAN KERJA' => $row->pengalaman_kerja,
+    //                 'BAHASA ASING YANG DIKUASAI' => $row->bahasa_asing,
+
+    //                 'PERNAH KE JEPANG' => $row->pernah_keluar_negeri,
+    //                 'JIKA YA, SEBUTKAN TGL/BLN/THN' => $row->tanggal_keluar_negeri,
+    //                 'PERNAH LUAR NEGERI LAINNYA' => $row->pernah_keluar_negeri_lain,
+    //                 'JIKA YA, NEGARA APA' => $row->negara,
+
+    //                 'APAKAH ADA KERABAT DI JEPANG'
+    //                     => $row->kerabat_dijepang,
+
+    //                 'APA HUBUNGAN KERABAT YANG DI JEPANG'
+    //                     => $row->hubungan_kerabat_dijepang,
+
+    //                 'BELAJAR BAHASA' => $row->belajar_bahasa,
+    //                 'BUKU YANG DI PAKAI' => $row->buku_yang_dipakai,
+    //                 'BAB YANG DI PELAJARI' => $row->bab_yang_dipelajari,
+
+    //                 'NAMA AYAH' => $row->nama_ayah,
+    //                 'HUBUNGAN AYAH' => $row->hubungan_ayah,
+    //                 'USIA AYAH' => $row->usia_ayah,
+    //                 'PEKERJAAN AYAH' => $row->pekerjaan_ayah,
+
+    //                 'NAMA IBU' => $row->nama_ibu,
+    //                 'HUBUNGAN IBU' => $row->hubungan_ibu,
+    //                 'USIA IBU' => $row->usia_ibu,
+    //                 'PEKERJAAN IBU' => $row->pekerjaan_ibu,
+
+    //                 'NAMA SAUDARA' => $row->nama_saudara,
+    //                 'PENDAPAT KELUARGA' => $row->pendapat_keluarga,
+    //                 'NO HP KELUARGA' => $row->no_hp_keluarga,
+
+    //                 'NAMA MENTOR' => $row->nama_mentor,
+    //                 'UKURAN BAJU' => $row->ukuran_baju,
+    //                 'NOMOR SEPATU' => $row->ukuran_sepatu,
+    //                 'PILIH KELAS' => $row->pilih_kelas,
+    //                 'PILIH PROGRAM' => $row->pilih_program,
+
+    //                 'Timestamp' => $row->created_at ?? '',
+    //             ];
+    //         });
+
+    //     return response()->json($data);
+    // }
+
+    public function data_pendaftaran_json()
+{
+    $data = DataPendaftaranSiswa::orderByDesc('id')
+        ->get()
+        ->map(function ($row) {
+            return [
+                'ID' => $row->id,
+                'EMAIL' => $row->email,
+                'NAMA (KATAKANA)' => $row->nama_katakana,
+                'NAMA (INDONESIA)' => $row->nama_indonesia,
+                'ALAMAT' => $row->alamat,
+                'TANGGAL LAHIR' => $row->tanggal_lahir,
+                'USIA' => $row->usia,
+                'KELAMIN' => $row->jenis_kelamin,
+                'NO HP AKTIF' => $row->no_hp_aktif,
+                'AGAMA' => $row->agama,
+                'TINGGI' => $row->tinggi_badan,
+                'BERAT' => $row->berat_badan,
+                'GOL DARAH' => $row->golongan_darah,
+                'BUTA WARNA' => $row->buta_warna,
+                'MATA KIRI' => $row->mata_kiri,
+                'MATA KANAN' => $row->mata_kanan,
+                'PERNAH OPERASI' => $row->pernah_operasi,
+                'APAKAH SEDANG MINUM' => $row->apakah_sedang_minum,
+                'TANGAN' => $row->tangan,
+                'MEROKOK' => $row->merokok,
+                'PENYAKIT DALAM' => $row->penyakit_dalam,
+                'KEAHLIAN' => $row->keahlian,
+                'SIFAT/KEPRIBADIAN' => $row->sifat_kepribadian,
+                'KELEBIHAN' => $row->kelebihan,
+                'KELEMAHAN' => $row->kelemahan,
+                'STATUS' => $row->status,
+                'HOBI' => $row->hobi,
+                'MOTIVASI' => $row->motivasi,
+
+                'SELAMA 3 TAHUN DI JEPANG MAU NABUNG BERAPA'
+                    => $row->nabung_berapa,
+
+                'SETELAH PULANG JEPANG, APA YANG AKAN DILAKUKAN'
+                    => $row->apa_yang_akan_dilakukan,
+
+                'APAKAH ANDA PERNAH TINGGAL/BEKERJA DI JEPANG'
+                    => $row->pernah_tinggal_dijepang,
+
+                'JIKA YA, KUALIFIKASI APA YANG ANDA LAMAR'
+                    => $row->kualifikasi,
+
+                'SEKOLAH DASAR (SD)' => $row->sekolah_dasar,
+                'TAHUN MASUK SEKOLAH (SD)' => $row->tahun_masuk_sd,
+                'TAHUN KELUAR SEKOLAH (SD)' => $row->tahun_keluar_sd,
+
+                'SEKOLAH MENENGAH PERTAMA (SMP)'
+                    => $row->sekolah_menengah_pertama,
+
+                'TAHUN MASUK SEKOLAH (SMP)' => $row->tahun_masuk_smp,
+                'TAHUN KELUAR SEKOLAH (SMP)' => $row->tahun_keluar_smp,
+
+                'SEKOLAH MENENGAH ATAS/KEJURUAN (SMA/SMK)'
+                    => $row->sekolah_menengah_atas,
+
+                'TAHUN MASUK SEKOLAH (SMA/SMK)' => $row->tahun_masuk_smak,
+                'TAHUN KELUAR SEKOLAH (SMA/SMK)' => $row->tahun_keluar_smak,
+                'JURUSAN (SMA/SMK)' => $row->jurusan,
+                'PERGURUAN TINGGI' => $row->perguruan_tinggi,
+                'PENGALAMAN KERJA' => $row->pengalaman_kerja,
+                'BAHASA ASING YANG DIKUASAI' => $row->bahasa_asing,
+
+                'PERNAH KE JEPANG' => $row->pernah_keluar_negeri,
+                'JIKA YA, SEBUTKAN TGL/BLN/THN' => $row->tanggal_keluar_negeri,
+                'PERNAH LUAR NEGERI LAINNYA' => $row->pernah_keluar_negeri_lain,
+                'JIKA YA, NEGARA APA' => $row->negara,
+
+                'APAKAH ADA KERABAT DI JEPANG'
+                    => $row->kerabat_dijepang,
+
+                'APA HUBUNGAN KERABAT YANG DI JEPANG'
+                    => $row->hubungan_kerabat_dijepang,
+
+                'BELAJAR BAHASA' => $row->belajar_bahasa,
+                'BUKU YANG DI PAKAI' => $row->buku_yang_dipakai,
+                'BAB YANG DI PELAJARI' => $row->bab_yang_dipelajari,
+
+                'NAMA AYAH' => $row->nama_ayah,
+                'HUBUNGAN AYAH' => $row->hubungan_ayah,
+                'USIA AYAH' => $row->usia_ayah,
+                'PEKERJAAN AYAH' => $row->pekerjaan_ayah,
+
+                'NAMA IBU' => $row->nama_ibu,
+                'HUBUNGAN IBU' => $row->hubungan_ibu,
+                'USIA IBU' => $row->usia_ibu,
+                'PEKERJAAN IBU' => $row->pekerjaan_ibu,
+
+                'NAMA SAUDARA' => $row->nama_saudara,
+                'PENDAPAT KELUARGA' => $row->pendapat_keluarga,
+                'NO HP KELUARGA' => $row->no_hp_keluarga,
+
+                'NAMA MENTOR' => $row->nama_mentor,
+                'UKURAN BAJU' => $row->ukuran_baju,
+                'NOMOR SEPATU' => $row->ukuran_sepatu,
+                'PILIH KELAS' => $row->pilih_kelas,
+                'PILIH PROGRAM' => $row->pilih_program,
+
+                // PENTING: gunakan key yang sama dengan JavaScript
+                'Timestamp' => $row->created_at
+                    ? $row->created_at->toDateTimeString()
+                    : '',
+            ];
+        });
+
+    return response()->json($data);
+}
 
     public function export_cv_word(Request $request)
     {

@@ -76,27 +76,34 @@ Route::get('data-siswa/export-excel', [DashboardController::class, 'export_excel
 # Data User
 Route::get('/data-user', [UserController::class, 'data_user'])->name('data_user')->middleware('auth');
 Route::delete('/user/{id}', [UserController::class, 'delete_user'])->name('delete_user');
+
 # upload galeri
 Route::get('/upload', [ImageUploadController::class, 'index'])->name('images.index');
 Route::post('/upload', [ImageUploadController::class, 'store'])->name('images.store');
+
 # pendaftaran
 Route::get('/pendaftaran-online', [PendaftaranController::class, 'index']);
 Route::post('/pendaftaran-online', [PendaftaranController::class, 'store']);
+
 # get data pendaftaran old
 Route::get('/data-pendaftaran-online', [PendaftaranController::class, 'data_pendaftaran_old']);
+
 # pendaftaran umum
 Route::get('/pendaftaran-siswa-baru', [PendaftaranController::class, 'pendaftaran_baru']);
+
 # for mentor
 Route::get('/pendaftaran-siswa-baru/{mentor}', [PendaftaranController::class, 'pendaftaran_baru']);
 Route::post('/pendaftaran-siswa-baru', [PendaftaranController::class, 'store_pendaftaran_baru'])->name('store_pendaftaran_baru');
 Route::get('/link-pendaftaran-mentor', [PendaftaranController::class, 'link_pendaftaran_mentor']);
+
 # get data pendaftaran baru
 Route::get('/data-pendaftaran', [PendaftaranController::class, 'data_pendaftaran_new']);
+Route::get('/data-pendaftaran/json', [PendaftaranController::class, 'data_pendaftaran_json'])->name('data-pendaftaran.json');
 Route::get('/data-pendaftaran/export-pdf', [PendaftaranController::class, 'exportPdf'])->name('data-pendaftaran.export-pdf');
+
 # refresh
 Route::get('/refresh-table-pendaftaran', [PendaftaranController::class, 'refreshTablePendaftaran'])->name('refresh.pendaftaran');
 Route::get('/export-cv-pdf/{id}', [PendaftaranController::class, 'export_cv_pdf'])->name('export.pdf');
-// Route::get('/export-cv-word/{id}', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 Route::post('/export-cv-word', [PendaftaranController::class, 'export_cv_word'])->name('export.cv.word');
 
 Route::delete('/images/{id}', [ImageUploadController::class, 'delete'])->name('images.delete');
