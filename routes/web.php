@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Http;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\DataCOE;
 use App\Models\Image;
+use App\Http\Controllers\ImportPendaftaranController;
+
+Route::get('/import-pendaftaran', [
+    ImportPendaftaranController::class,
+    'import'
+]);
 
 // Landing Page
 Route::get('/', [LandingPageController::class, 'index'])->name('landing.index');
