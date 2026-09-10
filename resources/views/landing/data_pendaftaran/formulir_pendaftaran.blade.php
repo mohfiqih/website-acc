@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Formulir Pendaftaran Online LPK ACC Japan Centre</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
@@ -730,7 +731,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-1">PERNAH OPERASI <span
                                         class="text-red-500">*</span></label>
-                                <select name="pernav_operasi"
+                                <select name="pernah_operasi"
                                     class="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all text-sm text-gray-700"
                                     required>
                                     <option value="" disabled selected>Pilih Opsi</option>
@@ -1343,7 +1344,7 @@
             }
         });
 
-        //submit
+        // submit
         document.getElementById('pendaftaranForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
@@ -1361,39 +1362,212 @@
 
             Swal.fire({
                 title: 'Mengirim data pendaftaran...',
+                text: 'Mohon tunggu sebentar.',
                 didOpen: () => Swal.showLoading(),
                 allowOutsideClick: false
             });
 
             const form = e.target;
-            const formData = new FormData(form);
-            console.log("formData :", formData);
 
             try {
-                await fetch(
-                    "https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec", {
+
+                // ==================================================
+                // 1. KIRIM KE LARAVEL
+                // ==================================================
+
+                console.log('Mengirim ke Laravel...');
+
+                const laravelResponse = await fetch(
+                    "{{ route('store_pendaftaran_baru') }}", {
                         method: "POST",
-                        body: formData,
-                        mode: "no-cors"
+                        body: new FormData(form),
+                        headers: {
+                            "X-CSRF-TOKEN": document
+                                .querySelector('meta[name="csrf-token"]')
+                                .getAttribute('content'),
+
+                            "Accept": "application/json"
+                        }
+                    }
+                );
+
+                console.log(
+                    'Response Laravel:',
+                    laravelResponse.status
+                );
+
+                let laravelResult;
+
+                try {
+                    laravelResult = await laravelResponse.json();
+                } catch (error) {
+                    throw new Error(
+                        'Response dari server Laravel tidak valid.'
+                    );
+                }
+
+                console.log(
+                    'Data Laravel:',
+                    laravelResult
+                );
+
+
+                // ==================================================
+                // 2. CEK HASIL LARAVEL
+                // ==================================================
+
+                if (
+                    !laravelResponse.ok ||
+                    !laravelResult.success
+                ) {
+
+                    // ----------------------------------------------
+                    // DUPLICATE
+                    // ----------------------------------------------
+
+                    if (laravelResult.duplicate) {
+
+                        Swal.close();
+
+                        await Swal.fire({
+                            icon: 'warning',
+                            title: 'Data sudah terdaftar!',
+                            text: laravelResult.message ||
+                                'Data anda sudah terdaftar di LPK ACC Japan Centre!'
+                        });
+
+                        return;
+                    }
+
+
+                    // ----------------------------------------------
+                    // VALIDATION ERROR
+                    // ----------------------------------------------
+
+                    if (laravelResult.errors) {
+
+                        let errorMessage = '';
+
+                        Object.values(
+                            laravelResult.errors
+                        ).forEach(errors => {
+
+                            errors.forEach(message => {
+                                errorMessage +=
+                                    message + '<br>';
+                            });
+
+                        });
+
+                        Swal.close();
+
+                        await Swal.fire({
+                            icon: 'error',
+                            title: 'Validasi gagal',
+                            html: errorMessage
+                        });
+
+                        return;
+                    }
+
+
+                    throw new Error(
+                        laravelResult.message ||
+                        'Gagal menyimpan data ke database.'
+                    );
+                }
+
+
+                // ==================================================
+                // 3. LARAVEL BERHASIL
+                // ==================================================
+
+                console.log(
+                    'Database berhasil disimpan.'
+                );
+
+                console.log(
+                    'Random ID:',
+                    laravelResult.randomId
+                );
+
+
+                // ==================================================
+                // 4. KIRIM KE GOOGLE APPS SCRIPT
+                // ==================================================
+                //
+                // PENTING:
+                // Tidak menggunakan await.
+                //
+                // Jadi browser TIDAK menunggu Google selesai.
+                // ==================================================
+
+                console.log(
+                    'Mengirim ke Google Apps Script...'
+                );
+
+                const formDataGoogle = new FormData(form);
+
+                fetch(
+                        "https://script.google.com/macros/s/AKfycbyK-RPpoWJcxR5BQmHNSitFaoRmNM8L7P_NmL-FFsh7jS3F4sfLkAX9KVnp2FsSYKMe/exec", {
+                            method: "POST",
+                            body: formDataGoogle,
+                            mode: "no-cors",
+                            keepalive: true
+                        }
+                    )
+                    .then(() => {
+
+                        console.log(
+                            'Google Apps Script request selesai.'
+                        );
+
+                    })
+                    .catch((googleError) => {
+
+                        console.error(
+                            'Google Apps Script error:',
+                            googleError
+                        );
+
                     });
 
+
+                // ==================================================
+                // 5. LANGSUNG SUCCESS
+                // ==================================================
+
                 Swal.close();
-                Swal.fire({
+
+                await Swal.fire({
                     icon: 'success',
                     title: 'Berhasil!',
-                    text: 'Data pendaftaran telah dikirim! Silakan konfirmasi ke staff yang sudah anda chat. Terimakasih.'
+                    text: 'Data pendaftaran telah dikirim dan disimpan. Silakan konfirmasi ke staff yang sudah anda chat. Terimakasih.'
                 });
+
+
+                // ==================================================
+                // 6. RESET FORM
+                // ==================================================
 
                 form.reset();
 
+
             } catch (error) {
+
+                console.error(
+                    'Error:',
+                    error
+                );
+
                 Swal.close();
-                Swal.fire({
+
+                await Swal.fire({
                     icon: 'error',
                     title: 'Gagal!',
-                    text: 'Terjadi kesalahan saat mengirim data. Silakan coba lagi.'
+                    text: error.message ||
+                        'Terjadi kesalahan saat mengirim data. Silakan coba lagi.'
                 });
-                console.error('Error:', error);
             }
         });
 
