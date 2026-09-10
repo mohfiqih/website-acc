@@ -722,62 +722,10 @@
             </header>
             <!--  Header End -->
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card dashboard-card mentor-overview-card">
-                            <div class="card-body">
-                                <h5 class="card-title d-flex align-items-center gap-2 mb-4">
-                                    Grafik Pendaftaran Online Berdasarkan Nama Mentor
-                                </h5>
-                                {{-- <div class="d-flex align-items-center gap-2 flex-wrap">
-                                    <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
-                                        <option value="">All Month</option>
-                                    </select>
-
-                                    <button class="btn btn-primary btn-sm px-4 text-nowrap" onclick="exportJPG()">
-                                        Export JPG
-                                    </button>
-                                    <button class="btn btn-primary btn-sm px-4 text-nowrap"
-                                        onclick="exportPDFLandscape()">
-                                        Export PDF
-                                    </button>
-                                </div> --}}
-                                <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
-                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data
-                                        kotor yang terecord secara online melalui formulir pendaftaran online setiap
-                                        mentor)</b></p>
-                                <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-12" style="display:none;">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mt-3">
-                                <h6>Data Keseluruhan Pendaftaran Online</h6>
-                                <table class="table table-sm table-bordered" id="mentorTable">
-                                    <thead>
-                                        <tr>
-                                            <th>Mentor</th>
-                                            <th>Jumlah Pendaftar</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td colspan="2" class="text-center">Sedang proses menampilkan data...
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="col-lg-12">
                     <div class="card dashboard-card data-table-card">
                         <div class="card-body">
-                            <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
+                            {{-- <form action="{{ route('data-pendaftaran.export-pdf') }}" method="GET"
                                 class="data-export-panel">
                                 <div class="form-group">
                                     <label for="startDate">Dari Tanggal</label>
@@ -792,7 +740,7 @@
                                 <button type="submit" class="btn btn-primary btn-sm px-4 text-nowrap">
                                     <i class="fa fa-download mr-1"></i> Export PDF
                                 </button>
-                            </form>
+                            </form> --}}
 
                             <div class="table-responsive data-table-scroll">
                                 <div id="refreshIndicator"
@@ -893,6 +841,58 @@
                                 <div class="d-flex align-items-center ms-auto">
                                     <ul class="pagination pagination-sm mb-0" id="paginationControls"></ul>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card dashboard-card mentor-overview-card">
+                            <div class="card-body">
+                                <h5 class="card-title d-flex align-items-center gap-2 mb-4">
+                                    Grafik Pendaftaran Online Berdasarkan Nama Mentor
+                                </h5>
+                                {{-- <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <select id="monthFilter" class="form-select form-select-sm" style="width: 200px;">
+                                        <option value="">All Month</option>
+                                    </select>
+
+                                    <button class="btn btn-primary btn-sm px-4 text-nowrap" onclick="exportJPG()">
+                                        Export JPG
+                                    </button>
+                                    <button class="btn btn-primary btn-sm px-4 text-nowrap"
+                                        onclick="exportPDFLandscape()">
+                                        Export PDF
+                                    </button>
+                                </div> --}}
+                                <canvas id="mentorChart" style="min-height: 300px; width: 100%;"></canvas>
+                                <p>Jumlah Keseluruhan Pendaftaran Online Setiap Mentor <b>(Jumlah Data ini hanya Data
+                                        kotor yang terecord secara online melalui formulir pendaftaran online setiap
+                                        mentor)</b></p>
+                                <div class="vstack gap-2 mt-2 pt-2" id="mentorProgressBar"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12" style="display:none;">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="mt-3">
+                                <h6>Data Keseluruhan Pendaftaran Online</h6>
+                                <table class="table table-sm table-bordered" id="mentorTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Mentor</th>
+                                            <th>Jumlah Pendaftar</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="2" class="text-center">Sedang proses menampilkan data...
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
