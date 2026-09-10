@@ -752,7 +752,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Download CV</th>
-                                            <th>Timestamp</th>
                                             <th>EMAIL</th>
                                             <th>NAMA (KATAKANA)</th>
                                             <th>NAMA (INDONESIA)</th>
@@ -822,7 +821,6 @@
                                             <th>NOMOR SEPATU</th>
                                             <th>PILIH KELAS</th>
                                             <th>PILIH PROGRAM</th>
-                                            <th>ID</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1703,24 +1701,12 @@
             const refreshIndicator =
                 $('#refreshIndicator');
 
-
             try {
-
-
-                // -------------------------------------------------
-                // INDICATOR
-                // -------------------------------------------------
-
                 refreshIndicator
                     .text(
                         'Menyiapkan data...'
                     )
                     .show();
-
-
-                // -------------------------------------------------
-                // DESTROY DATATABLE LAMA
-                // -------------------------------------------------
 
                 if (
                     $.fn.DataTable.isDataTable(
@@ -1733,11 +1719,6 @@
                         .clear()
                         .destroy();
                 }
-
-
-                // -------------------------------------------------
-                // CLEAN DATA
-                // -------------------------------------------------
 
                 const cleanData =
 
@@ -1793,7 +1774,6 @@
                 // -------------------------------------------------
                 // SORT
                 // -------------------------------------------------
-
                 cleanData.sort(
                     function(a, b) {
 
@@ -2512,91 +2492,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- download cv --}}
-    {{-- <script>
-        $(document).on('click', '.btn-download-cv', async function(e) {
-            e.preventDefault();
-
-            const id = $(this).data('id');
-            const nama = $(this).data('nama');
-
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to download this CV?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'OK',
-                confirmButtonColor: '#046392'
-            }).then(async (result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        icon: 'info',
-                        title: 'Sedang download CV, mohon tunggu sebentar...',
-                        toast: true,
-                        position: 'top',
-                        showConfirmButton: false,
-                        allowOutsideClick: false,
-                        didOpen: () => Swal.showLoading()
-                    });
-
-                    try {
-                        // Ambil data dari Google Apps Script
-                        const res = await fetch(
-                            "https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec"
-                        );
-                        const data = await res.json();
-                        const rowData = data.reverse().find(d => d.ID == id);
-
-                        if (!rowData) throw new Error('Data tidak ditemukan');
-
-                        // Kirim data ke Laravel
-                        const formData = new FormData();
-                        formData.append('data', JSON.stringify(rowData));
-
-                        const response = await fetch('/export-cv-word', {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            },
-                            body: formData
-                        });
-
-                        if (!response.ok) throw new Error('Download gagal');
-
-                        const blob = await response.blob();
-                        const url = window.URL.createObjectURL(blob);
-                        const a = document.createElement('a');
-                        a.href = url;
-                        a.download = `CV_${nama.replace(/\s+/g, '_')}.docx`;
-                        document.body.appendChild(a);
-                        a.click();
-                        a.remove();
-                        window.URL.revokeObjectURL(url);
-
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'File has been downloaded.',
-                            icon: 'success',
-                            timer: 2000,
-                            showConfirmButton: false
-                        });
-
-                    } catch (err) {
-                        console.error(err);
-                        Swal.fire({
-                            title: 'Error!',
-                            text: err.message,
-                            icon: 'error'
-                        });
-                    }
-                }
-            });
-        });
-    </script> --}}
-
-    {{-- =========================================================
-     DOWNLOAD CV
-========================================================= --}}
-
     <script>
         $(document).on('click', '.btn-download-cv', async function(e) {
 

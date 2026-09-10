@@ -1,20 +1,3 @@
-{{-- <section id="topbar" class="topbar d-flex align-items-center">
-    <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="contact-info d-flex align-items-center">
-            <i class="bi bi-envelope d-flex align-items-center"><a
-                    href="mailto:amanahcitracemerlang1@gmail.com">amanahcitracemerlang1@gmail.com</a></i>
-        </div>
-        <div class="social-links d-md-flex align-items-center">
-            <a target="_blank" href="https://www.facebook.com/amanahcitracemerlangjapan?mibextid=ZbWKwL"
-                class="facebook"><i class="bi bi-facebook"></i></a>
-            <a target="_blank" href="https://www.instagram.com/accjapancentre_?igsh=enI4bWxjZnJueGJw"
-                class="instagram"><i class="bi bi-instagram"></i></a>
-            <a target="_blank" href="https://www.youtube.com/@AmanahCitraCemerlang" class="youtube"><i
-                    class="bi bi-youtube"></i></i></a>
-        </div>
-    </div>
-</section> --}}
-
 <header id="header" class="header d-flex align-items-center" style="padding: 10px;">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">

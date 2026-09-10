@@ -469,7 +469,7 @@
             'https://script.google.com/macros/s/AKfycbw_gwZKaRIVUuKb0K-NYTtNRP6njudztlkWQwbDXLuuf1nFJ7mWZFffRo9pid818q6u/exec';
 
         const allowedMentors = [
-            'IBNU', 'HERA', 'FIQIH', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
+            'IBNU', 'HERA', 'HESTI', 'FAIZAL', 'HILMI', 'TRIO', 'REZA',
             'SELLY', 'ADITYA', 'FAHRUL', 'FUJIAYU', 'FIRMAN', 'GAZI',
             'IPUT', 'NADIA', 'PHILLIP', 'PIPIT', 'AVILA', 'UMAY', 'SONY',
             'JAMAL', 'BANGKIT', 'DIAN', 'ALVAN', 'SELA', 'USWATUN', 'IZAH',

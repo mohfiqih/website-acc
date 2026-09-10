@@ -1,7 +1,6 @@
 window.allowedMentors = [
      "HESTI", "NADIA",
-     "AVILA", "REZA", "GAZI", "PIPIT", "VIA", "YANI", "ZULFI",
-     "FIQIH",
+     "AVILA", "REZA", "GAZI", "VIA", "ZULFI",
      "ALVAN", "SELA", "USWATUN",
      "JAMAL", "ARIFUDIN", "TYA",
      "ERWIN", "FUJIAYU", "UMAY", "QOLBI", "ILHAM", "SONY", "BAGUS", "FATONI", "NUR",
