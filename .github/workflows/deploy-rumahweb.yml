@@ -23,6 +23,9 @@ jobs:
       - name: Ambil source code
         uses: actions/checkout@v4
 
+      - name: Abaikan entri submodule rusak saat cleanup checkout
+        run: git update-index --force-remove public/template_home
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
