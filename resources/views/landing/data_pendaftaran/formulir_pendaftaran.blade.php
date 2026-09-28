@@ -1420,19 +1420,51 @@
 
                 console.log('Mengirim ke Laravel...');
 
-                const laravelResponse = await fetch(
-                    "{{ route('store_pendaftaran_baru') }}", {
+                let csrfToken = form.querySelector('input[name="_token"]')?.value;
+
+                if (!csrfToken) {
+                    throw new Error('Token keamanan tidak ditemukan. Muat ulang halaman lalu coba lagi.');
+                }
+
+                const submitToLaravel = (token) => fetch(
+                    `${window.location.origin}/pendaftaran-siswa-baru`, {
                         method: "POST",
                         body: new FormData(form),
+                        credentials: "same-origin",
                         headers: {
-                            "X-CSRF-TOKEN": document
-                                .querySelector('meta[name="csrf-token"]')
-                                .getAttribute('content'),
+                            "X-CSRF-TOKEN": token,
 
                             "Accept": "application/json"
                         }
                     }
                 );
+
+                let laravelResponse = await submitToLaravel(csrfToken);
+
+                // If this page holds an expired token, fetch a fresh form/session and retry once.
+                if (laravelResponse.status === 419) {
+                    const refreshedPage = await fetch(window.location.href, {
+                        method: "GET",
+                        credentials: "same-origin",
+                        cache: "no-store",
+                        headers: { "Accept": "text/html" }
+                    });
+
+                    if (!refreshedPage.ok) {
+                        throw new Error('Sesi formulir kedaluwarsa. Muat ulang halaman lalu coba lagi.');
+                    }
+
+                    const refreshedHtml = await refreshedPage.text();
+                    const refreshedDocument = new DOMParser().parseFromString(refreshedHtml, "text/html");
+                    csrfToken = refreshedDocument.querySelector('#pendaftaranForm input[name="_token"]')?.value;
+
+                    if (!csrfToken) {
+                        throw new Error('Token baru tidak ditemukan. Muat ulang halaman lalu coba lagi.');
+                    }
+
+                    form.querySelector('input[name="_token"]').value = csrfToken;
+                    laravelResponse = await submitToLaravel(csrfToken);
+                }
 
                 console.log(
                     'Response Laravel:',
@@ -1447,6 +1479,10 @@
                     throw new Error(
                         'Response dari server Laravel tidak valid.'
                     );
+                }
+
+                if (laravelResponse.status === 419) {
+                    throw new Error(`Session browser dan server masih tidak cocok. Hapus cookies untuk ${window.location.hostname}, buka kembali halaman pendaftaran, lalu kirim ulang.`);
                 }
 
                 console.log(
